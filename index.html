@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NS PRIME - The Smart Way to Earn Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #010313; color: #e5e7eb; overflow-x: hidden; cursor: none; }
+        #cursor-light { position: fixed; pointer-events: none; left: 0; top: 0; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 198, 255, 0.1), transparent 50%); transform: translate(-50%, -50%); transition: transform 0.1s ease-out; z-index: 1000; }
+        #aura-container { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
+        .aura { position: absolute; border-radius: 100%; filter: blur(150px); opacity: 0.7; }
+        #aura1 { background-color: #0077ff; width: 600px; height: 600px; animation: swirl1 35s infinite linear alternate; }
+        #aura2 { background-color: #9d00ff; width: 800px; height: 800px; animation: swirl2 45s infinite linear alternate; }
+        @keyframes swirl1 { 0%{transform: translate(10vw, 80vh) rotate(0deg);} 100%{transform: translate(80vw, 10vh) rotate(360deg);} }
+        @keyframes swirl2 { 0%{transform: translate(90vw, 20vh) rotate(0deg);} 100%{transform: translate(20vw, 90vh) rotate(360deg);} }
+        .overlay { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+        #stardust { background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.2; }
+        #grid { background: linear-gradient(rgba(0,198,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,198,255,0.1) 1px, transparent 1px); background-size: 50px 50px; }
+        .glass-card { background: rgba(17, 25, 40, 0.7); backdrop-filter: blur(25px) saturate(180%); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; transition: transform 0.4s ease; }
+        .glass-card:hover { transform: translateY(-10px); }
+        .btn-primary { background: linear-gradient(135deg, #00c6ff, #972FFF); color: #fff; border-radius: 12px; padding: 18px 40px; font-weight: 700; font-size: 1.1rem; box-shadow: 0 10px 35px rgba(151, 47, 255, 0.35); transition: all 0.3s ease; display: inline-block; border: none; }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 45px rgba(0, 198, 255, 0.45); }
+        .btn-primary:disabled, button:disabled { background-image: none; background-color: #4b5563; cursor: not-allowed; opacity: 0.6; box-shadow: none; transform: none; }
+        .text-gradient { background: linear-gradient(90deg, #00c6ff, #d89dff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .animated-headline span { opacity: 0; transform: translateY(30px) rotate(10deg); display: inline-block; transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1); }
+        .reveal { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        body.app-view { cursor: default; }
+        .auth-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; position: fixed; inset: 0; z-index: 200; }
+        input, select, textarea { background: rgba(10, 15, 30, 0.5) !important; color: white !important; border-radius: 12px !important; border: 1px solid rgba(255, 255, 255, 0.2) !important; padding: 12px; }
+        ::placeholder { color: #9ca3af; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(17, 25, 40, 0.7); backdrop-filter: blur(25px); border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; padding: 12px 0; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #9ca3af; transition: all 0.3s ease; padding: 8px; border-radius: 16px; flex: 1; cursor: pointer; }
+        .nav-item.active { color: #00c6ff; background: rgba(0, 198, 255, 0.1); }
+        .nav-item i { font-size: 20px; margin-bottom: 4px; }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .currency-switch { display: flex; align-items: center; background-color: rgba(10, 15, 30, 0.5); border-radius: 20px; padding: 4px; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .currency-switch button { font-size: 12px; font-weight: 600; padding: 4px 12px; border: none; background-color: transparent; color: #9ca3af; border-radius: 16px; cursor: pointer; transition: all 0.3s ease; }
+        .currency-switch button.active { background-color: #00c6ff; color: white; box-shadow: 0 0 10px rgba(0, 198, 255, 0.5); }
+    </style>
+</head>
+<body class="antialiased pb-24">
+
+    <div id="cursor-light"></div>
+    <div id="aura-container"><div id="aura1" class="aura"></div><div id="aura2" class="aura"></div></div>
+    <div id="stardust" class="overlay"></div>
+    <div id="grid" class="overlay"></div>
+
+    <div id="landing-page-wrapper">
+        <header class="sticky top-0 z-50 bg-slate-900/60 backdrop-blur-xl border-b border-slate-300/10"><nav class="container mx-auto px-6 py-4 flex justify-between items-center"><h1 class="text-3xl font-bold tracking-wider text-white">NS PRIME</h1><div class="space-x-4"><a href="#" data-auth-show="login" class="nav-auth-btn text-slate-300 hover:text-white transition-colors font-medium">Log In</a><a href="#" data-auth-show="register" class="nav-auth-btn btn-primary px-6 py-3">Start Earning</a></div></nav></header>
+        <main>
+            <section class="py-24 md:py-32 text-center overflow-hidden"><div class="container mx-auto px-6"><div class="max-w-4xl mx-auto"><h1 class="animated-headline text-4xl md:text-7xl font-extrabold leading-tight mb-6"></h1><p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-12 reveal" style="transition-delay: 1.5s;">Share links, complete simple tasks, and invite friends to earn real money. Get paid fast and securely.</p><div class="reveal" style="transition-delay: 1.8s;"><a href="#" data-auth-show="register" class="nav-auth-btn btn-primary">Create My Free Account</a></div></div><div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto reveal" style="transition-delay: 2s;"><div class="glass-card p-6"><p class="text-lg text-slate-400">Total Users</p><p id="total-users" class="text-5xl font-bold text-white mt-2">0</p></div><div class="glass-card p-6"><p class="text-lg text-slate-400">Money Paid Out</p><p class="text-5xl font-bold text-white mt-2">৳<span id="total-payouts">0</span></p></div></div></div></section>
+            <section class="py-20 md:py-28"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">How You <span class="text-gradient">Earn</span></h2><div class="grid grid-cols-1 md:grid-cols-3 gap-8"><div class="glass-card p-8 reveal"><i class="fas fa-tasks text-cyan-400 text-4xl mb-6"></i><h3 class="text-2xl font-bold mb-4">Complete Simple Tasks</h3><p class="text-slate-400">Watch videos, click links, and finish easy online tasks to earn daily rewards.</p></div><div class="glass-card p-8 reveal" style="transition-delay: 0.2s;"><i class="fas fa-share-alt text-cyan-400 text-4xl mb-6"></i><h3 class="text-2xl font-bold mb-4">Share Your Link</h3><p class="text-slate-400">Every unique visit to your marketing link adds to your daily impression earnings.</p></div><div class="glass-card p-8 reveal" style="transition-delay: 0.4s;"><i class="fas fa-user-plus text-cyan-400 text-4xl mb-6"></i><h3 class="text-2xl font-bold mb-4">Invite & Build a Team</h3><p class="text-slate-400">Grow your income by inviting friends. Earn commissions and unlock huge team bonuses.</p></div></div></div></section>
+            <section class="py-20 md:py-28 bg-black/20"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">Flexible & <span class="text-gradient">Secure Payouts</span></h2><div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto"><div class="glass-card p-8 reveal"><div class="mb-6"><i class="fas fa-calendar-day text-green-400 text-5xl"></i></div><h3 class="text-2xl font-bold mb-4">Daily ৳10 Payout</h3><p class="text-slate-400">Need quick cash? Request your daily ৳10 payout directly to your bKash account, available once every 24 hours.</p></div><div class="glass-card p-8 reveal" style="transition-delay: 0.2s;"><div class="mb-6"><i class="fas fa-money-bill-wave text-indigo-400 text-5xl"></i></div><h3 class="text-2xl font-bold mb-4">Monthly Main Withdrawals</h3><p class="text-slate-400">Cash out your larger earnings twice a month. We support secure payouts through bKash and USDT to give you flexibility.</p></div></div></div></section>
+            <section class="py-20 md:py-28"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">Team Milestone <span class="text-gradient">Prizes</span></h2><div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto"><div class="glass-card p-8 reveal"><div class="mb-6"><i class="fas fa-users text-cyan-400 text-5xl"></i></div><h3 class="text-2xl font-bold mb-4">50 Active Members</h3><p class="text-slate-300 text-4xl font-bold text-green-400">৳5,000</p><p class="text-slate-400 mt-2">Prize</p></div><div class="glass-card p-8 reveal" style="transition-delay: 0.2s;"><div class="mb-6"><i class="fas fa-trophy text-yellow-400 text-5xl"></i></div><h3 class="text-2xl font-bold mb-4">100 Active Members</h3><p class="text-slate-300 text-4xl font-bold text-green-400">৳10,000</p><p class="text-slate-400 mt-2">Prize</p></div></div></div></section>
+            <section class="py-24 md:py-32 text-center"><div class="container mx-auto px-6"><h2 class="text-3xl md:text-5xl font-bold mb-6 reveal">Ready to Start Earning?</h2><p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 reveal" style="transition-delay: 0.2s;">Join thousands of users who are earning real money with NS PRIME. Your free account is just a click away.</p><div class="reveal" style="transition-delay: 0.4s;"><a href="#" data-auth-show="register" class="nav-auth-btn btn-primary">Join Now For Free</a></div></div></section>
+        </main>
+        <footer class="border-t border-slate-300/10 text-center py-8"><div class="container mx-auto px-6 text-slate-400"><p>&copy; 2024 NS PRIME. The Smartest Path to Your Earning Goals.</p></div></footer>
+    </div>
+    
+    <div id="auth-section" class="auth-container hidden">
+        <div class="glass-card w-full max-w-sm p-8">
+            <div id="login-form"><h2 class="text-2xl font-bold mb-6 text-center text-white">Welcome Back</h2><form id="login-form-element"><div class="mb-4"><label class="block text-gray-300 mb-2">Email</label><input type="email" id="login-email" class="w-full" required></div><div class="mb-6"><label class="block text-gray-300 mb-2">Password</label><input type="password" id="login-password" class="w-full" required></div><button type="submit" class="btn-primary w-full py-3 mb-4">Log In</button></form><p class="text-center text-gray-300">No account? <a href="#" id="show-register" class="text-cyan-400 hover:underline">Register</a></p><p class="text-center mt-4"><a href="#" id="back-to-home-login" class="text-cyan-400 hover:underline">&larr; Back to Home</a></p></div>
+            <div id="register-form" class="hidden"><h2 class="text-2xl font-bold mb-6 text-center text-white">Create Your Account</h2>
+                <form id="register-form-element">
+                    <div class="mb-4"><label class="block text-gray-300 mb-2">Full Name</label><input type="text" id="register-name" class="w-full" required></div>
+                    <div class="mb-4"><label class="block text-gray-300 mb-2">Username</label><input type="text" id="register-username" class="w-full" required></div>
+                    <div class="mb-4"><label class="block text-gray-300 mb-2">Phone</label><input type="tel" id="register-phone" class="w-full" required></div>
+                    <div class="mb-4"><label class="block text-gray-300 mb-2">Email</label><input type="email" id="register-email" class="w-full" required></div>
+                    <div class="mb-4"><label class="block text-gray-300 mb-2">Password</label><input type="password" id="register-password" class="w-full" required></div>
+                    <div class="mb-4"><label class="block text-gray-300 mb-2">Join Code (Optional)</label><input type="text" id="register-join-code" class="w-full" placeholder="Enter referral code"></div>
+                    <button type="submit" class="btn-primary w-full py-3 mb-4">Create Account</button>
+                </form>
+                <p class="text-center text-gray-300">Already a member? <a href="#" id="show-login" class="text-cyan-400 hover:underline">Login</a></p><p class="text-center mt-4"><a href="#" id="back-to-home-register" class="text-cyan-400 hover:underline">&larr; Back to Home</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="main-app" class="hidden">
+        <header class="p-4 flex justify-between items-center sticky top-0 bg-slate-900/60 backdrop-blur-xl z-50"><h1 class="text-2xl font-bold">NS PRIME</h1><div class="text-right"><p id="user-name" class="font-semibold">User</p><p class="text-sm text-gray-400">Balance: <span id="header-balance">৳0.00</span></p></div></header>
+        <main class="p-4 max-w-lg mx-auto">
+            <section id="home" class="content-section">
+                <div class="glass-card p-6 mb-6"><h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-link mr-3 text-cyan-400"></i>Your Marketing Link</h3><div class="flex"><input type="text" id="marketing-link-input" class="w-full bg-gray-800/50" readonly><button id="copy-marketing-link-btn" class="bg-cyan-500 text-white px-4 rounded-r-lg"><i class="fas fa-copy"></i></button></div></div>
+                <div class="grid grid-cols-2 gap-4 mb-6"><div class="glass-card p-4 text-center"><i class="fas fa-eye text-2xl mb-2 text-cyan-300"></i><p class="font-bold text-2xl" id="today-impression">0</p><p class="text-sm text-gray-300">Today's Impressions</p></div><div class="glass-card p-4 text-center"><i class="fas fa-dollar-sign text-2xl mb-2 text-green-400"></i><p class="font-bold text-2xl" id="today-earnings-stat">৳0.00</p><p class="text-sm text-gray-300">Today's Earning</p></div><div class="glass-card p-4 text-center"><i class="fas fa-chart-line text-2xl mb-2 text-blue-400"></i><p class="font-bold text-2xl" id="cpm-stat">৳0.00</p><p class="text-sm text-gray-300">CPM</p></div><div class="glass-card p-4 text-center"><i class="fas fa-coins text-2xl mb-2 text-yellow-400"></i><p class="font-bold text-2xl" id="total-earnings-stat">৳0.00</p><p class="text-sm text-gray-300">Total Earning</p></div></div>
+                <div id="daily-target-card" class="glass-card p-6 mb-6"><h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-bullseye mr-3 text-yellow-300"></i>Today's Target</h3><p class="font-bold text-lg text-green-400 mb-3">Bonus: <span id="daily-target-bonus">৳0</span></p><div class="w-full bg-gray-800/50 rounded-full h-5 relative"><div id="daily-target-progress-bar" class="bg-gradient-to-r from-yellow-400 to-orange-500 h-5 rounded-full"></div><span id="daily-target-progress-text" class="absolute w-full h-full top-0 left-0 flex items-center justify-center text-xs font-bold text-black">0%</span></div></div>
+            </section>
+            <section id="tasks" class="content-section"><div class="grid grid-cols-2 gap-4 mb-6"><div class="glass-card p-4 text-center"><p class="text-sm text-gray-300">Tasks Completed</p><p class="font-bold text-2xl mt-1" id="stats-tasks-completed">0</p></div><div class="glass-card p-4 text-center"><p class="text-sm text-gray-300">Total Task Earnings</p><p class="font-bold text-2xl mt-1" id="stats-task-earnings">৳0.00</p></div></div><div class="glass-card p-6"><h2 class="text-xl font-bold mb-4">Available Tasks</h2><div id="tasks-list" class="space-y-4"><p class="text-center text-gray-400">Loading...</p></div></div></section>
+            <section id="wallet" class="content-section">
+                <div class="glass-card p-6 mb-6"><h2 class="text-2xl font-bold mb-6">My Wallet</h2><div class="mb-6 p-4 bg-gray-800/50 rounded-xl text-center"><p>Available Balance</p><p class="text-4xl font-bold my-2" id="wallet-available-balance">৳0.00</p></div><div class="grid grid-cols-2 gap-4 text-center"><div class="p-3 bg-gray-800/50 rounded-lg"><p>Pending</p><p class="font-bold text-xl" id="wallet-withdraw-balance">৳0.00</p></div><div class="p-3 bg-gray-800/50 rounded-lg"><p>Withdrawn</p><p class="font-bold text-xl" id="wallet-total-withdrawn">৳0.00</p></div></div></div>
+                <div class="glass-card p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4">Withdrawal Actions</h3>
+                    <div id="next-payment-info-card" class="p-4 bg-gray-900/60 rounded-lg mb-4 text-center hidden"><h4 class="font-semibold text-lg mb-2 text-gradient">Next Payment Details (from Admin)</h4><div class="grid grid-cols-2 gap-4"><div><p class="text-sm text-gray-400">Next Payout Date</p><p id="next-payment-date" class="font-bold text-cyan-400 mt-1">--/--/----</p></div><div><p class="text-sm text-gray-400">Next Payout Amount</p><p id="next-payment-amount" class="font-bold text-green-400 mt-1">৳0.00</p></div></div></div>
+                    <div class="p-4 bg-gray-800/50 rounded-lg mb-4"><h4 class="font-semibold text-lg">Daily ৳10 Payout</h4><p class="text-xs text-gray-300 mb-3">Request a fixed amount of ৳10. You can request this once per day.</p><button id="daily-withdraw-btn" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg">Request ৳10</button></div>
+                    <div class="p-4 bg-gray-800/50 rounded-lg mb-4"><h4 class="font-semibold text-lg flex items-center"><img src="https://i.ibb.co/xJqJgV7/bkash.png" class="w-6 h-6 mr-2"> bKash</h4><p class="text-xs text-gray-300 mb-3">Min: ৳500</p><div class="flex items-center gap-2 mb-3"><span>৳</span><input type="number" id="main-withdraw-amount" class="w-full" placeholder="500"></div><button id="main-withdraw-request-btn" class="w-full bg-indigo-600 text-white font-bold py-2 rounded-lg">Request bKash</button></div>
+                    <div class="p-4 bg-gray-800/50 rounded-lg"><h4 class="font-semibold text-lg flex items-center"><i class="fab fa-teamspeak mr-2 text-green-400"></i> USDT (TRC-20)</h4><p class="text-xs text-gray-300 mb-3">Min: $5</p><div class="flex items-center gap-2 mb-3"><span>$</span><input type="number" id="usdt-withdraw-amount" class="w-full" placeholder="5"></div><button id="usdt-withdraw-request-btn" class="w-full bg-green-600 text-white font-bold py-2 rounded-lg">Request USDT</button></div>
+                </div>
+                <div class="glass-card p-6 mb-6"><h3 class="text-xl font-bold mb-4">Recent Requests</h3><div id="withdrawal-history-list" class="space-y-2"><p class="text-center text-gray-400">Loading...</p></div></div>
+                <div class="glass-card p-6"><h3 class="text-xl font-bold mb-4">Payment Methods</h3><div class="mb-6"><label class="block mb-2">Your bKash Number:</label><input type="tel" id="bkash-number-input" class="w-full" placeholder="017..."><button id="save-bkash-btn" class="w-full bg-cyan-600 text-white py-2 mt-2 rounded-lg">Save bKash</button></div><div><label class="block mb-2">USDT (TRC-20) Address:</label><input type="text" id="usdt-address-input" class="w-full" placeholder="Starts with T..."><button id="save-usdt-btn" class="w-full bg-cyan-600 text-white py-2 mt-2 rounded-lg">Save USDT</button></div></div>
+            </section>
+            <section id="refer" class="content-section">
+                <div class="glass-card p-6 mb-6"><h3 class="text-xl font-bold mb-4">Your Referral Stats</h3><div class="grid grid-cols-2 gap-4"><div class="bg-gray-800/50 p-4 rounded-lg text-center"><p>Direct Team</p><p class="font-bold text-3xl" id="team-size">0</p></div><div class="bg-gray-800/50 p-4 rounded-lg text-center"><p>Active Members</p><p class="font-bold text-3xl" id="active-team-members">0</p></div></div></div>
+                <div class="glass-card p-6 mb-6"><h3 class="text-xl font-bold mb-4">Team Milestones</h3><div class="mb-4"><div class="flex justify-between items-center mb-1"><p>Goal: 50 Active Members</p><p class="font-bold text-green-400">৳5000 Prize</p></div><div class="w-full bg-gray-800/50 rounded-full h-4 relative"><div id="milestone-50-progress-bar" class="bg-gradient-to-r from-cyan-400 to-blue-500 h-4 rounded-full"></div><span id="milestone-50-progress-text" class="absolute w-full h-full top-0 left-0 flex items-center justify-center text-xs font-bold text-white">0/50</span></div></div><div><div class="flex justify-between items-center mb-1"><p>Goal: 100 Active Members</p><p class="font-bold text-green-400">৳10000 Prize</p></div><div class="w-full bg-gray-800/50 rounded-full h-4 relative"><div id="milestone-100-progress-bar" class="bg-gradient-to-r from-teal-400 to-green-500 h-4 rounded-full"></div><span id="milestone-100-progress-text" class="absolute w-full h-full top-0 left-0 flex items-center justify-center text-xs font-bold text-white">0/100</span></div></div></div>
+                <div class="glass-card p-6 mb-6"><h3 class="text-xl font-bold mb-4">Your Referral Code</h3><div class="p-4 bg-gray-800/50 rounded-lg flex items-center"><p id="referral-code-display" class="text-3xl font-bold tracking-widest flex-grow text-center">NOTSET</p><button id="copy-referral-code-btn" class="text-cyan-400 text-2xl ml-4"><i class="fas fa-copy"></i></button></div></div>
+                <div class="glass-card p-6"><h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-trophy mr-3 text-yellow-400"></i>Top 20 Earners</h3><div id="leaderboard-list" class="space-y-2"><p class="text-center text-gray-300 py-4">Loading...</p></div></div>
+            </section>
+            <section id="support" class="content-section">
+                <div class="glass-card p-6 mb-6"><h2 class="text-2xl font-bold mb-6">Support Center</h2><form id="ticket-form"><div class="mb-4"><label class="block mb-2">Subject</label><select id="ticket-subject" class="w-full"><option>Payment Issue</option><option>Task Problem</option><option>Other</option></select></div><div class="mb-6"><label class="block mb-2">Describe your issue</label><textarea id="ticket-message" class="w-full h-32"></textarea></div><button type="submit" class="btn-primary w-full py-3">Submit Ticket</button></form></div>
+                <div class="glass-card p-6"><h3 class="text-xl font-bold mb-4">Your Ticket History</h3><div id="ticket-history-list" class="space-y-3"><p class="text-center text-gray-400">Loading...</p></div></div>
+            </section>
+            <section id="profile" class="content-section">
+                <div class="glass-card p-4 mb-6"><h3 class="text-xl font-bold mb-3">Settings</h3><div class="flex justify-between items-center"><span class="font-semibold">Display Currency</span><div class="currency-switch"><button id="currency-bdt" class="active">BDT</button><button id="currency-usdt">USDT</button></div></div></div>
+                <div class="glass-card p-6 mb-6"><h3 class="text-xl font-bold mb-4">Personal Information</h3><div class="space-y-3"><div class="p-3 bg-gray-800/50 rounded-lg flex justify-between"><span>Name:</span><strong id="profile-info-name">N/A</strong></div><div class="p-3 bg-gray-800/50 rounded-lg flex justify-between"><span>Username:</span><strong id="profile-info-username">N/A</strong></div><div class="p-3 bg-gray-800/50 rounded-lg flex justify-between"><span>Email:</span><strong id="profile-info-email">N/A</strong></div><div class="p-3 bg-gray-800/50 rounded-lg flex justify-between"><span>Phone:</span><strong id="profile-info-phone">N/A</strong></div></div></div>
+                <button id="logout-btn" class="w-full mt-6 py-3 bg-red-600/80 text-white rounded-lg font-bold">Logout</button>
+            </section>
+        </main>
+        <nav class="bottom-nav">
+            <a class="nav-item active" data-section="home"><i class="fas fa-home"></i><span>Home</span></a>
+            <a class="nav-item" data-section="tasks"><i class="fas fa-tasks"></i><span>Tasks</span></a>
+            <a class="nav-item" data-section="wallet"><i class="fas fa-wallet"></i><span>Wallet</span></a>
+            <a class="nav-item" data-section="refer"><i class="fas fa-user-friends"></i><span>Refer</span></a>
+            <a class="nav-item" data-section="support"><i class="fas fa-headset"></i><span>Support</span></a>
+            <a class="nav-item" data-section="profile"><i class="fas fa-user-circle"></i><span>Profile</span></a>
+        </nav>
+    </div>
+
+    <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 text-white text-sm font-semibold py-3 px-6 rounded-full shadow-lg opacity-0 transition-all z-[200]"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, collection, addDoc, query, where, getDocs, increment, arrayUnion, orderBy, limit, Timestamp, writeBatch } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCU2RfLeclEyyxzEActtl5ks1P_NPvATOE",
+            authDomain: "ns-prime-d7ca5.firebaseapp.com",
+            projectId: "ns-prime-d7ca5",
+            storageBucket: "ns-prime-d7ca5.firebasestorage.app",
+            messagingSenderId: "172231719671",
+            appId: "1:172231719671:web:3dafc0ace7b44fbe0071f2",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        let currentUser = null, userData = {}, userListener = null, currentCurrency = 'BDT';
+        const bdtToUsdtRate = 118;
+        const landingPageWrapper = document.getElementById("landing-page-wrapper");
+        const authSection = document.getElementById("auth-section");
+        const mainApp = document.getElementById("main-app");
+        const loginFormDiv = document.getElementById("login-form");
+        const registerFormDiv = document.getElementById("register-form");
+        const bodyEl = document.body;
+        const cursorLight = document.getElementById("cursor-light");
+        const observer = new IntersectionObserver(e => { e.forEach(e => { e.isIntersecting && e.target.classList.add("visible") }) }, { threshold: .1 });
+
+        function showLandingPage(){ bodyEl.classList.remove("app-view"); if(window.innerWidth > 768) { cursorLight.style.display="block" }; landingPageWrapper.style.display="block"; authSection.style.display="none"; mainApp.style.display="none"; }
+        function showAuthForm(){ bodyEl.classList.remove("app-view"); if(window.innerWidth > 768) { cursorLight.style.display="block" }; landingPageWrapper.style.display="none"; authSection.style.display="flex"; mainApp.style.display="none"; }
+        function showMainApp(){ bodyEl.classList.add("app-view"); cursorLight.style.display="none"; landingPageWrapper.style.display="none"; authSection.style.display="none"; mainApp.style.display="block"; }
+        
+        // --- START: MODIFIED CODE ---
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                currentUser = user;
+                // A user is considered "new" if their account was created less than 10 seconds ago.
+                // This provides a grace period for the Firestore document to be created without logging them out.
+                const isNewUserSession = (new Date().getTime() - new Date(user.metadata.creationTime).getTime()) < 10000;
+                
+                listenToUserData(user.uid, isNewUserSession); // Pass the user's UID and the new user flag
+                
+                showMainApp();
+                navigateToSection("home");
+            } else {
+                if (userListener) userListener(); // Stop listening to old user data
+                currentUser = null;
+                userData = {};
+                showLandingPage();
+            }
+        });
+
+        function listenToUserData(userId, isNewUser) {
+            if (userListener) userListener(); // Unsubscribe from any previous listener
+        
+            userListener = onSnapshot(doc(db, "users", userId), (docSnapshot) => {
+                if (docSnapshot.exists()) {
+                    // User document found, update UI as normal
+                    userData = docSnapshot.data();
+                    currentCurrency = userData.preferredCurrency || "BDT";
+                    updateUI(userData);
+                } else {
+                    // User document does NOT exist yet.
+                    if (isNewUser) {
+                        // If it's a new user, we wait patiently. The onSnapshot listener will
+                        // fire again automatically once `initializeUserData` creates the document.
+                        console.log("New user detected. Waiting for Firestore document creation...");
+                    } else {
+                        // If this is an ESTABLISHED user and their document is missing,
+                        // it's a critical error. We should log them out for safety.
+                        console.error("Firestore document missing for existing user. Logging out.");
+                        showToast("Account data could not be found. Please contact support.", "error");
+                        signOut(auth);
+                    }
+                }
+            });
+        }
+        // --- END: MODIFIED CODE ---
+
+        function showToast(e,t="success"){const s=document.getElementById("toast");s.textContent=e,s.className="fixed bottom-24 left-1/2 -translate-x-1/2 text-white text-sm font-semibold py-3 px-6 rounded-full shadow-lg transition-all duration-300 z-[200]",s.classList.add("success"===t?"bg-green-500":"bg-red-500"),s.style.opacity="1",setTimeout(()=>{s.style.opacity="0"},3e3)}
+        
+        async function initializeUserData(user, name, username, phone, joinCode) {
+            const batch = writeBatch(db);
+            const newUserRef = doc(db, "users", user.uid);
+            batch.set(newUserRef, { 
+                uid: user.uid, email: user.email, name, username, phone, joinCode: joinCode || '', joinDate: Timestamp.now(), balance: 0, withdrawBalance: 0, totalWithdrawn: 0, totalEarnings: 0, 
+                tasksCompleted: [], totalTaskEarnings: 0, bkashNumber: '', referralCode: '', marketingLink: '', usdtAddress: '', teamSize: 0, activeTeam: 0, preferredCurrency: 'BDT', 
+                lastDailyWithdraw: null, nextPaymentDate: '', nextPaymentAmount: 0 
+            });
+            if (joinCode) {
+                const referrerQuery = query(collection(db, "users"), where("referralCode", "==", joinCode), limit(1));
+                const referrerSnap = await getDocs(referrerQuery);
+                if (!referrerSnap.empty) {
+                    const referrerRef = doc(db, "users", referrerSnap.docs[0].id);
+                    batch.update(referrerRef, { teamSize: increment(1) });
+                }
+            }
+            await batch.commit();
+        }
+
+        function updateUI(e){const t=(t,s)=>e[t]??s,s=e=>"USDT"===currentCurrency?`$${(e/bdtToUsdtRate).toFixed(2)}`:`৳${(e||0).toFixed(2)}`;document.getElementById("currency-bdt").classList.toggle("active","BDT"===currentCurrency),document.getElementById("currency-usdt").classList.toggle("active","USDT"===currentCurrency),["header-balance","wallet-available-balance"].forEach(a=>document.getElementById(a).textContent=s(t("balance",0))),document.getElementById("total-earnings-stat").textContent=s(t("totalEarnings",0)),document.getElementById("wallet-withdraw-balance").textContent=s(t("withdrawBalance",0)),document.getElementById("wallet-total-withdrawn").textContent=s(t("totalWithdrawn",0)),document.getElementById("stats-task-earnings").textContent=s(t("totalTaskEarnings",0));const a=t("todayImpression",0),n=t("todayEarning",0),o=a>0?n/a*1e3:0;document.getElementById("cpm-stat").textContent=s(o);const r=document.getElementById("daily-target-card"),i=t("todayTargetImpression",0);if(i>0){r.style.display="block";const e=Math.min(a/i*100,100);document.getElementById("daily-target-bonus").textContent=s(t("todayTargetBonus",0)),document.getElementById("daily-target-progress-bar").style.width=`${e}%`,document.getElementById("daily-target-progress-text").textContent=`${a} / ${i}`}else r.style.display="none";const l=t("activeTeam",0);document.getElementById("milestone-50-progress-bar").style.width=`${Math.min(l/50*100,100)}%`,document.getElementById("milestone-50-progress-text").textContent=`${l}/50`,document.getElementById("milestone-100-progress-bar").style.width=`${Math.min(l/100*100,100)}%`,document.getElementById("milestone-100-progress-text").textContent=`${l}/100`;const d=document.getElementById("next-payment-info-card"),c=t("nextPaymentDate",""),u=t("nextPaymentAmount",0);c&&u>0?(document.getElementById("next-payment-date").textContent=c,document.getElementById("next-payment-amount").textContent=s(u),d.classList.remove("hidden")):d.classList.add("hidden");const m=document.getElementById("daily-withdraw-btn"),g=t("lastDailyWithdraw",null);g&&g.toDate?Date.now()<g.toDate().getTime()+864e5?(m.disabled=!0,m.textContent="Available Later"):(m.disabled=!1,m.textContent="Request ৳10"):(m.disabled=!1,m.textContent="Request ৳10"),document.getElementById("user-name").textContent=t("name","User"),document.getElementById("marketing-link-input").value=t("marketingLink",""),document.getElementById("today-impression").textContent=a,document.getElementById("today-earnings-stat").textContent=s(n),document.getElementById("bkash-number-input").value=t("bkashNumber",""),document.getElementById("usdt-address-input").value=t("usdtAddress",""),document.getElementById("team-size").textContent=t("teamSize",0),document.getElementById("active-team-members").textContent=l,document.getElementById("referral-code-display").textContent=t("referralCode")||"NOTSET",document.getElementById("stats-tasks-completed").textContent=t("tasksCompleted",[]).length,["name","username","email","phone"].forEach(e=>document.getElementById(`profile-info-${e}`).textContent=t(e,"N/A"))}
+        function fetchAndRenderTasks(){const e=document.getElementById("tasks-list");e.innerHTML='<p class="text-center text-gray-300">Loading...</p>';const t=query(collection(db,"tasks"),orderBy("createdAt","desc"));onSnapshot(t,t=>{if(t.empty)return void(e.innerHTML="<p>No tasks available.</p>");e.innerHTML="",t.forEach(t=>{const s=t.data(),a=userData.tasksCompleted?.includes(t.id);e.innerHTML+=`<div class="bg-gray-800/50 p-4 rounded-lg flex justify-between items-center"><div><h4>${s.title}</h4><p class="text-sm text-green-400">Reward: ৳${s.reward.toFixed(2)}</p></div><button data-task-id="${t.id}" data-task-link="${s.link}" data-task-reward="${s.reward}" class="task-btn bg-cyan-600 text-white font-bold py-2 px-5 rounded-lg" ${a?"disabled":""}>${a?"Completed":"View"}</button></div>`})})}document.getElementById("tasks-list").addEventListener("click",async e=>{if(e.target.classList.contains("task-btn")){const t=e.target,{taskId:s,taskLink:a,taskReward:n}=t.dataset;if(t.disabled)return;t.disabled=!0,window.open(a,"_blank"),await updateDoc(doc(db,"users",currentUser.uid),{tasksCompleted:arrayUnion(s),balance:increment(parseFloat(n)),totalTaskEarnings:increment(parseFloat(n)),totalEarnings:increment(parseFloat(n))}),showToast("Task completed!","success")}});async function fetchAndRenderLeaderboard(){const e=document.getElementById("leaderboard-list");e.innerHTML='<p class="text-center text-gray-300">Loading...</p>';try{const t=query(collection(db,"users"),orderBy("totalEarnings","desc"),limit(20)),s=await getDocs(t),a=e=>"USDT"===currentCurrency?`$${(e/bdtToUsdtRate).toFixed(2)}`:`৳${(e||0).toFixed(2)}`;e.innerHTML="",s.forEach((t,s)=>{e.innerHTML+=`<div class="flex justify-between items-center bg-gray-800/50 p-2 rounded-lg text-sm"><span>${s+1}. ${t.data().name}</span><strong>${a(t.data().totalEarnings)}</strong></div>`})}catch(e){e.innerHTML="<p>Could not load leaderboard.</p>"}}
+        function fetchAndRenderHistory(e,t,s,a){const n=document.getElementById(e);n.innerHTML='<p class="text-center text-gray-400">Loading...</p>';const o=query(collection(db,t),where("userId","==",currentUser.uid),orderBy(s,"desc"),limit(10));onSnapshot(o,e=>{if(e.empty)return void(n.innerHTML='<p class="text-center text-gray-400">No history found.</p>');n.innerHTML="",e.forEach(e=>{const t=e.data(),s={pending:"text-yellow-400",completed:"text-green-400",rejected:"text-red-400"}[t[a]];let o;"withdrawal_requests"===t?(o=`<div><p class="font-bold">${(t.method||"").includes("USDT")?`$${t.amount.toFixed(2)}`:`৳${t.amount.toFixed(2)}`}</p><p class="text-xs text-gray-400">${t[s].toDate().toLocaleDateString()}</p></div><p class="font-semibold capitalize ${s}">${t[a]}</p>`):o=`<div class="w-full"><div class="flex justify-between items-center"><p class="font-bold">${t.subject}</p><p class="font-semibold capitalize ${s}">${t[a]}</p></div><p class="text-xs text-gray-400 mt-1">${t[s].toDate().toLocaleString()}</p></div>`,n.innerHTML+=`<div class="bg-gray-800/50 p-3 rounded-lg flex justify-between items-center text-sm">${o}</div>`})},()=>n.innerHTML="<p>Could not load history.</p>")}async function handleCurrencyChange(e){currentCurrency!==e&&await updateDoc(doc(db,"users",currentUser.uid),{preferredCurrency:e})}async function saveDetail(e,t,s,a){if(!s.test(t))return void showToast(a,"error");await updateDoc(doc(db,"users",currentUser.uid),{[e]:t}),showToast("Saved successfully!","success")}async function requestWithdrawal(e,t,s,a,n){if(!userData[n])return void showToast(`Save your ${e} details first`,"error");if(isNaN(t)||t<s)return void showToast(`Minimum is ${s}`,"error");if(userData.balance<a)return void showToast("Insufficient balance","error");if(e.includes("Daily")){const t=userData.lastDailyWithdraw;if(t&&t.toDate){if(new Date().getTime()<t.toDate().getTime()+864e5)return void showToast("You can request daily payout once every 24 hours.","error")}}const o={balance:increment(-a),withdrawBalance:increment(a)};e.includes("Daily")&&(o.lastDailyWithdraw=Timestamp.now()),await addDoc(collection(db,"withdrawal_requests"),{userId:currentUser.uid,userName:userData.name,amount:t,method:e,accountNumber:userData[n],status:"pending",timestamp:Timestamp.now()}),await updateDoc(doc(db,"users",currentUser.uid),o),showToast("Request sent!","success")}async function navigateToSection(e){document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),document.querySelector(`.nav-item[data-section="${e}"]`)?.classList.add("active"),document.querySelectorAll(".content-section").forEach(e=>e.classList.remove("active")),document.getElementById(e)?.classList.add("active"),window.scrollTo(0,0),"tasks"===e?fetchAndRenderTasks():"wallet"===e?fetchAndRenderHistory("withdrawal-history-list","withdrawal_requests","timestamp","status"):"support"===e?fetchAndRenderHistory("ticket-history-list","supportTickets","createdAt","status"):"refer"===e&&fetchAndRenderLeaderboard()}async function updateLandingPageStats(){try{const e=collection(db,"users"),t=await getDocs(e);document.getElementById("total-users").textContent=t.size;let s=0;t.forEach(e=>{s+=e.data().totalWithdrawn||0}),document.getElementById("total-payouts").textContent=Math.round(s).toLocaleString("en-IN")}catch(e){console.error("Could not update landing page stats:",e),document.getElementById("total-users").textContent="N/A",document.getElementById("total-payouts").textContent="N/A"}}
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            updateLandingPageStats(); 
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.nav-auth-btn').forEach(b => b.addEventListener('click', e => { e.preventDefault(); showAuthForm(); loginFormDiv.style.display = b.dataset.authShow === 'login' ? 'block' : 'none'; registerFormDiv.style.display = b.dataset.authShow === 'register' ? 'block' : 'none'; }));
+            [document.getElementById('show-register'), document.getElementById('show-login')].forEach((el, i) => el.addEventListener('click', e => { e.preventDefault(); loginFormDiv.style.display = i === 0 ? 'none' : 'block'; registerFormDiv.style.display = i === 0 ? 'block' : 'none'; }));
+            [document.getElementById('back-to-home-login'), document.getElementById('back-to-home-register')].forEach(b => b.addEventListener('click', e => { e.preventDefault(); showLandingPage(); }));
+            
+            document.getElementById('register-form-element').addEventListener('submit', async e => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                const name = document.getElementById('register-name').value;
+                const username = document.getElementById('register-username').value;
+                const phone = document.getElementById('register-phone').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const joinCode = document.getElementById('register-join-code').value.trim();
+                try {
+                    const cred = await createUserWithEmailAndPassword(auth, email, password);
+                    await updateProfile(cred.user, { displayName: name });
+                    await initializeUserData(cred.user, name, username, phone, joinCode);
+                    // onAuthStateChanged will handle the UI transition automatically.
+                } catch (err) {
+                    console.error("Registration Error: ", err);
+                    showToast(`Registration failed: ${err.message}`, 'error');
+                } finally {
+                    btn.disabled = false;
+                }
+            });
+
+            document.getElementById('login-form-element').addEventListener('submit', async e => { e.preventDefault(); try { await signInWithEmailAndPassword(auth, document.getElementById('login-email').value, document.getElementById('login-password').value); } catch (err) { showToast('Login failed', 'error'); } });
+            document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => navigateToSection(item.dataset.section)));
+            document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
+            document.getElementById('currency-bdt').addEventListener('click', () => handleCurrencyChange('BDT'));
+            document.getElementById('currency-usdt').addEventListener('click', () => handleCurrencyChange('USDT'));
+            document.getElementById('save-bkash-btn').addEventListener('click', () => saveDetail('bkashNumber', document.getElementById('bkash-number-input').value, /^(01[3-9])\d{8}$/, 'Invalid bKash number'));
+            document.getElementById('save-usdt-btn').addEventListener('click', () => saveDetail('usdtAddress', document.getElementById('usdt-address-input').value, /^T[a-zA-Z0-9]{33}$/, 'Invalid TRC-20 address'));
+            document.getElementById('daily-withdraw-btn').addEventListener('click', () => requestWithdrawal('bKash (Daily)', 10, 10, 10, 'bkashNumber'));
+            document.getElementById('main-withdraw-request-btn').addEventListener('click', () => { const amount = parseFloat(document.getElementById('main-withdraw-amount').value); requestWithdrawal('bKash', amount, 500, amount, 'bkashNumber'); });
+            document.getElementById('usdt-withdraw-request-btn').addEventListener('click', () => { const amount = parseFloat(document.getElementById('usdt-withdraw-amount').value); requestWithdrawal('USDT', amount, 5, amount * bdtToUsdtRate, 'usdtAddress'); });
+            document.getElementById('ticket-form').addEventListener('submit', async (e) => { e.preventDefault(); try { await addDoc(collection(db, "supportTickets"), { userId: currentUser.uid, userName: userData.name, subject: document.getElementById('ticket-subject').value, message: document.getElementById('ticket-message').value, status: 'open', createdAt: Timestamp.now() }); showToast('Ticket submitted!', 'success'); e.target.reset(); } catch { showToast('Failed to submit ticket.', 'error'); } });
+            const headlineText = "The Smart Way to Earn Online"; const headline = document.querySelector('.animated-headline'); if (headline) { headline.innerHTML = ''; headlineText.split('').forEach((char, index) => { const span = document.createElement('span'); span.textContent = char === ' ' ? '\u00A0' : char; headline.appendChild(span); setTimeout(() => { span.style.opacity = '1'; span.style.transform = 'translateY(0)'; }, 40 * index); }); }
+        });
+    </script>
+</body>
+</html>
