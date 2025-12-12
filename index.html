@@ -763,10 +763,30 @@
                 }
             });
 
-            // 🔄 LOAD USER DATA
-            onSnapshot(doc(db, "users", user.uid), (docSnap) => {
+            // 🔄 LOAD USER DATA & CHECK FOR DAILY RESET
+            onSnapshot(doc(db, "users", user.uid), async (docSnap) => {
                 if (docSnap.exists()) {
                     userData = docSnap.data();
+
+                    // ✅ DAILY RESET LOGIC HERE
+                    const todayStr = new Date().toDateString(); // E.g., "Mon Dec 12 2025"
+                    
+                    if (userData.lastActiveDate !== todayStr) {
+                        // It's a new day! Reset counters but KEEP Balance & Total
+                        try {
+                            const userRef = doc(db, "users", user.uid);
+                            await updateDoc(userRef, {
+                                lastActiveDate: todayStr,
+                                todayEarning: 0,
+                                rawTodayImpressions: 0,
+                                todayTaskCount: 0
+                            });
+                            console.log("Daily stats reset successfully.");
+                        } catch (error) {
+                            console.error("Error resetting daily stats:", error);
+                        }
+                    }
+
                     updateUI(userData);
                     
                     if(userData.savedAccounts && userData.savedAccounts[selectedWithdrawMethod]) {
@@ -895,11 +915,13 @@
                }
             }
 
+            // Added lastActiveDate to initialize correctly
             batch.set(ref, {
                 uid: cred.user.uid, email: email, name: name, phone: phone, 
                 joinedVia: joinCode || "None", referrerUid: referrerUid, joinDate: Timestamp.now(), 
                 balance: 0, totalEarnings: 0, referralCode: defaultRefCode, 
-                teamSize: 0, rawTodayImpressions: 0, todayTaskCount: 0, savedAccounts: {}, referralEarnings: 0
+                teamSize: 0, rawTodayImpressions: 0, todayEarning: 0, todayTaskCount: 0, 
+                savedAccounts: {}, referralEarnings: 0, lastActiveDate: new Date().toDateString()
             });
             await batch.commit();
             showToast("Welcome to NS PRIME!", "success");
