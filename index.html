@@ -326,7 +326,7 @@
     </header>
 
 <main class="p-4 max-w-lg mx-auto space-y-6">
-    <!-- HOME SECTION -->
+    <!-- HOME SECTION (Updated: Daily Deleted) -->
     <section id="home" class="fade-up visible">
        <!-- Smart Link -->
         <div class="neon-card p-5 mb-5 border-l-4 border-l-cyan-500" data-tilt>
@@ -511,7 +511,7 @@
         </div>
     </section>
 
-    <!-- PROFILE SECTION & SUPPORT -->
+    <!-- PROFILE SECTION (FULL INFO) -->
     <section id="profile" class="hidden">
         <div class="neon-card p-6 mb-5">
             <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-6">
@@ -529,6 +529,31 @@
 
             <!-- Full Info Grid -->
             <div class="grid grid-cols-1 gap-3 mb-6">
+                <!-- UID & Join Date -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-black/40 rounded p-3 border border-white/5">
+                        <p class="text-[10px] text-gray-400 uppercase">User ID</p>
+                        <p class="text-xs font-bold text-cyan-400 font-mono truncate" id="profile-uid">...</p>
+                    </div>
+                    <div class="bg-black/40 rounded p-3 border border-white/5">
+                         <p class="text-[10px] text-gray-400 uppercase">Joined</p>
+                         <p class="text-xs font-bold text-white" id="profile-join-date">...</p>
+                    </div>
+                </div>
+
+                <!-- Balance & Total -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-black/40 rounded p-3 border border-white/5">
+                        <p class="text-[10px] text-gray-400 uppercase">Balance</p>
+                        <p class="text-sm font-bold text-white brand-font" id="profile-balance">৳0.00</p>
+                    </div>
+                    <div class="bg-black/40 rounded p-3 border border-white/5">
+                         <p class="text-[10px] text-gray-400 uppercase">Total Earned</p>
+                         <p class="text-sm font-bold text-green-400 brand-font" id="profile-total-earned">৳0.00</p>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
                 <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between">
                     <span class="text-gray-400 text-xs uppercase">Phone</span>
                     <span class="text-white text-xs font-bold" id="profile-phone">...</span>
@@ -536,6 +561,13 @@
                 <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between">
                     <span class="text-gray-400 text-xs uppercase">Email</span>
                     <span class="text-white text-xs font-bold" id="profile-email">...</span>
+                </div>
+                 <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between items-center">
+                    <span class="text-gray-400 text-xs uppercase">Refer Code</span>
+                    <div class="flex items-center gap-2">
+                         <span class="text-white text-xs font-bold font-mono" id="profile-refer-code">...</span>
+                         <i class="fas fa-copy text-gray-500 cursor-pointer text-xs" id="copy-profile-ref"></i>
+                    </div>
                 </div>
             </div>
             
@@ -570,7 +602,8 @@
             <h2 id="modal-task-title" class="text-xl font-bold text-white mb-1 brand-font">...</h2>
             <p class="text-green-400 font-bold mb-4 font-mono">REWARD: <span id="modal-task-reward">0</span></p>
             <div class="bg-white/5 p-4 rounded border border-white/5 mb-5">
-                <p id="modal-task-desc" class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">...</p>
+                <p id="modal-task-desc" class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">...
+                </p>
                 <div id="modal-task-images" class="grid grid-cols-2 gap-2 mt-3"></div>
             </div>
             <a id="modal-task-link" href="#" target="_blank" class="block w-full text-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-3.5 rounded shadow-[0_0_15px_cyan] mb-6 transition transform hover:scale-[1.02]">
@@ -585,7 +618,7 @@
     </div>
 </div>
 
-<!-- SUPPORT MODAL -->
+<!-- SUPPORT MODAL (Fixed Scroll) -->
 <div id="support-modal-overlay" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
     <div class="neon-card w-full max-w-lg bg-[#0a0a15] relative flex flex-col h-[500px]">
         <div class="p-4 border-b border-white/10 flex justify-between items-center bg-purple-900/20">
@@ -605,7 +638,7 @@
 <!-- Toast -->
 <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 text-white text-xs font-bold py-3 px-6 rounded-full shadow-lg opacity-0 transition-all duration-300 z-[300] backdrop-blur-md border border-white/10"></div>
 
-<!-- 🧠 MAIN LOGIC -->
+<!-- 🧠 MAIN LOGIC (FIXED) -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
@@ -673,7 +706,7 @@
 
     let currentUser = null, userData = {};
     let selectedWithdrawMethod = 'bkash'; 
-    let todayTargetClaimed = false;
+    let walletUnsubscribe = null;
     const loader = document.getElementById("loading-screen");
 
     function showToast(msg, type="success") {
@@ -683,6 +716,17 @@
         t.style.borderColor = type === "success" ? "#00f3ff" : "#ff0000";
         t.style.opacity = "1"; t.style.bottom = "100px";
         setTimeout(() => { t.style.opacity = "0"; t.style.bottom = "80px"; }, 3000);
+    }
+
+    // --- Calculator Functionality ---
+    window.updateCalc = () => {
+        const tasks = document.getElementById("calc-tasks").value;
+        const refs = document.getElementById("calc-ref").value;
+        document.getElementById("calc-tasks-val").innerText = tasks;
+        document.getElementById("calc-ref-val").innerText = refs;
+        const daily = (parseInt(tasks) * 5) + (parseInt(refs) * 2); 
+        const monthly = daily * 30;
+        document.getElementById("calc-total").innerText = monthly;
     }
 
     // --- Auth & Data Flow ---
@@ -697,6 +741,7 @@
             const regInput = document.getElementById("register-join-code");
             if(regInput) { regInput.value = refCode; }
         }
+        window.updateCalc();
     };
 
     onAuthStateChanged(auth, user => {
@@ -723,7 +768,6 @@
                 if (docSnap.exists()) {
                     userData = docSnap.data();
                     updateUI(userData);
-                    checkTargetStatus();
                     
                     if(userData.savedAccounts && userData.savedAccounts[selectedWithdrawMethod]) {
                         document.getElementById("main-withdraw-account").value = userData.savedAccounts[selectedWithdrawMethod];
@@ -739,11 +783,11 @@
         }
     });
 
-    // --- UI Update Logic ---
+    // --- UI Update Logic (Updated for Profile) ---
     function updateUI(data) {
         if (!data) return;
 
-        // Stats (Updated for new cards)
+        // Stats
         document.getElementById("header-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
         document.getElementById("wallet-available-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
         document.getElementById("user-name").textContent = (data.name || "User").split(' ')[0].toUpperCase();
@@ -751,23 +795,33 @@
         document.getElementById("today-earnings-stat").textContent = `৳${(data.todayEarning || 0).toFixed(2)}`;
         document.getElementById("total-earnings-stat").textContent = `৳${(data.totalEarnings || 0).toFixed(2)}`;
         document.getElementById("today-impression").textContent = data.rawTodayImpressions || 0;
-        document.getElementById("home-refer-commission").textContent = `৳${(data.referralEarnings || 0).toFixed(2)}`; // New
+        document.getElementById("home-refer-commission").textContent = `৳${(data.referralEarnings || 0).toFixed(2)}`;
 
         // Refer Section
         document.getElementById("refer-team-size").textContent = data.teamSize || 0;
         document.getElementById("referral-code-display").textContent = data.referralCode || "Generating...";
 
-        // Profile Full Info
+        // Profile Full Info (Expanded)
         document.getElementById("profile-info-name").textContent = data.name || "No Name";
         document.getElementById("profile-phone").textContent = data.phone || "Not Set";
         document.getElementById("profile-email").textContent = currentUser.email;
+        document.getElementById("profile-uid").textContent = currentUser.uid;
+        
+        // Format Join Date
+        let joinDateStr = "N/A";
+        if(data.joinDate && data.joinDate.toDate) {
+            joinDateStr = data.joinDate.toDate().toLocaleDateString('en-GB');
+        }
+        document.getElementById("profile-join-date").textContent = joinDateStr;
+        
+        document.getElementById("profile-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
+        document.getElementById("profile-total-earned").textContent = `৳${(data.totalEarnings || 0).toFixed(2)}`;
+        document.getElementById("profile-refer-code").textContent = data.referralCode || "...";
 
         updateMarketingLink();
     }
 
     function updateTargetUI() {
-        document.getElementById("target-task-goal").textContent = `${adminConfig.dailyTaskTarget} Tasks`;
-        document.getElementById("target-click-goal").textContent = `${adminConfig.dailyClickTarget} Clicks`;
         document.getElementById("active-threshold-display").textContent = adminConfig.activeMemberThreshold;
     }
 
@@ -776,55 +830,11 @@
         document.getElementById("main-withdraw-amount").placeholder = `Min ${adminConfig.minWithdraw}`;
     }
 
-    function checkTargetStatus() {
-        if(!userData || !adminConfig) return;
-        const tasksDone = userData.todayTaskCount || 0;
-        const clicksDone = userData.rawTodayImpressions || 0;
-        const claimedDates = userData.claimedTargetDates || [];
-        const todayStr = new Date().toDateString();
-        todayTargetClaimed = claimedDates.includes(todayStr);
-
-        let progress = 0;
-        const taskProgress = Math.min((tasksDone / adminConfig.dailyTaskTarget), 1) * 0.5;
-        const clickProgress = Math.min((clicksDone / adminConfig.dailyClickTarget), 1) * 0.5;
-        progress = (taskProgress + clickProgress) * 100;
-        document.getElementById("target-progress-bar").style.width = `${progress}%`;
-
-        const btn = document.getElementById("claim-target-btn");
-        const statusSpan = document.getElementById("target-status");
-
-        if (todayTargetClaimed) {
-            btn.textContent = "ALREADY CLAIMED TODAY";
-            btn.disabled = true;
-            btn.className = "w-full py-2 bg-green-900/50 text-green-400 rounded text-xs font-bold uppercase cursor-not-allowed";
-            statusSpan.textContent = "Done ✅";
-        } else if (tasksDone >= adminConfig.dailyTaskTarget && clicksDone >= adminConfig.dailyClickTarget) {
-            btn.textContent = `CLAIM ৳${adminConfig.dailyTargetBonus} BONUS NOW`;
-            btn.disabled = false;
-            btn.className = "w-full py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-black rounded text-xs font-bold uppercase transition hover:scale-[1.02] cursor-pointer shadow-[0_0_15px_orange]";
-            statusSpan.textContent = "Ready 🎁";
-        } else {
-            btn.textContent = `Progress: ${Math.floor(progress)}%`;
-            btn.disabled = true;
-            btn.className = "w-full py-2 bg-gray-800 text-gray-500 rounded text-xs font-bold uppercase cursor-not-allowed";
-        }
+    // Copy Profile Refer Code
+    document.getElementById("copy-profile-ref").onclick = () => {
+        navigator.clipboard.writeText(document.getElementById("profile-refer-code").textContent);
+        showToast("Refer Code Copied!", "success");
     }
-
-    // --- Bonus Claim ---
-    document.getElementById("claim-target-btn").onclick = async () => {
-        if (todayTargetClaimed) return;
-        try {
-            const todayStr = new Date().toDateString();
-            const userRef = doc(db, "users", currentUser.uid);
-            await updateDoc(userRef, {
-                balance: increment(adminConfig.dailyTargetBonus),
-                totalEarnings: increment(adminConfig.dailyTargetBonus),
-                todayEarning: increment(adminConfig.dailyTargetBonus),
-                claimedTargetDates: [todayStr] 
-            });
-            showToast(`৳${adminConfig.dailyTargetBonus} Bonus Added!`, "success");
-        } catch(e) { showToast("Error claiming bonus", "error"); }
-    };
 
     function updateMarketingLink() {
         if (!currentUser) return;
@@ -974,7 +984,7 @@
         }
     }
 
-    // --- Support Logic ---
+    // --- Support Logic (Fixed Scroll & Add Doc) ---
     let supportUnsub = null;
     document.getElementById("open-support-btn").onclick = () => {
         const modal = document.getElementById("support-modal-overlay");
@@ -994,6 +1004,7 @@
         const container = document.getElementById("support-messages");
         container.innerHTML = '<div class="spinner mx-auto" style="width:20px;height:20px;"></div>';
         const q = query(collection(db, "support_tickets"), where("userId", "==", currentUser.uid), orderBy("timestamp", "asc"));
+        
         supportUnsub = onSnapshot(q, (snapshot) => {
             container.innerHTML = "";
             if (snapshot.empty) {
@@ -1013,6 +1024,7 @@
                 bubble.appendChild(inner);
                 container.appendChild(bubble);
             });
+            // Auto Scroll to bottom
             setTimeout(() => { container.scrollTop = container.scrollHeight; }, 100);
         });
     }
@@ -1022,12 +1034,22 @@
         const input = document.getElementById("support-input");
         const message = input.value.trim();
         if(!message) return;
-        const oldVal = input.value; input.value = ""; 
+        const oldVal = input.value; 
+        input.value = ""; 
         try {
             await addDoc(collection(db, "support_tickets"), {
-                userId: currentUser.uid, userName: userData.name, message: message, sender: "user", timestamp: Timestamp.now(), status: "unread"
+                userId: currentUser.uid, 
+                userName: userData.name || "User", 
+                message: message, 
+                sender: "user", 
+                timestamp: Timestamp.now(), 
+                status: "unread"
             });
-        } catch(e) { showToast("Message Failed", "error"); input.value = oldVal; }
+            // Scroll happens via onSnapshot automatically
+        } catch(e) { 
+            showToast("Message Failed", "error"); 
+            input.value = oldVal; 
+        }
     };
 
     // --- Tasks & Proof ---
@@ -1061,14 +1083,14 @@
                 const el = document.createElement("div");
                 el.className = "neon-card p-4 flex justify-between items-center cursor-pointer hover:bg-white/5 transition";
                 el.innerHTML = `<div class="flex items-center gap-4"><div class="w-10 h-10 rounded bg-cyan-500/10 flex items-center justify-center text-cyan-400 border border-cyan-500/20"><i class="fas fa-cube"></i></div><div><h4 class="font-bold text-white text-sm">${t.title}</h4><p class="text-[10px] text-gray-400">Reward: ৳${t.reward}</p></div></div><div class="font-bold text-green-400 text-sm">START</div>`;
-                el.onclick = () => openTask(doc.id, t);
+                el.onclick = () => window.openTask(doc.id, t);
                 container.appendChild(el);
             });
             if(!hasTask) container.innerHTML = '<p class="text-center text-gray-500 text-xs py-4">NO JOBS AVAILABLE</p>';
         } catch(e) { container.innerHTML = '<p class="text-center text-red-400 text-xs">Loading Error</p>'; }
     }
 
-    function openTask(id, task) {
+    window.openTask = (id, task) => {
         document.getElementById("modal-task-title").textContent = task.title;
         document.getElementById("modal-task-reward").textContent = `৳${task.reward}`;
         document.getElementById("modal-task-desc").textContent = task.description;
@@ -1159,15 +1181,14 @@
          } catch(e) { showToast(e.message, "error"); }
     };
 
-    // ✅ FIXED WALLET HISTORY FUNCTION
     function loadWalletHistory() {
         const el = document.getElementById('withdrawal-history-list'); 
         el.innerHTML = '<p class="text-center text-gray-500">Loading...</p>';
+        if (walletUnsubscribe) walletUnsubscribe();
+
+        const q = query(collection(db, "withdrawal_requests"), where("userId", "==", currentUser.uid), limit(20));
         
-        // Ensure index exists for complex query, or just sort client side for small lists
-        const q = query(collection(db, "withdrawal_requests"), where("userId", "==", currentUser.uid), limit(10));
-        
-        onSnapshot(q, snap => {
+        walletUnsubscribe = onSnapshot(q, snap => {
             el.innerHTML = ""; 
             if(snap.empty) { 
                 el.innerHTML = '<p class="text-center text-gray-500">No records found.</p>'; 
@@ -1176,8 +1197,6 @@
             
             let docs = []; 
             snap.forEach(d => docs.push(d.data()));
-            
-            // Client side sort to avoid index issues
             docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
             
             docs.forEach(d => {
