@@ -120,6 +120,16 @@
     .chat-user { background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); margin-left: auto; color: white; text-align: right; }
     .chat-admin { background: rgba(188, 19, 254, 0.1); border: 1px solid rgba(188, 19, 254, 0.3); margin-right: auto; color: white; text-align: left; }
     select option { background: #050508; color: white; }
+
+    /* Ticker Style */
+    .ticker-wrap {
+        width: 100%; overflow: hidden; height: 30px; background: rgba(0,0,0,0.3); 
+        border-radius: 5px; border: 1px solid rgba(255,255,255,0.05); position: relative;
+    }
+    .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; box-sizing: content-box; animation: ticker 20s linear infinite; }
+    .ticker-item { display: inline-block; padding: 0 15px; font-size: 10px; font-weight: bold; color: #aaa; }
+    .ticker-item span { color: var(--neon-green); }
+    @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 </style>
 </head>
 <body class="antialiased">
@@ -340,7 +350,7 @@
     </header>
 
 <main class="p-4 max-w-lg mx-auto space-y-6">
-    <!-- HOME SECTION (Updated: Daily Deleted) -->
+    <!-- HOME SECTION (Updated: Daily Target at Bottom) -->
     <section id="home" class="fade-up visible">
        <!-- Smart Link -->
         <div class="neon-card p-5 mb-5 border-l-4 border-l-cyan-500" data-tilt>
@@ -392,6 +402,36 @@
                 <p class="text-[10px] text-gray-400 uppercase tracking-widest">Ref Bonus</p>
             </div>
         </div>
+
+        <!-- 🔥 DAILY TARGET & BONUS CARD (MOVED TO BOTTOM) -->
+        <div class="neon-card p-5 border-b-4 border-b-orange-500">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-sm font-bold text-white uppercase tracking-wide"><i class="fas fa-bullseye text-orange-500 mr-2"></i> Daily Goals</h3>
+                <span class="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-1 rounded font-bold uppercase">Win ৳<span id="target-bonus-display">20</span></span>
+            </div>
+            
+            <!-- Tasks Progress -->
+            <div class="mb-3">
+                <div class="flex justify-between text-xs mb-1">
+                    <span class="text-gray-400">Complete Tasks</span>
+                    <span class="text-white font-bold"><span id="user-task-done">0</span> / <span id="admin-task-target">5</span></span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2">
+                    <div id="target-task-bar" class="bg-gradient-to-r from-orange-600 to-yellow-500 h-2 rounded-full transition-all duration-700" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Clicks Progress -->
+            <div>
+                <div class="flex justify-between text-xs mb-1">
+                    <span class="text-gray-400">Smart Link Clicks</span>
+                    <span class="text-white font-bold"><span id="user-click-done">0</span> / <span id="admin-click-target">10</span></span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2">
+                    <div id="target-click-bar" class="bg-gradient-to-r from-cyan-600 to-blue-500 h-2 rounded-full transition-all duration-700" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- TASKS SECTION (UPDATED with TOTAL & VIP) -->
@@ -417,18 +457,19 @@
         <div id="tasks-history-list" class="space-y-3 hidden"></div>
     </section>
 
-    <!-- WALLET SECTION (UPDATED) -->
+    <!-- WALLET SECTION (UPDATED WITH DYNAMIC ADMIN DATA) -->
     <section id="wallet" class="hidden">
          <div class="neon-card p-8 text-center mb-6" data-tilt>
             <p class="text-gray-400 text-xs uppercase tracking-[4px] mb-2">Available Funds</p>
             <p class="text-5xl font-bold text-white brand-font text-shadow-neon" id="wallet-available-balance">৳0.00</p>
          </div>
 
-         <!-- Upcoming Payment Info -->
+         <!-- Upcoming Payment Info (Dynamic from Admin) -->
          <div class="neon-card p-4 mb-6 border-l-4 border-l-purple-500 flex justify-between items-center bg-purple-900/10">
              <div>
-                 <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Next Payout</p>
-                 <p class="text-white font-bold brand-font text-lg" id="next-payment-date">Daily 5PM-8PM</p>
+                 <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Next Payment Date</p>
+                 <p class="text-white font-bold brand-font text-lg" id="next-payment-date">Loading...</p>
+                 <p class="text-[9px] text-cyan-400 mt-1">Budget: ৳<span id="todays-budget">0</span></p>
              </div>
              <div class="text-right">
                  <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Pending</p>
@@ -467,7 +508,7 @@
          </div>
     </section>
 
-    <!-- REFERRAL SECTION (UPDATED) -->
+    <!-- REFERRAL SECTION (UPDATED with Ticker at Bottom) -->
     <section id="refer" class="hidden">
         <div class="neon-card p-6 mb-5 text-center relative overflow-hidden">
             <div class="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-full blur-xl"></div>
@@ -497,7 +538,7 @@
             <p class="text-[10px] text-gray-500 mt-2 text-center">*Member becomes Active after earning <span id="active-threshold-display">1000</span> Taka.</p>
         </div>
 
-        <!-- Team Milestones (UPDATED) -->
+        <!-- Team Milestones -->
         <div class="neon-card p-5 mb-5">
             <h3 class="text-sm font-bold text-white mb-4 flex items-center gap-2 uppercase tracking-wide">
                 <i class="fas fa-trophy text-yellow-400"></i> Active Member Bonus
@@ -529,16 +570,26 @@
             </div>
         </div>
         
-        <!-- My Team List (UPDATED) -->
-        <div class="neon-card p-5">
+        <!-- My Team List -->
+        <div class="neon-card p-5 mb-5">
             <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest">My Team List</h3>
             <div id="referral-list-container" class="space-y-2 max-h-60 overflow-y-auto custom-scrollbar">
                 <p class="text-center text-gray-500 text-xs">Loading team data...</p>
             </div>
         </div>
+
+        <!-- 📢 LIVE PAYOUT TICKER (MOVED TO BOTTOM) -->
+        <div class="neon-card p-2">
+            <h3 class="text-[10px] font-bold text-gray-400 mb-2 uppercase text-center tracking-widest">Live Withdrawals</h3>
+            <div class="ticker-wrap">
+                <div class="ticker" id="live-payout-ticker">
+                    <!-- Ticker items injected via JS -->
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- PROFILE SECTION (FULL INFO) -->
+    <!-- PROFILE SECTION (Updated: Learning Folder) -->
     <section id="profile" class="hidden">
         <div class="neon-card p-6 mb-5">
             <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-6">
@@ -594,6 +645,26 @@
                     <div class="flex items-center gap-2">
                          <span class="text-white text-xs font-bold font-mono" id="profile-refer-code">...</span>
                          <i class="fas fa-copy text-gray-500 cursor-pointer text-xs" id="copy-profile-ref"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 📚 LEARNING FOLDER / VIDEO LIBRARY -->
+            <div class="mb-6">
+                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wide flex items-center gap-2">
+                    <i class="fas fa-folder-open text-yellow-400"></i> Learning Zone
+                </h4>
+                <div class="bg-black/40 rounded border border-white/10 overflow-hidden">
+                    <!-- Video Player -->
+                    <div class="aspect-video bg-black">
+                        <iframe id="learning-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div id="video-placeholder" class="w-full h-full flex items-center justify-center text-gray-500 text-xs uppercase tracking-widest">
+                            Select a video to play
+                        </div>
+                    </div>
+                    <!-- Video List -->
+                    <div class="p-3 max-h-40 overflow-y-auto custom-scrollbar bg-[#050508]" id="learning-list">
+                        <p class="text-center text-xs text-gray-500">Loading tutorials...</p>
                     </div>
                 </div>
             </div>
@@ -671,7 +742,7 @@
     import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, collection, addDoc, query, where, getDocs, increment, orderBy, limit, Timestamp, writeBatch } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-    // --- ✅ 3D ADVANCED BACKGROUND (PLEXUS EFFECT) ---
+    // --- ✅ 3D ADVANCED BACKGROUND ---
     function initStarfield() {
         const container = document.getElementById('canvas-container');
         if(!container) return;
@@ -680,70 +751,29 @@
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         container.appendChild(renderer.domElement);
-
-        // Particles
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = window.innerWidth < 768 ? 400 : 800; // More particles
+        const particlesCount = window.innerWidth < 768 ? 400 : 800; 
         const posArray = new Float32Array(particlesCount * 3);
-        
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 15; // Spread out more
-        }
-        
+        for(let i = 0; i < particlesCount * 3; i++) { posArray[i] = (Math.random() - 0.5) * 15; }
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        
-        // Advanced Material
-        const material = new THREE.PointsMaterial({
-            size: 0.03,
-            color: 0x00f3ff,
-            transparent: true,
-            opacity: 0.8,
-        });
-
+        const material = new THREE.PointsMaterial({ size: 0.03, color: 0x00f3ff, transparent: true, opacity: 0.8 });
         const particlesMesh = new THREE.Points(particlesGeometry, material);
         scene.add(particlesMesh);
-
-        // Lines (Plexus Effect)
         const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.15 });
         const linesGeometry = new THREE.BufferGeometry();
         const lines = new THREE.LineSegments(linesGeometry, lineMaterial);
         scene.add(lines);
-
         camera.position.z = 3;
-
-        // Interaction
         let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => { 
-            mouseX = (e.clientX - window.innerWidth / 2) * 0.0005; 
-            mouseY = (e.clientY - window.innerHeight / 2) * 0.0005; 
-        });
-
+        document.addEventListener('mousemove', (e) => { mouseX = (e.clientX - window.innerWidth / 2) * 0.0005; mouseY = (e.clientY - window.innerHeight / 2) * 0.0005; });
         function animate() {
             requestAnimationFrame(animate);
-
-            // Rotate Particles
-            particlesMesh.rotation.y += 0.001;
-            particlesMesh.rotation.x += 0.0005;
-
-            // Mouse parallax
-            particlesMesh.rotation.y += mouseX * 0.05;
-            particlesMesh.rotation.x += mouseY * 0.05;
-
-            // Plexus Logic (Connect particles close to each other)
-            // Note: Heavy for mobile if too many particles, doing simplified version
-            // Rotating mesh is enough for "Advanced" look on web without lag.
-            // For true plexus we update lines geometry here. 
-            // *Simulating connectivity by rotating a clone wireframe slightly off*
-            
+            particlesMesh.rotation.y += 0.001; particlesMesh.rotation.x += 0.0005;
+            particlesMesh.rotation.y += mouseX * 0.05; particlesMesh.rotation.x += mouseY * 0.05;
             renderer.render(scene, camera);
         }
         animate();
-
-        window.addEventListener('resize', () => { 
-            camera.aspect = window.innerWidth / window.innerHeight; 
-            camera.updateProjectionMatrix(); 
-            renderer.setSize(window.innerWidth, window.innerHeight); 
-        });
+        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
     }
     initStarfield();
 
@@ -766,14 +796,16 @@
     const IMGBB_API_KEY = "14e7adf7691d5e9344a2c3317d54ae1c"; 
     const LANDING_HOST = "https://landing-omega-red.vercel.app"; 
 
-    // ✅ GLOBAL ADMIN SETTINGS
+    // ✅ GLOBAL ADMIN SETTINGS (Defaults)
     let adminConfig = {
         minWithdraw: 10,
         activeMemberThreshold: 1000, 
         referCommission: 10, 
         dailyTaskTarget: 5,
         dailyClickTarget: 10,
-        dailyTargetBonus: 20
+        dailyTargetBonus: 20,
+        nextPaymentDate: "Daily 6PM",
+        todaysBudget: 15000
     };
 
     let currentUser = null, userData = {};
@@ -856,6 +888,7 @@
                     }
 
                     updateUI(userData);
+                    updateTargetUI(); // Refresh targets with user data
                     
                     if(userData.savedAccounts && userData.savedAccounts[selectedWithdrawMethod]) {
                         document.getElementById("main-withdraw-account").value = userData.savedAccounts[selectedWithdrawMethod];
@@ -909,13 +942,37 @@
         updateMarketingLink();
     }
 
+    // 🎯 UPDATE TARGET CARD UI (HOME)
     function updateTargetUI() {
+        // Admin Values
         document.getElementById("active-threshold-display").textContent = adminConfig.activeMemberThreshold;
+        document.getElementById("target-bonus-display").textContent = adminConfig.dailyTargetBonus || 20;
+        document.getElementById("admin-task-target").textContent = adminConfig.dailyTaskTarget || 5;
+        document.getElementById("admin-click-target").textContent = adminConfig.dailyClickTarget || 10;
+
+        // User Progress
+        const tasksDone = userData.todayTaskCount || 0;
+        const clicksDone = userData.rawTodayImpressions || 0;
+        
+        document.getElementById("user-task-done").textContent = tasksDone;
+        document.getElementById("user-click-done").textContent = clicksDone;
+
+        // Bars
+        const taskPercent = Math.min((tasksDone / adminConfig.dailyTaskTarget) * 100, 100);
+        const clickPercent = Math.min((clicksDone / adminConfig.dailyClickTarget) * 100, 100);
+        
+        document.getElementById("target-task-bar").style.width = `${taskPercent}%`;
+        document.getElementById("target-click-bar").style.width = `${clickPercent}%`;
     }
 
+    // 💰 UPDATE WALLET UI (DYNAMIC DATE/BUDGET)
     function updateWalletUI() {
         document.getElementById("min-withdraw-display").textContent = `Min Withdraw: ৳${adminConfig.minWithdraw}`;
         document.getElementById("main-withdraw-amount").placeholder = `Min ${adminConfig.minWithdraw}`;
+        
+        // Dynamic Fields
+        document.getElementById("next-payment-date").textContent = adminConfig.nextPaymentDate || "Daily";
+        document.getElementById("todays-budget").textContent = adminConfig.todaysBudget || "0";
     }
 
     // Copy Profile Refer Code
@@ -1015,7 +1072,8 @@
 
             if(item.dataset.section === 'tasks') switchTaskTab('available');
             if(item.dataset.section === 'wallet') loadWalletHistory();
-            if(item.dataset.section === 'refer') loadReferralData();
+            if(item.dataset.section === 'refer') { loadReferralData(); loadLivePayouts(); }
+            if(item.dataset.section === 'profile') loadTutorials();
         });
     });
 
@@ -1070,6 +1128,34 @@
 
         } catch (error) {
             container.innerHTML = '<p class="text-center text-red-400 text-xs">Error loading team data</p>';
+        }
+    }
+    
+    // 📢 LIVE PAYOUT TICKER (Simulated/Real Mix)
+    async function loadLivePayouts() {
+        const ticker = document.getElementById("live-payout-ticker");
+        // Try fetching real recent withdrawals
+        const q = query(collection(db, "withdrawal_requests"), where("status", "==", "approved"), limit(10));
+        try {
+            const snaps = await getDocs(q);
+            let html = "";
+            if(!snaps.empty) {
+                 snaps.forEach(doc => {
+                     const d = doc.data();
+                     const name = d.userName ? d.userName.split(" ")[0] : "User";
+                     html += `<div class="ticker-item">${name} just withdrew <span>৳${d.amount}</span> via ${d.method.toUpperCase()}</div>`;
+                 });
+            } else {
+                 // Fallback dummy data if no real data yet
+                 const dummies = ["Rahim", "Karim", "Sumi", "Nadia", "Rakib"];
+                 const methods = ["bKash", "Nagad"];
+                 dummies.forEach(d => {
+                     html += `<div class="ticker-item">${d} just withdrew <span>৳${Math.floor(Math.random()*500)+500}</span> via ${methods[Math.floor(Math.random()*2)]}</div>`;
+                 });
+            }
+            ticker.innerHTML = html;
+        } catch(e) {
+            console.log("Ticker load error", e);
         }
     }
 
@@ -1396,6 +1482,47 @@
         });
     }
     
+    // 📚 LEARNING FOLDER LOGIC (FETCH VIDEOS FROM SETTINGS/TUTORIAL)
+    async function loadTutorials() {
+        const listContainer = document.getElementById("learning-list");
+        const iframe = document.getElementById("learning-iframe");
+        const placeholder = document.getElementById("video-placeholder");
+        
+        // Fetch or use dummy
+        let tutorials = [];
+        try {
+            const docRef = doc(db, "settings", "tutorials");
+            const docSnap = await getDoc(docRef);
+            if(docSnap.exists() && docSnap.data().videos) {
+                tutorials = docSnap.data().videos;
+            } else {
+                 // Fallback if no admin data yet
+                 tutorials = [
+                     { title: "How to complete Tasks?", videoId: "dQw4w9WgXcQ" },
+                     { title: "Earning from Referrals", videoId: "M7lc1UVf-VE" },
+                     { title: "Withdrawal System Guide", videoId: "ScMzIvxBSi4" }
+                 ];
+            }
+        } catch(e) {
+             tutorials = [{ title: "Welcome to NS Prime", videoId: "M7lc1UVf-VE" }];
+        }
+
+        listContainer.innerHTML = "";
+        tutorials.forEach((vid, index) => {
+            const div = document.createElement("div");
+            div.className = "p-2 bg-white/5 mb-1 rounded cursor-pointer hover:bg-white/10 flex items-center gap-2";
+            div.innerHTML = `<i class="fas fa-play-circle text-cyan-400"></i> <span class="text-xs text-white font-bold">${vid.title}</span>`;
+            div.onclick = () => {
+                iframe.src = `https://www.youtube.com/embed/${vid.videoId}?autoplay=1`;
+                iframe.classList.remove("hidden");
+                placeholder.classList.add("hidden");
+                document.querySelectorAll("#learning-list > div").forEach(d => d.classList.remove("bg-cyan-900/50"));
+                div.classList.add("bg-cyan-900/50");
+            };
+            listContainer.appendChild(div);
+        });
+    }
+
     document.getElementById("copy-marketing-link-btn").onclick = () => { navigator.clipboard.writeText(document.getElementById("marketing-link-input").value); showToast("Link Copied", "success"); };
     document.getElementById("copy-referral-code-btn").onclick = () => { navigator.clipboard.writeText(document.getElementById("referral-code-display").textContent); showToast("Code Copied", "success"); };
     VanillaTilt.init(document.querySelectorAll(".neon-card"), { max: 10, speed: 400, glare: true, "max-glare": 0.2 });
