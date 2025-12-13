@@ -1074,7 +1074,7 @@
         }
     };
 
-    // --- Tasks & Proof ---
+    // --- Tasks & Proof (UPDATED WITH LIMIT LOGIC) ---
     window.switchTaskTab = (tab) => {
         const list = document.getElementById("tasks-list"); 
         const histList = document.getElementById("tasks-history-list");
@@ -1095,21 +1095,72 @@
         const container = document.getElementById("tasks-list");
         container.innerHTML = '<div class="flex justify-center p-4"><div class="spinner" style="width:30px;height:30px;"></div></div>';
         try {
+            // 1. Get current user history to check what they have already done
+            const historyQ = query(collection(db, "task_submissions"), where("userId", "==", currentUser.uid));
+            const historySnap = await getDocs(historyQ);
+            const userSubmissionMap = new Map(); // taskId -> data
+            
+            historySnap.forEach(doc => {
+                const data = doc.data();
+                userSubmissionMap.set(data.taskId, data);
+            });
+
+            // 2. Get active tasks
             const q = query(collection(db, "tasks"), where("active", "==", true));
             const snaps = await getDocs(q);
             container.innerHTML = ""; 
+            
             let hasTask = false;
+            const todayStr = new Date().toDateString();
+
             snaps.forEach(doc => {
                 const t = doc.data();
+                const limit = t.limit || 999999;
+                const completedCount = t.completedCount || 0;
+
+                // --- LOGIC 1: GLOBAL LIMIT CHECK ---
+                // If the global limit is reached, do NOT show the task
+                if (completedCount >= limit) {
+                    return; 
+                }
+
+                // --- LOGIC 2: USER HISTORY CHECK ---
+                if (userSubmissionMap.has(doc.id)) {
+                    // Check if it's a daily task
+                    if (t.taskType === 'daily') {
+                        const subData = userSubmissionMap.get(doc.id);
+                        if(subData.submittedAt) {
+                            const subDate = subData.submittedAt.toDate().toDateString();
+                            // If done today, hide it. If done yesterday, show it.
+                            if (subDate === todayStr) return;
+                        }
+                    } else {
+                        // If it's a one-time task and user did it, hide it forever
+                        return;
+                    }
+                }
+
                 hasTask = true;
                 const el = document.createElement("div");
                 el.className = "neon-card p-4 flex justify-between items-center cursor-pointer hover:bg-white/5 transition";
-                el.innerHTML = `<div class="flex items-center gap-4"><div class="w-10 h-10 rounded bg-cyan-500/10 flex items-center justify-center text-cyan-400 border border-cyan-500/20"><i class="fas fa-cube"></i></div><div><h4 class="font-bold text-white text-sm">${t.title}</h4><p class="text-[10px] text-gray-400">Reward: ৳${t.reward}</p></div></div><div class="font-bold text-green-400 text-sm">START</div>`;
+                el.innerHTML = `
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded bg-cyan-500/10 flex items-center justify-center text-cyan-400 border border-cyan-500/20"><i class="fas fa-cube"></i></div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">${t.title}</h4>
+                        <p class="text-[10px] text-gray-400">Reward: ৳${t.reward} | Spots: ${completedCount}/${limit}</p>
+                    </div>
+                </div>
+                <div class="font-bold text-green-400 text-sm">START</div>`;
                 el.onclick = () => window.openTask(doc.id, t);
                 container.appendChild(el);
             });
+
             if(!hasTask) container.innerHTML = '<p class="text-center text-gray-500 text-xs py-4">NO JOBS AVAILABLE</p>';
-        } catch(e) { container.innerHTML = '<p class="text-center text-red-400 text-xs">Loading Error</p>'; }
+        } catch(e) { 
+            console.error(e);
+            container.innerHTML = '<p class="text-center text-red-400 text-xs">Loading Error</p>'; 
+        }
     }
 
     window.openTask = (id, task) => {
@@ -1125,6 +1176,7 @@
     }
     document.getElementById("close-task-modal").onclick = () => { const m = document.getElementById("task-modal-overlay"); m.classList.add("hidden"); m.classList.remove("flex"); };
 
+    // --- SUBMISSION HANDLER UPDATED TO INCREMENT COUNT ---
     document.getElementById("proof-submission-form").onsubmit = async (e) => {
         e.preventDefault(); 
         const btn = e.target.querySelector('button'); 
@@ -1138,12 +1190,24 @@
                 const j = await res.json(); 
                 if(j.success) imgUrl = j.data.url;
             }
+            
+            // 1. Add Submission
             await addDoc(collection(db, "task_submissions"), {
                 userId: currentUser.uid, userName: userData.name, taskId: window.currentTask.id, taskTitle: window.currentTask.title,
                 reward: window.currentTask.reward, proofText: document.getElementById("proof-text").value, proofImage: imgUrl, status: "pending", submittedAt: Timestamp.now()
             });
+
+            // 2. Increment Task Completion Count (To handle Global Limit)
+            const taskRef = doc(db, "tasks", window.currentTask.id);
+            await updateDoc(taskRef, {
+                completedCount: increment(1)
+            });
+
             showToast("Proof Sent for Approval!", "success"); 
             document.getElementById("close-task-modal").click(); 
+            // Refresh list to remove the task immediately
+            if(window.switchTaskTab) switchTaskTab('available');
+
         } catch(e) { showToast(e.message, "error"); } finally { btn.disabled = false; btn.innerText = "SUBMIT PROOF"; }
     };
 
