@@ -1256,7 +1256,7 @@
         }
     };
 
-    // --- ✅ TASKS LOGIC (UPDATED FOR COINS) ---
+    // --- ✅ TASKS LOGIC (FIXED: Daily & Global Limits) ---
     window.switchTaskTab = (tab) => {
         const list = document.getElementById("tasks-list"); 
         const histList = document.getElementById("tasks-history-list");
@@ -1278,11 +1278,10 @@
         container.innerHTML = '<div class="flex justify-center p-4"><div class="spinner" style="width:30px;height:30px;"></div></div>';
         
         try {
-            // 1. Get user history
+            // 1. Get user history for checking daily/one-time limits
             const historyQ = query(collection(db, "task_submissions"), where("userId", "==", currentUser.uid));
             const historySnap = await getDocs(historyQ);
-            const userSubmissionMap = new Map();
-            historySnap.forEach(doc => { userSubmissionMap.set(doc.data().taskId, doc.data()); });
+            const userSubmissions = historySnap.docs.map(doc => doc.data());
 
             // 2. Get active tasks
             const q = query(collection(db, "tasks"), where("active", "==", true));
@@ -1291,30 +1290,50 @@
             
             const todayStr = new Date().toDateString();
             let availableTasks = [];
-            let totalPotentialReward = 0; // In Coins now
+            let totalPotentialReward = 0; // In Coins
 
             snaps.forEach(doc => {
                 const t = doc.data();
-                const limit = t.limit || 999999;
-                const completedCount = t.completedCount || 0;
-
-                // Checks: Limit & User History
-                if (completedCount >= limit) return;
+                const taskId = doc.id;
                 
-                if (userSubmissionMap.has(doc.id)) {
-                    if (t.taskType === 'daily') {
-                        const subData = userSubmissionMap.get(doc.id);
-                        if(subData.submittedAt) {
-                            const subDate = subData.submittedAt.toDate().toDateString();
-                            if (subDate === todayStr) return; // Done today
-                        }
-                    } else {
-                        return; // One time task done
+                // --- GLOBAL LIMIT CHECK ---
+                // If current global completed count >= global limit, HIDE for everyone.
+                // If limit is not set or 0, treat as infinite (unless logic below catches it)
+                const globalLimit = t.limit ? parseInt(t.limit) : 999999;
+                const completedGlobal = t.completedCount ? parseInt(t.completedCount) : 0;
+
+                if (completedGlobal >= globalLimit) {
+                    return; // SKIP: Global limit reached
+                }
+
+                // --- USER SPECIFIC CHECKS ---
+                // Filter this user's submissions for this specific task ID
+                const mySubsForTask = userSubmissions.filter(s => s.taskId === taskId);
+
+                // Is this a 'Daily' task?
+                const isDaily = t.taskType === 'daily';
+
+                // CHECK 1: One-Time Task Logic
+                // If it's NOT a daily task, and user has done it at least once (pending or approved), HIDE it.
+                if (!isDaily && mySubsForTask.length > 0) {
+                     return; // SKIP: User already submitted this one-time task
+                }
+
+                // CHECK 2: Daily Limit Logic
+                if (isDaily) {
+                    const dailyLimit = t.dailyLimit ? parseInt(t.dailyLimit) : 1; 
+                    // Count submissions made TODAY
+                    const todayCount = mySubsForTask.filter(s => {
+                        return s.submittedAt && s.submittedAt.toDate().toDateString() === todayStr;
+                    }).length;
+
+                    if (todayCount >= dailyLimit) {
+                        return; // SKIP: User reached daily limit for this task
                     }
                 }
 
-                // If available, add to list and sum total
-                availableTasks.push({ id: doc.id, ...t });
+                // If passed all checks, add to list
+                availableTasks.push({ id: taskId, ...t });
                 totalPotentialReward += parseFloat(t.reward);
             });
 
@@ -1400,6 +1419,7 @@
                 reward: window.currentTask.reward, proofText: document.getElementById("proof-text").value, proofImage: imgUrl, status: "pending", submittedAt: Timestamp.now()
             });
 
+            // Increment Global Count on Submission (so it hides for everyone if limit reached)
             const taskRef = doc(db, "tasks", window.currentTask.id);
             await updateDoc(taskRef, { completedCount: increment(1) });
 
