@@ -343,9 +343,16 @@
     <!-- Floating Header -->
     <header class="p-4 flex justify-between items-center sticky top-0 z-40 bg-black/70 backdrop-blur-lg border-b border-white/10">
         <h1 class="text-xl font-bold text-white brand-font tracking-wider">NS PRIME</h1>
-        <div class="text-right">
-            <p id="user-name" class="font-bold text-white text-xs opacity-70">USER</p>
-            <p class="text-sm font-bold text-cyan-400 font-mono">BAL: <span id="header-balance">৳0.00</span></p>
+        <div class="text-right flex items-center gap-3">
+            <!-- COIN DISPLAY ADDED -->
+            <div class="text-center">
+                <p class="text-[9px] text-gray-400 font-bold">COINS</p>
+                <p class="text-sm font-bold text-yellow-400 font-mono"><i class="fas fa-coins text-[10px]"></i> <span id="header-coins">0</span></p>
+            </div>
+            <div class="text-right">
+                <p id="user-name" class="font-bold text-white text-xs opacity-70">USER</p>
+                <p class="text-sm font-bold text-cyan-400 font-mono">BAL: <span id="header-balance">৳0.00</span></p>
+            </div>
         </div>
     </header>
 
@@ -436,15 +443,15 @@
 
     <!-- TASKS SECTION (UPDATED with TOTAL & VIP) -->
     <section id="tasks" class="hidden">
-        <!-- TOTAL AVAILABLE EARNING DISPLAY -->
-        <div class="neon-card p-4 mb-5 bg-gradient-to-r from-green-900/50 to-black border-l-4 border-l-green-400 shadow-[0_0_10px_rgba(0,255,0,0.2)]">
+        <!-- TOTAL AVAILABLE EARNING DISPLAY (COINS) -->
+        <div class="neon-card p-4 mb-5 bg-gradient-to-r from-yellow-900/50 to-black border-l-4 border-l-yellow-400 shadow-[0_0_10px_rgba(255,215,0,0.2)]">
             <div class="flex justify-between items-center">
                 <div>
-                    <h4 class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Total Available Earning</h4>
-                    <h2 class="text-3xl font-bold text-white brand-font text-shadow-neon mt-1">৳<span id="total-available-task-reward">0.00</span></h2>
+                    <h4 class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Total Available Coins</h4>
+                    <h2 class="text-3xl font-bold text-white brand-font text-shadow-neon mt-1"><span id="total-available-task-reward">0</span> <span class="text-sm text-yellow-400">COINS</span></h2>
                 </div>
-                <div class="w-10 h-10 rounded-full border border-green-500 flex items-center justify-center bg-green-500/20">
-                    <i class="fas fa-sack-dollar text-green-400"></i>
+                <div class="w-10 h-10 rounded-full border border-yellow-500 flex items-center justify-center bg-yellow-500/20">
+                    <i class="fas fa-coins text-yellow-400"></i>
                 </div>
             </div>
         </div>
@@ -457,7 +464,7 @@
         <div id="tasks-history-list" class="space-y-3 hidden"></div>
     </section>
 
-    <!-- WALLET SECTION (UPDATED WITH DYNAMIC ADMIN DATA) -->
+    <!-- WALLET SECTION (UPDATED WITH COIN CONVERTER) -->
     <section id="wallet" class="hidden">
          <div class="neon-card p-8 text-center mb-6" data-tilt>
             <p class="text-gray-400 text-xs uppercase tracking-[4px] mb-2">Available Funds</p>
@@ -477,6 +484,25 @@
              </div>
          </div>
          
+         <!-- 🪙 COIN CONVERTER CARD (NEW) -->
+         <div class="neon-card p-5 mb-5 border-l-4 border-l-yellow-500 relative">
+             <div class="absolute right-0 top-0 p-2 opacity-10 text-6xl text-yellow-500"><i class="fas fa-exchange-alt"></i></div>
+             <h4 class="text-sm font-bold text-white mb-2 uppercase tracking-wide flex items-center gap-2">
+                 <i class="fas fa-coins text-yellow-400"></i> Coin Converter
+             </h4>
+             <p class="text-[10px] text-gray-400 mb-4">Rate: 1000 Coins = 10 Taka (100 Coins = 1 Taka)</p>
+             
+             <div class="bg-black/40 p-3 rounded border border-white/10 mb-3 flex justify-between items-center">
+                 <span class="text-gray-400 text-xs uppercase">Your Coins</span>
+                 <span class="text-yellow-400 font-bold text-lg" id="wallet-coin-balance">0</span>
+             </div>
+             
+             <div class="flex gap-2">
+                 <input type="number" id="convert-amount-input" class="flex-1 bg-black/40 border border-white/10 rounded p-3 text-white text-sm outline-none focus:border-yellow-500" placeholder="Coins to convert">
+                 <button id="convert-coin-btn" class="bg-yellow-600 hover:bg-yellow-500 text-black font-bold px-4 rounded text-xs transition">CONVERT</button>
+             </div>
+         </div>
+
          <div class="neon-card p-5 mb-5">
             <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wide">Request Withdrawal</h4>
             <div class="flex gap-2 mb-4 bg-black/40 p-1 rounded border border-white/5">
@@ -698,7 +724,7 @@
         <button id="close-task-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
         <div class="p-6">
             <h2 id="modal-task-title" class="text-xl font-bold text-white mb-1 brand-font">...</h2>
-            <p class="text-green-400 font-bold mb-4 font-mono">REWARD: <span id="modal-task-reward">0</span></p>
+            <p class="text-yellow-400 font-bold mb-4 font-mono"><i class="fas fa-coins"></i> REWARD: <span id="modal-task-reward">0</span></p>
             <div class="bg-white/5 p-4 rounded border border-white/5 mb-5">
                 <p id="modal-task-desc" class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">...
                 </p>
@@ -805,7 +831,8 @@
         dailyClickTarget: 10,
         dailyTargetBonus: 20,
         nextPaymentDate: "Daily 6PM",
-        todaysBudget: 15000
+        todaysBudget: 15000,
+        coinRate: 100 // 100 coins = 1 taka (1000 = 10)
     };
 
     let currentUser = null, userData = {};
@@ -910,7 +937,10 @@
 
         // Stats
         document.getElementById("header-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
+        document.getElementById("header-coins").textContent = (data.coins || 0); // COIN HEADER
         document.getElementById("wallet-available-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
+        document.getElementById("wallet-coin-balance").textContent = (data.coins || 0); // COIN WALLET
+        
         document.getElementById("user-name").textContent = (data.name || "User").split(' ')[0].toUpperCase();
         
         document.getElementById("today-earnings-stat").textContent = `৳${(data.todayEarning || 0).toFixed(2)}`;
@@ -1040,10 +1070,11 @@
                }
             }
 
+            // Initialize COINS with 0
             batch.set(ref, {
                 uid: cred.user.uid, email: email, name: name, phone: phone, 
                 joinedVia: joinCode || "None", referrerUid: referrerUid, joinDate: Timestamp.now(), 
-                balance: 0, totalEarnings: 0, referralCode: defaultRefCode, 
+                balance: 0, coins: 0, totalEarnings: 0, referralCode: defaultRefCode, 
                 teamSize: 0, rawTodayImpressions: 0, todayEarning: 0, todayTaskCount: 0, 
                 savedAccounts: {}, referralEarnings: 0, lastActiveDate: new Date().toDateString()
             });
@@ -1225,7 +1256,7 @@
         }
     };
 
-    // --- ✅ TASKS LOGIC (UPDATED WITH TOTAL CALCULATION & VIP SORTING) ---
+    // --- ✅ TASKS LOGIC (UPDATED FOR COINS) ---
     window.switchTaskTab = (tab) => {
         const list = document.getElementById("tasks-list"); 
         const histList = document.getElementById("tasks-history-list");
@@ -1260,7 +1291,7 @@
             
             const todayStr = new Date().toDateString();
             let availableTasks = [];
-            let totalPotentialReward = 0;
+            let totalPotentialReward = 0; // In Coins now
 
             snaps.forEach(doc => {
                 const t = doc.data();
@@ -1287,15 +1318,15 @@
                 totalPotentialReward += parseFloat(t.reward);
             });
 
-            // Update Total Available Display
-            document.getElementById("total-available-task-reward").innerText = totalPotentialReward.toFixed(2);
+            // Update Total Available Display (Coins)
+            document.getElementById("total-available-task-reward").innerText = totalPotentialReward.toFixed(0);
 
-            // Sort: VIP (>5 Taka) first, then high to low price
+            // Sort: VIP (>500 Coins) first
             availableTasks.sort((a, b) => {
-                const aVip = a.reward > 5 ? 1 : 0;
-                const bVip = b.reward > 5 ? 1 : 0;
-                if (aVip !== bVip) return bVip - aVip; // VIP first
-                return b.reward - a.reward; // Then price high to low
+                const aVip = a.reward > 500 ? 1 : 0;
+                const bVip = b.reward > 500 ? 1 : 0;
+                if (aVip !== bVip) return bVip - aVip; 
+                return b.reward - a.reward; 
             });
 
             if (availableTasks.length === 0) {
@@ -1304,7 +1335,7 @@
             }
 
             availableTasks.forEach(t => {
-                const isVip = t.reward > 5;
+                const isVip = t.reward > 500;
                 const el = document.createElement("div");
                 
                 // VIP Styling Classes
@@ -1313,6 +1344,7 @@
                 const badge = isVip ? '<div class="vip-badge"><i class="fas fa-crown mr-1"></i> VIP</div>' : '';
 
                 el.className = cardClass;
+                // DISPLAY REWARD AS COINS (🪙)
                 el.innerHTML = `
                 ${badge}
                 <div class="flex items-center gap-4">
@@ -1321,7 +1353,7 @@
                     </div>
                     <div>
                         <h4 class="font-bold ${isVip ? 'text-yellow-400' : 'text-white'} text-sm">${t.title}</h4>
-                        <p class="text-[10px] text-gray-400">Reward: ৳${t.reward} | Spots: ${t.completedCount || 0}/${t.limit || '∞'}</p>
+                        <p class="text-[10px] text-gray-400">Reward: <span class="text-yellow-400 font-bold">${t.reward} 🪙</span> | Spots: ${t.completedCount || 0}/${t.limit || '∞'}</p>
                     </div>
                 </div>
                 <div class="font-bold ${isVip ? 'text-yellow-400 border border-yellow-500 px-3 py-1 rounded bg-black' : 'text-green-400'} text-xs">START</div>`;
@@ -1337,7 +1369,7 @@
 
     window.openTask = (id, task) => {
         document.getElementById("modal-task-title").textContent = task.title;
-        document.getElementById("modal-task-reward").textContent = `৳${task.reward}`;
+        document.getElementById("modal-task-reward").textContent = `${task.reward} 🪙`;
         document.getElementById("modal-task-desc").textContent = task.description;
         document.getElementById("modal-task-link").href = task.link;
         const imgBox = document.getElementById("modal-task-images"); imgBox.innerHTML = "";
@@ -1348,7 +1380,7 @@
     }
     document.getElementById("close-task-modal").onclick = () => { const m = document.getElementById("task-modal-overlay"); m.classList.add("hidden"); m.classList.remove("flex"); };
 
-    // --- PROOF SUBMISSION ---
+    // --- PROOF SUBMISSION (Reward is now Coin) ---
     document.getElementById("proof-submission-form").onsubmit = async (e) => {
         e.preventDefault(); 
         const btn = e.target.querySelector('button'); 
@@ -1371,11 +1403,38 @@
             const taskRef = doc(db, "tasks", window.currentTask.id);
             await updateDoc(taskRef, { completedCount: increment(1) });
 
-            showToast("Proof Sent for Approval!", "success"); 
+            showToast("Proof Sent! Coins pending approval.", "success"); 
             document.getElementById("close-task-modal").click(); 
             if(window.switchTaskTab) switchTaskTab('available');
 
         } catch(e) { showToast(e.message, "error"); } finally { btn.disabled = false; btn.innerText = "SUBMIT PROOF"; }
+    };
+
+    // --- 🪙 COIN CONVERTER LOGIC ---
+    document.getElementById("convert-coin-btn").onclick = async () => {
+        const input = document.getElementById("convert-amount-input");
+        const amount = parseInt(input.value);
+        const userCoins = userData.coins || 0;
+        
+        // Rate: 100 Coins = 1 Taka
+        const rate = adminConfig.coinRate || 100;
+        
+        if(isNaN(amount) || amount <= 0) return showToast("Enter valid coin amount", "error");
+        if(amount > userCoins) return showToast("Insufficient Coins!", "error");
+        
+        const takaAmount = amount / rate;
+        
+        try {
+            const userRef = doc(db, "users", currentUser.uid);
+            await updateDoc(userRef, {
+                coins: increment(-amount),
+                balance: increment(takaAmount)
+            });
+            showToast(`Converted ${amount} coins to ৳${takaAmount.toFixed(2)}`, "success");
+            input.value = "";
+        } catch(e) {
+            showToast("Conversion Failed", "error");
+        }
     };
 
     // --- 💸 WALLET LOGIC ---
