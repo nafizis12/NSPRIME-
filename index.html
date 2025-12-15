@@ -762,7 +762,7 @@
 <!-- Toast -->
 <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 text-white text-xs font-bold py-3 px-6 rounded-full shadow-lg opacity-0 transition-all duration-300 z-[300] backdrop-blur-md border border-white/10"></div>
 
-<!-- 🧠 MAIN LOGIC (FIXED & UPDATED) -->
+<!-- 🧠 MAIN LOGIC -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
@@ -822,7 +822,7 @@
     const IMGBB_API_KEY = "14e7adf7691d5e9344a2c3317d54ae1c"; 
     const LANDING_HOST = "https://landing-omega-red.vercel.app"; 
 
-    // ✅ GLOBAL ADMIN SETTINGS (Defaults)
+    // ✅ GLOBAL ADMIN SETTINGS
     let adminConfig = {
         minWithdraw: 10,
         activeMemberThreshold: 1000, 
@@ -832,7 +832,7 @@
         dailyTargetBonus: 20,
         nextPaymentDate: "Daily 6PM",
         todaysBudget: 15000,
-        coinRate: 100 // 100 coins = 1 taka (1000 = 10)
+        coinRate: 100
     };
 
     let currentUser = null, userData = {};
@@ -849,7 +849,7 @@
         setTimeout(() => { t.style.opacity = "0"; t.style.bottom = "80px"; }, 3000);
     }
 
-    // --- Calculator Functionality ---
+    // --- Calculator ---
     window.updateCalc = () => {
         const tasks = document.getElementById("calc-tasks").value;
         const refs = document.getElementById("calc-ref").value;
@@ -883,7 +883,7 @@
             document.getElementById("auth-section").style.display = "none";
             document.getElementById("main-app").classList.remove("hidden");
             
-            // 🔄 LOAD ADMIN SETTINGS
+            // Load Settings
             onSnapshot(doc(db, "settings", "config"), (docSnap) => {
                 if (docSnap.exists()) {
                     adminConfig = { ...adminConfig, ...docSnap.data() };
@@ -894,14 +894,13 @@
                 }
             });
 
-            // 🔄 LOAD USER DATA
+            // Load User Data
             onSnapshot(doc(db, "users", user.uid), async (docSnap) => {
                 if (docSnap.exists()) {
                     userData = docSnap.data();
 
-                    // ✅ DAILY RESET LOGIC
+                    // Daily Reset
                     const todayStr = new Date().toDateString();
-                    
                     if (userData.lastActiveDate !== todayStr) {
                         try {
                             const userRef = doc(db, "users", user.uid);
@@ -915,8 +914,7 @@
                     }
 
                     updateUI(userData);
-                    updateTargetUI(); // Refresh targets with user data
-                    
+                    updateTargetUI(); 
                     if(userData.savedAccounts && userData.savedAccounts[selectedWithdrawMethod]) {
                         document.getElementById("main-withdraw-account").value = userData.savedAccounts[selectedWithdrawMethod];
                     }
@@ -931,81 +929,55 @@
         }
     });
 
-    // --- UI Update Logic ---
+    // --- UI Updates ---
     function updateUI(data) {
         if (!data) return;
-
-        // Stats
         document.getElementById("header-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
-        document.getElementById("header-coins").textContent = (data.coins || 0); // COIN HEADER
+        document.getElementById("header-coins").textContent = (data.coins || 0);
         document.getElementById("wallet-available-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
-        document.getElementById("wallet-coin-balance").textContent = (data.coins || 0); // COIN WALLET
-        
+        document.getElementById("wallet-coin-balance").textContent = (data.coins || 0);
         document.getElementById("user-name").textContent = (data.name || "User").split(' ')[0].toUpperCase();
-        
         document.getElementById("today-earnings-stat").textContent = `৳${(data.todayEarning || 0).toFixed(2)}`;
         document.getElementById("total-earnings-stat").textContent = `৳${(data.totalEarnings || 0).toFixed(2)}`;
         document.getElementById("today-impression").textContent = data.rawTodayImpressions || 0;
         document.getElementById("home-refer-commission").textContent = `৳${(data.referralEarnings || 0).toFixed(2)}`;
-
-        // Refer Section
         document.getElementById("refer-team-size").textContent = data.teamSize || 0;
         document.getElementById("referral-code-display").textContent = data.referralCode || "Generating...";
-
-        // Profile Full Info
         document.getElementById("profile-info-name").textContent = data.name || "No Name";
         document.getElementById("profile-phone").textContent = data.phone || "Not Set";
         document.getElementById("profile-email").textContent = currentUser.email;
         document.getElementById("profile-uid").textContent = currentUser.uid;
-        
-        // Format Join Date
         let joinDateStr = "N/A";
-        if(data.joinDate && data.joinDate.toDate) {
-            joinDateStr = data.joinDate.toDate().toLocaleDateString('en-GB');
-        }
+        if(data.joinDate && data.joinDate.toDate) { joinDateStr = data.joinDate.toDate().toLocaleDateString('en-GB'); }
         document.getElementById("profile-join-date").textContent = joinDateStr;
-        
         document.getElementById("profile-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
         document.getElementById("profile-total-earned").textContent = `৳${(data.totalEarnings || 0).toFixed(2)}`;
         document.getElementById("profile-refer-code").textContent = data.referralCode || "...";
-
         updateMarketingLink();
     }
 
-    // 🎯 UPDATE TARGET CARD UI (HOME)
     function updateTargetUI() {
-        // Admin Values
         document.getElementById("active-threshold-display").textContent = adminConfig.activeMemberThreshold;
         document.getElementById("target-bonus-display").textContent = adminConfig.dailyTargetBonus || 20;
         document.getElementById("admin-task-target").textContent = adminConfig.dailyTaskTarget || 5;
         document.getElementById("admin-click-target").textContent = adminConfig.dailyClickTarget || 10;
-
-        // User Progress
         const tasksDone = userData.todayTaskCount || 0;
         const clicksDone = userData.rawTodayImpressions || 0;
-        
         document.getElementById("user-task-done").textContent = tasksDone;
         document.getElementById("user-click-done").textContent = clicksDone;
-
-        // Bars
         const taskPercent = Math.min((tasksDone / adminConfig.dailyTaskTarget) * 100, 100);
         const clickPercent = Math.min((clicksDone / adminConfig.dailyClickTarget) * 100, 100);
-        
         document.getElementById("target-task-bar").style.width = `${taskPercent}%`;
         document.getElementById("target-click-bar").style.width = `${clickPercent}%`;
     }
 
-    // 💰 UPDATE WALLET UI (DYNAMIC DATE/BUDGET)
     function updateWalletUI() {
         document.getElementById("min-withdraw-display").textContent = `Min Withdraw: ৳${adminConfig.minWithdraw}`;
         document.getElementById("main-withdraw-amount").placeholder = `Min ${adminConfig.minWithdraw}`;
-        
-        // Dynamic Fields
         document.getElementById("next-payment-date").textContent = adminConfig.nextPaymentDate || "Daily";
         document.getElementById("todays-budget").textContent = adminConfig.todaysBudget || "0";
     }
 
-    // Copy Profile Refer Code
     document.getElementById("copy-profile-ref").onclick = () => {
         navigator.clipboard.writeText(document.getElementById("profile-refer-code").textContent);
         showToast("Refer Code Copied!", "success");
@@ -1019,7 +991,7 @@
     }
     document.getElementById("link-type-selector").addEventListener("change", updateMarketingLink);
 
-    // --- Auth Handlers ---
+    // --- Auth Buttons ---
     const authSec = document.getElementById("auth-section");
     const loginForm = document.getElementById("login-form");
     const regForm = document.getElementById("register-form");
@@ -1059,7 +1031,6 @@
 
             const batch = writeBatch(db); 
             const ref = doc(db, "users", cred.user.uid);
-            
             let referrerUid = null;
             if(joinCode) {
                const q = query(collection(db, "users"), where("referralCode", "==", joinCode));
@@ -1069,8 +1040,6 @@
                    batch.update(doc(db, "users", referrerUid), { teamSize: increment(1) });
                }
             }
-
-            // Initialize COINS with 0
             batch.set(ref, {
                 uid: cred.user.uid, email: email, name: name, phone: phone, 
                 joinedVia: joinCode || "None", referrerUid: referrerUid, joinDate: Timestamp.now(), 
@@ -1108,21 +1077,18 @@
         });
     });
 
-    // 🏆 REFERRAL & ACTIVE MEMBER LOGIC
+    // --- Referral & Ticker ---
     async function loadReferralData() {
         if(!userData.referralCode) return;
         const container = document.getElementById("referral-list-container");
         container.innerHTML = '<p class="text-center text-gray-500 text-xs mt-2">Loading team...</p>';
-        
         try {
             const q = query(collection(db, "users"), where("joinedVia", "==", userData.referralCode));
             const snapshot = await getDocs(q);
-            
             container.innerHTML = "";
             let totalCount = 0;
             let activeCount = 0;
             const threshold = adminConfig.activeMemberThreshold || 1000;
-
             if (snapshot.empty) {
                 container.innerHTML = '<p class="text-center text-gray-500 text-xs mt-4">No team members yet. Share your code!</p>';
             } else {
@@ -1132,40 +1098,22 @@
                     const earnings = u.totalEarnings || 0;
                     const isActive = earnings >= threshold;
                     if(isActive) activeCount++;
-
-                    container.innerHTML += `
-                        <div class="flex items-center justify-between bg-white/5 p-2 rounded border border-white/5 mb-2">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full ${isActive ? 'bg-green-900/50 text-green-400' : 'bg-gray-800 text-gray-500'} flex items-center justify-center text-xs font-bold">${totalCount}</div>
-                                <div>
-                                    <p class="text-white text-xs font-bold">${u.name}</p>
-                                    <p class="text-[9px] text-gray-500">Earned: ৳${earnings.toFixed(0)}</p>
-                                </div>
-                            </div>
-                            <span class="text-[9px] ${isActive ? 'bg-green-500 text-black' : 'bg-gray-700 text-gray-400'} px-2 rounded font-bold">${isActive ? 'ACTIVE' : 'INACTIVE'}</span>
-                        </div>`;
+                    container.innerHTML += `<div class="flex items-center justify-between bg-white/5 p-2 rounded border border-white/5 mb-2"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full ${isActive ? 'bg-green-900/50 text-green-400' : 'bg-gray-800 text-gray-500'} flex items-center justify-center text-xs font-bold">${totalCount}</div><div><p class="text-white text-xs font-bold">${u.name}</p><p class="text-[9px] text-gray-500">Earned: ৳${earnings.toFixed(0)}</p></div></div><span class="text-[9px] ${isActive ? 'bg-green-500 text-black' : 'bg-gray-700 text-gray-400'} px-2 rounded font-bold">${isActive ? 'ACTIVE' : 'INACTIVE'}</span></div>`;
                 });
             }
-
             document.getElementById("active-team-size").textContent = activeCount;
             document.getElementById("refer-team-size").textContent = totalCount;
-
             const p50 = Math.min((activeCount / 50) * 100, 100);
             const p100 = Math.min((activeCount / 100) * 100, 100);
             document.getElementById("milestone-50-bar").style.width = `${p50}%`;
             document.getElementById("milestone-50-text").textContent = `${activeCount}/50`;
             document.getElementById("milestone-100-bar").style.width = `${p100}%`;
             document.getElementById("milestone-100-text").textContent = `${activeCount}/100`;
-
-        } catch (error) {
-            container.innerHTML = '<p class="text-center text-red-400 text-xs">Error loading team data</p>';
-        }
+        } catch (error) { container.innerHTML = '<p class="text-center text-red-400 text-xs">Error loading team data</p>'; }
     }
     
-    // 📢 LIVE PAYOUT TICKER (Simulated/Real Mix)
     async function loadLivePayouts() {
         const ticker = document.getElementById("live-payout-ticker");
-        // Try fetching real recent withdrawals
         const q = query(collection(db, "withdrawal_requests"), where("status", "==", "approved"), limit(10));
         try {
             const snaps = await getDocs(q);
@@ -1177,7 +1125,6 @@
                      html += `<div class="ticker-item">${name} just withdrew <span>৳${d.amount}</span> via ${d.method.toUpperCase()}</div>`;
                  });
             } else {
-                 // Fallback dummy data if no real data yet
                  const dummies = ["Rahim", "Karim", "Sumi", "Nadia", "Rakib"];
                  const methods = ["bKash", "Nagad"];
                  dummies.forEach(d => {
@@ -1185,12 +1132,10 @@
                  });
             }
             ticker.innerHTML = html;
-        } catch(e) {
-            console.log("Ticker load error", e);
-        }
+        } catch(e) { console.log("Ticker load error", e); }
     }
 
-    // --- Support Logic ---
+    // --- Support ---
     let supportUnsub = null;
     document.getElementById("open-support-btn").onclick = () => {
         const modal = document.getElementById("support-modal-overlay");
@@ -1198,7 +1143,6 @@
         modal.classList.add("flex");
         loadSupportMessages();
     };
-    
     document.getElementById("close-support-modal").onclick = () => {
         const modal = document.getElementById("support-modal-overlay");
         modal.classList.add("hidden");
@@ -1210,7 +1154,6 @@
         const container = document.getElementById("support-messages");
         container.innerHTML = '<div class="spinner mx-auto" style="width:20px;height:20px;"></div>';
         const q = query(collection(db, "support_tickets"), where("userId", "==", currentUser.uid), orderBy("timestamp", "asc"));
-        
         supportUnsub = onSnapshot(q, (snapshot) => {
             container.innerHTML = "";
             if (snapshot.empty) {
@@ -1221,7 +1164,6 @@
                 const msg = doc.data();
                 const isUser = msg.sender === "user";
                 const date = msg.timestamp ? msg.timestamp.toDate().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : "";
-                
                 const bubble = document.createElement("div");
                 bubble.style.cssText = `display:flex; justify-content:${isUser ? 'flex-end' : 'flex-start'}; margin-bottom:10px;`;
                 const inner = document.createElement("div");
@@ -1243,20 +1185,12 @@
         input.value = ""; 
         try {
             await addDoc(collection(db, "support_tickets"), {
-                userId: currentUser.uid, 
-                userName: userData.name || "User", 
-                message: message, 
-                sender: "user", 
-                timestamp: Timestamp.now(), 
-                status: "unread"
+                userId: currentUser.uid, userName: userData.name || "User", message: message, sender: "user", timestamp: Timestamp.now(), status: "unread"
             });
-        } catch(e) { 
-            showToast("Message Failed", "error"); 
-            input.value = oldVal; 
-        }
+        } catch(e) { showToast("Message Failed", "error"); input.value = oldVal; }
     };
 
-    // --- ✅ TASKS LOGIC (FIXED: Daily & Global Limits) ---
+    // --- ✅ FIXED: LOAD TASKS FUNCTION ---
     window.switchTaskTab = (tab) => {
         const list = document.getElementById("tasks-list"); 
         const histList = document.getElementById("tasks-history-list");
@@ -1278,69 +1212,67 @@
         container.innerHTML = '<div class="flex justify-center p-4"><div class="spinner" style="width:30px;height:30px;"></div></div>';
         
         try {
-            // 1. Get user history for checking daily/one-time limits
+            // 1. Fetch User's Submissions (Filter out Rejected)
             const historyQ = query(collection(db, "task_submissions"), where("userId", "==", currentUser.uid));
             const historySnap = await getDocs(historyQ);
-            const userSubmissions = historySnap.docs.map(doc => doc.data());
+            
+            // Map submissions but IGNORE rejected ones (so users can retry if rejected)
+            const myValidSubmissions = historySnap.docs.map(doc => doc.data()).filter(s => s.status !== 'rejected');
 
-            // 2. Get active tasks
+            // 2. Fetch Active Tasks
             const q = query(collection(db, "tasks"), where("active", "==", true));
             const snaps = await getDocs(q);
             container.innerHTML = ""; 
             
             const todayStr = new Date().toDateString();
             let availableTasks = [];
-            let totalPotentialReward = 0; // In Coins
+            let totalPotentialReward = 0; 
 
             snaps.forEach(doc => {
                 const t = doc.data();
                 const taskId = doc.id;
                 
-                // --- GLOBAL LIMIT CHECK ---
-                // If current global completed count >= global limit, HIDE for everyone.
-                // If limit is not set or 0, treat as infinite (unless logic below catches it)
-                const globalLimit = t.limit ? parseInt(t.limit) : 999999;
+                // --- 🌍 GLOBAL LIMIT CHECK ---
+                // If global limit exists and completed count meets/exceeds it, HIDE for EVERYONE
+                // We use parseInt to ensure numbers are compared correctly
+                const globalLimit = t.limit ? parseInt(t.limit) : 0; // 0 or null means infinite
                 const completedGlobal = t.completedCount ? parseInt(t.completedCount) : 0;
 
-                if (completedGlobal >= globalLimit) {
+                if (globalLimit > 0 && completedGlobal >= globalLimit) {
                     return; // SKIP: Global limit reached
                 }
 
-                // --- USER SPECIFIC CHECKS ---
-                // Filter this user's submissions for this specific task ID
-                const mySubsForTask = userSubmissions.filter(s => s.taskId === taskId);
+                // --- 👤 USER LIMIT CHECK ---
+                // Filter user's valid (not rejected) submissions for this task
+                const mySubsForTask = myValidSubmissions.filter(s => s.taskId === taskId);
 
-                // Is this a 'Daily' task?
+                // Is this a Daily Task?
                 const isDaily = t.taskType === 'daily';
 
-                // CHECK 1: One-Time Task Logic
-                // If it's NOT a daily task, and user has done it at least once (pending or approved), HIDE it.
+                // CHECK A: One-Time Task (If not daily, and user has 1 valid submission, hide it)
                 if (!isDaily && mySubsForTask.length > 0) {
-                     return; // SKIP: User already submitted this one-time task
+                     return; // SKIP: Already completed one-time task
                 }
 
-                // CHECK 2: Daily Limit Logic
+                // CHECK B: Daily Limit (If daily, check today's count)
                 if (isDaily) {
                     const dailyLimit = t.dailyLimit ? parseInt(t.dailyLimit) : 1; 
-                    // Count submissions made TODAY
                     const todayCount = mySubsForTask.filter(s => {
                         return s.submittedAt && s.submittedAt.toDate().toDateString() === todayStr;
                     }).length;
 
                     if (todayCount >= dailyLimit) {
-                        return; // SKIP: User reached daily limit for this task
+                        return; // SKIP: Daily limit reached
                     }
                 }
 
-                // If passed all checks, add to list
+                // Add to list
                 availableTasks.push({ id: taskId, ...t });
                 totalPotentialReward += parseFloat(t.reward);
             });
 
-            // Update Total Available Display (Coins)
             document.getElementById("total-available-task-reward").innerText = totalPotentialReward.toFixed(0);
 
-            // Sort: VIP (>500 Coins) first
             availableTasks.sort((a, b) => {
                 const aVip = a.reward > 500 ? 1 : 0;
                 const bVip = b.reward > 500 ? 1 : 0;
@@ -1356,14 +1288,11 @@
             availableTasks.forEach(t => {
                 const isVip = t.reward > 500;
                 const el = document.createElement("div");
-                
-                // VIP Styling Classes
                 const cardClass = isVip ? "neon-card vip-card p-4 flex justify-between items-center cursor-pointer mb-3" : "neon-card p-4 flex justify-between items-center cursor-pointer hover:bg-white/5 transition mb-3";
                 const iconClass = isVip ? "w-10 h-10 rounded bg-yellow-900/40 flex items-center justify-center text-yellow-400 border border-yellow-500" : "w-10 h-10 rounded bg-cyan-500/10 flex items-center justify-center text-cyan-400 border border-cyan-500/20";
                 const badge = isVip ? '<div class="vip-badge"><i class="fas fa-crown mr-1"></i> VIP</div>' : '';
 
                 el.className = cardClass;
-                // DISPLAY REWARD AS COINS (🪙)
                 el.innerHTML = `
                 ${badge}
                 <div class="flex items-center gap-4">
@@ -1399,7 +1328,6 @@
     }
     document.getElementById("close-task-modal").onclick = () => { const m = document.getElementById("task-modal-overlay"); m.classList.add("hidden"); m.classList.remove("flex"); };
 
-    // --- PROOF SUBMISSION (Reward is now Coin) ---
     document.getElementById("proof-submission-form").onsubmit = async (e) => {
         e.preventDefault(); 
         const btn = e.target.querySelector('button'); 
@@ -1419,7 +1347,7 @@
                 reward: window.currentTask.reward, proofText: document.getElementById("proof-text").value, proofImage: imgUrl, status: "pending", submittedAt: Timestamp.now()
             });
 
-            // Increment Global Count on Submission (so it hides for everyone if limit reached)
+            // Increment Global Count
             const taskRef = doc(db, "tasks", window.currentTask.id);
             await updateDoc(taskRef, { completedCount: increment(1) });
 
@@ -1430,34 +1358,24 @@
         } catch(e) { showToast(e.message, "error"); } finally { btn.disabled = false; btn.innerText = "SUBMIT PROOF"; }
     };
 
-    // --- 🪙 COIN CONVERTER LOGIC ---
+    // --- Converter ---
     document.getElementById("convert-coin-btn").onclick = async () => {
         const input = document.getElementById("convert-amount-input");
         const amount = parseInt(input.value);
         const userCoins = userData.coins || 0;
-        
-        // Rate: 100 Coins = 1 Taka
         const rate = adminConfig.coinRate || 100;
-        
         if(isNaN(amount) || amount <= 0) return showToast("Enter valid coin amount", "error");
         if(amount > userCoins) return showToast("Insufficient Coins!", "error");
-        
         const takaAmount = amount / rate;
-        
         try {
             const userRef = doc(db, "users", currentUser.uid);
-            await updateDoc(userRef, {
-                coins: increment(-amount),
-                balance: increment(takaAmount)
-            });
+            await updateDoc(userRef, { coins: increment(-amount), balance: increment(takaAmount) });
             showToast(`Converted ${amount} coins to ৳${takaAmount.toFixed(2)}`, "success");
             input.value = "";
-        } catch(e) {
-            showToast("Conversion Failed", "error");
-        }
+        } catch(e) { showToast("Conversion Failed", "error"); }
     };
 
-    // --- 💸 WALLET LOGIC ---
+    // --- Wallet ---
     window.handleWithdrawMethodChange = (method) => {
         selectedWithdrawMethod = method;
         const btns = ['bkash', 'nagad', 'usdt'];
@@ -1489,23 +1407,15 @@
          const amt = parseFloat(document.getElementById("main-withdraw-amount").value);
          const acc = document.getElementById("main-withdraw-account").value;
          const min = adminConfig.minWithdraw || 10;
-         
          if(isNaN(amt) || amt < min) return showToast(`Minimum Withdrawal is ৳${min}`, "error");
          if(userData.balance < amt) return showToast("Insufficient Balance", "error");
          if(!acc || acc.length < 5) return showToast("Invalid Account Number", "error");
-
          try {
             const batch = writeBatch(db);
             const userRef = doc(db, "users", currentUser.uid);
             const wRef = doc(collection(db, "withdrawal_requests"));
-            
             batch.set(wRef, { userId: currentUser.uid, userName: userData.name, amount: amt, method: selectedWithdrawMethod, accountNumber: acc, status: "pending", timestamp: Timestamp.now() });
-            
-            batch.update(userRef, { 
-                balance: increment(-amt),
-                [`savedAccounts.${selectedWithdrawMethod}`]: acc
-            }); 
-            
+            batch.update(userRef, { balance: increment(-amt), [`savedAccounts.${selectedWithdrawMethod}`]: acc }); 
             await batch.commit();
             showToast("Withdrawal Pending!", "success");
             document.getElementById("main-withdraw-amount").value = "";
@@ -1517,32 +1427,15 @@
         const el = document.getElementById('withdrawal-history-list'); 
         el.innerHTML = '<p class="text-center text-gray-500">Loading...</p>';
         if (walletUnsubscribe) walletUnsubscribe();
-
         const q = query(collection(db, "withdrawal_requests"), where("userId", "==", currentUser.uid), limit(20));
-        
         walletUnsubscribe = onSnapshot(q, snap => {
             el.innerHTML = ""; 
-            if(snap.empty) { 
-                el.innerHTML = '<p class="text-center text-gray-500">No records found.</p>'; 
-                return; 
-            }
-            
-            let docs = []; 
-            snap.forEach(d => docs.push(d.data()));
+            if(snap.empty) { el.innerHTML = '<p class="text-center text-gray-500">No records found.</p>'; return; }
+            let docs = []; snap.forEach(d => docs.push(d.data()));
             docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-            
             docs.forEach(d => {
                 const statusColor = d.status === 'pending' ? 'text-yellow-400' : (d.status === 'approved' || d.status === 'paid' ? 'text-green-400' : 'text-red-400');
-                el.innerHTML += `
-                <div class="bg-white/5 p-3 rounded border border-white/5 flex justify-between items-center mb-2">
-                    <div>
-                        <p class="text-white font-bold text-xs">Withdraw: ৳${d.amount}</p>
-                        <p class="text-[9px] text-gray-500 uppercase">${d.method} | ${d.accountNumber}</p>
-                    </div>
-                    <span class="text-[10px] font-bold ${statusColor}">
-                        <i class="fas fa-circle text-[6px] mr-1"></i>${d.status.toUpperCase()}
-                    </span>
-                </div>`;
+                el.innerHTML += `<div class="bg-white/5 p-3 rounded border border-white/5 flex justify-between items-center mb-2"><div><p class="text-white font-bold text-xs">Withdraw: ৳${d.amount}</p><p class="text-[9px] text-gray-500 uppercase">${d.method} | ${d.accountNumber}</p></div><span class="text-[10px] font-bold ${statusColor}"><i class="fas fa-circle text-[6px] mr-1"></i>${d.status.toUpperCase()}</span></div>`;
             });
         });
     }
@@ -1560,34 +1453,21 @@
             });
         });
     }
-    
-    // 📚 LEARNING FOLDER LOGIC (FETCH VIDEOS FROM SETTINGS/TUTORIAL)
+
+    // --- Learning ---
     async function loadTutorials() {
         const listContainer = document.getElementById("learning-list");
         const iframe = document.getElementById("learning-iframe");
         const placeholder = document.getElementById("video-placeholder");
-        
-        // Fetch or use dummy
         let tutorials = [];
         try {
             const docRef = doc(db, "settings", "tutorials");
             const docSnap = await getDoc(docRef);
-            if(docSnap.exists() && docSnap.data().videos) {
-                tutorials = docSnap.data().videos;
-            } else {
-                 // Fallback if no admin data yet
-                 tutorials = [
-                     { title: "How to complete Tasks?", videoId: "dQw4w9WgXcQ" },
-                     { title: "Earning from Referrals", videoId: "M7lc1UVf-VE" },
-                     { title: "Withdrawal System Guide", videoId: "ScMzIvxBSi4" }
-                 ];
-            }
-        } catch(e) {
-             tutorials = [{ title: "Welcome to NS Prime", videoId: "M7lc1UVf-VE" }];
-        }
-
+            if(docSnap.exists() && docSnap.data().videos) { tutorials = docSnap.data().videos; } 
+            else { tutorials = [{ title: "How to complete Tasks?", videoId: "dQw4w9WgXcQ" }]; }
+        } catch(e) { tutorials = [{ title: "Welcome to NS Prime", videoId: "M7lc1UVf-VE" }]; }
         listContainer.innerHTML = "";
-        tutorials.forEach((vid, index) => {
+        tutorials.forEach((vid) => {
             const div = document.createElement("div");
             div.className = "p-2 bg-white/5 mb-1 rounded cursor-pointer hover:bg-white/10 flex items-center gap-2";
             div.innerHTML = `<i class="fas fa-play-circle text-cyan-400"></i> <span class="text-xs text-white font-bold">${vid.title}</span>`;
