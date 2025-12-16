@@ -1104,11 +1104,8 @@
             document.getElementById("active-team-size").textContent = activeCount;
             document.getElementById("refer-team-size").textContent = totalCount;
             const p50 = Math.min((activeCount / 50) * 100, 100);
-            const p100 = Math.min((activeCount / 100) * 100, 100);
             document.getElementById("milestone-50-bar").style.width = `${p50}%`;
             document.getElementById("milestone-50-text").textContent = `${activeCount}/50`;
-            document.getElementById("milestone-100-bar").style.width = `${p100}%`;
-            document.getElementById("milestone-100-text").textContent = `${activeCount}/100`;
         } catch (error) { container.innerHTML = '<p class="text-center text-red-400 text-xs">Error loading team data</p>'; }
     }
     
@@ -1216,7 +1213,7 @@
             const historyQ = query(collection(db, "task_submissions"), where("userId", "==", currentUser.uid));
             const historySnap = await getDocs(historyQ);
             
-            // Map submissions but IGNORE rejected ones (so users can retry if rejected)
+            // Map submissions but IGNORE rejected ones
             const myValidSubmissions = historySnap.docs.map(doc => doc.data()).filter(s => s.status !== 'rejected');
 
             // 2. Fetch Active Tasks
@@ -1224,7 +1221,16 @@
             const snaps = await getDocs(q);
             container.innerHTML = ""; 
             
-            const todayStr = new Date().toDateString();
+            // Helper to check if a timestamp is today
+            const isToday = (timestamp) => {
+                if(!timestamp) return false;
+                const d = timestamp.toDate();
+                const today = new Date();
+                return d.getDate() === today.getDate() &&
+                       d.getMonth() === today.getMonth() &&
+                       d.getFullYear() === today.getFullYear();
+            };
+
             let availableTasks = [];
             let totalPotentialReward = 0; 
 
@@ -1232,43 +1238,47 @@
                 const t = doc.data();
                 const taskId = doc.id;
                 
-                // --- 🌍 GLOBAL LIMIT CHECK ---
-                // If global limit exists and completed count meets/exceeds it, HIDE for EVERYONE
-                // We use parseInt to ensure numbers are compared correctly
-                const globalLimit = t.limit ? parseInt(t.limit) : 0; // 0 or null means infinite
+                // --- 🔢 PARSE VALUES SAFELY (CORRECTED HERE) ---
+                // We check 'globalLimit' first (from admin), fallback to 'limit' if old data
+                let rawGlobal = t.globalLimit !== undefined ? t.globalLimit : t.limit;
+                const globalLimit = rawGlobal ? parseInt(rawGlobal) : 0;
+                
                 const completedGlobal = t.completedCount ? parseInt(t.completedCount) : 0;
-
+                const dailyLimit = t.dailyLimit ? parseInt(t.dailyLimit) : 1;
+                
+                // --- 🌍 GLOBAL LIMIT CHECK ---
                 if (globalLimit > 0 && completedGlobal >= globalLimit) {
-                    return; // SKIP: Global limit reached
+                    return; 
                 }
 
-                // --- 👤 USER LIMIT CHECK ---
-                // Filter user's valid (not rejected) submissions for this task
+                // --- 👤 USER SUBMISSION CHECK ---
                 const mySubsForTask = myValidSubmissions.filter(s => s.taskId === taskId);
 
-                // Is this a Daily Task?
-                const isDaily = t.taskType === 'daily';
+                // Check Type
+                const isDaily = (t.taskType && t.taskType.toLowerCase() === 'daily');
 
-                // CHECK A: One-Time Task (If not daily, and user has 1 valid submission, hide it)
+                // CASE A: One-Time Task (If not daily, and user has done it once)
                 if (!isDaily && mySubsForTask.length > 0) {
-                     return; // SKIP: Already completed one-time task
+                     return; 
                 }
 
-                // CHECK B: Daily Limit (If daily, check today's count)
+                // CASE B: Daily Limit (If daily, check today's count)
                 if (isDaily) {
-                    const dailyLimit = t.dailyLimit ? parseInt(t.dailyLimit) : 1; 
-                    const todayCount = mySubsForTask.filter(s => {
-                        return s.submittedAt && s.submittedAt.toDate().toDateString() === todayStr;
-                    }).length;
-
+                    const todayCount = mySubsForTask.filter(s => isToday(s.submittedAt)).length;
                     if (todayCount >= dailyLimit) {
-                        return; // SKIP: Daily limit reached
+                        return; // Daily limit reached
                     }
                 }
 
                 // Add to list
-                availableTasks.push({ id: taskId, ...t });
-                totalPotentialReward += parseFloat(t.reward);
+                availableTasks.push({ 
+                    id: taskId, 
+                    ...t, 
+                    displayLimit: globalLimit > 0 ? globalLimit : '∞',
+                    displayCompleted: completedGlobal
+                });
+                
+                totalPotentialReward += parseFloat(t.reward || 0);
             });
 
             document.getElementById("total-available-task-reward").innerText = totalPotentialReward.toFixed(0);
@@ -1301,7 +1311,7 @@
                     </div>
                     <div>
                         <h4 class="font-bold ${isVip ? 'text-yellow-400' : 'text-white'} text-sm">${t.title}</h4>
-                        <p class="text-[10px] text-gray-400">Reward: <span class="text-yellow-400 font-bold">${t.reward} 🪙</span> | Spots: ${t.completedCount || 0}/${t.limit || '∞'}</p>
+                        <p class="text-[10px] text-gray-400">Reward: <span class="text-yellow-400 font-bold">${t.reward} 🪙</span> | Spots: ${t.displayCompleted}/${t.displayLimit}</p>
                     </div>
                 </div>
                 <div class="font-bold ${isVip ? 'text-yellow-400 border border-yellow-500 px-3 py-1 rounded bg-black' : 'text-green-400'} text-xs">START</div>`;
@@ -1451,34 +1461,6 @@
             docs.forEach(d => {
                  el.innerHTML += `<div class="bg-white/5 p-3 rounded border border-white/5 flex justify-between items-center mb-2"><div><p class="text-white font-bold text-xs">${d.taskTitle}</p><p class="text-[9px] text-gray-500 uppercase">${d.status}</p></div><span class="text-[10px] font-bold ${d.status === 'pending' ? 'text-yellow-400' : 'text-green-400'}">${d.status}</span></div>`;
             });
-        });
-    }
-
-    // --- Learning ---
-    async function loadTutorials() {
-        const listContainer = document.getElementById("learning-list");
-        const iframe = document.getElementById("learning-iframe");
-        const placeholder = document.getElementById("video-placeholder");
-        let tutorials = [];
-        try {
-            const docRef = doc(db, "settings", "tutorials");
-            const docSnap = await getDoc(docRef);
-            if(docSnap.exists() && docSnap.data().videos) { tutorials = docSnap.data().videos; } 
-            else { tutorials = [{ title: "How to complete Tasks?", videoId: "dQw4w9WgXcQ" }]; }
-        } catch(e) { tutorials = [{ title: "Welcome to NS Prime", videoId: "M7lc1UVf-VE" }]; }
-        listContainer.innerHTML = "";
-        tutorials.forEach((vid) => {
-            const div = document.createElement("div");
-            div.className = "p-2 bg-white/5 mb-1 rounded cursor-pointer hover:bg-white/10 flex items-center gap-2";
-            div.innerHTML = `<i class="fas fa-play-circle text-cyan-400"></i> <span class="text-xs text-white font-bold">${vid.title}</span>`;
-            div.onclick = () => {
-                iframe.src = `https://www.youtube.com/embed/${vid.videoId}?autoplay=1`;
-                iframe.classList.remove("hidden");
-                placeholder.classList.add("hidden");
-                document.querySelectorAll("#learning-list > div").forEach(d => d.classList.remove("bg-cyan-900/50"));
-                div.classList.add("bg-cyan-900/50");
-            };
-            listContainer.appendChild(div);
         });
     }
 
