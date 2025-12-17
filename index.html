@@ -1,139 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta name="monetag" content="649f4dd938faf1e37ed19a3d1fccc2e5">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NS PRIME - Advanced Earning Network</title>
-<!-- ✅ Libraries -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --neon-blue: #00f3ff;
-        --neon-purple: #bc13fe;
-        --neon-green: #0aff0a;
-        --neon-gold: #ffd700;
-        --bg-dark: #050508;
-        --glass-bg: rgba(20, 20, 30, 0.7);
-        --glass-border: rgba(255, 255, 255, 0.15);
-    }
+    <meta name="monetag" content="649f4dd938faf1e37ed19a3d1fccc2e5">
 
-    /* 🌌 GLOBAL STYLES */
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { 
-        background-color: var(--bg-dark); 
-        color: #e5e7eb; 
-        font-family: 'Poppins', sans-serif;
-        overflow-x: hidden; 
-        margin: 0;
-    }
-    
-    h1, h2, h3, .brand-font { font-family: 'Rajdhani', sans-serif; font-weight: 700; }
+    <!-- ✅ Stable Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    /* 🌌 3D BACKGROUND CANVAS */
-    #canvas-container {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-        background: radial-gradient(circle at center, #0a0a1a 0%, #000000 100%);
-    }
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-green: #0aff0a;
+            --neon-gold: #ffd700;
+            --bg-dark: #050508;
+            --glass-bg: rgba(20, 20, 30, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
 
-    /* 🧊 3D NEON CARD */
-    .neon-card {
-        background: var(--glass-bg);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid var(--glass-border);
-        border-radius: 16px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        transform-style: preserve-3d;
-    }
-    
-    /* VIP CARD STYLE */
-    .neon-card.vip-card {
-        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-        border: 1px solid var(--neon-gold);
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-    }
-    .vip-badge {
-        position: absolute; top: 0; right: 0;
-        background: var(--neon-gold); color: black;
-        font-size: 10px; font-weight: bold;
-        padding: 2px 8px; border-bottom-left-radius: 8px;
-        z-index: 10;
-    }
+        /* 🌌 GLOBAL STYLES */
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            background-color: var(--bg-dark); 
+            color: #e5e7eb; 
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden; 
+            margin: 0;
+        }
+        
+        /* Utility Classes */
+        .hidden { display: none !important; }
+        .flex { display: flex; }
+        
+        h1, h2, h3, .brand-font { font-family: 'Rajdhani', sans-serif; font-weight: 700; }
 
-    .neon-card:hover {
-        transform: translateY(-5px);
-    }
+        /* 🌌 3D BACKGROUND CANVAS */
+        #canvas-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at center, #0a0a1a 0%, #000000 100%);
+        }
 
-    /* 🚀 ANIMATIONS */
-    .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+        /* 🧊 3D NEON CARD */
+        .neon-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+        
+        /* VIP CARD STYLE */
+        .neon-card.vip-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+            border: 1px solid var(--neon-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        .vip-badge {
+            position: absolute; top: 0; right: 0;
+            background: var(--neon-gold); color: black;
+            font-size: 10px; font-weight: bold;
+            padding: 2px 8px; border-bottom-left-radius: 8px;
+            z-index: 10;
+        }
 
-    /* ✨ BUTTONS */
-    .btn-cyber {
-        background: linear-gradient(90deg, #00f3ff, #0066ff);
-        color: black; font-weight: 800; text-transform: uppercase;
-        padding: 12px 30px; border-radius: 8px; border: none;
-        transition: 0.3s; letter-spacing: 1px; font-family: 'Rajdhani', sans-serif;
-        cursor: pointer;
-    }
-    .btn-cyber:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 243, 255, 0.6); color: white; }
+        .neon-card:hover { transform: translateY(-5px); }
 
-    .btn-outline {
-        background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue);
-        padding: 10px 25px; border-radius: 8px; font-weight: 700; text-transform: uppercase;
-        transition: 0.3s; font-family: 'Rajdhani', sans-serif; cursor: pointer;
-    }
-    .btn-outline:hover { background: rgba(0, 243, 255, 0.1); box-shadow: 0 0 15px var(--neon-blue); }
+        /* 🚀 ANIMATIONS */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* 📱 BOTTOM DOCK */
-    .dock-nav {
-        position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-        background: rgba(10, 15, 30, 0.9); backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
-        padding: 10px 25px; display: flex; gap: 20px; z-index: 100;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8); width: 90%; max-width: 450px; justify-content: space-between;
-    }
-    .dock-item {
-        color: #888; font-size: 22px; transition: 0.3s; position: relative;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        cursor: pointer;
-    }
-    .dock-item.active { color: var(--neon-blue); transform: translateY(-5px); text-shadow: 0 0 10px var(--neon-blue); }
-    
-    /* 🌀 UTILS */
-    .text-gradient { background: linear-gradient(to right, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    #loading-screen { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; justify-content: center; align-items: center; }
-    .spinner { width: 60px; height: 60px; border: 4px solid rgba(0, 243, 255, 0.1); border-top-color: var(--neon-blue); border-radius: 50%; animation: spin 1s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #000; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
-    
-    /* Chat Bubble Style */
-    .chat-bubble { max-width: 80%; padding: 10px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; }
-    .chat-user { background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); margin-left: auto; color: white; text-align: right; }
-    .chat-admin { background: rgba(188, 19, 254, 0.1); border: 1px solid rgba(188, 19, 254, 0.3); margin-right: auto; color: white; text-align: left; }
-    select option { background: #050508; color: white; }
+        /* ✨ BUTTONS */
+        .btn-cyber {
+            background: linear-gradient(90deg, #00f3ff, #0066ff);
+            color: black; font-weight: 800; text-transform: uppercase;
+            padding: 12px 30px; border-radius: 8px; border: none;
+            transition: 0.3s; letter-spacing: 1px; font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            display: inline-block; text-align: center;
+        }
+        .btn-cyber:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 243, 255, 0.6); color: white; }
 
-    /* Ticker Style */
-    .ticker-wrap {
-        width: 100%; overflow: hidden; height: 30px; background: rgba(0,0,0,0.3); 
-        border-radius: 5px; border: 1px solid rgba(255,255,255,0.05); position: relative;
-    }
-    .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; box-sizing: content-box; animation: ticker 20s linear infinite; }
-    .ticker-item { display: inline-block; padding: 0 15px; font-size: 10px; font-weight: bold; color: #aaa; }
-    .ticker-item span { color: var(--neon-green); }
-    @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
-</style>
+        .btn-outline {
+            background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue);
+            padding: 10px 25px; border-radius: 8px; font-weight: 700; text-transform: uppercase;
+            transition: 0.3s; font-family: 'Rajdhani', sans-serif; cursor: pointer;
+        }
+        .btn-outline:hover { background: rgba(0, 243, 255, 0.1); box-shadow: 0 0 15px var(--neon-blue); }
+
+        /* 📱 BOTTOM DOCK - FIXED */
+        .dock-nav {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(10, 15, 30, 0.9); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
+            padding: 10px 25px; display: flex; gap: 20px; z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); width: 90%; max-width: 450px; justify-content: space-between;
+        }
+        .dock-item {
+            color: #888; font-size: 22px; transition: 0.3s; position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+        .dock-item.active { color: var(--neon-blue); transform: translateY(-5px); text-shadow: 0 0 10px var(--neon-blue); }
+        
+        /* 🌀 UTILS */
+        .text-gradient { background: linear-gradient(to right, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        #loading-screen { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; justify-content: center; align-items: center; }
+        .spinner { width: 60px; height: 60px; border: 4px solid rgba(0, 243, 255, 0.1); border-top-color: var(--neon-blue); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #000; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
+        
+        /* Chat Bubble */
+        .chat-bubble { max-width: 80%; padding: 10px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; }
+        .chat-user { background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); margin-left: auto; color: white; text-align: right; }
+        .chat-admin { background: rgba(188, 19, 254, 0.1); border: 1px solid rgba(188, 19, 254, 0.3); margin-right: auto; color: white; text-align: left; }
+        select option { background: #050508; color: white; }
+
+        /* Ticker */
+        .ticker-wrap {
+            width: 100%; overflow: hidden; height: 30px; background: rgba(0,0,0,0.3); 
+            border-radius: 5px; border: 1px solid rgba(255,255,255,0.05); position: relative;
+        }
+        .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; box-sizing: content-box; animation: ticker 20s linear infinite; }
+        .ticker-item { display: inline-block; padding: 0 15px; font-size: 10px; font-weight: bold; color: #aaa; }
+        .ticker-item span { color: var(--neon-green); }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+    </style>
 </head>
-<body class="antialiased">
-<!-- 🌌 LIVE 3D BACKGROUND (Advanced Plexus) -->
+<body class="antialiased text-white bg-black">
+
+<!-- 🌌 LIVE 3D BACKGROUND -->
 <div id="canvas-container"></div>
 <!-- 🌀 LOADER -->
 <div id="loading-screen"><div class="spinner"></div></div>
@@ -148,13 +154,13 @@
                 <span class="text-xl font-bold tracking-widest text-white brand-font">NS <span class="text-cyan-400">PRIME</span></span>
             </div>
             <div class="hidden md:flex gap-8 text-sm font-bold text-gray-300">
-                <a href="#hero" class="hover:text-cyan-400 transition">Home</a>
-                <a href="#how-it-works" class="hover:text-cyan-400 transition">How it Works</a>
-                <a href="#calculator" class="hover:text-cyan-400 transition">Calculator</a>
-                <a href="#payouts" class="hover:text-cyan-400 transition">Payouts</a>
+                <a href="#hero" class="hover:text-cyan-400 transition no-underline">Home</a>
+                <a href="#how-it-works" class="hover:text-cyan-400 transition no-underline">How it Works</a>
+                <a href="#calculator" class="hover:text-cyan-400 transition no-underline">Calculator</a>
+                <a href="#payouts" class="hover:text-cyan-400 transition no-underline">Payouts</a>
             </div>
             <div class="flex gap-4">
-                <button class="text-gray-300 hover:text-white font-bold text-sm nav-auth-btn uppercase cursor-pointer" data-auth="login">Login</button>
+                <button class="text-gray-300 hover:text-white font-bold text-sm nav-auth-btn uppercase cursor-pointer bg-transparent border-none" data-auth="login">Login</button>
                 <button class="btn-outline text-xs nav-auth-btn cursor-pointer" data-auth="register">Sign Up</button>
             </div>
         </div>
@@ -175,7 +181,7 @@
                 </p>
                 <div class="flex flex-wrap gap-5">
                     <button class="btn-cyber nav-auth-btn" data-auth="register">Start Earning</button>
-                    <a href="#how-it-works" class="px-6 py-3 rounded border border-white/20 hover:bg-white/5 text-white font-bold tracking-wider transition flex items-center gap-3">
+                    <a href="#how-it-works" class="px-6 py-3 rounded border border-white/20 hover:bg-white/5 text-white font-bold tracking-wider transition flex items-center gap-3 no-underline">
                         <i class="fas fa-info-circle text-purple-400"></i> LEARN MORE
                     </a>
                 </div>
@@ -306,10 +312,11 @@
         &copy; 2025 NS PRIME NETWORK. ALL RIGHTS RESERVED.
     </footer>
 </div>
+
 <!-- ==================== AUTH SECTION ==================== -->
 <div id="auth-section" class="fixed inset-0 z-[200] hidden flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
     <div class="neon-card w-full max-w-sm p-8 relative bg-[#0a0a15] border border-cyan-500/30">
-        <button id="close-auth" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+        <button id="close-auth" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-transparent border-none cursor-pointer"><i class="fas fa-times"></i></button>
         <!-- Login -->
         <div id="login-form">
             <h2 class="text-3xl font-bold mb-8 text-center text-white brand-font">Welcome Back</h2>
@@ -338,13 +345,12 @@
     </div>
 </div>
 
-<!-- ==================== DASHBOARD APP ==================== -->
-<div id="main-app" class="hidden pb-28 relative z-10">
+<!-- ==================== DASHBOARD APP (INITIALLY HIDDEN) ==================== -->
+<div id="main-app" class="hidden pb-28 relative z-10 w-full">
     <!-- Floating Header -->
-    <header class="p-4 flex justify-between items-center sticky top-0 z-40 bg-black/70 backdrop-blur-lg border-b border-white/10">
+    <header class="p-4 flex justify-between items-center sticky top-0 z-40 bg-black/70 backdrop-blur-lg border-b border-white/10 w-full">
         <h1 class="text-xl font-bold text-white brand-font tracking-wider">NS PRIME</h1>
         <div class="text-right flex items-center gap-3">
-            <!-- COIN DISPLAY ADDED -->
             <div class="text-center">
                 <p class="text-[9px] text-gray-400 font-bold">COINS</p>
                 <p class="text-sm font-bold text-yellow-400 font-mono"><i class="fas fa-coins text-[10px]"></i> <span id="header-coins">0</span></p>
@@ -356,397 +362,363 @@
         </div>
     </header>
 
-<main class="p-4 max-w-lg mx-auto space-y-6">
-    <!-- HOME SECTION (Updated: Daily Target at Bottom) -->
-    <section id="home" class="fade-up visible">
-       <!-- Smart Link -->
-        <div class="neon-card p-5 mb-5 border-l-4 border-l-cyan-500" data-tilt>
-            <h3 class="text-xs font-bold text-gray-400 uppercase mb-3 tracking-[3px]">Smart Link Generator</h3>
-            <div class="mb-3">
-                <select id="link-type-selector" class="w-full bg-black/40 text-xs p-3 rounded border border-white/10 text-white mt-1 outline-none focus:border-cyan-500 appearance-none font-bold">
-                     <option value="video">🔥 Viral Video (Best)</option>
-                    <option value="cricket">🏏 Cricket Match</option>
-                        <option value="money">💰 Money Offer</option>
-                        <option value="freefire">🎮 FreeFire Diamonds</option>
-                        <option value="whatsapp">💬 WhatsApp Chat</option>
-                        <option value="telegram">✈️ Telegram Channel</option>
-                        <option value="internet">🌐 Free Internet</option>
-                        <option value="movie">🎬 Movie Download</option>
-                        <option value="live">🎧 Live Video Call</option>
-                        <option value="tiktok">🎵 TikTok Viral</option>
-                        <option value="crypto">🪙 Crypto Claim</option>
-                        <option value="gallery">🖼️ Private Gallery</option>
-                </select>
-            </div>
-            <div class="flex gap-2 relative">
-                <input type="text" id="marketing-link-input" class="w-full bg-black/40 text-xs p-3 rounded border border-white/10 text-cyan-300 font-mono" readonly>
-                <button id="copy-marketing-link-btn" class="bg-cyan-600/20 text-cyan-400 border border-cyan-500/50 px-4 rounded text-xs font-bold hover:bg-cyan-600 hover:text-white transition shadow-[0_0_10px_cyan]"><i class="fas fa-copy"></i></button>
-            </div>
-        </div>
-
-        <!-- Stats Grid (UPDATED) -->
-        <div class="grid grid-cols-2 gap-3 mb-5">
-            <div class="neon-card p-4 text-center">
-                <i class="fas fa-coins text-green-400 text-xl mb-2"></i>
-                <p class="text-2xl font-bold text-white brand-font" id="today-earnings-stat">৳0.00</p>
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest">Today</p>
-            </div>
-            <div class="neon-card p-4 text-center">
-                <i class="fas fa-wallet text-purple-400 text-xl mb-2"></i>
-                <p class="text-2xl font-bold text-white brand-font" id="total-earnings-stat">৳0.00</p>
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest">Total</p>
-            </div>
-            <!-- Added Valid Clicks -->
-            <div class="neon-card p-4 text-center">
-                <i class="fas fa-mouse-pointer text-cyan-400 text-xl mb-2"></i>
-                <p class="text-2xl font-bold text-white brand-font" id="today-impression">0</p>
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest">Valid Clicks</p>
-            </div>
-            <!-- Added Refer Commission -->
-            <div class="neon-card p-4 text-center">
-                <i class="fas fa-users text-blue-400 text-xl mb-2"></i>
-                <p class="text-2xl font-bold text-white brand-font" id="home-refer-commission">৳0.00</p>
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest">Ref Bonus</p>
-            </div>
-        </div>
-
-        <!-- 🔥 DAILY TARGET & BONUS CARD (MOVED TO BOTTOM) -->
-        <div class="neon-card p-5 border-b-4 border-b-orange-500">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-sm font-bold text-white uppercase tracking-wide"><i class="fas fa-bullseye text-orange-500 mr-2"></i> Daily Goals</h3>
-                <span class="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-1 rounded font-bold uppercase">Win ৳<span id="target-bonus-display">20</span></span>
-            </div>
-            
-            <!-- Tasks Progress -->
-            <div class="mb-3">
-                <div class="flex justify-between text-xs mb-1">
-                    <span class="text-gray-400">Complete Tasks</span>
-                    <span class="text-white font-bold"><span id="user-task-done">0</span> / <span id="admin-task-target">5</span></span>
+    <main class="p-4 max-w-lg mx-auto space-y-6">
+        <!-- HOME SECTION -->
+        <section id="home" class="fade-up visible">
+           <!-- Smart Link -->
+            <div class="neon-card p-5 mb-5 border-l-4 border-l-cyan-500" data-tilt>
+                <h3 class="text-xs font-bold text-gray-400 uppercase mb-3 tracking-[3px]">Smart Link Generator</h3>
+                <div class="mb-3">
+                    <select id="link-type-selector" class="w-full bg-black/40 text-xs p-3 rounded border border-white/10 text-white mt-1 outline-none focus:border-cyan-500 appearance-none font-bold">
+                         <option value="video">🔥 Viral Video (Best)</option>
+                        <option value="cricket">🏏 Cricket Match</option>
+                            <option value="money">💰 Money Offer</option>
+                            <option value="freefire">🎮 FreeFire Diamonds</option>
+                            <option value="whatsapp">💬 WhatsApp Chat</option>
+                            <option value="telegram">✈️ Telegram Channel</option>
+                            <option value="internet">🌐 Free Internet</option>
+                            <option value="movie">🎬 Movie Download</option>
+                            <option value="live">🎧 Live Video Call</option>
+                            <option value="tiktok">🎵 TikTok Viral</option>
+                            <option value="crypto">🪙 Crypto Claim</option>
+                            <option value="gallery">🖼️ Private Gallery</option>
+                    </select>
                 </div>
-                <div class="w-full bg-gray-800 rounded-full h-2">
-                    <div id="target-task-bar" class="bg-gradient-to-r from-orange-600 to-yellow-500 h-2 rounded-full transition-all duration-700" style="width: 0%"></div>
+                <div class="flex gap-2 relative">
+                    <input type="text" id="marketing-link-input" class="w-full bg-black/40 text-xs p-3 rounded border border-white/10 text-cyan-300 font-mono" readonly>
+                    <button id="copy-marketing-link-btn" class="bg-cyan-600/20 text-cyan-400 border border-cyan-500/50 px-4 rounded text-xs font-bold hover:bg-cyan-600 hover:text-white transition shadow-[0_0_10px_cyan]"><i class="fas fa-copy"></i></button>
                 </div>
             </div>
 
-            <!-- Clicks Progress -->
-            <div>
-                <div class="flex justify-between text-xs mb-1">
-                    <span class="text-gray-400">Smart Link Clicks</span>
-                    <span class="text-white font-bold"><span id="user-click-done">0</span> / <span id="admin-click-target">10</span></span>
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 gap-3 mb-5">
+                <div class="neon-card p-4 text-center">
+                    <i class="fas fa-coins text-green-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-bold text-white brand-font" id="today-earnings-stat">৳0.00</p>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">Today</p>
                 </div>
-                <div class="w-full bg-gray-800 rounded-full h-2">
-                    <div id="target-click-bar" class="bg-gradient-to-r from-cyan-600 to-blue-500 h-2 rounded-full transition-all duration-700" style="width: 0%"></div>
+                <div class="neon-card p-4 text-center">
+                    <i class="fas fa-wallet text-purple-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-bold text-white brand-font" id="total-earnings-stat">৳0.00</p>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">Total</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TASKS SECTION (UPDATED with TOTAL & VIP) -->
-    <section id="tasks" class="hidden">
-        <!-- TOTAL AVAILABLE EARNING DISPLAY (COINS) -->
-        <div class="neon-card p-4 mb-5 bg-gradient-to-r from-yellow-900/50 to-black border-l-4 border-l-yellow-400 shadow-[0_0_10px_rgba(255,215,0,0.2)]">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h4 class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Total Available Coins</h4>
-                    <h2 class="text-3xl font-bold text-white brand-font text-shadow-neon mt-1"><span id="total-available-task-reward">0</span> <span class="text-sm text-yellow-400">COINS</span></h2>
+                <div class="neon-card p-4 text-center">
+                    <i class="fas fa-mouse-pointer text-cyan-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-bold text-white brand-font" id="today-impression">0</p>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">Valid Clicks</p>
                 </div>
-                <div class="w-10 h-10 rounded-full border border-yellow-500 flex items-center justify-center bg-yellow-500/20">
-                    <i class="fas fa-coins text-yellow-400"></i>
+                <div class="neon-card p-4 text-center">
+                    <i class="fas fa-users text-blue-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-bold text-white brand-font" id="home-refer-commission">৳0.00</p>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">Ref Bonus</p>
                 </div>
             </div>
-        </div>
 
-        <div class="neon-card p-1 mb-5 flex">
-            <button id="tab-btn-available" class="flex-1 py-3 text-xs font-bold rounded bg-cyan-600 text-white shadow-[0_0_10px_cyan]" onclick="switchTaskTab('available')">AVAILABLE JOBS</button>
-            <button id="tab-btn-history" class="flex-1 py-3 text-xs font-bold rounded text-gray-400" onclick="switchTaskTab('history')">MY HISTORY</button>
-        </div>
-        <div id="tasks-list" class="space-y-4"></div>
-        <div id="tasks-history-list" class="space-y-3 hidden"></div>
-    </section>
-
-    <!-- WALLET SECTION (UPDATED WITH COIN CONVERTER) -->
-    <section id="wallet" class="hidden">
-         <div class="neon-card p-8 text-center mb-6" data-tilt>
-            <p class="text-gray-400 text-xs uppercase tracking-[4px] mb-2">Available Funds</p>
-            <p class="text-5xl font-bold text-white brand-font text-shadow-neon" id="wallet-available-balance">৳0.00</p>
-         </div>
-
-         <!-- Upcoming Payment Info (Dynamic from Admin) -->
-         <div class="neon-card p-4 mb-6 border-l-4 border-l-purple-500 flex justify-between items-center bg-purple-900/10">
-             <div>
-                 <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Next Payment Date</p>
-                 <p class="text-white font-bold brand-font text-lg" id="next-payment-date">Loading...</p>
-                 <p class="text-[9px] text-cyan-400 mt-1">Budget: ৳<span id="todays-budget">0</span></p>
-             </div>
-             <div class="text-right">
-                 <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Pending</p>
-                 <p class="text-green-400 font-bold brand-font text-lg" id="pending-withdrawals">৳0.00</p>
-             </div>
-         </div>
-         
-         <!-- 🪙 COIN CONVERTER CARD (NEW) -->
-         <div class="neon-card p-5 mb-5 border-l-4 border-l-yellow-500 relative">
-             <div class="absolute right-0 top-0 p-2 opacity-10 text-6xl text-yellow-500"><i class="fas fa-exchange-alt"></i></div>
-             <h4 class="text-sm font-bold text-white mb-2 uppercase tracking-wide flex items-center gap-2">
-                 <i class="fas fa-coins text-yellow-400"></i> Coin Converter
-             </h4>
-             <p class="text-[10px] text-gray-400 mb-4">Rate: 1000 Coins = 10 Taka (100 Coins = 1 Taka)</p>
-             
-             <div class="bg-black/40 p-3 rounded border border-white/10 mb-3 flex justify-between items-center">
-                 <span class="text-gray-400 text-xs uppercase">Your Coins</span>
-                 <span class="text-yellow-400 font-bold text-lg" id="wallet-coin-balance">0</span>
-             </div>
-             
-             <div class="flex gap-2">
-                 <input type="number" id="convert-amount-input" class="flex-1 bg-black/40 border border-white/10 rounded p-3 text-white text-sm outline-none focus:border-yellow-500" placeholder="Coins to convert">
-                 <button id="convert-coin-btn" class="bg-yellow-600 hover:bg-yellow-500 text-black font-bold px-4 rounded text-xs transition">CONVERT</button>
-             </div>
-         </div>
-
-         <div class="neon-card p-5 mb-5">
-            <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wide">Request Withdrawal</h4>
-            <div class="flex gap-2 mb-4 bg-black/40 p-1 rounded border border-white/5">
-                <button id="w-method-bkash" class="flex-1 py-2 rounded text-xs font-bold bg-pink-600 text-white transition" onclick="handleWithdrawMethodChange('bkash')">bKash</button>
-                <button id="w-method-nagad" class="flex-1 py-2 rounded text-xs font-bold text-gray-400 hover:text-white transition" onclick="handleWithdrawMethodChange('nagad')">Nagad</button>
-                <button id="w-method-usdt" class="flex-1 py-2 rounded text-xs font-bold text-gray-400 hover:text-white transition" onclick="handleWithdrawMethodChange('usdt')">USDT</button>
-            </div>
-            <div class="space-y-3">
-                <div>
-                    <label class="text-[10px] text-gray-400 uppercase font-bold ml-1">Amount</label>
-                    <input type="number" id="main-withdraw-amount" class="w-full bg-black/40 border border-white/10 rounded p-3 text-white text-sm outline-none focus:border-cyan-500 mt-1" placeholder="Min Amount">
-                </div>
-                <div>
-                    <div class="flex justify-between">
-                        <label id="w-account-label" class="text-[10px] text-gray-400 uppercase font-bold ml-1">Account Number</label>
-                        <span class="text-[10px] text-cyan-400 font-bold uppercase"><i class="fas fa-save mr-1"></i> Auto Save</span>
-                    </div>
-                    <input type="text" id="main-withdraw-account" class="w-full bg-black/40 border border-white/10 rounded p-3 text-white text-sm outline-none focus:border-cyan-500 mt-1" placeholder="017xxxxxxxx">
-                </div>
-                <div class="text-[10px] text-gray-500 mt-1 italic" id="min-withdraw-display">Min Withdraw: ৳10</div>
-                <button id="main-withdraw-request-btn" class="w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded text-xs font-bold transition mt-2">SUBMIT REQUEST</button>
-            </div>
-         </div>
-         <div class="mt-8">
-             <h4 class="text-xs font-bold text-gray-500 mb-3 uppercase tracking-wide ml-1">Transaction History</h4>
-             <div id="withdrawal-history-list" class="text-xs space-y-2">
-                 <p class="text-center text-gray-500">Loading history...</p>
-             </div>
-         </div>
-    </section>
-
-    <!-- REFERRAL SECTION (UPDATED with Ticker at Bottom) -->
-    <section id="refer" class="hidden">
-        <div class="neon-card p-6 mb-5 text-center relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-full blur-xl"></div>
-            <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest">Refer & Earn</h3>
-            
-            <div class="bg-black/40 p-4 rounded border border-dashed border-cyan-500/50">
-                <p class="text-[10px] text-gray-400 uppercase mb-2">Your Unique Refer Code</p>
-                <div class="flex justify-between items-center bg-cyan-900/10 p-2 rounded">
-                    <span id="referral-code-display" class="font-mono text-xl text-white tracking-widest font-bold ml-2">...</span>
-                    <button id="copy-referral-code-btn" class="bg-cyan-500/20 text-cyan-400 px-3 py-2 rounded text-xs font-bold hover:bg-cyan-500 hover:text-black transition"><i class="fas fa-copy"></i></button>
-                </div>
-                <div class="mt-3 inline-block px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full">
-                    <p class="text-[10px] text-white font-bold tracking-widest">Lifetime 10% Commission</p>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4 mt-5">
-                <div class="bg-white/5 p-3 rounded border border-white/5">
-                    <p class="text-2xl font-bold text-white brand-font" id="refer-team-size">0</p>
-                    <p class="text-xs text-gray-400 mt-1">Total Team</p>
-                </div>
-                <div class="bg-white/5 p-3 rounded border border-white/5">
-                    <p class="text-2xl font-bold text-cyan-400 brand-font" id="active-team-size">0</p>
-                    <p class="text-xs text-green-400 mt-1 font-bold">Active Members</p>
-                </div>
-            </div>
-            <p class="text-[10px] text-gray-500 mt-2 text-center">*Member becomes Active after earning <span id="active-threshold-display">1000</span> Taka.</p>
-        </div>
-
-        <!-- Team Milestones -->
-        <div class="neon-card p-5 mb-5">
-            <h3 class="text-sm font-bold text-white mb-4 flex items-center gap-2 uppercase tracking-wide">
-                <i class="fas fa-trophy text-yellow-400"></i> Active Member Bonus
-            </h3>
-            <div class="space-y-5">
-                <!-- 50 Members -->
-                <div class="bg-white/5 p-3 rounded border border-white/5">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-300 text-xs font-bold uppercase">Silver (50 Active)</span>
-                        <span class="text-cyan-400 text-xs font-bold">Prize:5000 BDT</span>
-                    </div>
-                    <div class="w-full bg-gray-700 h-1.5 rounded-full overflow-hidden">
-                        <div id="milestone-50-bar" class="bg-cyan-400 h-full transition-all duration-1000" style="width: 0%"></div>
-                    </div>
-                    <p class="text-right text-[10px] text-gray-500 mt-1" id="milestone-50-text">0/50</p>
+            <!-- Daily Goals -->
+            <div class="neon-card p-5 border-b-4 border-b-orange-500">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wide"><i class="fas fa-bullseye text-orange-500 mr-2"></i> Daily Goals</h3>
+                    <span class="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-1 rounded font-bold uppercase">Win ৳<span id="target-bonus-display">20</span></span>
                 </div>
                 
-                <!-- 100 Members -->
-                <div class="bg-white/5 p-3 rounded border border-white/5">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-300 text-xs font-bold uppercase">Gold (100 Active)</span>
-                        <span class="text-yellow-400 text-xs font-bold">Prize:10000 BDT</span>
+                <div class="mb-3">
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="text-gray-400">Complete Tasks</span>
+                        <span class="text-white font-bold"><span id="user-task-done">0</span> / <span id="admin-task-target">5</span></span>
                     </div>
-                    <div class="w-full bg-gray-700 h-1.5 rounded-full overflow-hidden">
-                        <div id="milestone-100-bar" class="bg-yellow-400 h-full transition-all duration-1000" style="width: 0%"></div>
+                    <div class="w-full bg-gray-800 rounded-full h-2">
+                        <div id="target-task-bar" class="bg-gradient-to-r from-orange-600 to-yellow-500 h-2 rounded-full transition-all duration-700" style="width: 0%"></div>
                     </div>
-                    <p class="text-right text-[10px] text-gray-500 mt-1" id="milestone-100-text">0/100</p>
                 </div>
-            </div>
-        </div>
-        
-        <!-- My Team List -->
-        <div class="neon-card p-5 mb-5">
-            <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest">My Team List</h3>
-            <div id="referral-list-container" class="space-y-2 max-h-60 overflow-y-auto custom-scrollbar">
-                <p class="text-center text-gray-500 text-xs">Loading team data...</p>
-            </div>
-        </div>
 
-        <!-- 📢 LIVE PAYOUT TICKER (MOVED TO BOTTOM) -->
-        <div class="neon-card p-2">
-            <h3 class="text-[10px] font-bold text-gray-400 mb-2 uppercase text-center tracking-widest">Live Withdrawals</h3>
-            <div class="ticker-wrap">
-                <div class="ticker" id="live-payout-ticker">
-                    <!-- Ticker items injected via JS -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROFILE SECTION (Updated: Learning Folder) -->
-    <section id="profile" class="hidden">
-        <div class="neon-card p-6 mb-5">
-            <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-6">
-                <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-3xl font-bold text-white shadow-[0_0_15px_cyan]">
-                    <i class="fas fa-user-astronaut"></i>
-                </div>
                 <div>
-                    <h3 class="text-xl font-bold text-white brand-font" id="profile-info-name">Loading...</h3>
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                        <p class="text-xs text-green-400 font-bold tracking-widest">ACTIVE ACCOUNT</p>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="text-gray-400">Smart Link Clicks</span>
+                        <span class="text-white font-bold"><span id="user-click-done">0</span> / <span id="admin-click-target">10</span></span>
+                    </div>
+                    <div class="w-full bg-gray-800 rounded-full h-2">
+                        <div id="target-click-bar" class="bg-gradient-to-r from-cyan-600 to-blue-500 h-2 rounded-full transition-all duration-700" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASKS SECTION -->
+        <section id="tasks" class="hidden">
+            <div class="neon-card p-4 mb-5 bg-gradient-to-r from-yellow-900/50 to-black border-l-4 border-l-yellow-400 shadow-[0_0_10px_rgba(255,215,0,0.2)]">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h4 class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Total Available Coins</h4>
+                        <h2 class="text-3xl font-bold text-white brand-font text-shadow-neon mt-1"><span id="total-available-task-reward">0</span> <span class="text-sm text-yellow-400">COINS</span></h2>
+                    </div>
+                    <div class="w-10 h-10 rounded-full border border-yellow-500 flex items-center justify-center bg-yellow-500/20">
+                        <i class="fas fa-coins text-yellow-400"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- Full Info Grid -->
-            <div class="grid grid-cols-1 gap-3 mb-6">
-                <!-- UID & Join Date -->
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-black/40 rounded p-3 border border-white/5">
-                        <p class="text-[10px] text-gray-400 uppercase">User ID</p>
-                        <p class="text-xs font-bold text-cyan-400 font-mono truncate" id="profile-uid">...</p>
-                    </div>
-                    <div class="bg-black/40 rounded p-3 border border-white/5">
-                         <p class="text-[10px] text-gray-400 uppercase">Joined</p>
-                         <p class="text-xs font-bold text-white" id="profile-join-date">...</p>
-                    </div>
-                </div>
+            <div class="neon-card p-1 mb-5 flex">
+                <button id="tab-btn-available" class="flex-1 py-3 text-xs font-bold rounded bg-cyan-600 text-white shadow-[0_0_10px_cyan]" onclick="switchTaskTab('available')">AVAILABLE JOBS</button>
+                <button id="tab-btn-history" class="flex-1 py-3 text-xs font-bold rounded text-gray-400" onclick="switchTaskTab('history')">MY HISTORY</button>
+            </div>
+            <div id="tasks-list" class="space-y-4"></div>
+            <div id="tasks-history-list" class="space-y-3 hidden"></div>
+        </section>
 
-                <!-- Balance & Total -->
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-black/40 rounded p-3 border border-white/5">
-                        <p class="text-[10px] text-gray-400 uppercase">Balance</p>
-                        <p class="text-sm font-bold text-white brand-font" id="profile-balance">৳0.00</p>
-                    </div>
-                    <div class="bg-black/40 rounded p-3 border border-white/5">
-                         <p class="text-[10px] text-gray-400 uppercase">Total Earned</p>
-                         <p class="text-sm font-bold text-green-400 brand-font" id="profile-total-earned">৳0.00</p>
-                    </div>
-                </div>
+        <!-- WALLET SECTION -->
+        <section id="wallet" class="hidden">
+             <div class="neon-card p-8 text-center mb-6" data-tilt>
+                <p class="text-gray-400 text-xs uppercase tracking-[4px] mb-2">Available Funds</p>
+                <p class="text-5xl font-bold text-white brand-font text-shadow-neon" id="wallet-available-balance">৳0.00</p>
+             </div>
 
-                <!-- Contact Info -->
-                <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between">
-                    <span class="text-gray-400 text-xs uppercase">Phone</span>
-                    <span class="text-white text-xs font-bold" id="profile-phone">...</span>
+             <div class="neon-card p-4 mb-6 border-l-4 border-l-purple-500 flex justify-between items-center bg-purple-900/10">
+                 <div>
+                     <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Next Payment Date</p>
+                     <p class="text-white font-bold brand-font text-lg" id="next-payment-date">Loading...</p>
+                     <p class="text-[9px] text-cyan-400 mt-1">Budget: ৳<span id="todays-budget">0</span></p>
+                 </div>
+                 <div class="text-right">
+                     <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Pending</p>
+                     <p class="text-green-400 font-bold brand-font text-lg" id="pending-withdrawals">৳0.00</p>
+                 </div>
+             </div>
+             
+             <!-- 🪙 COIN CONVERTER -->
+             <div class="neon-card p-5 mb-5 border-l-4 border-l-yellow-500 relative">
+                 <div class="absolute right-0 top-0 p-2 opacity-10 text-6xl text-yellow-500"><i class="fas fa-exchange-alt"></i></div>
+                 <h4 class="text-sm font-bold text-white mb-2 uppercase tracking-wide flex items-center gap-2">
+                     <i class="fas fa-coins text-yellow-400"></i> Coin Converter
+                 </h4>
+                 <p class="text-[10px] text-gray-400 mb-4">Rate: 1000 Coins = 10 Taka (100 Coins = 1 Taka)</p>
+                 
+                 <div class="bg-black/40 p-3 rounded border border-white/10 mb-3 flex justify-between items-center">
+                     <span class="text-gray-400 text-xs uppercase">Your Coins</span>
+                     <span class="text-yellow-400 font-bold text-lg" id="wallet-coin-balance">0</span>
+                 </div>
+                 
+                 <div class="flex gap-2">
+                     <input type="number" id="convert-amount-input" class="flex-1 bg-black/40 border border-white/10 rounded p-3 text-white text-sm outline-none focus:border-yellow-500" placeholder="Coins to convert">
+                     <button id="convert-coin-btn" class="bg-yellow-600 hover:bg-yellow-500 text-black font-bold px-4 rounded text-xs transition">CONVERT</button>
+                 </div>
+             </div>
+
+             <div class="neon-card p-5 mb-5">
+                <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wide">Request Withdrawal</h4>
+                <div class="flex gap-2 mb-4 bg-black/40 p-1 rounded border border-white/5">
+                    <button id="w-method-bkash" class="flex-1 py-2 rounded text-xs font-bold bg-pink-600 text-white transition" onclick="handleWithdrawMethodChange('bkash')">bKash</button>
+                    <button id="w-method-nagad" class="flex-1 py-2 rounded text-xs font-bold text-gray-400 hover:text-white transition" onclick="handleWithdrawMethodChange('nagad')">Nagad</button>
+                    <button id="w-method-usdt" class="flex-1 py-2 rounded text-xs font-bold text-gray-400 hover:text-white transition" onclick="handleWithdrawMethodChange('usdt')">USDT</button>
                 </div>
-                <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between">
-                    <span class="text-gray-400 text-xs uppercase">Email</span>
-                    <span class="text-white text-xs font-bold" id="profile-email">...</span>
+                <div class="space-y-3">
+                    <div>
+                        <label class="text-[10px] text-gray-400 uppercase font-bold ml-1">Amount</label>
+                        <input type="number" id="main-withdraw-amount" class="w-full bg-black/40 border border-white/10 rounded p-3 text-white text-sm outline-none focus:border-cyan-500 mt-1" placeholder="Min Amount">
+                    </div>
+                    <div>
+                        <div class="flex justify-between">
+                            <label id="w-account-label" class="text-[10px] text-gray-400 uppercase font-bold ml-1">Account Number</label>
+                            <span class="text-[10px] text-cyan-400 font-bold uppercase"><i class="fas fa-save mr-1"></i> Auto Save</span>
+                        </div>
+                        <input type="text" id="main-withdraw-account" class="w-full bg-black/40 border border-white/10 rounded p-3 text-white text-sm outline-none focus:border-cyan-500 mt-1" placeholder="017xxxxxxxx">
+                    </div>
+                    <div class="text-[10px] text-gray-500 mt-1 italic" id="min-withdraw-display">Min Withdraw: ৳10</div>
+                    <button id="main-withdraw-request-btn" class="w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded text-xs font-bold transition mt-2">SUBMIT REQUEST</button>
                 </div>
-                 <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between items-center">
-                    <span class="text-gray-400 text-xs uppercase">Refer Code</span>
-                    <div class="flex items-center gap-2">
-                         <span class="text-white text-xs font-bold font-mono" id="profile-refer-code">...</span>
-                         <i class="fas fa-copy text-gray-500 cursor-pointer text-xs" id="copy-profile-ref"></i>
+             </div>
+             <div class="mt-8">
+                 <h4 class="text-xs font-bold text-gray-500 mb-3 uppercase tracking-wide ml-1">Transaction History</h4>
+                 <div id="withdrawal-history-list" class="text-xs space-y-2">
+                     <p class="text-center text-gray-500">Loading history...</p>
+                 </div>
+             </div>
+        </section>
+
+        <!-- REFERRAL SECTION -->
+        <section id="refer" class="hidden">
+            <div class="neon-card p-6 mb-5 text-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-full blur-xl"></div>
+                <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest">Refer & Earn</h3>
+                
+                <div class="bg-black/40 p-4 rounded border border-dashed border-cyan-500/50">
+                    <p class="text-[10px] text-gray-400 uppercase mb-2">Your Unique Refer Code</p>
+                    <div class="flex justify-between items-center bg-cyan-900/10 p-2 rounded">
+                        <span id="referral-code-display" class="font-mono text-xl text-white tracking-widest font-bold ml-2">...</span>
+                        <button id="copy-referral-code-btn" class="bg-cyan-500/20 text-cyan-400 px-3 py-2 rounded text-xs font-bold hover:bg-cyan-500 hover:text-black transition"><i class="fas fa-copy"></i></button>
+                    </div>
+                    <div class="mt-3 inline-block px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full">
+                        <p class="text-[10px] text-white font-bold tracking-widest">Lifetime 10% Commission</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mt-5">
+                    <div class="bg-white/5 p-3 rounded border border-white/5">
+                        <p class="text-2xl font-bold text-white brand-font" id="refer-team-size">0</p>
+                        <p class="text-xs text-gray-400 mt-1">Total Team</p>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded border border-white/5">
+                        <p class="text-2xl font-bold text-cyan-400 brand-font" id="active-team-size">0</p>
+                        <p class="text-xs text-green-400 mt-1 font-bold">Active Members</p>
+                    </div>
+                </div>
+                <p class="text-[10px] text-gray-500 mt-2 text-center">*Member becomes Active after earning <span id="active-threshold-display">1000</span> Taka.</p>
+            </div>
+
+            <!-- Team Milestones -->
+            <div class="neon-card p-5 mb-5">
+                <h3 class="text-sm font-bold text-white mb-4 flex items-center gap-2 uppercase tracking-wide">
+                    <i class="fas fa-trophy text-yellow-400"></i> Active Member Bonus
+                </h3>
+                <div class="space-y-5">
+                    <div class="bg-white/5 p-3 rounded border border-white/5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-300 text-xs font-bold uppercase">Silver (50 Active)</span>
+                            <span class="text-cyan-400 text-xs font-bold">Prize:5000 BDT</span>
+                        </div>
+                        <div class="w-full bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                            <div id="milestone-50-bar" class="bg-cyan-400 h-full transition-all duration-1000" style="width: 0%"></div>
+                        </div>
+                        <p class="text-right text-[10px] text-gray-500 mt-1" id="milestone-50-text">0/50</p>
+                    </div>
+                    
+                    <div class="bg-white/5 p-3 rounded border border-white/5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-300 text-xs font-bold uppercase">Gold (100 Active)</span>
+                            <span class="text-yellow-400 text-xs font-bold">Prize:10000 BDT</span>
+                        </div>
+                        <div class="w-full bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                            <div id="milestone-100-bar" class="bg-yellow-400 h-full transition-all duration-1000" style="width: 0%"></div>
+                        </div>
+                        <p class="text-right text-[10px] text-gray-500 mt-1" id="milestone-100-text">0/100</p>
                     </div>
                 </div>
             </div>
+            
+            <div class="neon-card p-5 mb-5">
+                <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest">My Team List</h3>
+                <div id="referral-list-container" class="space-y-2 max-h-60 overflow-y-auto custom-scrollbar">
+                    <p class="text-center text-gray-500 text-xs">Loading team data...</p>
+                </div>
+            </div>
 
-            <!-- 📚 LEARNING FOLDER / VIDEO LIBRARY -->
-            <div class="mb-6">
-                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wide flex items-center gap-2">
-                    <i class="fas fa-folder-open text-yellow-400"></i> Learning Zone
-                </h4>
-                <div class="bg-black/40 rounded border border-white/10 overflow-hidden">
-                    <!-- Video Player -->
-                    <div class="aspect-video bg-black">
-                        <iframe id="learning-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <div id="video-placeholder" class="w-full h-full flex items-center justify-center text-gray-500 text-xs uppercase tracking-widest">
-                            Select a video to play
+            <div class="neon-card p-2">
+                <h3 class="text-[10px] font-bold text-gray-400 mb-2 uppercase text-center tracking-widest">Live Withdrawals</h3>
+                <div class="ticker-wrap">
+                    <div class="ticker" id="live-payout-ticker"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE SECTION -->
+        <section id="profile" class="hidden">
+            <div class="neon-card p-6 mb-5">
+                <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-6">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-3xl font-bold text-white shadow-[0_0_15px_cyan]">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white brand-font" id="profile-info-name">Loading...</h3>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            <p class="text-xs text-green-400 font-bold tracking-widest">ACTIVE ACCOUNT</p>
                         </div>
                     </div>
-                    <!-- Video List -->
-                    <div class="p-3 max-h-40 overflow-y-auto custom-scrollbar bg-[#050508]" id="learning-list">
-                        <p class="text-center text-xs text-gray-500">Loading tutorials...</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-3 mb-6">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-black/40 rounded p-3 border border-white/5">
+                            <p class="text-[10px] text-gray-400 uppercase">User ID</p>
+                            <p class="text-xs font-bold text-cyan-400 font-mono truncate" id="profile-uid">...</p>
+                        </div>
+                        <div class="bg-black/40 rounded p-3 border border-white/5">
+                             <p class="text-[10px] text-gray-400 uppercase">Joined</p>
+                             <p class="text-xs font-bold text-white" id="profile-join-date">...</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-black/40 rounded p-3 border border-white/5">
+                            <p class="text-[10px] text-gray-400 uppercase">Balance</p>
+                            <p class="text-sm font-bold text-white brand-font" id="profile-balance">৳0.00</p>
+                        </div>
+                        <div class="bg-black/40 rounded p-3 border border-white/5">
+                             <p class="text-[10px] text-gray-400 uppercase">Total Earned</p>
+                             <p class="text-sm font-bold text-green-400 brand-font" id="profile-total-earned">৳0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between">
+                        <span class="text-gray-400 text-xs uppercase">Phone</span>
+                        <span class="text-white text-xs font-bold" id="profile-phone">...</span>
+                    </div>
+                    <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between">
+                        <span class="text-gray-400 text-xs uppercase">Email</span>
+                        <span class="text-white text-xs font-bold" id="profile-email">...</span>
+                    </div>
+                     <div class="bg-black/40 rounded p-3 border border-white/5 flex justify-between items-center">
+                        <span class="text-gray-400 text-xs uppercase">Refer Code</span>
+                        <div class="flex items-center gap-2">
+                             <span class="text-white text-xs font-bold font-mono" id="profile-refer-code">...</span>
+                             <i class="fas fa-copy text-gray-500 cursor-pointer text-xs" id="copy-profile-ref"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Support Button -->
-            <button id="open-support-btn" class="w-full mb-6 py-4 rounded border border-purple-500/30 bg-purple-900/10 flex items-center justify-center gap-3 text-white font-bold hover:bg-purple-900/20 transition">
-                <i class="fas fa-headset text-purple-400 text-xl"></i> 
-                <span>HELP CENTER / SUPPORT</span>
-            </button>
-            
-            <button id="logout-btn" class="w-full mt-2 py-3 border border-red-500/30 text-red-400 bg-red-500/5 hover:bg-red-500/10 rounded text-xs font-bold tracking-[3px] uppercase transition">
-                Logout System
-            </button>
-        </div>
-    </section>
-</main>
 
-<!-- Dock Navigation -->
-<nav class="dock-nav">
-    <a class="dock-item active" data-section="home"><i class="fas fa-home"></i></a>
-    <a class="dock-item" data-section="tasks"><i class="fas fa-cube"></i></a>
-    <a class="dock-item" data-section="wallet"><i class="fas fa-wallet"></i></a>
-    <a class="dock-item" data-section="refer"><i class="fas fa-users"></i></a>
-    <a class="dock-item" data-section="profile"><i class="fas fa-id-card"></i></a>
-</nav>
+                <div class="mb-6">
+                    <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wide flex items-center gap-2">
+                        <i class="fas fa-folder-open text-yellow-400"></i> Learning Zone
+                    </h4>
+                    <div class="bg-black/40 rounded border border-white/10 overflow-hidden">
+                        <div class="aspect-video bg-black">
+                            <iframe id="learning-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div id="video-placeholder" class="w-full h-full flex items-center justify-center text-gray-500 text-xs uppercase tracking-widest">
+                                Select a video to play
+                            </div>
+                        </div>
+                        <div class="p-3 max-h-40 overflow-y-auto custom-scrollbar bg-[#050508]" id="learning-list">
+                            <p class="text-center text-xs text-gray-500">Loading tutorials...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="open-support-btn" class="w-full mb-6 py-4 rounded border border-purple-500/30 bg-purple-900/10 flex items-center justify-center gap-3 text-white font-bold hover:bg-purple-900/20 transition">
+                    <i class="fas fa-headset text-purple-400 text-xl"></i> 
+                    <span>HELP CENTER / SUPPORT</span>
+                </button>
+                
+                <button id="logout-btn" class="w-full mt-2 py-3 border border-red-500/30 text-red-400 bg-red-500/5 hover:bg-red-500/10 rounded text-xs font-bold tracking-[3px] uppercase transition">
+                    Logout System
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Dock Navigation (Inside Main App) -->
+    <nav class="dock-nav">
+        <a class="dock-item active" data-section="home"><i class="fas fa-home"></i></a>
+        <a class="dock-item" data-section="tasks"><i class="fas fa-cube"></i></a>
+        <a class="dock-item" data-section="wallet"><i class="fas fa-wallet"></i></a>
+        <a class="dock-item" data-section="refer"><i class="fas fa-users"></i></a>
+        <a class="dock-item" data-section="profile"><i class="fas fa-id-card"></i></a>
+    </nav>
 </div>
 
-<!-- TASK MODAL (FIXED MAX HEIGHT & SCROLL) -->
+<!-- TASK MODAL -->
 <div id="task-modal-overlay" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
-    <!-- Card Container: Max Height 85vh to prevent overflow on mobile -->
     <div class="neon-card w-full max-w-lg bg-[#0a0a15] relative flex flex-col max-h-[85vh]">
-
-        <!-- Close Button (Absolute) -->
         <button id="close-task-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 bg-black/50 rounded-full w-8 h-8 flex items-center justify-center border border-white/10"><i class="fas fa-times"></i></button>
-
-        <!-- Scrollable Content Wrapper -->
         <div class="overflow-y-auto custom-scrollbar p-6">
-            
-            <!-- Title & Reward -->
             <h2 id="modal-task-title" class="text-xl font-bold text-white mb-1 brand-font pr-8">...</h2>
             <p class="text-yellow-400 font-bold mb-4 font-mono"><i class="fas fa-coins"></i> REWARD: <span id="modal-task-reward">0</span></p>
-
-            <!-- Description Box (Distinct Background) -->
             <div class="bg-white/5 p-4 rounded border border-white/5 mb-5">
                 <h4 class="text-xs font-bold text-gray-400 uppercase mb-2 border-b border-white/10 pb-1">Task Instructions</h4>
-                <!-- ✅ Crucial: whitespace-pre-wrap & break-words for long text -->
                 <p id="modal-task-desc" class="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap break-words">...</p>
                 <div id="modal-task-images" class="grid grid-cols-2 gap-2 mt-3"></div>
             </div>
-
-            <!-- Link Button -->
             <a id="modal-task-link" href="#" target="_blank" class="block w-full text-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-3.5 rounded shadow-[0_0_15px_cyan] mb-6 transition transform hover:scale-[1.02]">
                 <i class="fas fa-external-link-alt mr-2"></i> START TASK
             </a>
-
-            <!-- Proof Form -->
             <form id="proof-submission-form" class="border-t border-white/10 pt-5">
                 <h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Submit Proof</h4>
                 <input type="text" id="proof-text" class="w-full bg-black/40 border border-white/10 rounded p-3 text-xs text-white mb-3 outline-none focus:border-cyan-500" placeholder="Your username / Email" required>
@@ -757,24 +729,23 @@
     </div>
 </div>
 
-<!-- SUPPORT MODAL (Fixed Scroll) -->
+<!-- SUPPORT MODAL -->
 <div id="support-modal-overlay" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
     <div class="neon-card w-full max-w-lg bg-[#0a0a15] relative flex flex-col h-[500px]">
         <div class="p-4 border-b border-white/10 flex justify-between items-center bg-purple-900/20">
             <h3 class="text-lg font-bold text-white brand-font"><i class="fas fa-headset mr-2"></i> Live Support</h3>
-            <button id="close-support-modal" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+            <button id="close-support-modal" class="text-gray-400 hover:text-white bg-transparent border-none cursor-pointer"><i class="fas fa-times"></i></button>
         </div>
         <div id="support-messages" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar"></div>
         <form id="support-form" class="p-4 border-t border-white/10 bg-black/40">
             <div class="flex gap-2">
                 <input type="text" id="support-input" class="flex-1 bg-black/50 border border-white/10 rounded p-3 text-sm text-white outline-none focus:border-purple-500" placeholder="Type your problem..." autocomplete="off">
-                <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white px-5 rounded font-bold"><i class="fas fa-paper-plane"></i></button>
+                <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white px-5 rounded font-bold border-none"><i class="fas fa-paper-plane"></i></button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Toast -->
 <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 text-white text-xs font-bold py-3 px-6 rounded-full shadow-lg opacity-0 transition-all duration-300 z-[300] backdrop-blur-md border border-white/10"></div>
 
 <!-- 🧠 MAIN LOGIC -->
@@ -895,6 +866,7 @@
         if (user) {
             currentUser = user;
             document.getElementById("landing-page-wrapper").style.display = "none";
+            document.getElementById("landing-page-wrapper").classList.add("hidden");
             document.getElementById("auth-section").style.display = "none";
             document.getElementById("main-app").classList.remove("hidden");
             
@@ -940,6 +912,7 @@
         } else {
             currentUser = null;
             document.getElementById("main-app").classList.add("hidden");
+            document.getElementById("landing-page-wrapper").classList.remove("hidden");
             document.getElementById("landing-page-wrapper").style.display = "block";
         }
     });
@@ -1388,7 +1361,7 @@
         const input = document.getElementById("convert-amount-input");
         const amount = parseInt(input.value);
         const userCoins = userData.coins || 0;
-        const rate = adminConfig.coinRate || 100;
+        const rate = adminConfig.coinRate || 100; // 100 Coins = 1 Taka
         if(isNaN(amount) || amount <= 0) return showToast("Enter valid coin amount", "error");
         if(amount > userCoins) return showToast("Insufficient Coins!", "error");
         const takaAmount = amount / rate;
