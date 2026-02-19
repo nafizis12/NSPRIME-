@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- SweetAlert2 for Professional Popups -->
+    <!-- SweetAlert2 for Popups -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
@@ -662,8 +662,8 @@
             <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4 md:p-5 mb-6 shadow-sm">
                 <h4 class="text-yellow-800 dark:text-yellow-400 font-bold text-sm mb-2"><i class="fas fa-scroll"></i> Withdrawal Rules & Schedule</h4>
                 <ul class="text-xs md:text-sm text-yellow-700 dark:text-yellow-300 space-y-2 list-disc list-inside font-medium leading-relaxed">
-                    <li><strong>Daily Withdraw:</strong> You can withdraw a maximum of <strong>৳10 once every 24 hours</strong> on normal days.</li>
-                    <li><strong>Main Payments:</strong> Unlimited balances are automatically unlocked and can be fully withdrawn <strong>twice a month (on the 6th and 20th)</strong>.</li>
+                    <li><strong>Daily Withdraw:</strong> On normal days, you can withdraw exactly <strong>৳10 once every 24 hours</strong>.</li>
+                    <li><strong>Main Payments:</strong> Full balances can be withdrawn <strong>twice a month (on the 6th and 20th)</strong>.</li>
                     <li>Ensure your account number is exactly correct. Wrong details will result in payment failure.</li>
                 </ul>
             </div>
@@ -674,7 +674,7 @@
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500"></div>
                     <p class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider">Available Balance</p>
                     <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 mt-3 mb-1 font-mono tracking-tight">৳<span id="wallet-bal">0.00</span></h2>
-                    <p class="text-[10px] md:text-xs text-slate-500 mb-6 bg-slate-50 dark:bg-slate-800 inline-block px-3 py-1 rounded-full border border-slate-100 dark:border-slate-700">Minimum Withdraw: ৳<span id="min-with-display">10</span></p>
+                    <p class="text-[10px] md:text-xs text-slate-500 mb-6 bg-slate-50 dark:bg-slate-800 inline-block px-3 py-1 rounded-full border border-slate-100 dark:border-slate-700">Daily Limit: ৳10 | Payment Days: 6th & 20th</p>
                     
                     <div class="grid grid-cols-3 gap-2 mb-5">
                         <button class="py-2.5 border-2 rounded-lg hover:bg-pink-50 hover:border-pink-500 hover:text-pink-600 font-bold text-xs md:text-sm transition method-btn active bg-slate-100 border-pink-500 text-pink-600 dark:bg-slate-800" data-m="bkash"><i class="fas fa-mobile-alt"></i> bKash</button>
@@ -683,7 +683,7 @@
                     </div>
                     
                     <div class="space-y-3">
-                        <input type="number" id="w-amount" class="input-pro bg-white" placeholder="Enter Amount (৳)">
+                        <input type="number" id="w-amount" class="input-pro bg-white" placeholder="Enter Amount (Max ৳10 on normal days)">
                         <input type="text" id="w-account" class="input-pro bg-white" placeholder="Account / Wallet Number">
                         <button id="btn-withdraw" class="btn-primary w-full shadow-lg shadow-blue-500/20 text-base md:text-lg py-3"><i class="fas fa-paper-plane mr-2"></i> Request Payout</button>
                     </div>
@@ -863,6 +863,7 @@
     const showLoading = (show) => document.getElementById("loading-screen").style.display = show ? "flex" : "none";
     const notify = (title, icon="success") => Swal.fire({ title, icon, toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true });
 
+    // --- DARK MODE LOGIC ---
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -877,6 +878,7 @@
         }
     });
 
+    // --- INITIAL LOAD ---
     window.onload = () => {
         const urlParams = new URLSearchParams(window.location.search);
         if(urlParams.get('ref')) document.getElementById('reg-code').value = urlParams.get('ref');
@@ -889,7 +891,6 @@
             document.getElementById("landing-page").style.display = "none";
             document.getElementById("dashboard-app").classList.remove("hidden");
             
-            // 🔥 CRITICAL FIX: Auto Create User Doc if missing
             const userRef = doc(db, "users", currentUser.uid);
             const userSnap = await getDoc(userRef);
             if (!userSnap.exists()) {
@@ -920,7 +921,6 @@
         onSnapshot(doc(db, "settings", "config"), (snap) => {
             if(snap.exists()) {
                 adminConfig = { ...adminConfig, ...snap.data() };
-                document.getElementById('min-with-display').textContent = adminConfig.minWithdraw || 10;
                 document.getElementById('link-telegram').href = adminConfig.telegramLink || "#";
                 document.getElementById('link-whatsapp').href = adminConfig.whatsappLink || "#";
                 
@@ -942,7 +942,6 @@
                         userData.todayEarning = 0; userData.rawTodayImpressions = 0;
                     }
                     
-                    // Fixed: Force create referral code if missing
                     if(!userData.referralCode) {
                         const newCode = "USR" + Math.floor(1000+Math.random()*9000);
                         await updateDoc(doc(db, "users", currentUser.uid), { referralCode: newCode });
@@ -1122,7 +1121,6 @@
         finally { btn.innerHTML = originalText; btn.disabled = false; }
     };
 
-    // 🔥 FIXED: Task History Sort Safe Check Error Fix
     window.loadTaskHistory = async () => {
         if(!currentUser) return;
         const tbody = document.getElementById('task-history-list');
@@ -1131,7 +1129,6 @@
             const snap = await getDocs(query(collection(db, "task_submissions"), where("userId", "==", currentUser.uid), limit(20)));
             let records = []; snap.forEach(d => records.push(d.data()));
             
-            // Crash safe sort
             records.sort((a, b) => {
                 const timeA = (a.timestamp && a.timestamp.toMillis) ? a.timestamp.toMillis() : 0;
                 const timeB = (b.timestamp && b.timestamp.toMillis) ? b.timestamp.toMillis() : 0;
@@ -1155,6 +1152,7 @@
         } catch(err) { tbody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-red-400">Error loading history.</td></tr>'; }
     };
 
+    // 🔥 FIXED: Daily Maximum 10 Withdraw Logic
     document.querySelectorAll('.method-btn').forEach(btn => {
         btn.onclick = () => {
             document.querySelectorAll('.method-btn').forEach(b => { b.classList.remove('bg-slate-100', 'border-pink-500', 'text-pink-600', 'border-orange-500', 'text-orange-600', 'border-green-500', 'text-green-600'); b.classList.add('border-2'); });
@@ -1169,20 +1167,39 @@
     document.getElementById('btn-withdraw').onclick = async () => {
         const amt = parseFloat(document.getElementById('w-amount').value);
         const acc = document.getElementById('w-account').value;
-        const minW = adminConfig.minWithdraw || 10;
+        const currentBal = parseFloat(userData.balance || 0);
         
-        if(!amt || amt < minW) return notify(`Minimum Withdraw is ৳${minW}`, 'warning');
-        if(parseFloat(userData.balance || 0) < amt) return notify('Insufficient Balance', 'error');
+        if(!amt || isNaN(amt)) return notify('Enter a valid amount', 'warning');
         if(!acc) return notify('Enter Account Number', 'warning');
+        if(currentBal < amt) return notify('Insufficient Balance', 'error');
         
+        // --- 6th and 20th Strict Logic ---
         const todayDate = new Date().getDate();
-        if(todayDate !== 6 && todayDate !== 20 && amt > 10) {
-            return Swal.fire('Limit Exceeded', 'You can only request maximum ৳10 on regular days. Withdraw full balance on the 6th and 20th.', 'warning');
+        const isPaymentDay = (todayDate === 6 || todayDate === 20);
+
+        if (!isPaymentDay) {
+            // On normal days, strictly ONLY 10 Taka is allowed.
+            if (amt !== 10) {
+                return Swal.fire('Daily Limit', 'On regular days, you can only withdraw exactly ৳10. Full balance withdrawals are only available on the 6th and 20th.', 'warning');
+            }
+        } else {
+            // On 6th or 20th, minimum is 10.
+            if (amt < 10) {
+                return notify('Minimum withdraw is ৳10', 'warning');
+            }
         }
 
+        // --- 24 Hour Cooldown Strict Logic ---
         if(userData.lastWithdrawTime && userData.lastWithdrawTime.toDate) {
-            const diffHours = (new Date().getTime() - userData.lastWithdrawTime.toDate().getTime()) / (1000 * 60 * 60);
-            if(diffHours < 24) return Swal.fire('Please Wait', 'You can only submit one withdrawal request every 24 hours.', 'error');
+            const lastTime = userData.lastWithdrawTime.toDate().getTime();
+            const now = new Date().getTime();
+            const diffHours = (now - lastTime) / (1000 * 60 * 60);
+            
+            // Allow withdrawal after 23.5 hours to avoid minor delays
+            if(diffHours < 23.5) {
+                const remainingHours = Math.ceil(24 - diffHours);
+                return Swal.fire('Please Wait', `You have already withdrawn today. Try again in ${remainingHours} hours.`, 'error');
+            }
         }
         
         const btn = document.getElementById('btn-withdraw');
@@ -1193,7 +1210,7 @@
             batch.set(doc(collection(db, "withdrawal_requests")), { userId: currentUser.uid, userName: userData.name, amount: amt, method: withdrawMethod, accountNumber: acc, status: "pending", timestamp: Timestamp.now() });
             batch.update(doc(db, "users", currentUser.uid), { balance: increment(-amt), lastWithdrawTime: Timestamp.now() });
             await batch.commit();
-            Swal.fire('Success!', 'Withdraw request sent successfully.', 'success');
+            Swal.fire('Success!', 'Withdraw request sent successfully. Wait for admin approval.', 'success');
             document.getElementById('w-amount').value = '';
             window.loadWalletHistory();
         } catch(e) { notify('Error processing request', 'error'); } 
