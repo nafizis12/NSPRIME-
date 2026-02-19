@@ -1,805 +1,844 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="monetag" content="649f4dd938faf1e37ed19a3d1fccc2e5">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NS PRIME - Advanced Ad Network</title>
+    <title>NS PRIME - Premium Ad Network & Monetization Platform</title>
+    
     <!-- ✅ Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 for Professional Popups -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         tailwind.config = {
+            darkMode: 'class', 
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb', // Professional Blue
-                        secondary: '#475569', // Slate
-                        background: '#f8fafc', // Very light grey
-                        card: '#ffffff',
+                        primary: '#2563eb', 
+                        primaryDark: '#1e40af',
+                        secondary: '#f8fafc', 
+                        dark: '#0f172a',
+                        success: '#10b981',
+                        warning: '#f59e0b',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        heading: ['Outfit', 'sans-serif'],
+                        heading: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'card': '0 0 0 1px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.04)',
                     }
                 }
             }
         }
     </script>
+
     <style>
-        /* 🌌 GLOBAL STYLES */
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        /* 🏢 CORPORATE THEME STYLES */
         body { 
-            background-color: #f1f5f9; 
-            color: #1e293b; 
+            background-color: #f8fafc; 
+            color: #334155; 
             font-family: 'Inter', sans-serif;
             overflow-x: hidden; 
-            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
         
-        h1, h2, h3, .brand-font { font-family: 'Outfit', sans-serif; font-weight: 700; }
+        h1, h2, h3, h4, .brand-font { font-family: 'Manrope', sans-serif; }
 
-        /* 🌌 3D BACKGROUND CANVAS */
-        #canvas-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            opacity: 0.6;
-        }
-
-        /* 🧊 PRO CARD STYLE */
-        .pro-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+        /* 🧊 MODERN CARDS */
+        .ad-card {
+            background: #ffffff;
             border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, border-color 0.3s;
         }
-
-        .pro-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
-        }
-
-        /* VIP CARD */
-        .pro-card.vip-card {
-            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
-            border: 1px solid #fbbf24;
-        }
-        .vip-badge {
-            position: absolute; top: 0; right: 0;
-            background: #fbbf24; color: black;
-            font-size: 10px; font-weight: bold;
-            padding: 2px 8px; border-bottom-left-radius: 8px;
-            z-index: 10;
+        .ad-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border-color: #cbd5e1;
         }
 
         /* ✨ BUTTONS */
         .btn-primary {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white; font-weight: 600;
-            padding: 12px 30px; border-radius: 10px; border: none;
-            transition: 0.3s; letter-spacing: 0.5px;
-            cursor: pointer; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4); }
-
-        .btn-outline {
-            background: transparent; border: 2px solid #2563eb; color: #2563eb;
-            padding: 10px 25px; border-radius: 10px; font-weight: 600;
-            transition: 0.3s; cursor: pointer;
-        }
-        .btn-outline:hover { background: #eff6ff; }
-
-        /* 📱 BOTTOM DOCK */
-        .dock-nav {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: white; 
-            border: 1px solid #e2e8f0; border-radius: 24px;
-            padding: 12px 30px; display: flex; gap: 25px; z-index: 100;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: auto; min-width: 320px; justify-content: space-between;
-        }
-        .dock-item {
-            color: #94a3b8; font-size: 20px; transition: 0.3s; position: relative;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: #2563eb; color: white;
+            padding: 12px 28px; border-radius: 8px;
+            font-weight: 600; transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
             cursor: pointer;
         }
-        .dock-item.active { color: #2563eb; transform: translateY(-5px); }
-        .dock-item.active::after { content: ''; position: absolute; bottom: -8px; width: 6px; height: 6px; background: #2563eb; border-radius: 50%; }
+        .btn-primary:hover { background: #1d4ed8; box-shadow: 0 8px 12px -1px rgba(37, 99, 235, 0.3); }
+        
+        .btn-outline {
+            background: white; border: 1px solid #e2e8f0; color: #475569;
+            padding: 12px 28px; border-radius: 8px; font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .btn-outline:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
 
-        /* 🌀 UTILS */
-        .text-gradient { background: linear-gradient(to right, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #loading-screen { position: fixed; inset: 0; z-index: 9999; background: #ffffff; display: flex; justify-content: center; align-items: center; }
-        .spinner { width: 50px; height: 50px; border: 4px solid #e2e8f0; border-top-color: #2563eb; border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        /* 📱 DASHBOARD NAV */
+        .sidebar {
+            width: 260px; height: 100vh; position: fixed; left: 0; top: 0;
+            background: white; border-right: 1px solid #e2e8f0; z-index: 50;
+            display: none; flex-direction: column;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .sidebar-link {
+            padding: 14px 24px; color: #64748b; font-weight: 500; display: flex; align-items: center; gap: 12px;
+            transition: 0.2s; border-right: 3px solid transparent; cursor: pointer;
+        }
+        .sidebar-link:hover { background: #f8fafc; color: #2563eb; }
+        .sidebar-link.active { background: #eff6ff; color: #2563eb; border-right-color: #2563eb; }
+
+        .mobile-dock {
+            position: fixed; bottom: 0; left: 0; width: 100%; background: white;
+            border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around;
+            padding: 10px 0; z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+            transition: background-color 0.3s, border-color 0.3s;
+            padding-bottom: env(safe-area-inset-bottom, 10px);
+        }
+        .dock-btn { font-size: 20px; color: #94a3b8; padding: 10px 15px; border-radius: 8px; transition: 0.2s; cursor: pointer; }
+        .dock-btn.active { color: #2563eb; background: #eff6ff; }
         
-        ::-webkit-scrollbar { width: 5px; } 
-        ::-webkit-scrollbar-track { background: #f1f5f9; } 
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
-        
-        /* Chat Bubble */
-        .chat-bubble { max-width: 80%; padding: 12px; border-radius: 12px; margin-bottom: 8px; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .chat-user { background: #2563eb; color: white; margin-left: auto; text-align: right; border-bottom-right-radius: 2px; }
-        .chat-admin { background: #f1f5f9; color: #334155; margin-right: auto; text-align: left; border-bottom-left-radius: 2px; }
+        @media (min-width: 768px) {
+            .sidebar { display: flex; }
+            .mobile-dock { display: none; }
+            #main-content { margin-left: 260px; padding: 32px; }
+            #landing-hero { padding-top: 120px; }
+        }
+        @media (max-width: 767px) {
+            #main-content { padding: 16px; padding-bottom: 100px; }
+            #landing-hero { padding-top: 100px; }
+        }
+
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #2563eb; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         /* Ticker */
-        .ticker-wrap { width: 100%; overflow: hidden; height: 34px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; }
-        .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; box-sizing: content-box; animation: ticker 25s linear infinite; line-height: 34px; }
-        .ticker-item { display: inline-block; padding: 0 20px; font-size: 12px; font-weight: 600; color: #64748b; }
-        .ticker-item span { color: #10b981; }
-        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+        .ticker-container { background: #1e293b; color: white; overflow: hidden; height: 30px; line-height: 30px; font-size: 12px; font-weight: 600; border-radius: 6px; }
+        .ticker-move { display: inline-block; white-space: nowrap; animation: ticker 25s linear infinite; }
+        .ticker-item { margin-right: 40px; display: inline-block; }
+        .ticker-item span { color: #4ade80; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        .fade-up { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .input-pro { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; outline: none; transition: 0.2s; font-size: 14px; background: #f8fafc; }
+        .input-pro:focus { border-color: #2563eb; background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        
+        .fade-in { animation: fadeIn 0.4s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .slide-up { animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+        /* 🌙 DARK MODE OVERRIDES */
+        html.dark body { background-color: #0f172a; color: #f1f5f9; }
+        html.dark .bg-white, html.dark #landing-page { background-color: #1e293b !important; }
+        html.dark .bg-slate-50, html.dark #dashboard-app { background-color: #0f172a !important; }
+        html.dark .ad-card { background-color: #1e293b; border-color: #334155; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3); }
+        html.dark .ad-card:hover { border-color: #475569; }
+        html.dark .text-slate-800, html.dark .text-slate-900, html.dark .text-slate-700 { color: #f8fafc !important; }
+        html.dark .text-slate-500, html.dark .text-slate-600 { color: #94a3b8 !important; }
+        html.dark .border-slate-100, html.dark .border-slate-200 { border-color: #334155 !important; }
+        html.dark .sidebar, html.dark .mobile-dock { background-color: #1e293b; border-color: #334155; }
+        html.dark .sidebar-link:hover { background: #0f172a; }
+        html.dark .sidebar-link.active { background: #1e40af; color: #ffffff; border-right-color: #60a5fa; }
+        html.dark .dock-btn.active { background: #1e40af; color: #ffffff; }
+        html.dark .input-pro { background-color: #0f172a; border-color: #334155; color: #f8fafc; }
+        html.dark .input-pro:focus { border-color: #3b82f6; background-color: #1e293b; }
+        html.dark nav { background-color: rgba(30, 41, 59, 0.9) !important; border-color: #334155 !important; }
+        html.dark .bg-blue-50 { background-color: rgba(37, 99, 235, 0.15) !important; border-color: transparent !important; }
+        html.dark .text-blue-600 { color: #60a5fa !important; }
+        html.dark .bg-slate-100 { background-color: #334155 !important; }
+        html.dark .ticker-container { background-color: #1e293b; border-color: #334155; }
+        html.dark #auth-modal .ad-card, html.dark #task-submit-modal .bg-white { background-color: #1e293b; }
+        html.dark .shadow-sm { box-shadow: none !important; }
+        html.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) { border-color: #334155 !important; }
+        html.dark table thead { border-bottom-color: #334155 !important; }
+        html.dark tr.border-b { border-bottom-color: #334155 !important; }
+        html.dark tr:hover { background-color: #0f172a !important; }
     </style>
 </head>
-<body class="antialiased text-slate-800">
+<body class="antialiased">
 
-<!-- 🌌 BACKGROUND -->
-<div id="canvas-container"></div>
-<!-- 🌀 LOADER -->
-<div id="loading-screen"><div class="spinner"></div></div>
+<!-- Loading Screen -->
+<div id="loading-screen" class="fixed inset-0 bg-white z-[9999] flex items-center justify-center transition-colors duration-300">
+    <div class="flex flex-col items-center">
+        <div class="w-12 h-12 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin"></div>
+        <p class="mt-4 text-slate-500 text-sm font-bold tracking-widest">LOADING NS PRIME</p>
+    </div>
+</div>
 
-<!-- ==================== LANDING PAGE (FULL INFO RESTORED) ==================== -->
-<div id="landing-page-wrapper" class="relative z-10 hidden">
+<!-- ==================== LANDING PAGE (FULL INFO) ==================== -->
+<div id="landing-page" class="relative z-10 hidden bg-white">
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 transition-all">
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/30">N</div>
-                <span class="text-xl font-bold tracking-tight text-slate-800 brand-font">NS <span class="text-blue-600">PRIME</span></span>
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">N</div>
+                <span class="text-xl font-bold text-slate-800 brand-font tracking-tight">NS <span class="text-blue-600">PRIME</span></span>
             </div>
-            <div class="hidden md:flex gap-8 text-sm font-semibold text-slate-500">
+            <div class="hidden md:flex gap-8 text-sm font-semibold text-slate-600">
                 <a href="#hero" class="hover:text-blue-600 transition">Home</a>
-                <a href="#how-it-works" class="hover:text-blue-600 transition">How it Works</a>
-                <a href="#calculator" class="hover:text-blue-600 transition">Calculator</a>
-                <a href="#payouts" class="hover:text-blue-600 transition">Payouts</a>
+                <a href="#publishers" class="hover:text-blue-600 transition">Monetization</a>
+                <a href="#advertisers" class="hover:text-blue-600 transition">Advertisers</a>
+                <a href="#stats" class="hover:text-blue-600 transition">Our Network</a>
             </div>
-            <div class="flex gap-4">
-                <button class="text-slate-600 hover:text-blue-600 font-bold text-sm nav-auth-btn cursor-pointer" data-auth="login">LOGIN</button>
-                <button class="btn-primary text-xs nav-auth-btn cursor-pointer shadow-none py-2" data-auth="register">GET STARTED</button>
+            <div class="flex gap-3">
+                <button class="text-slate-600 font-bold text-sm hover:text-blue-600 px-4 nav-auth-btn transition" data-auth="login">Login</button>
+                <button class="btn-primary text-sm nav-auth-btn" data-auth="register">Sign Up</button>
             </div>
         </div>
     </nav>
     
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center pt-24 pb-12 px-6 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div class="text-left fade-up">
-                <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-blue-200 bg-blue-50 rounded-full text-blue-600 text-xs font-bold tracking-wider uppercase">
-                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span> Advanced Ad Network
+    <section id="hero" class="relative pt-32 pb-20 px-6 overflow-hidden bg-slate-50">
+        <div class="absolute inset-0 z-0 opacity-30" style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 24px 24px;"></div>
+        
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="text-left">
+                <div class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wide mb-6 shadow-sm">
+                    🚀 #1 Ad Network for Publishers
                 </div>
-                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-slate-900 brand-font">
-                    Monetize Your <br><span class="text-gradient">Digital Traffic</span>
+                <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6 brand-font">
+                    Maximize Your Revenue With <span class="text-blue-600">Smart Ads</span>
                 </h1>
-                <p class="text-lg text-slate-500 mb-8 leading-relaxed max-w-lg">
-                    NS PRIME is your ultimate earning partner. Complete high paying VIP tasks, share smart links, and build your team.
+                <p class="text-lg text-slate-500 mb-8 leading-relaxed">
+                    NS PRIME connects premium advertisers with high-quality traffic. Monetize your audience with Smart Links, Tasks, and Direct Offers. Highest CPM guaranteed.
                 </p>
-                <div class="flex flex-wrap gap-5">
-                    <button class="btn-primary nav-auth-btn" data-auth="register">Start Earning</button>
-                    <a href="#how-it-works" class="px-6 py-3 rounded-lg border-2 border-slate-200 hover:bg-slate-50 text-slate-600 font-bold transition flex items-center gap-3">
-                        <i class="fas fa-info-circle text-blue-500"></i> LEARN MORE
-                    </a>
+                <div class="flex flex-wrap gap-4">
+                    <button class="btn-primary nav-auth-btn" data-auth="register">Start Monetizing</button>
+                    <a href="#advertisers" class="btn-outline">I Want to Advertise</a>
+                </div>
+                <div class="mt-8 flex items-center gap-6 text-sm font-bold text-slate-400 grayscale opacity-70">
+                    <span class="hover:grayscale-0 hover:text-blue-500 transition cursor-pointer"><i class="fab fa-google fa-lg mr-1"></i> Partner</span>
+                    <span class="hover:grayscale-0 hover:text-blue-500 transition cursor-pointer"><i class="fab fa-meta fa-lg mr-1"></i> Ads</span>
+                    <span class="hover:grayscale-0 hover:text-green-500 transition cursor-pointer"><i class="fas fa-shield-alt fa-lg mr-1"></i> Secure</span>
                 </div>
             </div>
-
-            <!-- 3D Card Info -->
-            <div class="relative hidden md:block fade-up" data-tilt>
-                <div class="pro-card p-8 border-t-4 border-t-blue-500 transform rotate-y-12 bg-white">
-                    <div class="flex justify-between items-start mb-6">
-                        <div>
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Active Users</p>
-                            <h2 class="text-4xl font-bold text-slate-800 brand-font">15,402</h2>
-                        </div>
-                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                            <i class="fas fa-users text-green-600 text-xl"></i>
+            
+            <div class="relative hidden md:block">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[20px] blur opacity-20"></div>
+                <div class="ad-card p-6 bg-white rotate-3 hover:rotate-0 transition duration-500 relative">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-slate-700">Live Performance</h3>
+                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs font-bold animate-pulse">● LIVE</span>
+                    </div>
+                    <div class="flex items-end gap-2 h-40 mb-4 px-2">
+                        <div class="w-1/6 bg-blue-100 rounded-t h-[40%] hover:bg-blue-200 transition"></div>
+                        <div class="w-1/6 bg-blue-200 rounded-t h-[60%] hover:bg-blue-300 transition"></div>
+                        <div class="w-1/6 bg-blue-300 rounded-t h-[50%] hover:bg-blue-400 transition"></div>
+                        <div class="w-1/6 bg-blue-400 rounded-t h-[80%] hover:bg-blue-500 transition"></div>
+                        <div class="w-1/6 bg-blue-500 rounded-t h-[70%] hover:bg-blue-600 transition"></div>
+                        <div class="w-1/6 bg-blue-600 rounded-t h-[95%] relative group cursor-pointer">
+                            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">৳1250 Today</div>
                         </div>
                     </div>
-                    <div class="border-t border-slate-100 pt-4">
-                        <div class="flex justify-between text-sm text-slate-500 mb-1">
-                            <span>Total Payouts</span>
-                            <span class="text-slate-800 font-bold">৳2,500,000+</span>
-                        </div>
+                    <div class="grid grid-cols-3 gap-4 border-t pt-4 border-slate-100">
+                        <div class="text-center"><p class="text-xs text-slate-400 uppercase font-bold">Impressions</p><p class="text-lg font-bold text-slate-800">142K</p></div>
+                        <div class="text-center"><p class="text-xs text-slate-400 uppercase font-bold">eCPM</p><p class="text-lg font-bold text-blue-600">$4.50</p></div>
+                        <div class="text-center"><p class="text-xs text-slate-400 uppercase font-bold">Revenue</p><p class="text-lg font-bold text-green-600">$640</p></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works & Info -->
-    <section id="how-it-works" class="py-20 px-6 bg-white">
+    <!-- Publisher Section -->
+    <section id="publishers" class="py-20 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 text-slate-800 brand-font">SYSTEM FEATURES</h2>
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="pro-card p-6 text-center hover:bg-slate-50 fade-up bg-white">
-                    <i class="fas fa-crown text-3xl text-yellow-500 mb-4"></i>
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">VIP Tasks</h3>
-                    <p class="text-slate-500 text-xs">High paying tasks marked as VIP. Earn more with less effort.</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 brand-font mb-4">For Publishers</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">We provide the best tools to monetize your traffic efficiently with industry-leading rates.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="ad-card p-8 text-center hover:border-blue-500 transition group cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-600 text-2xl group-hover:bg-blue-600 group-hover:text-white transition"><i class="fas fa-link"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Smart Links</h3>
+                    <p class="text-slate-500 text-sm">One link, global monetization. Our AI automatically shows the highest paying offer to your visitor based on Geo and OS.</p>
                 </div>
-                <div class="pro-card p-6 text-center hover:bg-slate-50 fade-up bg-white">
-                    <i class="fas fa-link text-3xl text-purple-500 mb-4"></i>
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Smart Links</h3>
-                    <p class="text-slate-500 text-xs">Share viral content. Get paid for every valid unique click.</p>
+                <div class="ad-card p-8 text-center hover:border-purple-500 transition group cursor-pointer">
+                    <div class="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-6 text-purple-600 text-2xl group-hover:bg-purple-600 group-hover:text-white transition"><i class="fas fa-tasks"></i></div>
+                    <h3 class="text-xl font-bold mb-3">CPA Tasks</h3>
+                    <p class="text-slate-500 text-sm">Complete simple tasks (App install, Signups, Surveys) and earn instant rewards in your wallet. 100% Fill Rate.</p>
                 </div>
-                <div class="pro-card p-6 text-center hover:bg-slate-50 fade-up bg-white">
-                    <i class="fas fa-users text-3xl text-green-500 mb-4"></i>
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Refer System</h3>
-                    <p class="text-slate-500 text-xs">Invite friends. Earn commission on their earnings for lifetime.</p>
-                </div>
-                <div class="pro-card p-6 text-center hover:bg-slate-50 fade-up bg-white">
-                    <i class="fas fa-bolt text-3xl text-blue-500 mb-4"></i>
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Fast Payout</h3>
-                    <p class="text-slate-500 text-xs">Get your payments via bKash, Nagad or USDT quickly.</p>
+                <div class="ad-card p-8 text-center hover:border-green-500 transition group cursor-pointer">
+                    <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600 text-2xl group-hover:bg-green-600 group-hover:text-white transition"><i class="fas fa-wallet"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Fast Payouts</h3>
+                    <p class="text-slate-500 text-sm">Withdraw your earnings daily via bKash, Nagad, or Crypto (USDT). Minimum threshold is only ৳10.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Earnings Calculator (Restored with Light Theme) -->
-    <section id="calculator" class="py-20 px-6 bg-slate-50 border-t border-slate-200">
+    <!-- Global Reach / Stats Section -->
+    <section id="stats" class="py-16 bg-blue-600 text-white px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <h3 class="text-4xl font-extrabold mb-2 brand-font">50K+</h3>
+                <p class="text-blue-200 text-sm uppercase tracking-wide font-bold">Active Publishers</p>
+            </div>
+            <div>
+                <h3 class="text-4xl font-extrabold mb-2 brand-font">10M+</h3>
+                <p class="text-blue-200 text-sm uppercase tracking-wide font-bold">Daily Impressions</p>
+            </div>
+            <div>
+                <h3 class="text-4xl font-extrabold mb-2 brand-font">200+</h3>
+                <p class="text-blue-200 text-sm uppercase tracking-wide font-bold">Premium Advertisers</p>
+            </div>
+            <div>
+                <h3 class="text-4xl font-extrabold mb-2 brand-font">24/7</h3>
+                <p class="text-blue-200 text-sm uppercase tracking-wide font-bold">Dedicated Support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advertiser Section -->
+    <section id="advertisers" class="py-20 px-6 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-purple-600 rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+        
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
+            <div>
+                <div class="inline-block px-4 py-1.5 bg-white/10 text-blue-400 rounded-full text-xs font-bold uppercase tracking-wide mb-6 border border-white/10">
+                    🎯 For Brands & Agencies
+                </div>
+                <h2 class="text-3xl font-bold brand-font mb-6">Grow Your Business With Targeted Ads</h2>
+                <p class="text-slate-400 mb-8 text-lg leading-relaxed">
+                    Access millions of high-quality impressions daily. Drive real conversions, installs, and sales with our advanced anti-fraud protected traffic.
+                </p>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-center gap-3 text-slate-300"><i class="fas fa-check-circle text-blue-500"></i> Advanced Targeting (Geo, OS, Browser)</li>
+                    <li class="flex items-center gap-3 text-slate-300"><i class="fas fa-check-circle text-blue-500"></i> Strict Anti-Fraud & Bot Protection</li>
+                    <li class="flex items-center gap-3 text-slate-300"><i class="fas fa-check-circle text-blue-500"></i> CPA, CPC, & CPM Pricing Models</li>
+                </ul>
+                <button id="advertiser-whatsapp-btn" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-bold flex items-center justify-center w-full md:w-auto gap-3 transition shadow-lg shadow-green-500/30">
+                    <i class="fab fa-whatsapp text-2xl"></i> Contact Sales on WhatsApp
+                </button>
+            </div>
+            <div class="ad-card bg-white/5 border-white/10 p-8 backdrop-blur-md">
+                <h3 class="font-bold text-xl mb-6 text-white">Available Ad Formats</h3>
+                <div class="space-y-4">
+                    <div class="p-4 bg-white/5 rounded-lg border border-white/10 flex items-center gap-4 hover:bg-white/10 transition">
+                        <div class="w-12 h-10 bg-blue-500/20 rounded flex items-center justify-center text-blue-400"><i class="fas fa-image"></i></div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Banner Ads</h4>
+                            <p class="text-xs text-slate-400">High visibility display advertising</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white/5 rounded-lg border border-white/10 flex items-center gap-4 hover:bg-white/10 transition">
+                        <div class="w-12 h-10 bg-purple-500/20 rounded flex items-center justify-center text-purple-400"><i class="fas fa-window-restore"></i></div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Popunders</h4>
+                            <p class="text-xs text-slate-400">Full page landing ads with high ROI</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white/5 rounded-lg border border-white/10 flex items-center gap-4 hover:bg-white/10 transition">
+                        <div class="w-12 h-10 bg-green-500/20 rounded flex items-center justify-center text-green-400"><i class="fas fa-external-link-alt"></i></div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Direct Link</h4>
+                            <p class="text-xs text-slate-400">Direct traffic monetization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods -->
+    <section id="payouts" class="py-16 bg-white border-t border-slate-100">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-10 text-slate-800 brand-font">EARNINGS CALCULATOR</h2>
-            <div class="pro-card p-8 text-left bg-white">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-6">
-                        <div>
-                            <label class="text-slate-400 text-xs font-bold uppercase">Daily Tasks Completed</label>
-                            <input type="range" min="0" max="20" value="5" class="w-full mt-2 accent-blue-600 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="updateCalc()" id="calc-tasks">
-                            <p class="text-right text-blue-600 font-bold" id="calc-tasks-val">5</p>
-                        </div>
-                        <div>
-                            <label class="text-slate-400 text-xs font-bold uppercase">Active Referrals</label>
-                            <input type="range" min="0" max="100" value="10" class="w-full mt-2 accent-purple-600 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="updateCalc()" id="calc-ref">
-                            <p class="text-right text-purple-600 font-bold" id="calc-ref-val">10</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col justify-center items-center bg-slate-50 rounded p-6 border border-slate-200">
-                        <p class="text-slate-500 text-sm font-bold uppercase">Estimated Monthly Earning</p>
-                        <h3 class="text-5xl font-bold text-slate-800 brand-font mt-2">৳<span id="calc-total">3500</span></h3>
-                        <p class="text-xs text-slate-400 mt-2 italic">*Estimations vary based on rates.</p>
-                    </div>
-                </div>
+            <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-8">Trusted Payment Partners</p>
+            <div class="flex flex-wrap justify-center gap-10 opacity-70 grayscale hover:grayscale-0 transition duration-500">
+                <div class="flex items-center gap-2 font-bold text-slate-700 text-lg"><i class="fas fa-mobile-alt text-pink-600 text-3xl"></i> bKash</div>
+                <div class="flex items-center gap-2 font-bold text-slate-700 text-lg"><i class="fas fa-mobile-alt text-orange-600 text-3xl"></i> Nagad</div>
+                <div class="flex items-center gap-2 font-bold text-slate-700 text-lg"><i class="fab fa-bitcoin text-yellow-500 text-3xl"></i> Crypto (USDT)</div>
+                <div class="flex items-center gap-2 font-bold text-slate-700 text-lg"><i class="fas fa-university text-blue-800 text-3xl"></i> Bank Transfer</div>
             </div>
         </div>
     </section>
 
-    <!-- Payout Info (Restored with Light Theme) -->
-    <section id="payouts" class="py-20 px-6 bg-white">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12 text-slate-800 brand-font">PAYMENT DETAILS</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Milestones -->
-                <div class="pro-card p-6 bg-slate-50">
-                    <h3 class="text-xl font-bold text-yellow-600 mb-4"><i class="fas fa-trophy mr-2"></i> Milestones</h3>
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li class="flex justify-between border-b border-slate-200 pb-2">
-                            <span>Silver Member (50 Team)</span>
-                            <span class="font-bold text-slate-800">৳5,000 Bonus</span>
-                        </li>
-                        <li class="flex justify-between border-b border-slate-200 pb-2">
-                            <span>Gold Member (100 Team)</span>
-                            <span class="font-bold text-slate-800">৳10,000 Bonus</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Diamond Member (500 Team)</span>
-                            <span class="font-bold text-slate-800">৳50,000 Bonus</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Withdrawal Info -->
-                <div class="pro-card p-6 bg-slate-50">
-                    <h3 class="text-xl font-bold text-green-600 mb-4"><i class="fas fa-wallet mr-2"></i> Withdrawal Policy</h3>
-                    <div class="space-y-4 text-sm text-slate-600">
-                        <p><strong class="text-slate-800">Minimum Withdraw:</strong> ৳500 (bKash/Nagad) / $5 (USDT)</p>
-                        <p><strong class="text-slate-800">Payment Cycle:</strong> Daily (Small amounts) & Weekly (Large amounts).</p>
-                        <p><strong class="text-slate-800">Methods:</strong> bKash, Nagad, Rocket, USDT (TRC20).</p>
-                        <div class="flex gap-4 mt-4 opacity-80">
-                            <img src="https://freelogopng.com/images/all_img/1656234745bkash-app-logo-png.png" class="h-8">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Nagad_Logo_2019.svg/1200px-Nagad_Logo_2019.svg.png" class="h-8 bg-white p-1 rounded border">
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <footer class="bg-slate-50 py-10 border-t border-slate-200 text-center text-slate-400 text-sm">
+        <div class="font-bold text-lg text-slate-700 brand-font mb-4">NS <span class="text-blue-600">PRIME</span></div>
+        <p>&copy; 2026 NS PRIME AD NETWORK. ALL RIGHTS RESERVED.</p>
+        <div class="flex justify-center gap-6 mt-4 font-medium">
+            <a href="#" class="hover:text-blue-600 transition">Privacy Policy</a>
+            <a href="#" class="hover:text-blue-600 transition">Terms of Service</a>
+            <a href="#" class="hover:text-blue-600 transition">Contact Support</a>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-6 text-center border-t border-slate-200 bg-white text-slate-400 text-xs">
-        &copy; 2025 NS PRIME NETWORK. ALL RIGHTS RESERVED.
     </footer>
 </div>
 
-<!-- ==================== AUTH SECTION ==================== -->
-<div id="auth-section" class="fixed inset-0 z-[200] hidden flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
-    <div class="pro-card w-full max-w-sm p-8 relative bg-white shadow-2xl">
-        <button id="close-auth" class="absolute top-4 right-4 text-slate-400 hover:text-red-500"><i class="fas fa-times"></i></button>
-        <!-- Login -->
-        <div id="login-form">
-            <h2 class="text-2xl font-bold mb-2 text-center text-slate-800 brand-font">Welcome Back</h2>
-            <p class="text-center text-slate-500 text-xs mb-8">Enter your credentials to access dashboard</p>
-            <form id="login-form-element" class="space-y-5">
-                <div><label class="text-xs text-slate-500 font-bold block mb-2">Email</label><input type="email" id="login-email" class="w-full bg-slate-50 border border-slate-200 rounded p-3 text-slate-800 focus:border-blue-500 outline-none transition" required></div>
-                <div><label class="text-xs text-slate-500 font-bold block mb-2">Password</label><input type="password" id="login-password" class="w-full bg-slate-50 border border-slate-200 rounded p-3 text-slate-800 focus:border-blue-500 outline-none transition" required></div>
-                <button type="submit" class="btn-primary w-full mt-2">Sign In</button>
-            </form>
-            <p class="text-center text-slate-500 text-sm mt-6">New User? <a href="#" id="show-register" class="text-blue-600 font-bold hover:underline">Register</a></p>
-        </div>
-        <!-- Register -->
-        <div id="register-form" class="hidden">
-            <h2 class="text-2xl font-bold mb-6 text-center text-slate-800 brand-font">Join NS PRIME</h2>
-            <form id="register-form-element" class="space-y-3">
-                <div class="grid grid-cols-2 gap-3">
-                    <div><label class="text-xs text-slate-500 block mb-1">Name</label><input type="text" id="register-name" class="w-full bg-slate-50 border border-slate-200 rounded p-2 text-slate-800 outline-none focus:border-blue-500" required></div>
-                    <div><label class="text-xs text-slate-500 block mb-1">Phone</label><input type="tel" id="register-phone" class="w-full bg-slate-50 border border-slate-200 rounded p-2 text-slate-800 outline-none focus:border-blue-500" required></div>
+<!-- ==================== AUTH MODAL ==================== -->
+<div id="auth-modal" class="fixed inset-0 z-[200] hidden flex-col justify-end md:justify-center items-center bg-slate-900/60 backdrop-blur-sm p-0 md:p-4 transition-all">
+    <div class="bg-white w-full max-w-md rounded-t-3xl md:rounded-2xl relative p-8 fade-in shadow-2xl slide-up dark:bg-slate-800">
+        <div class="w-12 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full mx-auto mb-6 md:hidden"></div>
+        <button id="close-auth" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:text-red-500 transition"><i class="fas fa-times"></i></button>
+        
+        <div id="login-box">
+            <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2">Welcome Back</h2>
+            <p class="text-slate-500 text-sm mb-6">Login to your Publisher Dashboard</p>
+            <form id="form-login" class="space-y-4">
+                <div>
+                    <label class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Email Address</label>
+                    <input type="email" id="login-email" class="input-pro mt-1" placeholder="you@example.com" required>
                 </div>
-                <div><label class="text-xs text-slate-500 block mb-1">Email</label><input type="email" id="register-email" class="w-full bg-slate-50 border border-slate-200 rounded p-2 text-slate-800 outline-none focus:border-blue-500" required></div>
-                <div><label class="text-xs text-slate-500 block mb-1">Password</label><input type="password" id="register-password" class="w-full bg-slate-50 border border-slate-200 rounded p-2 text-slate-800 outline-none focus:border-blue-500" required></div>
-                <div><label class="text-xs text-slate-500 block mb-1">Refer Code</label><input type="text" id="register-join-code" class="w-full bg-slate-50 border border-slate-200 rounded p-2 text-slate-800 outline-none focus:border-blue-500"></div>
-                <button type="submit" class="btn-primary w-full mt-2">Create Account</button>
+                <div>
+                    <label class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Password</label>
+                    <input type="password" id="login-pass" class="input-pro mt-1" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary w-full shadow-lg shadow-blue-500/30 text-lg mt-2">Secure Login</button>
             </form>
-            <p class="text-center text-slate-500 text-sm mt-4">Have an account? <a href="#" id="show-login" class="text-blue-600 font-bold hover:underline">Login</a></p>
+            <div class="mt-6 text-center text-sm pb-4 md:pb-0">
+                <span class="text-slate-500">Don't have an account?</span>
+                <button id="btn-show-reg" class="text-blue-600 font-bold hover:underline">Register Publisher</button>
+            </div>
+        </div>
+
+        <div id="register-box" class="hidden">
+            <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2">Join Network</h2>
+            <p class="text-slate-500 text-sm mb-6">Create a new Publisher account</p>
+            <form id="form-register" class="space-y-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400">Full Name</label>
+                        <input type="text" id="reg-name" class="input-pro mt-1" required placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400">Phone</label>
+                        <input type="tel" id="reg-phone" class="input-pro mt-1" required placeholder="017...">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-600 dark:text-slate-400">Email Address</label>
+                    <input type="email" id="reg-email" class="input-pro mt-1" required placeholder="email@domain.com">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-600 dark:text-slate-400">Password</label>
+                    <input type="password" id="reg-pass" class="input-pro mt-1" required placeholder="Min 6 chars">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-600 dark:text-slate-400">Referral Code (Optional)</label>
+                    <input type="text" id="reg-code" class="input-pro mt-1" placeholder="Enter if any">
+                </div>
+                <button type="submit" class="btn-primary w-full mt-2 shadow-lg shadow-blue-500/30 text-lg">Create Account</button>
+            </form>
+            <div class="mt-6 text-center text-sm pb-4 md:pb-0">
+                <span class="text-slate-500">Already a member?</span>
+                <button id="btn-show-login" class="text-blue-600 font-bold hover:underline">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== TASK SUBMISSION MODAL ==================== -->
+<div id="task-submit-modal" class="fixed inset-0 z-[250] hidden flex-col justify-end md:justify-center items-center bg-slate-900/60 backdrop-blur-sm p-0 md:p-4 transition-all">
+    <div class="bg-white dark:bg-slate-800 w-full md:max-w-lg rounded-t-3xl md:rounded-2xl shadow-2xl flex flex-col max-h-[90vh] slide-up relative">
+        <div class="w-12 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full mx-auto mt-3 mb-1 md:hidden"></div>
+        <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-white dark:bg-slate-800 rounded-t-3xl md:rounded-t-2xl">
+            <h3 class="font-bold text-lg text-slate-800 dark:text-white" id="tm-title">Task Details</h3>
+            <button id="close-task-modal" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:text-red-500 transition"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="p-6 overflow-y-auto pb-10 md:pb-6">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 font-black px-3 py-1.5 rounded-lg text-sm border border-yellow-200 dark:border-yellow-800 shadow-sm flex items-center gap-1">
+                    Reward: +<span id="tm-reward">0</span> <i class="fas fa-coins text-xs"></i>
+                </span>
+            </div>
+            <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2"><i class="fas fa-list-ul mr-1"></i> Task Instructions</h4>
+            <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700 mb-6">
+                <p class="text-slate-600 dark:text-slate-300 text-sm whitespace-pre-line leading-relaxed font-medium" id="tm-desc">Task description...</p>
+            </div>
+            <a href="#" id="tm-link" target="_blank" class="flex justify-center items-center gap-2 w-full text-center bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 font-bold py-3.5 rounded-xl border-2 border-dashed border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 transition mb-6 shadow-sm">
+                <i class="fas fa-external-link-alt"></i> CLICK HERE TO DO TASK
+            </a>
+            <div class="border-t border-slate-100 dark:border-slate-700 pt-5">
+                <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3"><i class="fas fa-upload mr-1"></i> Submit Proof Here</h4>
+                <form id="task-proof-form" class="space-y-4">
+                    <input type="hidden" id="tm-id">
+                    <div>
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Text Proof (Required)</label>
+                        <textarea id="tm-text-proof" rows="3" class="input-pro resize-none dark:bg-slate-900" placeholder="Type username, email, or exact text requested..." required></textarea>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Screenshot Link (Optional)</label>
+                        <input type="url" id="tm-img-proof" class="input-pro dark:bg-slate-900" placeholder="Paste ImgBB link here...">
+                    </div>
+                    <button type="submit" class="btn-primary w-full shadow-lg shadow-blue-500/30 text-base py-3.5 mt-2"><i class="fas fa-check-circle mr-1"></i> Submit Proof</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- ==================== DASHBOARD APP ==================== -->
-<div id="main-app" class="hidden pb-28 relative z-10">
-    <!-- Floating Header -->
-    <header class="p-4 flex justify-between items-center sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-slate-200 shadow-sm">
-        <h1 class="text-lg font-bold text-slate-800 brand-font tracking-tight">NS <span class="text-blue-600">PRIME</span></h1>
-        <div class="text-right flex items-center gap-4">
-            <!-- COIN DISPLAY ADDED -->
-            <div class="text-center bg-amber-50 px-2 py-1 rounded border border-amber-100">
-                <p class="text-[9px] text-amber-600 font-bold uppercase">Coins</p>
-                <p class="text-xs font-bold text-amber-500 font-mono"><i class="fas fa-coins text-[10px]"></i> <span id="header-coins">0</span></p>
-            </div>
-            <div class="text-right">
-                <p id="user-name" class="font-bold text-slate-400 text-[10px] uppercase">USER</p>
-                <p class="text-sm font-bold text-blue-600 font-mono">৳<span id="header-balance">0.00</span></p>
+<div id="dashboard-app" class="hidden min-h-screen bg-slate-50">
+    <aside class="sidebar">
+        <div class="p-6 border-b border-slate-100 flex items-center gap-3">
+            <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold shadow-md">N</div>
+            <span class="font-bold text-lg text-slate-800 brand-font tracking-tight">NS PRIME</span>
+        </div>
+        <div class="p-4 space-y-1 overflow-y-auto">
+            <div class="sidebar-link active" data-page="home"><i class="fas fa-home w-5 text-center"></i> Dashboard</div>
+            <div class="sidebar-link" data-page="tasks"><i class="fas fa-layer-group w-5 text-center"></i> Campaigns</div>
+            <div class="sidebar-link" data-page="wallet"><i class="fas fa-wallet w-5 text-center"></i> Payments</div>
+            <div class="sidebar-link" data-page="refer"><i class="fas fa-users w-5 text-center"></i> Referrals</div>
+            <div class="sidebar-link" data-page="profile"><i class="fas fa-user-circle w-5 text-center"></i> Profile</div>
+        </div>
+        <div class="mt-auto p-4 border-t border-slate-100">
+            <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 dark:border-blue-900 dark:bg-slate-800/50">
+                <p class="text-xs font-bold text-blue-600 uppercase mb-1 flex items-center gap-1"><i class="fas fa-headset"></i> Account Manager</p>
+                <p class="text-sm font-bold text-slate-700 dark:text-slate-300">Admin Support</p>
+                <button id="sidebar-contact-btn" class="text-xs text-white bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg mt-3 w-full font-bold transition shadow-sm"><i class="fab fa-whatsapp mr-1"></i> WhatsApp</button>
             </div>
         </div>
-    </header>
+    </aside>
 
-<main class="p-4 max-w-lg mx-auto space-y-6">
-    <!-- HOME SECTION -->
-    <section id="home" class="fade-up visible">
-       <!-- Smart Link -->
-        <div class="pro-card p-5 mb-5 border-l-4 border-l-blue-500" data-tilt>
-            <div class="flex items-center gap-2 mb-3">
-                <div class="p-1 bg-blue-100 rounded text-blue-600"><i class="fas fa-link text-xs"></i></div>
-                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Smart Link Generator</h3>
-            </div>
-            
-            <div class="mb-3">
-                <select id="link-type-selector" class="w-full bg-slate-50 text-xs p-3 rounded border border-slate-200 text-slate-700 mt-1 outline-none focus:border-blue-500 font-semibold cursor-pointer hover:bg-white transition">
-                     <option value="video">🔥 Viral Video (High CPM)</option>
-                    <option value="cricket">🏏 Cricket Match</option>
-                        <option value="money">💰 Money Offer</option>
-                        <option value="freefire">🎮 FreeFire Diamonds</option>
-                        <option value="whatsapp">💬 WhatsApp Chat</option>
-                        <option value="telegram">✈️ Telegram Channel</option>
-                        <option value="internet">🌐 Free Internet</option>
-                </select>
-            </div>
-            <div class="flex gap-2 relative">
-                <input type="text" id="marketing-link-input" class="w-full bg-slate-50 text-xs p-3 rounded border border-slate-200 text-blue-600 font-mono" readonly>
-                <button id="copy-marketing-link-btn" class="bg-blue-600 text-white px-4 rounded text-xs font-bold hover:bg-blue-700 transition shadow-md"><i class="fas fa-copy"></i></button>
-            </div>
-        </div>
-
-        <!-- Stats Grid (UPDATED) -->
-        <div class="grid grid-cols-2 gap-3 mb-5">
-            <div class="pro-card p-4 text-center bg-white border-none shadow-sm">
-                <div class="w-8 h-8 rounded-full bg-green-50 mx-auto flex items-center justify-center mb-2"><i class="fas fa-coins text-green-500 text-sm"></i></div>
-                <p class="text-xl font-bold text-slate-800 brand-font" id="today-earnings-stat">৳0.00</p>
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Today</p>
-            </div>
-            <div class="pro-card p-4 text-center bg-white border-none shadow-sm">
-                <div class="w-8 h-8 rounded-full bg-purple-50 mx-auto flex items-center justify-center mb-2"><i class="fas fa-wallet text-purple-500 text-sm"></i></div>
-                <p class="text-xl font-bold text-slate-800 brand-font" id="total-earnings-stat">৳0.00</p>
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Total</p>
-            </div>
-            <!-- Added Valid Clicks -->
-            <div class="pro-card p-4 text-center bg-white border-none shadow-sm">
-                <div class="w-8 h-8 rounded-full bg-blue-50 mx-auto flex items-center justify-center mb-2"><i class="fas fa-mouse-pointer text-blue-500 text-sm"></i></div>
-                <p class="text-xl font-bold text-slate-800 brand-font" id="today-impression">0</p>
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Clicks</p>
-            </div>
-            <!-- Added Refer Commission -->
-            <div class="pro-card p-4 text-center bg-white border-none shadow-sm">
-                <div class="w-8 h-8 rounded-full bg-orange-50 mx-auto flex items-center justify-center mb-2"><i class="fas fa-users text-orange-500 text-sm"></i></div>
-                <p class="text-xl font-bold text-slate-800 brand-font" id="home-refer-commission">৳0.00</p>
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Ref Bonus</p>
-            </div>
-        </div>
-
-        <!-- 🔥 DAILY TARGET & BONUS CARD -->
-        <div class="pro-card p-5 border-b-4 border-b-orange-500 bg-white shadow-md">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide flex items-center"><i class="fas fa-bullseye text-orange-500 mr-2"></i> Daily Goals</h3>
-                <span class="text-[10px] bg-orange-100 text-orange-600 px-2 py-1 rounded-full font-bold uppercase">Prize: ৳<span id="target-bonus-display">20</span></span>
-            </div>
-            
-            <!-- Tasks Progress -->
-            <div class="mb-4">
-                <div class="flex justify-between text-xs mb-1">
-                    <span class="text-slate-500 font-semibold">Complete Tasks</span>
-                    <span class="text-slate-800 font-bold"><span id="user-task-done">0</span> / <span id="admin-task-target">5</span></span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2">
-                    <div id="target-task-bar" class="bg-gradient-to-r from-orange-400 to-yellow-400 h-2 rounded-full transition-all duration-700 shadow-sm" style="width: 0%"></div>
-                </div>
-            </div>
-
-            <!-- Clicks Progress -->
+    <main id="main-content">
+        <header class="flex justify-between items-center mb-6 md:mb-8">
             <div>
-                <div class="flex justify-between text-xs mb-1">
-                    <span class="text-slate-500 font-semibold">Smart Link Clicks</span>
-                    <span class="text-slate-800 font-bold"><span id="user-click-done">0</span> / <span id="admin-click-target">10</span></span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2">
-                    <div id="target-click-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full transition-all duration-700 shadow-sm" style="width: 0%"></div>
-                </div>
+                <h1 class="text-2xl font-bold text-slate-800 brand-font" id="page-title">Dashboard</h1>
+                <p class="text-sm text-slate-500">Welcome back, <span id="user-display-name" class="font-semibold text-slate-700 dark:text-slate-300">User</span></p>
             </div>
-        </div>
-    </section>
-
-    <!-- TASKS SECTION -->
-    <section id="tasks" class="hidden">
-        <!-- TOTAL AVAILABLE EARNING DISPLAY -->
-        <div class="pro-card p-4 mb-5 bg-gradient-to-r from-slate-900 to-slate-800 text-white shadow-lg">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Available Coins</h4>
-                    <h2 class="text-3xl font-bold text-white brand-font mt-1"><span id="total-available-task-reward">0</span> <span class="text-sm text-yellow-400">COINS</span></h2>
-                </div>
-                <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                    <i class="fas fa-coins text-yellow-400"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="pro-card p-1 mb-5 flex bg-slate-100 border-none shadow-inner">
-            <button id="tab-btn-available" class="flex-1 py-3 text-xs font-bold rounded-lg bg-white text-blue-600 shadow-sm transition" onclick="switchTaskTab('available')">AVAILABLE JOBS</button>
-            <button id="tab-btn-history" class="flex-1 py-3 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-600 transition" onclick="switchTaskTab('history')">MY HISTORY</button>
-        </div>
-        <div id="tasks-list" class="space-y-4"></div>
-        <div id="tasks-history-list" class="space-y-3 hidden"></div>
-    </section>
-
-    <!-- WALLET SECTION -->
-    <section id="wallet" class="hidden">
-         <div class="pro-card p-8 text-center mb-6 bg-gradient-to-br from-blue-600 to-indigo-700 text-white border-none shadow-blue-500/30 shadow-xl" data-tilt>
-            <p class="text-blue-200 text-xs uppercase tracking-[2px] mb-2 font-bold">Withdrawable Funds</p>
-            <p class="text-5xl font-bold text-white brand-font" id="wallet-available-balance">৳0.00</p>
-         </div>
-
-         <!-- Upcoming Payment Info -->
-         <div class="pro-card p-4 mb-6 border-l-4 border-l-purple-500 flex justify-between items-center bg-white">
-             <div>
-                 <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Next Payment Run</p>
-                 <p class="text-slate-800 font-bold brand-font text-lg" id="next-payment-date">Daily</p>
-             </div>
-             <div class="text-right">
-                 <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Pending</p>
-                 <p class="text-orange-500 font-bold brand-font text-lg" id="pending-withdrawals">৳0.00</p>
-             </div>
-         </div>
-         
-         <!-- 🪙 COIN CONVERTER CARD -->
-         <div class="pro-card p-5 mb-5 border-l-4 border-l-yellow-500 bg-white relative">
-             <div class="absolute right-4 top-4 opacity-10 text-5xl text-yellow-500"><i class="fas fa-exchange-alt"></i></div>
-             <h4 class="text-sm font-bold text-slate-800 mb-2 uppercase tracking-wide flex items-center gap-2">
-                 <i class="fas fa-coins text-yellow-500"></i> Coin Converter
-             </h4>
-             <p class="text-[10px] text-slate-500 mb-4 font-semibold">Rate: 1000 Coins = 10 Taka</p>
-             
-             <div class="bg-slate-50 p-3 rounded border border-slate-200 mb-3 flex justify-between items-center">
-                 <span class="text-slate-500 text-xs uppercase font-bold">Your Coins</span>
-                 <span class="text-slate-800 font-bold text-lg" id="wallet-coin-balance">0</span>
-             </div>
-             
-             <div class="flex gap-2">
-                 <input type="number" id="convert-amount-input" class="flex-1 bg-slate-50 border border-slate-200 rounded p-3 text-slate-800 text-sm outline-none focus:border-yellow-500 transition" placeholder="Coins to convert">
-                 <button id="convert-coin-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-4 rounded text-xs transition shadow-md">CONVERT</button>
-             </div>
-         </div>
-
-         <div class="pro-card p-5 mb-5 bg-white">
-            <h4 class="text-sm font-bold text-slate-800 mb-4 uppercase tracking-wide">Request Withdrawal</h4>
-            <div class="p-3 bg-blue-50 border border-blue-100 rounded text-xs text-blue-800 mb-4">
-                <i class="fas fa-info-circle mr-1"></i> Note: You can request to withdraw (Minimum ৳10) once every 24 hours.
-            </div>
-            <div class="flex gap-2 mb-4 bg-slate-100 p-1 rounded-lg">
-                <button id="w-method-bkash" class="flex-1 py-2 rounded-md text-xs font-bold bg-pink-600 text-white shadow-sm transition" onclick="handleWithdrawMethodChange('bkash')">bKash</button>
-                <button id="w-method-nagad" class="flex-1 py-2 rounded-md text-xs font-bold text-slate-500 hover:bg-white hover:text-slate-800 transition" onclick="handleWithdrawMethodChange('nagad')">Nagad</button>
-                <button id="w-method-usdt" class="flex-1 py-2 rounded-md text-xs font-bold text-slate-500 hover:bg-white hover:text-slate-800 transition" onclick="handleWithdrawMethodChange('usdt')">USDT</button>
-            </div>
-            <div class="space-y-3">
-                <div>
-                    <label class="text-[10px] text-slate-400 uppercase font-bold ml-1">Amount</label>
-                    <input type="number" id="main-withdraw-amount" class="w-full bg-slate-50 border border-slate-200 rounded p-3 text-slate-800 text-sm outline-none focus:border-blue-500 mt-1 transition" placeholder="Min Amount">
-                </div>
-                <div>
-                    <div class="flex justify-between">
-                        <label id="w-account-label" class="text-[10px] text-slate-400 uppercase font-bold ml-1">Account Number</label>
-                        <span class="text-[10px] text-blue-600 font-bold uppercase"><i class="fas fa-save mr-1"></i> Auto Save</span>
-                    </div>
-                    <input type="text" id="main-withdraw-account" class="w-full bg-slate-50 border border-slate-200 rounded p-3 text-slate-800 text-sm outline-none focus:border-blue-500 mt-1 transition" placeholder="017xxxxxxxx">
-                </div>
-                <div class="text-[10px] text-slate-500 mt-1 italic font-semibold" id="min-withdraw-display">Min Withdraw: ৳10</div>
-                <button id="main-withdraw-request-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-3.5 rounded-lg text-xs font-bold transition mt-2 shadow-lg shadow-green-500/20">SUBMIT REQUEST</button>
-            </div>
-         </div>
-         <div class="mt-8">
-             <h4 class="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wide ml-1">Transaction History</h4>
-             <div id="withdrawal-history-list" class="text-xs space-y-2">
-                 <p class="text-center text-slate-400">Loading history...</p>
-             </div>
-         </div>
-    </section>
-
-    <!-- REFERRAL SECTION -->
-    <section id="refer" class="hidden">
-        <div class="pro-card p-6 mb-5 text-center relative overflow-hidden bg-white">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl -z-10 opacity-50"></div>
-            <h3 class="text-sm font-bold text-slate-800 mb-4 uppercase tracking-widest">Refer & Earn</h3>
-            
-            <div class="bg-slate-50 p-5 rounded-xl border border-dashed border-blue-300">
-                <p class="text-[10px] text-slate-400 uppercase mb-2 font-bold">Your Unique Invite Code</p>
-                <div class="flex justify-between items-center bg-white border border-slate-200 p-2 rounded-lg shadow-sm">
-                    <span id="referral-code-display" class="font-mono text-xl text-blue-600 tracking-widest font-bold ml-2">...</span>
-                    <button id="copy-referral-code-btn" class="bg-blue-50 text-blue-600 px-3 py-2 rounded text-xs font-bold hover:bg-blue-100 transition"><i class="fas fa-copy"></i></button>
-                </div>
-                <div class="mt-4 inline-block px-4 py-1.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-lg shadow-blue-500/20">
-                    <p class="text-[10px] text-white font-bold tracking-widest uppercase">Lifetime 10% Commission</p>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4 mt-5">
-                <div class="bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
-                    <p class="text-2xl font-bold text-slate-800 brand-font" id="refer-team-size">0</p>
-                    <p class="text-xs text-slate-500 mt-1 font-semibold">Total Team</p>
-                </div>
-                <div class="bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
-                    <p class="text-2xl font-bold text-blue-600 brand-font" id="active-team-size">0</p>
-                    <p class="text-xs text-green-600 mt-1 font-bold">Active Members</p>
-                </div>
-            </div>
-            <p class="text-[10px] text-slate-400 mt-3 text-center">*Member becomes Active after earning <span id="active-threshold-display">1000</span> Taka.</p>
-        </div>
-
-        <!-- Team Milestones -->
-        <div class="pro-card p-5 mb-5 bg-white">
-            <h3 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2 uppercase tracking-wide">
-                <i class="fas fa-trophy text-yellow-500"></i> Bonus Milestones
-            </h3>
-            <div class="space-y-5">
-                <!-- 50 Members -->
-                <div class="bg-slate-50 p-3 rounded border border-slate-200">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-slate-600 text-xs font-bold uppercase">Silver (50 Active)</span>
-                        <span class="text-blue-600 text-xs font-bold">৳5000</span>
-                    </div>
-                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                        <div id="milestone-50-bar" class="bg-blue-500 h-full transition-all duration-1000" style="width: 0%"></div>
-                    </div>
-                    <p class="text-right text-[10px] text-slate-400 mt-1 font-mono" id="milestone-50-text">0/50</p>
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="hidden md:block text-right bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Balance</p>
+                    <p class="text-lg font-bold text-blue-600">৳<span id="top-balance">0.00</span></p>
                 </div>
                 
-                <!-- 100 Members -->
-                <div class="bg-slate-50 p-3 rounded border border-slate-200">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-slate-600 text-xs font-bold uppercase">Gold (100 Active)</span>
-                        <span class="text-yellow-500 text-xs font-bold">৳10000</span>
-                    </div>
-                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                        <div id="milestone-100-bar" class="bg-yellow-500 h-full transition-all duration-1000" style="width: 0%"></div>
-                    </div>
-                    <p class="text-right text-[10px] text-slate-400 mt-1 font-mono" id="milestone-100-text">0/100</p>
+                <div class="bg-white w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 shadow-sm cursor-pointer hover:bg-slate-50 transition dark:bg-slate-800 dark:border-slate-700" id="theme-toggle" title="Toggle Dark Mode">
+                    <i class="fas fa-moon text-slate-400 transition" id="theme-icon"></i>
+                </div>
+
+                <div class="bg-white w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 shadow-sm cursor-pointer hover:bg-red-50 hover:text-red-500 transition dark:bg-slate-800 dark:border-slate-700" id="logout-btn" title="Logout">
+                    <i class="fas fa-power-off text-slate-400 hover:text-red-500 transition"></i>
                 </div>
             </div>
-        </div>
-        
-        <!-- My Team List -->
-        <div class="pro-card p-5 mb-5 bg-white">
-            <h3 class="text-sm font-bold text-slate-800 mb-4 uppercase tracking-widest">My Team List</h3>
-            <div id="referral-list-container" class="space-y-2 max-h-60 overflow-y-auto custom-scrollbar">
-                <p class="text-center text-slate-400 text-xs">Loading team data...</p>
+        </header>
+
+        <div id="admin-notice" class="hidden bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4 rounded shadow-sm fade-in dark:bg-yellow-900/30">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-bell text-yellow-500 text-lg animate-bounce"></i>
+                <p class="text-sm font-semibold text-yellow-800 dark:text-yellow-400" id="admin-notice-text">Notice goes here...</p>
             </div>
         </div>
 
-        <!-- 📢 LIVE PAYOUT TICKER -->
-        <div class="pro-card p-3 bg-white">
-            <h3 class="text-[10px] font-bold text-slate-400 mb-2 uppercase text-center tracking-widest">Live Withdrawals</h3>
-            <div class="ticker-wrap">
-                <div class="ticker" id="live-payout-ticker"></div>
+        <div class="ticker-container mb-6 shadow-sm border border-slate-700">
+            <div class="ticker-move" id="payout-ticker">Loading live payouts...</div>
+        </div>
+
+        <!-- 🏠 HOME PAGE -->
+        <div id="view-home" class="page-view fade-in">
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
+                <div class="ad-card p-4 md:p-5 border-b-4 border-b-blue-600">
+                    <p class="text-[10px] md:text-xs text-slate-400 font-bold uppercase mb-1">Total Revenue</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800">৳<span id="stat-total-earn">0</span></h3>
+                    <p class="text-[10px] md:text-xs text-green-500 mt-1 font-semibold"><i class="fas fa-arrow-up"></i> Lifetime</p>
+                </div>
+                <div class="ad-card p-4 md:p-5 border-b-4 border-b-indigo-500">
+                    <p class="text-[10px] md:text-xs text-slate-400 font-bold uppercase mb-1">Today's Earn</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-indigo-600">৳<span id="stat-today-earn">0</span></h3>
+                </div>
+                <div class="ad-card p-4 md:p-5 border-b-4 border-b-slate-800">
+                    <p class="text-[10px] md:text-xs text-slate-400 font-bold uppercase mb-1">Valid Clicks</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800" id="stat-clicks">0</h3>
+                </div>
+                <div class="ad-card p-4 md:p-5 border-b-4 border-b-yellow-500 bg-gradient-to-br from-white to-yellow-50/50 dark:from-slate-800 dark:to-slate-800">
+                    <p class="text-[10px] md:text-xs text-slate-400 font-bold uppercase mb-1">Coin Balance</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-yellow-600 flex items-center gap-1"><span id="stat-coins">0</span> <i class="fas fa-coins text-xs md:text-sm"></i></h3>
+                </div>
+            </div>
+
+            <!-- 🌟 SMART LINK GENERATOR -->
+            <div class="ad-card p-6 md:p-10 border-t-4 border-t-blue-600 bg-gradient-to-b from-blue-50/50 to-white dark:from-slate-800 dark:to-slate-900 shadow-md relative overflow-hidden">
+                <div class="absolute right-0 top-0 opacity-[0.03] dark:opacity-5 pointer-events-none text-[10rem] md:text-[15rem] text-blue-600 -mt-10 -mr-10"><i class="fas fa-link"></i></div>
+                <div class="relative z-10 max-w-4xl mx-auto text-left">
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 mb-8">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center shrink-0 dark:bg-blue-900/40 shadow-inner">
+                            <i class="fas fa-magic text-2xl md:text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-black text-slate-800 brand-font mb-2">Smart Link Generator</h3>
+                            <p class="text-xs md:text-sm text-slate-500 leading-relaxed">Select a highly engaging category to generate your unique tracking link. Our AI will automatically serve the highest paying CPA offers to your audience for maximum CPM.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 items-end bg-white dark:bg-slate-800 p-5 md:p-6 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                        <div class="md:col-span-2 text-left">
+                            <label class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Traffic Category / Niche</label>
+                            <select id="sl-category" class="input-pro font-bold text-slate-700 h-12 md:h-14 text-sm md:text-base cursor-pointer">
+                                <option value="viral">🔥 Viral Video (Highest CPM)</option>
+                                <option value="sports">🏏 Live Sports / Cricket Streaming</option>
+                                <option value="money">💰 Make Money Online / Earning Offers</option>
+                                <option value="gaming">🎮 Gaming / FreeFire Diamonds</option>
+                                <option value="news">📰 Breaking News & Gossip</option>
+                                <option value="whatsapp">💬 Join WhatsApp Groups</option>
+                                <option value="telegram">✈️ Join Telegram Channels</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-1">
+                            <button class="w-full btn-primary h-12 md:h-14 text-sm md:text-base shadow-lg shadow-blue-500/30" onclick="window.updateSmartLink()"><i class="fas fa-bolt mr-2"></i> Generate Link</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <label class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block text-left">Your Unique Monetization Link</label>
+                        <div class="relative">
+                            <input type="text" id="sl-output" class="input-pro h-14 md:h-16 pl-4 md:pl-6 pr-28 md:pr-32 bg-slate-50 dark:bg-slate-900 text-blue-600 font-mono text-xs md:text-sm border-dashed border-2 border-blue-200 dark:border-blue-900 rounded-xl" readonly value="Click Generate to get your link...">
+                            <button onclick="window.copySmartLink()" class="absolute right-2 top-2 h-10 md:h-12 px-4 md:px-6 bg-white dark:bg-slate-800 rounded-lg shadow text-slate-600 font-bold hover:text-blue-600 hover:bg-blue-50 transition border border-slate-100 dark:border-slate-700 flex items-center gap-2 text-xs md:text-sm"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="mt-4 bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg border border-orange-200 dark:border-orange-800/50 flex items-start gap-2">
+                            <i class="fas fa-exclamation-triangle text-orange-500 mt-0.5"></i>
+                            <p class="text-[10px] md:text-xs text-orange-700 dark:text-orange-300 font-medium leading-relaxed"><strong>Rules:</strong> Share this link naturally. Do not use VPN, Proxy, or Bots. Invalid traffic will lead to account termination.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- PROFILE SECTION -->
-    <section id="profile" class="hidden">
-        <div class="pro-card p-6 mb-5 bg-white shadow-md">
-            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-6">
-                <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg shadow-blue-500/30">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-slate-800 brand-font" id="profile-info-name">Loading...</h3>
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                        <p class="text-xs text-green-600 font-bold tracking-widest">VERIFIED ACCOUNT</p>
+        <!-- 📋 CAMPAIGNS (TASKS) -->
+        <div id="view-tasks" class="page-view hidden fade-in">
+            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mb-6 shadow-sm">
+                <h4 class="text-blue-800 dark:text-blue-400 font-bold text-sm mb-2"><i class="fas fa-info-circle"></i> Task Rules & Instructions</h4>
+                <ul class="text-xs text-blue-700 dark:text-blue-300 space-y-1.5 list-disc list-inside font-medium">
+                    <li>Read the task instructions carefully before starting any campaign.</li>
+                    <li>Submit exact text proof or a valid screenshot link as requested.</li>
+                    <li>Fake or invalid proofs will be permanently rejected and may lead to account ban.</li>
+                </ul>
+            </div>
+
+            <div class="ad-card p-6 mb-6 bg-gradient-to-r from-blue-600 to-indigo-700 text-white relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center relative z-10 gap-4">
+                    <div>
+                        <h3 class="font-bold text-xl md:text-2xl">Active Campaigns</h3>
+                        <p class="text-blue-100 text-xs md:text-sm mt-1">Complete premium tasks to earn coins instantly.</p>
+                    </div>
+                    <div class="text-left md:text-right bg-black/20 p-3 rounded-xl border border-white/10">
+                        <p class="text-[10px] opacity-70 uppercase font-bold tracking-wider mb-1">Total Reward Pool</p>
+                        <p class="text-2xl md:text-3xl font-bold font-mono text-yellow-300 drop-shadow-md flex items-center gap-1"><span id="pool-reward">0</span> <i class="fas fa-coins text-lg"></i></p>
                     </div>
                 </div>
             </div>
-
-            <!-- Full Info Grid -->
-            <div class="grid grid-cols-1 gap-3 mb-6">
-                <!-- UID & Join Date -->
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-slate-50 rounded p-3 border border-slate-200">
-                        <p class="text-[10px] text-slate-400 uppercase font-bold">User ID</p>
-                        <p class="text-xs font-bold text-blue-600 font-mono truncate" id="profile-uid">...</p>
-                    </div>
-                    <div class="bg-slate-50 rounded p-3 border border-slate-200">
-                         <p class="text-[10px] text-slate-400 uppercase font-bold">Joined</p>
-                         <p class="text-xs font-bold text-slate-700" id="profile-join-date">...</p>
-                    </div>
-                </div>
-
-                <!-- Contact Info -->
-                <div class="bg-slate-50 rounded p-3 border border-slate-200 flex justify-between">
-                    <span class="text-slate-400 text-xs uppercase font-bold">Phone</span>
-                    <span class="text-slate-800 text-xs font-bold" id="profile-phone">...</span>
-                </div>
-                <div class="bg-slate-50 rounded p-3 border border-slate-200 flex justify-between">
-                    <span class="text-slate-400 text-xs uppercase font-bold">Email</span>
-                    <span class="text-slate-800 text-xs font-bold" id="profile-email">...</span>
-                </div>
-                 <div class="bg-slate-50 rounded p-3 border border-slate-200 flex justify-between items-center">
-                    <span class="text-slate-400 text-xs uppercase font-bold">Refer Code</span>
-                    <div class="flex items-center gap-2">
-                         <span class="text-slate-800 text-xs font-bold font-mono" id="profile-refer-code">...</span>
-                         <i class="fas fa-copy text-slate-400 cursor-pointer text-xs hover:text-blue-600" id="copy-profile-ref"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Support Button -->
-            <button id="open-support-btn" class="w-full mb-4 py-4 rounded-lg border border-purple-200 bg-purple-50 flex items-center justify-center gap-3 text-purple-700 font-bold hover:bg-purple-100 transition shadow-sm">
-                <i class="fas fa-headset"></i> 
-                <span>HELP CENTER / SUPPORT</span>
-            </button>
             
-            <button id="logout-btn" class="w-full mt-2 py-3 border border-red-200 text-red-500 bg-red-50 hover:bg-red-100 rounded-lg text-xs font-bold tracking-[2px] uppercase transition">
-                Logout System
-            </button>
-        </div>
-    </section>
-</main>
-
-<!-- Dock Navigation -->
-<nav class="dock-nav">
-    <a class="dock-item active" data-section="home"><i class="fas fa-home"></i></a>
-    <a class="dock-item" data-section="tasks"><i class="fas fa-layer-group"></i></a>
-    <a class="dock-item" data-section="wallet"><i class="fas fa-wallet"></i></a>
-    <a class="dock-item" data-section="refer"><i class="fas fa-users"></i></a>
-    <a class="dock-item" data-section="profile"><i class="fas fa-user-circle"></i></a>
-</nav>
-</div>
-
-<!-- TASK MODAL -->
-<div id="task-modal-overlay" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-    <div class="pro-card w-full max-w-lg bg-white relative flex flex-col max-h-[85vh] shadow-2xl">
-        <button id="close-task-modal" class="absolute top-4 right-4 text-slate-400 hover:text-red-500 z-10 bg-slate-100 rounded-full w-8 h-8 flex items-center justify-center"><i class="fas fa-times"></i></button>
-
-        <div class="overflow-y-auto custom-scrollbar p-6">
-            <h2 id="modal-task-title" class="text-xl font-bold text-slate-800 mb-1 brand-font pr-8">...</h2>
-            <p class="text-yellow-600 font-bold mb-4 font-mono text-sm"><i class="fas fa-coins"></i> REWARD: <span id="modal-task-reward">0</span></p>
-
-            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 mb-5">
-                <h4 class="text-xs font-bold text-slate-400 uppercase mb-2 border-b border-slate-200 pb-1">Instructions</h4>
-                <p id="modal-task-desc" class="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap break-words">...</p>
-                <div id="modal-task-images" class="grid grid-cols-2 gap-2 mt-3"></div>
+            <div id="task-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-10">
+                <p class="col-span-full text-center text-slate-400 py-10 font-medium"><i class="fas fa-spinner fa-spin mr-2"></i> Loading campaigns...</p>
             </div>
 
-            <a id="modal-task-link" href="#" target="_blank" class="block w-full text-center bg-blue-600 text-white font-bold py-3.5 rounded-lg shadow-lg shadow-blue-500/30 mb-6 transition transform hover:scale-[1.01]">
-                <i class="fas fa-external-link-alt mr-2"></i> START TASK
-            </a>
-
-            <form id="proof-submission-form" class="border-t border-slate-200 pt-5">
-                <h4 class="text-xs font-bold text-slate-400 uppercase mb-3">Submit Proof</h4>
-                <input type="text" id="proof-text" class="w-full bg-slate-50 border border-slate-200 rounded p-3 text-xs text-slate-800 mb-3 outline-none focus:border-blue-500" placeholder="Your username / Email" required>
-                <input type="file" id="proof-file" accept="image/*" class="w-full text-xs text-slate-400 mb-4">
-                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition shadow-md">SUBMIT PROOF</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- SUPPORT MODAL -->
-<div id="support-modal-overlay" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-    <div class="pro-card w-full max-w-lg bg-white relative flex flex-col h-[500px] shadow-2xl">
-        <div class="p-4 border-b border-slate-200 flex justify-between items-center bg-slate-50">
-            <h3 class="text-lg font-bold text-slate-800 brand-font"><i class="fas fa-headset mr-2 text-blue-600"></i> Live Support</h3>
-            <button id="close-support-modal" class="text-slate-400 hover:text-red-500"><i class="fas fa-times"></i></button>
-        </div>
-        <div id="support-messages" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar bg-slate-50/50"></div>
-        <form id="support-form" class="p-4 border-t border-slate-200 bg-white">
-            <div class="flex gap-2">
-                <input type="text" id="support-input" class="flex-1 bg-slate-50 border border-slate-200 rounded p-3 text-sm text-slate-800 outline-none focus:border-blue-500" placeholder="Type your problem..." autocomplete="off">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 rounded font-bold transition"><i class="fas fa-paper-plane"></i></button>
+            <!-- TASK HISTORY -->
+            <div class="flex justify-between items-center mb-4 border-t border-slate-200 dark:border-slate-700 pt-6">
+                <h3 class="font-bold text-slate-800 text-lg md:text-xl">My Task History</h3>
+                <button onclick="window.loadTaskHistory()" class="text-xs text-blue-600 hover:underline bg-blue-50 dark:bg-blue-900/30 px-3 py-1.5 rounded-md font-bold"><i class="fas fa-redo text-[10px] mr-1"></i> Refresh</button>
             </div>
-        </form>
-    </div>
+            
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm mb-20">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs md:text-sm text-left whitespace-nowrap">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200 dark:border-slate-700">
+                            <tr>
+                                <th class="p-3 md:p-4">Date</th>
+                                <th class="p-3 md:p-4">Task Name</th>
+                                <th class="p-3 md:p-4">Reward</th>
+                                <th class="p-3 md:p-4 text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="task-history-list" class="text-slate-700 divide-y divide-slate-100 dark:divide-slate-700">
+                            <tr><td colspan="4" class="p-8 text-center text-slate-400 font-medium">Loading history...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 💳 WALLET -->
+        <div id="view-wallet" class="page-view hidden fade-in">
+            <!-- ⚠️ RULES BOX -->
+            <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4 md:p-5 mb-6 shadow-sm">
+                <h4 class="text-yellow-800 dark:text-yellow-400 font-bold text-sm mb-2"><i class="fas fa-scroll"></i> Withdrawal Rules & Schedule</h4>
+                <ul class="text-xs md:text-sm text-yellow-700 dark:text-yellow-300 space-y-2 list-disc list-inside font-medium leading-relaxed">
+                    <li><strong>Daily Withdraw:</strong> You can withdraw a maximum of <strong>৳10 once every 24 hours</strong> on normal days.</li>
+                    <li><strong>Main Payments:</strong> Unlimited balances are automatically unlocked and can be fully withdrawn <strong>twice a month (on the 6th and 20th)</strong>.</li>
+                    <li>Ensure your account number is exactly correct. Wrong details will result in payment failure.</li>
+                </ul>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6 mb-8">
+                <!-- Balance Card -->
+                <div class="ad-card p-6 md:p-8 text-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500"></div>
+                    <p class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider">Available Balance</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 mt-3 mb-1 font-mono tracking-tight">৳<span id="wallet-bal">0.00</span></h2>
+                    <p class="text-[10px] md:text-xs text-slate-500 mb-6 bg-slate-50 dark:bg-slate-800 inline-block px-3 py-1 rounded-full border border-slate-100 dark:border-slate-700">Minimum Withdraw: ৳<span id="min-with-display">10</span></p>
+                    
+                    <div class="grid grid-cols-3 gap-2 mb-5">
+                        <button class="py-2.5 border-2 rounded-lg hover:bg-pink-50 hover:border-pink-500 hover:text-pink-600 font-bold text-xs md:text-sm transition method-btn active bg-slate-100 border-pink-500 text-pink-600 dark:bg-slate-800" data-m="bkash"><i class="fas fa-mobile-alt"></i> bKash</button>
+                        <button class="py-2.5 border-2 rounded-lg hover:bg-orange-50 hover:border-orange-500 hover:text-orange-600 font-bold text-xs md:text-sm transition method-btn dark:bg-slate-800" data-m="nagad"><i class="fas fa-mobile-alt"></i> Nagad</button>
+                        <button class="py-2.5 border-2 rounded-lg hover:bg-green-50 hover:border-green-500 hover:text-green-600 font-bold text-xs md:text-sm transition method-btn dark:bg-slate-800" data-m="usdt"><i class="fab fa-bitcoin"></i> USDT</button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <input type="number" id="w-amount" class="input-pro bg-white" placeholder="Enter Amount (৳)">
+                        <input type="text" id="w-account" class="input-pro bg-white" placeholder="Account / Wallet Number">
+                        <button id="btn-withdraw" class="btn-primary w-full shadow-lg shadow-blue-500/20 text-base md:text-lg py-3"><i class="fas fa-paper-plane mr-2"></i> Request Payout</button>
+                    </div>
+                </div>
+                
+                <!-- Coin Swap -->
+                <div class="ad-card p-6 md:p-8 flex flex-col justify-center">
+                    <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mb-4 text-xl"><i class="fas fa-exchange-alt"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-4 text-lg md:text-xl">Coin Exchange</h3>
+                    <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-800 p-4 md:p-5 rounded-xl mb-6 border border-slate-200 dark:border-slate-700">
+                        <div>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Your Coins</p>
+                            <p class="text-xl md:text-2xl font-black text-yellow-500 flex items-center gap-1" id="swap-coin-bal">0</p>
+                        </div>
+                        <div class="w-8 h-8 bg-white dark:bg-slate-700 rounded-full shadow flex items-center justify-center border border-slate-100 dark:border-slate-600 z-10 -mx-2 md:-mx-4"><i class="fas fa-arrow-right text-slate-300 text-xs"></i></div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">BDT Value</p>
+                            <p class="text-xl md:text-2xl font-black text-blue-600">৳<span id="swap-val">0.00</span></p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 md:gap-3">
+                         <input type="number" id="swap-input" class="input-pro bg-white font-mono text-sm" placeholder="Coins to swap">
+                         <button id="btn-swap" class="bg-slate-800 hover:bg-slate-900 text-white px-5 md:px-6 rounded-lg font-bold transition shadow-lg"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                    <p class="text-[10px] md:text-xs text-slate-500 mt-4 text-center font-medium bg-blue-50 dark:bg-blue-900/20 py-2 rounded border border-blue-100 dark:border-blue-900/50">Current Rate: 1000 Coins = 10 BDT</p>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-slate-800 text-base md:text-lg">Transaction History</h3>
+                <button onclick="window.loadWalletHistory()" class="text-xs text-blue-600 hover:underline bg-blue-50 dark:bg-blue-900/30 px-3 py-1.5 rounded-md font-bold"><i class="fas fa-redo text-[10px] mr-1"></i> Refresh</button>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm pb-20 md:pb-0">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs md:text-sm text-left whitespace-nowrap">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200 dark:border-slate-700">
+                            <tr>
+                                <th class="p-3 md:p-4">Date</th>
+                                <th class="p-3 md:p-4">Method</th>
+                                <th class="p-3 md:p-4">Account</th>
+                                <th class="p-3 md:p-4">Amount</th>
+                                <th class="p-3 md:p-4 text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tx-history" class="text-slate-700 divide-y divide-slate-100 dark:divide-slate-700">
+                            <tr><td colspan="5" class="p-8 text-center text-slate-400 font-medium">Loading history...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 👥 REFERRALS -->
+        <div id="view-refer" class="page-view hidden fade-in">
+            <div class="ad-card p-6 md:p-8 text-center mb-6 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-blue-50/50 dark:bg-blue-900/10">
+                <div class="w-14 h-14 md:w-16 md:h-16 bg-white dark:bg-slate-800 rounded-full shadow-sm flex items-center justify-center mx-auto mb-4 text-blue-600 text-2xl"><i class="fas fa-gift"></i></div>
+                <h3 class="font-bold text-xl md:text-2xl text-slate-800 mb-2">Invite & Earn Lifetime</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-6 max-w-md mx-auto">Get 10% commission on every friend's earnings forever. The more you invite, the more passive income you generate!</p>
+                <div class="max-w-md mx-auto flex flex-col md:flex-row items-center gap-2 bg-white dark:bg-slate-800 p-2 rounded-xl border-2 border-blue-200 dark:border-blue-800 shadow-sm">
+                    <span id="ref-code-display" class="flex-1 font-mono font-black text-slate-800 text-lg md:text-xl tracking-widest text-center py-2 md:py-0 w-full">LOADING</span>
+                    <button onclick="window.copyReferralCode()" class="bg-blue-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-bold text-sm hover:bg-blue-700 transition shadow-md"><i class="fas fa-copy mr-1"></i> COPY</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 md:gap-4 mb-8">
+                <div class="ad-card p-5 md:p-6 text-center">
+                    <div class="w-8 h-8 md:w-10 md:h-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-2 text-slate-500"><i class="fas fa-users text-sm md:text-base"></i></div>
+                    <p class="text-2xl md:text-3xl font-black text-slate-800" id="ref-count">0</p>
+                    <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider mt-1">Total Referred</p>
+                </div>
+                <div class="ad-card p-5 md:p-6 text-center">
+                    <div class="w-8 h-8 md:w-10 md:h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-2 text-green-600"><i class="fas fa-hand-holding-usd text-sm md:text-base"></i></div>
+                    <p class="text-2xl md:text-3xl font-black text-green-600" id="ref-earn">৳0</p>
+                    <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider mt-1">Commission Earned</p>
+                </div>
+            </div>
+            <h3 class="font-bold text-slate-800 mb-4 text-base md:text-lg">My Team</h3>
+            <div id="ref-list" class="space-y-3 pb-20 md:pb-0"></div>
+        </div>
+
+        <!-- 👤 PROFILE -->
+        <div id="view-profile" class="page-view hidden fade-in pb-20 md:pb-0">
+            <div class="ad-card p-6 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-4 md:gap-6 mb-6 relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-32 h-32 bg-blue-50 dark:bg-blue-900/20 rounded-bl-full -z-0"></div>
+                <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-slate-100 dark:bg-slate-800 border-4 border-white dark:border-slate-700 shadow-md flex items-center justify-center text-3xl md:text-4xl text-slate-300 relative z-10 shrink-0"><i class="fas fa-user"></i></div>
+                <div class="relative z-10 w-full">
+                    <h2 class="text-xl md:text-2xl font-black text-slate-800" id="profile-name">User Name</h2>
+                    <p class="text-slate-500 text-xs md:text-sm font-medium mb-3" id="profile-email">user@email.com</p>
+                    <span class="inline-flex items-center justify-center gap-1 bg-green-100 text-green-700 text-[10px] px-3 py-1.5 rounded-full font-bold uppercase tracking-wide border border-green-200 dark:bg-green-900/30 dark:border-green-800 dark:text-green-400 w-fit mx-auto md:mx-0"><i class="fas fa-check-circle"></i> Verified Publisher</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                <a href="#" id="link-telegram" target="_blank" class="block p-4 md:p-5 rounded-2xl bg-[#229ED9]/10 border border-[#229ED9]/20 text-[#229ED9] hover:bg-[#229ED9] hover:text-white transition group shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/50 dark:bg-slate-800/50 flex items-center justify-center group-hover:bg-white/20 transition"><i class="fab fa-telegram text-xl md:text-2xl"></i></div>
+                        <div>
+                            <span class="font-bold block text-base md:text-lg">Join Telegram</span>
+                            <span class="text-[10px] md:text-xs opacity-80">Official Support Group</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" id="link-whatsapp" target="_blank" class="block p-4 md:p-5 rounded-2xl bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white transition group shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/50 dark:bg-slate-800/50 flex items-center justify-center group-hover:bg-white/20 transition"><i class="fab fa-whatsapp text-xl md:text-2xl"></i></div>
+                        <div>
+                            <span class="font-bold block text-base md:text-lg">WhatsApp Channel</span>
+                            <span class="text-[10px] md:text-xs opacity-80">Daily Updates & Tips</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="ad-card p-5 md:p-6 h-full">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-800 text-base md:text-lg">Account Details</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="text-[10px] md:text-xs text-slate-500 font-bold uppercase tracking-wider">User ID</span>
+                            <span class="font-mono text-slate-700 text-[10px] md:text-xs font-bold bg-white dark:bg-slate-800 px-2 py-1 rounded border dark:border-slate-600 max-w-[120px] truncate" id="profile-uid">...</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="text-[10px] md:text-xs text-slate-500 font-bold uppercase tracking-wider">Phone</span>
+                            <span class="font-mono text-slate-800 font-bold text-xs md:text-sm" id="profile-phone">...</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="text-[10px] md:text-xs text-slate-500 font-bold uppercase tracking-wider">Join Date</span>
+                            <span class="text-slate-800 font-bold text-xs md:text-sm" id="profile-date">...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ad-card p-5 md:p-6 h-full border-t-4 border-t-blue-500">
+                    <h3 class="font-bold text-slate-800 text-base md:text-lg mb-1">Update Details</h3>
+                    <p class="text-[10px] md:text-xs text-slate-500 mb-4">Keep your contact details updated.</p>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 block">Saved Wallet Number</label>
+                            <input type="text" id="prof-wallet-update" class="input-pro bg-white" placeholder="Enter default bKash/Nagad">
+                        </div>
+                        <button onclick="window.updateProfileSettings()" class="w-full btn-outline text-sm py-3"><i class="fas fa-save mr-1"></i> Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
-<!-- Toast -->
-<div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 text-white text-xs font-bold py-3 px-6 rounded-full shadow-lg opacity-0 transition-all duration-300 z-[300] backdrop-blur-md border border-white/10"></div>
-
-<!-- 🧠 MAIN LOGIC -->
+<!-- ==================== LOGIC AND DB ==================== -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, collection, addDoc, query, where, getDocs, increment, orderBy, limit, Timestamp, writeBatch } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, collection, addDoc, query, where, getDocs, increment, limit, Timestamp, writeBatch } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-    // --- ✅ 3D ADVANCED BACKGROUND (Professional Mesh) ---
-    function initStarfield() {
-        const container = document.getElementById('canvas-container');
-        if(!container) return;
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(renderer.domElement);
-        
-        // Geometric Nodes
-        const geometry = new THREE.IcosahedronGeometry(1, 1);
-        const particlesCount = 200;
-        const posArray = new Float32Array(particlesCount * 3);
-        for(let i = 0; i < particlesCount * 3; i++) { posArray[i] = (Math.random() - 0.5) * 12; }
-        
-        const particlesGeometry = new THREE.BufferGeometry();
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        
-        // Professional Blue/Grey color
-        const material = new THREE.PointsMaterial({ size: 0.04, color: 0x2563eb, transparent: true, opacity: 0.6 });
-        const particlesMesh = new THREE.Points(particlesGeometry, material);
-        scene.add(particlesMesh);
-        
-        // Connections
-        const lineMaterial = new THREE.LineBasicMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.15 });
-        const linesGeometry = new THREE.BufferGeometry();
-        const lines = new THREE.LineSegments(linesGeometry, lineMaterial);
-        scene.add(lines);
-
-        camera.position.z = 4;
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => { mouseX = (e.clientX - window.innerWidth / 2) * 0.0002; mouseY = (e.clientY - window.innerHeight / 2) * 0.0002; });
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            particlesMesh.rotation.y += 0.0005;
-            particlesMesh.rotation.y += mouseX * 0.1;
-            particlesMesh.rotation.x += mouseY * 0.1;
-            renderer.render(scene, camera);
-        }
-        animate();
-        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
-    }
-    initStarfield();
-
-    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); } }); }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // --- Firebase Config ---
     const firebaseConfig = {
         apiKey: "AIzaSyCU2RfLeclEyyxzEActtl5ks1P_NPvATOE",
         authDomain: "ns-prime-d7ca5.firebaseapp.com",
@@ -808,643 +847,512 @@
         messagingSenderId: "172231719671",
         appId: "1:172231719671:web:3dafc0ace7b44fbe0071f2",
     };
-
+    
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const IMGBB_API_KEY = "14e7adf7691d5e9344a2c3317d54ae1c"; 
-    const LANDING_HOST = "https://landing-omega-red.vercel.app"; 
+    
+    const LANDING_HOST = "https://landing-omega-red.vercel.app";
 
-    // ✅ GLOBAL ADMIN SETTINGS
-    let adminConfig = {
-        minWithdraw: 10,
-        activeMemberThreshold: 1000, 
-        referCommission: 10, 
-        dailyTaskTarget: 5,
-        dailyClickTarget: 10,
-        dailyTargetBonus: 20,
-        nextPaymentDate: "Daily 6PM",
-        todaysBudget: 15000,
-        coinRate: 100
-    };
+    let currentUser = null;
+    let userData = {};
+    let currentTasks = {}; 
+    let adminConfig = { minWithdraw: 10, telegramLink: "#", whatsappLink: "#", coinRate: 100, adminWhatsapp: "8801905028230", noticeText: "" };
+    let withdrawMethod = 'bkash';
 
-    let currentUser = null, userData = {};
-    let selectedWithdrawMethod = 'bkash'; 
-    let walletUnsubscribe = null;
-    const loader = document.getElementById("loading-screen");
+    const showLoading = (show) => document.getElementById("loading-screen").style.display = show ? "flex" : "none";
+    const notify = (title, icon="success") => Swal.fire({ title, icon, toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true });
 
-    function showToast(msg, type="success") {
-        const t = document.getElementById("toast");
-        t.textContent = msg;
-        // Updated Toast Colors for Light Theme
-        t.style.backgroundColor = type === "success" ? "#10b981" : "#ef4444";
-        t.style.color = "#ffffff";
-        t.style.borderColor = "transparent";
-        t.style.opacity = "1"; t.style.bottom = "100px";
-        setTimeout(() => { t.style.opacity = "0"; t.style.bottom = "80px"; }, 3000);
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark'); themeIcon.classList.replace('fa-moon', 'fa-sun');
     }
+    themeToggleBtn.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        if (document.documentElement.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark'); themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            localStorage.setItem('theme', 'light'); themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+    });
 
-    // --- Calculator ---
-    window.updateCalc = () => {
-        const tasks = document.getElementById("calc-tasks").value;
-        const refs = document.getElementById("calc-ref").value;
-        document.getElementById("calc-tasks-val").innerText = tasks;
-        document.getElementById("calc-ref-val").innerText = refs;
-        const daily = (parseInt(tasks) * 5) + (parseInt(refs) * 2); 
-        const monthly = daily * 30;
-        document.getElementById("calc-total").innerText = monthly;
-    }
-
-    // --- Auth & Data Flow ---
     window.onload = () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const refCode = urlParams.get('ref');
-        if (refCode && !currentUser) {
-            document.getElementById("auth-section").style.display = "flex"; 
-            document.getElementById("auth-section").classList.remove("hidden");
-            document.getElementById("login-form").classList.add("hidden"); 
-            document.getElementById("register-form").classList.remove("hidden");
-            const regInput = document.getElementById("register-join-code");
-            if(regInput) { regInput.value = refCode; }
-        }
-        window.updateCalc();
+        if(urlParams.get('ref')) document.getElementById('reg-code').value = urlParams.get('ref');
     };
 
-    onAuthStateChanged(auth, user => {
-        if(loader) loader.style.display = "none";
+    onAuthStateChanged(auth, async (user) => {
+        showLoading(false);
         if (user) {
             currentUser = user;
-            document.getElementById("landing-page-wrapper").style.display = "none";
-            document.getElementById("auth-section").style.display = "none";
-            document.getElementById("main-app").classList.remove("hidden");
+            document.getElementById("landing-page").style.display = "none";
+            document.getElementById("dashboard-app").classList.remove("hidden");
             
-            // Load Settings
-            onSnapshot(doc(db, "settings", "config"), (docSnap) => {
-                if (docSnap.exists()) {
-                    adminConfig = { ...adminConfig, ...docSnap.data() };
-                    updateTargetUI();
-                    updateWalletUI();
-                } else {
-                    setDoc(doc(db, "settings", "config"), adminConfig);
-                }
-            });
-
-            // Load User Data
-            onSnapshot(doc(db, "users", user.uid), async (docSnap) => {
-                if (docSnap.exists()) {
-                    userData = docSnap.data();
-
-                    // Daily Reset
-                    const todayStr = new Date().toDateString();
-                    if (userData.lastActiveDate !== todayStr) {
-                        try {
-                            const userRef = doc(db, "users", user.uid);
-                            await updateDoc(userRef, {
-                                lastActiveDate: todayStr,
-                                todayEarning: 0,
-                                rawTodayImpressions: 0,
-                                todayTaskCount: 0
-                            });
-                        } catch (error) { console.error("Error resetting daily stats:", error); }
-                    }
-
-                    updateUI(userData);
-                    updateTargetUI(); 
-                    if(userData.savedAccounts && userData.savedAccounts[selectedWithdrawMethod]) {
-                        document.getElementById("main-withdraw-account").value = userData.savedAccounts[selectedWithdrawMethod];
-                    }
-                }
-            });
+            // 🔥 CRITICAL FIX: Auto Create User Doc if missing
+            const userRef = doc(db, "users", currentUser.uid);
+            const userSnap = await getDoc(userRef);
+            if (!userSnap.exists()) {
+                await setDoc(userRef, {
+                    uid: currentUser.uid, 
+                    name: currentUser.displayName || "User", 
+                    email: currentUser.email || "", 
+                    phone: "", 
+                    joinedVia: "Direct", 
+                    balance: 0, coins: 0, totalEarnings: 0, referralEarnings: 0, 
+                    referralCode: "USR" + Math.floor(1000+Math.random()*9000),
+                    teamSize: 0, 
+                    joinDate: Timestamp.now(), 
+                    lastActiveDate: new Date().toDateString(), 
+                    todayEarning: 0, todayTaskCount: 0, rawTodayImpressions: 0
+                });
+            }
             
-            if(window.switchTaskTab) switchTaskTab('available');
+            initDashboard();
         } else {
             currentUser = null;
-            document.getElementById("main-app").classList.add("hidden");
-            document.getElementById("landing-page-wrapper").style.display = "block";
+            document.getElementById("landing-page").style.display = "block";
+            document.getElementById("dashboard-app").classList.add("hidden");
         }
     });
 
-    // --- UI Updates ---
-    function updateUI(data) {
-        if (!data) return;
-        document.getElementById("header-balance").textContent = `${(data.balance || 0).toFixed(2)}`;
-        document.getElementById("header-coins").textContent = (data.coins || 0);
-        document.getElementById("wallet-available-balance").textContent = `৳${(data.balance || 0).toFixed(2)}`;
-        document.getElementById("wallet-coin-balance").textContent = (data.coins || 0);
-        document.getElementById("user-name").textContent = (data.name || "User").split(' ')[0].toUpperCase();
-        document.getElementById("today-earnings-stat").textContent = `৳${(data.todayEarning || 0).toFixed(2)}`;
-        document.getElementById("total-earnings-stat").textContent = `৳${(data.totalEarnings || 0).toFixed(2)}`;
-        document.getElementById("today-impression").textContent = data.rawTodayImpressions || 0;
-        document.getElementById("home-refer-commission").textContent = `৳${(data.referralEarnings || 0).toFixed(2)}`;
-        document.getElementById("refer-team-size").textContent = data.teamSize || 0;
-        document.getElementById("referral-code-display").textContent = data.referralCode || "Generating...";
-        document.getElementById("profile-info-name").textContent = data.name || "No Name";
-        document.getElementById("profile-phone").textContent = data.phone || "Not Set";
-        document.getElementById("profile-email").textContent = currentUser.email;
-        document.getElementById("profile-uid").textContent = currentUser.uid;
-        let joinDateStr = "N/A";
-        if(data.joinDate && data.joinDate.toDate) { joinDateStr = data.joinDate.toDate().toLocaleDateString('en-GB'); }
-        document.getElementById("profile-join-date").textContent = joinDateStr;
-        document.getElementById("profile-refer-code").textContent = data.referralCode || "...";
-        updateMarketingLink();
-    }
-
-    function updateTargetUI() {
-        document.getElementById("active-threshold-display").textContent = adminConfig.activeMemberThreshold;
-        document.getElementById("target-bonus-display").textContent = adminConfig.dailyTargetBonus || 20;
-        document.getElementById("admin-task-target").textContent = adminConfig.dailyTaskTarget || 5;
-        document.getElementById("admin-click-target").textContent = adminConfig.dailyClickTarget || 10;
-        const tasksDone = userData.todayTaskCount || 0;
-        const clicksDone = userData.rawTodayImpressions || 0;
-        document.getElementById("user-task-done").textContent = tasksDone;
-        document.getElementById("user-click-done").textContent = clicksDone;
-        const taskPercent = Math.min((tasksDone / adminConfig.dailyTaskTarget) * 100, 100);
-        const clickPercent = Math.min((clicksDone / adminConfig.dailyClickTarget) * 100, 100);
-        document.getElementById("target-task-bar").style.width = `${taskPercent}%`;
-        document.getElementById("target-click-bar").style.width = `${clickPercent}%`;
-    }
-
-    function updateWalletUI() {
-        document.getElementById("min-withdraw-display").textContent = `Min Withdraw: ৳${adminConfig.minWithdraw}`;
-        document.getElementById("main-withdraw-amount").placeholder = `Min ${adminConfig.minWithdraw}`;
-        document.getElementById("next-payment-date").textContent = adminConfig.nextPaymentDate || "Daily";
-        document.getElementById("todays-budget").textContent = adminConfig.todaysBudget || "0";
-    }
-
-    document.getElementById("copy-profile-ref").onclick = () => {
-        navigator.clipboard.writeText(document.getElementById("profile-refer-code").textContent);
-        showToast("Refer Code Copied!", "success");
-    }
-
-    function updateMarketingLink() {
-        if (!currentUser) return;
-        const type = document.getElementById("link-type-selector").value;
-        const link = `${LANDING_HOST}/index.html?ref=${currentUser.uid}&type=${type}`;
-        document.getElementById("marketing-link-input").value = link;
-    }
-    document.getElementById("link-type-selector").addEventListener("change", updateMarketingLink);
-
-    // --- Auth Buttons ---
-    const authSec = document.getElementById("auth-section");
-    const loginForm = document.getElementById("login-form");
-    const regForm = document.getElementById("register-form");
-
-    document.querySelectorAll('.nav-auth-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            authSec.style.display = "flex"; authSec.classList.remove("hidden");
-            if(btn.dataset.auth === 'register') { loginForm.classList.add("hidden"); regForm.classList.remove("hidden"); } 
-            else { loginForm.classList.remove("hidden"); regForm.classList.add("hidden"); }
+    function initDashboard() {
+        onSnapshot(doc(db, "settings", "config"), (snap) => {
+            if(snap.exists()) {
+                adminConfig = { ...adminConfig, ...snap.data() };
+                document.getElementById('min-with-display').textContent = adminConfig.minWithdraw || 10;
+                document.getElementById('link-telegram').href = adminConfig.telegramLink || "#";
+                document.getElementById('link-whatsapp').href = adminConfig.whatsappLink || "#";
+                
+                const noticeDiv = document.getElementById('admin-notice');
+                if(adminConfig.noticeText && adminConfig.noticeText.trim() !== "") {
+                    document.getElementById('admin-notice-text').textContent = adminConfig.noticeText;
+                    noticeDiv.classList.remove('hidden');
+                } else { noticeDiv.classList.add('hidden'); }
+            }
         });
+
+        onSnapshot(doc(db, "users", currentUser.uid), async (snap) => {
+            if(snap.exists()) {
+                userData = snap.data();
+                
+                try {
+                    if(userData.lastActiveDate !== new Date().toDateString()) {
+                        await updateDoc(doc(db, "users", currentUser.uid), { lastActiveDate: new Date().toDateString(), todayEarning: 0, todayTaskCount: 0, rawTodayImpressions: 0 });
+                        userData.todayEarning = 0; userData.rawTodayImpressions = 0;
+                    }
+                    
+                    // Fixed: Force create referral code if missing
+                    if(!userData.referralCode) {
+                        const newCode = "USR" + Math.floor(1000+Math.random()*9000);
+                        await updateDoc(doc(db, "users", currentUser.uid), { referralCode: newCode });
+                        userData.referralCode = newCode;
+                    }
+                } catch(err) {}
+                
+                updateUI(userData);
+            }
+        });
+
+        loadTasks();
+        window.loadTaskHistory();
+        window.loadWalletHistory();
+        loadLiveTicker();
+    }
+
+    function updateUI(u) {
+        document.getElementById('user-display-name').textContent = u.name ? u.name.split(' ')[0] : 'User';
+        document.getElementById('top-balance').textContent = parseFloat(u.balance || 0).toFixed(2);
+        document.getElementById('profile-name').textContent = u.name || 'User';
+        document.getElementById('profile-email').textContent = u.email || '';
+        document.getElementById('profile-uid').textContent = u.uid || '';
+        document.getElementById('profile-phone').textContent = u.phone || '-';
+        document.getElementById('profile-date').textContent = u.joinDate && u.joinDate.toDate ? u.joinDate.toDate().toLocaleDateString() : '-';
+        
+        document.getElementById('stat-total-earn').textContent = parseFloat(u.totalEarnings || 0).toFixed(2);
+        document.getElementById('stat-today-earn').textContent = parseFloat(u.todayEarning || 0).toFixed(2);
+        document.getElementById('stat-clicks').textContent = u.rawTodayImpressions || 0;
+        document.getElementById('stat-coins').textContent = u.coins || 0;
+        
+        document.getElementById('wallet-bal').textContent = parseFloat(u.balance || 0).toFixed(2);
+        document.getElementById('swap-coin-bal').textContent = u.coins || 0;
+        document.getElementById('swap-val').textContent = (parseFloat(u.coins || 0) / (adminConfig.coinRate || 100)).toFixed(2);
+        if(u.savedWallet) document.getElementById('prof-wallet-update').value = u.savedWallet;
+        
+        document.getElementById('ref-code-display').textContent = u.referralCode || 'N/A';
+        document.getElementById('ref-count').textContent = u.teamSize || 0;
+        document.getElementById('ref-earn').textContent = '৳' + parseFloat(u.referralEarnings || 0).toFixed(0);
+
+        window.updateSmartLink();
+    }
+
+    const pages = document.querySelectorAll('.page-view');
+    const navHandler = (pageId) => {
+        pages.forEach(p => p.classList.add('hidden'));
+        document.getElementById(`view-${pageId}`).classList.remove('hidden');
+        document.getElementById('page-title').textContent = pageId.charAt(0).toUpperCase() + pageId.slice(1);
+        
+        document.querySelectorAll('.sidebar-link, .dock-btn').forEach(l => l.classList.remove('active'));
+        document.querySelectorAll(`[data-page="${pageId}"]`).forEach(l => l.classList.add('active'));
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if(pageId === 'refer') window.loadReferrals();
+        if(pageId === 'wallet') window.loadWalletHistory();
+        if(pageId === 'tasks') window.loadTaskHistory();
+    };
+    document.querySelectorAll('.sidebar-link, .dock-btn').forEach(btn => {
+        btn.addEventListener('click', () => navHandler(btn.dataset.page));
     });
 
-    document.getElementById("close-auth").onclick = () => authSec.style.display = "none";
-    document.getElementById("show-register").onclick = () => { loginForm.classList.add("hidden"); regForm.classList.remove("hidden"); };
-    document.getElementById("show-login").onclick = () => { loginForm.classList.remove("hidden"); regForm.classList.add("hidden"); };
-
-    document.getElementById("login-form-element").onsubmit = async (e) => {
-        e.preventDefault();
-        try { await signInWithEmailAndPassword(auth, document.getElementById("login-email").value, document.getElementById("login-password").value); } 
-        catch(err) { showToast("Invalid Credentials", "error"); }
+    window.updateSmartLink = () => {
+        if(!currentUser) return;
+        const cat = document.getElementById('sl-category').value;
+        const link = `${LANDING_HOST}/index.html?ref=${currentUser.uid}&type=${cat}`;
+        document.getElementById('sl-output').value = link;
     };
-
-    document.getElementById("register-form-element").onsubmit = async (e) => {
-        e.preventDefault(); 
-        const btn = e.target.querySelector('button'); 
-        btn.disabled = true; btn.innerText = "Creating...";
-        try {
-            const email = document.getElementById("register-email").value;
-            const password = document.getElementById("register-password").value;
-            const name = document.getElementById("register-name").value;
-            const phone = document.getElementById("register-phone").value;
-            const joinCode = document.getElementById("register-join-code").value;
-
-            const cred = await createUserWithEmailAndPassword(auth, email, password);
-            await updateProfile(cred.user, { displayName: name });
-            const defaultRefCode = name.substring(0,3).toUpperCase() + Math.floor(1000 + Math.random() * 9000);
-
-            const batch = writeBatch(db); 
-            const ref = doc(db, "users", cred.user.uid);
-            let referrerUid = null;
-            if(joinCode) {
-               const q = query(collection(db, "users"), where("referralCode", "==", joinCode));
-               const rs = await getDocs(q);
-               if(!rs.empty) {
-                   referrerUid = rs.docs[0].id;
-                   batch.update(doc(db, "users", referrerUid), { teamSize: increment(1) });
-               }
-            }
-            batch.set(ref, {
-                uid: cred.user.uid, email: email, name: name, phone: phone, 
-                joinedVia: joinCode || "None", referrerUid: referrerUid, joinDate: Timestamp.now(), 
-                balance: 0, coins: 0, totalEarnings: 0, referralCode: defaultRefCode, 
-                teamSize: 0, rawTodayImpressions: 0, todayEarning: 0, todayTaskCount: 0, 
-                savedAccounts: {}, referralEarnings: 0, lastActiveDate: new Date().toDateString(),
-                lastWithdrawalTime: null // Init for cooldown logic
-            });
-            await batch.commit();
-            showToast("Welcome to NS PRIME!", "success");
-        } catch(err) { showToast(err.message, "error"); } finally { btn.disabled = false; btn.innerText = "Create Account"; }
-    };
+    document.getElementById('sl-category').addEventListener('change', window.updateSmartLink);
     
-    document.getElementById("logout-btn").onclick = () => signOut(auth);
-
-    // --- Navigation ---
-    const dockItems = document.querySelectorAll('.dock-item');
-    dockItems.forEach(item => {
-        item.addEventListener('click', () => {
-            dockItems.forEach(i => i.classList.remove('active')); 
-            item.classList.add('active');
-            
-            document.getElementById("main-app").querySelectorAll('section').forEach(sec => {
-                sec.classList.add('hidden');
-                sec.classList.remove('visible');
+    // 🔥 FIXED: Smart Link Copy fallback logic for mobile
+    window.copySmartLink = () => {
+        const copyText = document.getElementById("sl-output");
+        if(copyText.value.includes("Click Generate") || copyText.value.trim() === "") {
+            notify('Generate a link first!', 'warning');
+            return;
+        }
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); 
+        try {
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                notify('Link Copied to Clipboard!');
             });
-            
-            const target = document.getElementById(item.dataset.section);
-            target.classList.remove('hidden'); 
-            setTimeout(() => target.classList.add('visible'), 50);
-
-            if(item.dataset.section === 'tasks') switchTaskTab('available');
-            if(item.dataset.section === 'wallet') loadWalletHistory();
-            if(item.dataset.section === 'refer') { loadReferralData(); loadLivePayouts(); }
-        });
-    });
-
-    // --- Referral & Ticker ---
-    async function loadReferralData() {
-        if(!userData.referralCode) return;
-        const container = document.getElementById("referral-list-container");
-        container.innerHTML = '<p class="text-center text-slate-400 text-xs mt-2">Loading team...</p>';
-        try {
-            const q = query(collection(db, "users"), where("joinedVia", "==", userData.referralCode));
-            const snapshot = await getDocs(q);
-            container.innerHTML = "";
-            let totalCount = 0;
-            let activeCount = 0;
-            const threshold = adminConfig.activeMemberThreshold || 1000;
-            if (snapshot.empty) {
-                container.innerHTML = '<p class="text-center text-slate-400 text-xs mt-4">No team members yet. Share your code!</p>';
-            } else {
-                snapshot.forEach(doc => {
-                    const u = doc.data();
-                    totalCount++;
-                    const earnings = u.totalEarnings || 0;
-                    const isActive = earnings >= threshold;
-                    if(isActive) activeCount++;
-                    container.innerHTML += `<div class="flex items-center justify-between bg-slate-50 p-2 rounded border border-slate-100 mb-2"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full ${isActive ? 'bg-green-100 text-green-600' : 'bg-slate-200 text-slate-500'} flex items-center justify-center text-xs font-bold">${totalCount}</div><div><p class="text-slate-700 text-xs font-bold">${u.name}</p><p class="text-[9px] text-slate-400">Earned: ৳${earnings.toFixed(0)}</p></div></div><span class="text-[9px] ${isActive ? 'bg-green-500 text-white' : 'bg-slate-300 text-slate-600'} px-2 py-0.5 rounded font-bold">${isActive ? 'ACTIVE' : 'INACTIVE'}</span></div>`;
-                });
-            }
-            document.getElementById("active-team-size").textContent = activeCount;
-            document.getElementById("refer-team-size").textContent = totalCount;
-            const p50 = Math.min((activeCount / 50) * 100, 100);
-            document.getElementById("milestone-50-bar").style.width = `${p50}%`;
-            document.getElementById("milestone-50-text").textContent = `${activeCount}/50`;
-            const p100 = Math.min((activeCount / 100) * 100, 100);
-            document.getElementById("milestone-100-bar").style.width = `${p100}%`;
-            document.getElementById("milestone-100-text").textContent = `${activeCount}/100`;
-        } catch (error) { container.innerHTML = '<p class="text-center text-red-400 text-xs">Error loading team data</p>'; }
-    }
-    
-    async function loadLivePayouts() {
-        const ticker = document.getElementById("live-payout-ticker");
-        const q = query(collection(db, "withdrawal_requests"), where("status", "==", "approved"), limit(10));
-        try {
-            const snaps = await getDocs(q);
-            let html = "";
-            if(!snaps.empty) {
-                 snaps.forEach(doc => {
-                     const d = doc.data();
-                     const name = d.userName ? d.userName.split(" ")[0] : "User";
-                     html += `<div class="ticker-item">${name} just withdrew <span>৳${d.amount}</span> via ${d.method.toUpperCase()}</div>`;
-                 });
-            } else {
-                 const dummies = ["Rahim", "Karim", "Sumi", "Nadia", "Rakib", "Tania"];
-                 const methods = ["bKash", "Nagad"];
-                 dummies.forEach(d => {
-                     html += `<div class="ticker-item">${d} just withdrew <span>৳${Math.floor(Math.random()*500)+500}</span> via ${methods[Math.floor(Math.random()*2)]}</div>`;
-                 });
-            }
-            ticker.innerHTML = html;
-        } catch(e) { console.log("Ticker load error", e); }
-    }
-
-    // --- Support ---
-    let supportUnsub = null;
-    document.getElementById("open-support-btn").onclick = () => {
-        const modal = document.getElementById("support-modal-overlay");
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-        loadSupportMessages();
-    };
-    document.getElementById("close-support-modal").onclick = () => {
-        const modal = document.getElementById("support-modal-overlay");
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-        if(supportUnsub) supportUnsub(); 
+        } catch (err) {
+            document.execCommand("copy");
+            notify('Link Copied to Clipboard!');
+        }
     };
 
-    function loadSupportMessages() {
-        const container = document.getElementById("support-messages");
-        container.innerHTML = '<div class="spinner mx-auto" style="width:20px;height:20px;"></div>';
-        const q = query(collection(db, "support_tickets"), where("userId", "==", currentUser.uid), orderBy("timestamp", "asc"));
-        supportUnsub = onSnapshot(q, (snapshot) => {
-            container.innerHTML = "";
-            if (snapshot.empty) {
-                container.innerHTML = '<div class="text-center text-slate-400 text-xs mt-10"><i class="fas fa-comments text-2xl mb-2"></i><br>Start a conversation with Support</div>';
-                return;
-            }
-            snapshot.forEach((doc) => {
-                const msg = doc.data();
-                const isUser = msg.sender === "user";
-                const date = msg.timestamp ? msg.timestamp.toDate().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : "";
-                const bubble = document.createElement("div");
-                bubble.style.cssText = `display:flex; justify-content:${isUser ? 'flex-end' : 'flex-start'}; margin-bottom:10px;`;
-                const inner = document.createElement("div");
-                inner.className = `chat-bubble ${isUser ? 'chat-user' : 'chat-admin'}`;
-                inner.innerHTML = `<p>${msg.message}</p><div class="text-[9px] opacity-70 text-right mt-1">${date}</div>`;
-                bubble.appendChild(inner);
-                container.appendChild(bubble);
-            });
-            setTimeout(() => { container.scrollTop = container.scrollHeight; }, 100);
-        });
-    }
-
-    document.getElementById("support-form").onsubmit = async (e) => {
-        e.preventDefault();
-        const input = document.getElementById("support-input");
-        const message = input.value.trim();
-        if(!message) return;
-        const oldVal = input.value; 
-        input.value = ""; 
+    // 🔥 FIXED: Referral Code Copy fallback logic for mobile
+    window.copyReferralCode = () => {
+        const text = document.getElementById('ref-code-display').textContent;
+        if(text === "LOADING" || text === "N/A") {
+            notify('Code not ready!', 'warning');
+            return;
+        }
         try {
-            await addDoc(collection(db, "support_tickets"), {
-                userId: currentUser.uid, userName: userData.name || "User", message: message, sender: "user", timestamp: Timestamp.now(), status: "unread"
-            });
-        } catch(e) { showToast("Message Failed", "error"); input.value = oldVal; }
-    };
-
-    // --- TASKS LOAD ---
-    window.switchTaskTab = (tab) => {
-        const list = document.getElementById("tasks-list"); 
-        const histList = document.getElementById("tasks-history-list");
-        if(tab === 'available') {
-            list.classList.remove('hidden'); histList.classList.add('hidden');
-            loadTasks();
-            document.getElementById('tab-btn-available').className = "flex-1 py-3 text-xs font-bold rounded-lg bg-white text-blue-600 shadow-sm transition";
-            document.getElementById('tab-btn-history').className = "flex-1 py-3 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-600 transition";
-        } else {
-            list.classList.add('hidden'); histList.classList.remove('hidden');
-            loadHistory('task_submissions', 'tasks-history-list');
-            document.getElementById('tab-btn-history').className = "flex-1 py-3 text-xs font-bold rounded-lg bg-white text-blue-600 shadow-sm transition";
-            document.getElementById('tab-btn-available').className = "flex-1 py-3 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-600 transition";
+            navigator.clipboard.writeText(text).then(() => notify('Invite Code Copied!'));
+        } catch(err) {
+            const temp = document.createElement("input");
+            temp.value = text; document.body.appendChild(temp);
+            temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
+            notify('Invite Code Copied!');
         }
     };
 
     async function loadTasks() {
-        const container = document.getElementById("tasks-list");
-        container.innerHTML = '<div class="flex justify-center p-4"><div class="spinner" style="width:30px;height:30px;"></div></div>';
+        const container = document.getElementById('task-container');
         try {
-            const historyQ = query(collection(db, "task_submissions"), where("userId", "==", currentUser.uid));
-            const historySnap = await getDocs(historyQ);
-            const myValidSubmissions = historySnap.docs.map(doc => doc.data()).filter(s => s.status !== 'rejected');
-            const q = query(collection(db, "tasks"), where("active", "==", true));
-            const snaps = await getDocs(q);
-            container.innerHTML = ""; 
-            const isToday = (timestamp) => {
-                if(!timestamp) return false;
-                const d = timestamp.toDate();
-                const today = new Date();
-                return d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
-            };
-
-            let availableTasks = [];
-            let totalPotentialReward = 0; 
-
+            const snaps = await getDocs(collection(db, "tasks"));
+            let html = ''; let totalReward = 0; currentTasks = {}; 
+            
             snaps.forEach(doc => {
                 const t = doc.data();
-                const taskId = doc.id;
-                let rawGlobal = t.globalLimit !== undefined ? t.globalLimit : t.limit;
-                const globalLimit = rawGlobal ? parseInt(rawGlobal) : 0;
-                const completedGlobal = t.completedCount ? parseInt(t.completedCount) : 0;
-                const dailyLimit = t.dailyLimit ? parseInt(t.dailyLimit) : 1;
-                
-                if (globalLimit > 0 && completedGlobal >= globalLimit) return; 
-
-                const mySubsForTask = myValidSubmissions.filter(s => s.taskId === taskId);
-                const isDaily = (t.taskType && t.taskType.toLowerCase() === 'daily');
-
-                if (!isDaily && mySubsForTask.length > 0) return; 
-                if (isDaily) {
-                    const todayCount = mySubsForTask.filter(s => isToday(s.submittedAt)).length;
-                    if (todayCount >= dailyLimit) return; 
+                if(t.active === true || t.active === "true") {
+                    const rwd = parseInt(t.reward) || 0;
+                    totalReward += rwd;
+                    currentTasks[doc.id] = { ...t, reward: rwd };
+                    
+                    html += `
+                    <div class="ad-card p-4 md:p-5 border-t-4 border-t-indigo-500 hover:shadow-lg transition flex flex-col h-full">
+                        <div class="pr-2 mb-3">
+                            <h4 class="font-bold text-slate-800 text-base md:text-lg leading-tight line-clamp-2">${t.title}</h4>
+                            <p class="text-[10px] md:text-xs text-slate-500 mt-1.5 line-clamp-2">${t.description}</p>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase">Reward</span>
+                                <span class="bg-yellow-100 text-yellow-700 text-xs font-black px-2.5 py-1 rounded dark:bg-yellow-900/30 dark:text-yellow-400">+${rwd} <i class="fas fa-coins text-[10px]"></i></span>
+                            </div>
+                            <button onclick="window.openTaskModal('${doc.id}')" class="w-full py-3 bg-indigo-50 text-indigo-600 text-xs md:text-sm font-bold rounded-lg hover:bg-indigo-600 hover:text-white transition dark:bg-slate-800 dark:text-indigo-400"><i class="fas fa-eye mr-1"></i> VIEW DETAILS</button>
+                        </div>
+                    </div>`;
                 }
-
-                availableTasks.push({ id: taskId, ...t, displayLimit: globalLimit > 0 ? globalLimit : '∞', displayCompleted: completedGlobal });
-                totalPotentialReward += parseFloat(t.reward || 0);
             });
-
-            document.getElementById("total-available-task-reward").innerText = totalPotentialReward.toFixed(0);
-
-            availableTasks.sort((a, b) => {
-                const aVip = a.reward > 500 ? 1 : 0;
-                const bVip = b.reward > 500 ? 1 : 0;
-                if (aVip !== bVip) return bVip - aVip; 
-                return b.reward - a.reward; 
-            });
-
-            if (availableTasks.length === 0) {
-                container.innerHTML = '<p class="text-center text-slate-400 text-xs py-4">NO JOBS AVAILABLE RIGHT NOW</p>';
-                return;
-            }
-
-            availableTasks.forEach(t => {
-                const isVip = t.reward > 500;
-                const el = document.createElement("div");
-                const cardClass = isVip ? "pro-card vip-card p-4 flex justify-between items-center cursor-pointer mb-3 shadow-sm hover:shadow-md" : "pro-card p-4 flex justify-between items-center cursor-pointer hover:shadow-md transition mb-3 bg-white";
-                const iconClass = isVip ? "w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center text-yellow-600" : "w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500";
-                
-                el.className = cardClass;
-                el.innerHTML = `
-                <div class="flex items-center gap-4">
-                    <div class="${iconClass}">
-                        <i class="fas ${isVip ? 'fa-crown' : 'fa-check-circle'}"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold ${isVip ? 'text-yellow-700' : 'text-slate-800'} text-sm">${t.title}</h4>
-                        <p class="text-[10px] text-slate-400 font-semibold">Reward: <span class="text-amber-500 font-bold">${t.reward} 🪙</span> | Spots: ${t.displayCompleted}/${t.displayLimit}</p>
-                    </div>
-                </div>
-                <div class="font-bold ${isVip ? 'text-white bg-yellow-500 px-3 py-1 rounded-full' : 'text-blue-600 bg-blue-50 px-3 py-1 rounded-full'} text-xs">START</div>`;
-                el.onclick = () => window.openTask(t.id, t);
-                container.appendChild(el);
-            });
-        } catch(e) { container.innerHTML = '<p class="text-center text-red-400 text-xs">Loading Error</p>'; }
+            container.innerHTML = html || '<p class="col-span-full text-center text-slate-400 py-10 font-medium">No active campaigns at the moment.</p>';
+            document.getElementById('pool-reward').textContent = totalReward;
+        } catch (e) { container.innerHTML = '<p class="col-span-full text-center text-red-400 py-10 font-medium">Failed to load campaigns.</p>'; }
     }
 
-    window.openTask = (id, task) => {
-        document.getElementById("modal-task-title").textContent = task.title;
-        document.getElementById("modal-task-reward").textContent = `${task.reward} 🪙`;
-        document.getElementById("modal-task-desc").textContent = task.description;
-        document.getElementById("modal-task-link").href = task.link;
-        const imgBox = document.getElementById("modal-task-images"); imgBox.innerHTML = "";
-        if(task.images) task.images.forEach(url => { imgBox.innerHTML += `<img src="${url}" class="w-full h-24 object-cover rounded border border-slate-200" onclick="window.open('${url}')">`; });
-        const modal = document.getElementById("task-modal-overlay"); 
-        modal.classList.remove("hidden"); modal.classList.add("flex");
-        window.currentTask = { id, ...task };
-    }
-    document.getElementById("close-task-modal").onclick = () => { const m = document.getElementById("task-modal-overlay"); m.classList.add("hidden"); m.classList.remove("flex"); };
+    window.openTaskModal = (id) => {
+        const t = currentTasks[id];
+        if(!t) return;
+        document.getElementById('tm-id').value = id;
+        document.getElementById('tm-title').textContent = t.title;
+        document.getElementById('tm-desc').textContent = t.description;
+        document.getElementById('tm-reward').textContent = t.reward;
+        document.getElementById('tm-link').href = t.link;
+        document.getElementById('tm-text-proof').value = '';
+        document.getElementById('tm-img-proof').value = '';
+        const modal = document.getElementById('task-submit-modal');
+        modal.classList.remove('hidden'); modal.classList.add('flex');
+    };
 
-    document.getElementById("proof-submission-form").onsubmit = async (e) => {
-        e.preventDefault(); 
-        const btn = e.target.querySelector('button'); 
-        btn.disabled = true; btn.innerText = "Uploading...";
-        const file = document.getElementById("proof-file").files[0]; 
-        let imgUrl = "No Image";
+    document.getElementById('close-task-modal').onclick = () => {
+        const modal = document.getElementById('task-submit-modal');
+        modal.classList.add('hidden'); modal.classList.remove('flex');
+    };
+
+    document.getElementById('task-proof-form').onsubmit = async (e) => {
+        e.preventDefault();
+        if(!currentUser) return;
+        const tId = document.getElementById('tm-id').value;
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Submitting...'; btn.disabled = true;
+
         try {
-            if(file) {
-                const fd = new FormData(); fd.append("image", file);
-                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: fd }); 
-                const j = await res.json(); 
-                if(j.success) imgUrl = j.data.url;
-            }
             await addDoc(collection(db, "task_submissions"), {
-                userId: currentUser.uid, userName: userData.name, taskId: window.currentTask.id, taskTitle: window.currentTask.title,
-                reward: window.currentTask.reward, proofText: document.getElementById("proof-text").value, proofImage: imgUrl, status: "pending", submittedAt: Timestamp.now()
+                userId: currentUser.uid, userName: userData.name || 'User', taskId: tId, taskTitle: currentTasks[tId].title,
+                reward: parseInt(currentTasks[tId].reward) || 0, textProof: document.getElementById('tm-text-proof').value, 
+                imageProof: document.getElementById('tm-img-proof').value || '', status: "pending", timestamp: Timestamp.now()
             });
-            const taskRef = doc(db, "tasks", window.currentTask.id);
-            await updateDoc(taskRef, { completedCount: increment(1) });
-            showToast("Proof Sent! Coins pending approval.", "success"); 
-            document.getElementById("close-task-modal").click(); 
-            if(window.switchTaskTab) switchTaskTab('available');
-        } catch(e) { showToast(e.message, "error"); } finally { btn.disabled = false; btn.innerText = "SUBMIT PROOF"; }
+            Swal.fire({ title: 'Submitted!', text: 'Your proof is pending review.', icon: 'success', confirmButtonColor: '#2563eb' });
+            document.getElementById('close-task-modal').click();
+            window.loadTaskHistory(); 
+        } catch(err) { notify('Submission failed. Try again.', 'error'); } 
+        finally { btn.innerHTML = originalText; btn.disabled = false; }
     };
 
-    // --- Converter ---
-    document.getElementById("convert-coin-btn").onclick = async () => {
-        const input = document.getElementById("convert-amount-input");
-        const amount = parseInt(input.value);
-        const userCoins = userData.coins || 0;
-        const rate = adminConfig.coinRate || 100;
-        if(isNaN(amount) || amount <= 0) return showToast("Enter valid coin amount", "error");
-        if(amount > userCoins) return showToast("Insufficient Coins!", "error");
-        const takaAmount = amount / rate;
+    // 🔥 FIXED: Task History Sort Safe Check Error Fix
+    window.loadTaskHistory = async () => {
+        if(!currentUser) return;
+        const tbody = document.getElementById('task-history-list');
+        tbody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-slate-400 font-medium"><i class="fas fa-spinner fa-spin mr-2"></i> Loading...</td></tr>';
         try {
-            const userRef = doc(db, "users", currentUser.uid);
-            await updateDoc(userRef, { coins: increment(-amount), balance: increment(takaAmount) });
-            showToast(`Converted ${amount} coins to ৳${takaAmount.toFixed(2)}`, "success");
-            input.value = "";
-        } catch(e) { showToast("Conversion Failed", "error"); }
-    };
-
-    // --- Wallet ---
-    window.handleWithdrawMethodChange = (method) => {
-        selectedWithdrawMethod = method;
-        const btns = ['bkash', 'nagad', 'usdt'];
-        btns.forEach(m => {
-            const btn = document.getElementById(`w-method-${m}`);
-            if (m === method) {
-                btn.className = "flex-1 py-2 rounded-md text-xs font-bold bg-blue-600 text-white shadow-sm transition";
-            } else {
-                btn.className = "flex-1 py-2 rounded-md text-xs font-bold text-slate-500 hover:bg-white hover:text-slate-800 transition";
-            }
-        });
-        const label = document.getElementById('w-account-label');
-        const input = document.getElementById('main-withdraw-account');
-        if(method === 'usdt') {
-            label.textContent = "USDT (TRC20) Address";
-            input.placeholder = "Txxxxxxxx...";
-        } else {
-            label.textContent = `${method.toUpperCase()} Number`;
-            input.placeholder = "017xxxxxxxx";
-        }
-        if(userData.savedAccounts && userData.savedAccounts[method]) {
-            input.value = userData.savedAccounts[method];
-        } else {
-            input.value = "";
-        }
-    };
-
-    // --- ✅ UPDATED WITHDRAWAL LOGIC (24H COOLDOWN) ---
-    document.getElementById("main-withdraw-request-btn").onclick = async () => {
-         const amt = parseFloat(document.getElementById("main-withdraw-amount").value);
-         const acc = document.getElementById("main-withdraw-account").value;
-         const min = adminConfig.minWithdraw || 10;
-
-         // 1. Basic Validation
-         if(isNaN(amt) || amt < min) return showToast(`Minimum Withdrawal is ৳${min}`, "error");
-         if(userData.balance < amt) return showToast("Insufficient Balance", "error");
-         if(!acc || acc.length < 5) return showToast("Invalid Account Number", "error");
-
-         // 2. Check 24 Hour Cooldown
-         if (userData.lastWithdrawalTime) {
-             const now = new Date();
-             const last = userData.lastWithdrawalTime.toDate();
-             const diffMs = now - last;
-             const diffHours = diffMs / (1000 * 60 * 60);
-
-             if (diffHours < 24) {
-                 const remainingHours = Math.ceil(24 - diffHours);
-                 showToast(`Please wait ${remainingHours} hours before next request.`, "error");
-                 return;
-             }
-         }
-
-         try {
-            const batch = writeBatch(db);
-            const userRef = doc(db, "users", currentUser.uid);
-            const wRef = doc(collection(db, "withdrawal_requests"));
+            const snap = await getDocs(query(collection(db, "task_submissions"), where("userId", "==", currentUser.uid), limit(20)));
+            let records = []; snap.forEach(d => records.push(d.data()));
             
-            // Set Request
-            batch.set(wRef, { userId: currentUser.uid, userName: userData.name, amount: amt, method: selectedWithdrawMethod, accountNumber: acc, status: "pending", timestamp: Timestamp.now() });
-            
-            // Update User (Deduct Balance + Set Last Withdrawal Time)
-            batch.update(userRef, { 
-                balance: increment(-amt), 
-                [`savedAccounts.${selectedWithdrawMethod}`]: acc,
-                lastWithdrawalTime: Timestamp.now() // ✅ Sets current time for cooldown
+            // Crash safe sort
+            records.sort((a, b) => {
+                const timeA = (a.timestamp && a.timestamp.toMillis) ? a.timestamp.toMillis() : 0;
+                const timeB = (b.timestamp && b.timestamp.toMillis) ? b.timestamp.toMillis() : 0;
+                return timeB - timeA;
             }); 
             
-            await batch.commit();
-            showToast("Withdrawal Pending!", "success");
-            document.getElementById("main-withdraw-amount").value = "";
-            loadWalletHistory();
-         } catch(e) { showToast(e.message, "error"); }
+            tbody.innerHTML = '';
+            if(records.length === 0) { tbody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-slate-400">No tasks submitted yet.</td></tr>'; return; }
+            
+            records.forEach(t => {
+                const statusColor = t.status === 'approved' ? 'text-green-600 bg-green-50' : (t.status === 'pending' ? 'text-yellow-600 bg-yellow-50' : 'text-red-600 bg-red-50');
+                const statusIcon = t.status === 'approved' ? 'fa-check' : (t.status === 'pending' ? 'fa-clock' : 'fa-times');
+                tbody.innerHTML += `
+                <tr class="border-b border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+                    <td class="p-3 text-[10px] md:text-xs font-medium text-slate-500">${t.timestamp && t.timestamp.toDate ? t.timestamp.toDate().toLocaleDateString() : '-'}</td>
+                    <td class="p-3 font-bold text-slate-700 dark:text-slate-300 text-xs truncate max-w-[150px]">${t.taskTitle}</td>
+                    <td class="p-3 font-black text-yellow-600 text-xs">+${t.reward} <i class="fas fa-coins"></i></td>
+                    <td class="p-3 text-right"><span class="${statusColor} px-2 py-1 rounded-full text-[10px] font-bold uppercase"><i class="fas ${statusIcon}"></i> ${t.status}</span></td>
+                </tr>`;
+            });
+        } catch(err) { tbody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-red-400">Error loading history.</td></tr>'; }
     };
 
-    function loadWalletHistory() {
-        const el = document.getElementById('withdrawal-history-list'); 
-        el.innerHTML = '<p class="text-center text-slate-400">Loading...</p>';
-        if (walletUnsubscribe) walletUnsubscribe();
-        const q = query(collection(db, "withdrawal_requests"), where("userId", "==", currentUser.uid), limit(20));
-        walletUnsubscribe = onSnapshot(q, snap => {
-            el.innerHTML = ""; 
-            if(snap.empty) { el.innerHTML = '<p class="text-center text-slate-400">No records found.</p>'; return; }
-            let docs = []; snap.forEach(d => docs.push(d.data()));
-            docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-            docs.forEach(d => {
-                const statusColor = d.status === 'pending' ? 'text-amber-500' : (d.status === 'approved' || d.status === 'paid' ? 'text-green-500' : 'text-red-500');
-                el.innerHTML += `<div class="bg-white p-3 rounded-lg border border-slate-200 flex justify-between items-center mb-2 shadow-sm"><div><p class="text-slate-800 font-bold text-xs">Withdraw: ৳${d.amount}</p><p class="text-[9px] text-slate-400 uppercase font-semibold">${d.method} | ${d.accountNumber}</p></div><span class="text-[10px] font-bold ${statusColor}"><i class="fas fa-circle text-[6px] mr-1"></i>${d.status.toUpperCase()}</span></div>`;
-            });
-        });
-    }
+    document.querySelectorAll('.method-btn').forEach(btn => {
+        btn.onclick = () => {
+            document.querySelectorAll('.method-btn').forEach(b => { b.classList.remove('bg-slate-100', 'border-pink-500', 'text-pink-600', 'border-orange-500', 'text-orange-600', 'border-green-500', 'text-green-600'); b.classList.add('border-2'); });
+            withdrawMethod = btn.dataset.m;
+            if(withdrawMethod === 'bkash') btn.classList.add('bg-slate-100', 'border-pink-500', 'text-pink-600');
+            if(withdrawMethod === 'nagad') btn.classList.add('bg-slate-100', 'border-orange-500', 'text-orange-600');
+            if(withdrawMethod === 'usdt') btn.classList.add('bg-slate-100', 'border-green-500', 'text-green-600');
+            if(userData.savedWallet) document.getElementById('w-account').value = userData.savedWallet;
+        };
+    });
 
-    function loadHistory(col, domId) {
-        const el = document.getElementById(domId); 
-        const q = query(collection(db, col), where("userId", "==", currentUser.uid), limit(10));
-        onSnapshot(q, snap => {
-            el.innerHTML = ""; 
-            if(snap.empty) { el.innerHTML = '<p class="text-center text-slate-400">No records found.</p>'; return; }
-            let docs = []; snap.forEach(d => docs.push(d.data()));
-            docs.sort((a,b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
-            docs.forEach(d => {
-                 el.innerHTML += `<div class="bg-white p-3 rounded-lg border border-slate-200 flex justify-between items-center mb-2 shadow-sm"><div><p class="text-slate-800 font-bold text-xs">${d.taskTitle}</p><p class="text-[9px] text-slate-400 uppercase font-semibold">${d.status}</p></div><span class="text-[10px] font-bold ${d.status === 'pending' ? 'text-amber-500' : 'text-green-500'}">${d.status}</span></div>`;
-            });
-        });
-    }
+    document.getElementById('btn-withdraw').onclick = async () => {
+        const amt = parseFloat(document.getElementById('w-amount').value);
+        const acc = document.getElementById('w-account').value;
+        const minW = adminConfig.minWithdraw || 10;
+        
+        if(!amt || amt < minW) return notify(`Minimum Withdraw is ৳${minW}`, 'warning');
+        if(parseFloat(userData.balance || 0) < amt) return notify('Insufficient Balance', 'error');
+        if(!acc) return notify('Enter Account Number', 'warning');
+        
+        const todayDate = new Date().getDate();
+        if(todayDate !== 6 && todayDate !== 20 && amt > 10) {
+            return Swal.fire('Limit Exceeded', 'You can only request maximum ৳10 on regular days. Withdraw full balance on the 6th and 20th.', 'warning');
+        }
 
-    document.getElementById("copy-marketing-link-btn").onclick = () => { navigator.clipboard.writeText(document.getElementById("marketing-link-input").value); showToast("Link Copied", "success"); };
-    document.getElementById("copy-referral-code-btn").onclick = () => { navigator.clipboard.writeText(document.getElementById("referral-code-display").textContent); showToast("Code Copied", "success"); };
-    VanillaTilt.init(document.querySelectorAll(".pro-card"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
+        if(userData.lastWithdrawTime && userData.lastWithdrawTime.toDate) {
+            const diffHours = (new Date().getTime() - userData.lastWithdrawTime.toDate().getTime()) / (1000 * 60 * 60);
+            if(diffHours < 24) return Swal.fire('Please Wait', 'You can only submit one withdrawal request every 24 hours.', 'error');
+        }
+        
+        const btn = document.getElementById('btn-withdraw');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...'; btn.disabled = true;
+        
+        try {
+            const batch = writeBatch(db);
+            batch.set(doc(collection(db, "withdrawal_requests")), { userId: currentUser.uid, userName: userData.name, amount: amt, method: withdrawMethod, accountNumber: acc, status: "pending", timestamp: Timestamp.now() });
+            batch.update(doc(db, "users", currentUser.uid), { balance: increment(-amt), lastWithdrawTime: Timestamp.now() });
+            await batch.commit();
+            Swal.fire('Success!', 'Withdraw request sent successfully.', 'success');
+            document.getElementById('w-amount').value = '';
+            window.loadWalletHistory();
+        } catch(e) { notify('Error processing request', 'error'); } 
+        finally { btn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Request Payout'; btn.disabled = false; }
+    };
+
+    window.loadWalletHistory = async () => {
+        if(!currentUser) return;
+        const tbody = document.getElementById('tx-history');
+        tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-slate-400 font-medium"><i class="fas fa-spinner fa-spin mr-2"></i> Fetching...</td></tr>';
+        try {
+            const snap = await getDocs(query(collection(db, "withdrawal_requests"), where("userId", "==", currentUser.uid), limit(15)));
+            let records = []; snap.forEach(d => records.push(d.data()));
+            records.sort((a, b) => {
+                const timeA = (a.timestamp && a.timestamp.toMillis) ? a.timestamp.toMillis() : 0;
+                const timeB = (b.timestamp && b.timestamp.toMillis) ? b.timestamp.toMillis() : 0;
+                return timeB - timeA;
+            });
+            
+            tbody.innerHTML = '';
+            if(records.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-slate-400">No transactions found.</td></tr>'; return; }
+            
+            records.forEach(t => {
+                const statusColor = t.status === 'paid' ? 'text-green-600 bg-green-50' : (t.status === 'pending' ? 'text-yellow-600 bg-yellow-50' : 'text-red-600 bg-red-50');
+                const statusIcon = t.status === 'paid' ? 'fa-check' : (t.status === 'pending' ? 'fa-clock' : 'fa-times');
+                tbody.innerHTML += `
+                <tr class="border-b border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+                    <td class="p-3 text-[10px] md:text-xs font-medium text-slate-500">${t.timestamp && t.timestamp.toDate ? t.timestamp.toDate().toLocaleDateString() : '-'}</td>
+                    <td class="p-3 uppercase text-[10px] font-bold">${t.method}</td>
+                    <td class="p-3 font-mono text-[10px] text-slate-500">${t.accountNumber || '-'}</td>
+                    <td class="p-3 font-black text-slate-800 dark:text-slate-300 text-xs">৳${t.amount}</td>
+                    <td class="p-3 text-right"><span class="${statusColor} px-2 py-1 rounded-full text-[10px] font-bold uppercase"><i class="fas ${statusIcon}"></i> ${t.status}</span></td>
+                </tr>`;
+            });
+        } catch(err) { tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-red-400">Error loading history.</td></tr>'; }
+    };
+
+    document.getElementById('btn-swap').onclick = async () => {
+        const amt = parseInt(document.getElementById('swap-input').value);
+        if(!amt || amt <= 0) return notify('Enter valid amount', 'warning');
+        if(amt > (userData.coins || 0)) return notify('Not enough coins', 'error');
+        
+        const btn = document.getElementById('btn-swap');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        try {
+            const bdtValue = amt / (adminConfig.coinRate || 100);
+            await updateDoc(doc(db, "users", currentUser.uid), { coins: increment(-amt), balance: increment(bdtValue) });
+            notify(`Successfully swapped ${amt} coins for ৳${bdtValue.toFixed(2)}!`);
+            document.getElementById('swap-input').value = '';
+        } catch(e) { notify('Swap failed', 'error'); } 
+        finally { btn.innerHTML = '<i class="fas fa-sync-alt"></i>'; }
+    };
+
+    window.updateProfileSettings = async () => {
+        const wallet = document.getElementById('prof-wallet-update').value;
+        if(!wallet) return notify('Please enter a number', 'warning');
+        try { await updateDoc(doc(db, "users", currentUser.uid), { savedWallet: wallet }); notify('Profile Updated Successfully!'); }
+        catch(e) { notify('Update Failed', 'error'); }
+    };
+
+    window.loadReferrals = async () => {
+        const div = document.getElementById('ref-list');
+        div.innerHTML = '<p class="text-center text-slate-400 py-4"><i class="fas fa-spinner fa-spin"></i> Loading team...</p>';
+        try {
+            const snaps = await getDocs(query(collection(db, "users"), where("joinedVia", "==", userData.referralCode), limit(50)));
+            div.innerHTML = '';
+            if(snaps.empty) { div.innerHTML = '<p class="text-center text-slate-400 py-6 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700 border-dashed text-sm">You haven\'t invited anyone yet.</p>'; return; }
+            
+            snaps.forEach(d => {
+                const u = d.data();
+                const totalE = parseFloat(u.totalEarnings || 0);
+                const active = totalE > 10;
+                div.innerHTML += `
+                <div class="flex justify-between items-center p-3 md:p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl hover:shadow-sm transition">
+                    <div class="flex items-center gap-3 md:gap-4">
+                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 flex items-center justify-center text-xs md:text-sm font-bold text-blue-600 dark:text-blue-400 uppercase shadow-inner">${(u.name || 'U').charAt(0)}</div>
+                        <div>
+                            <p class="text-xs md:text-sm font-bold text-slate-700 dark:text-slate-300">${u.name || 'Unknown'}</p>
+                            <p class="text-[8px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider">Earned: ৳${totalE.toFixed(0)}</p>
+                        </div>
+                    </div>
+                    <span class="text-[8px] md:text-[10px] font-bold px-2 py-1 rounded-md ${active ? 'bg-green-50 text-green-600 dark:bg-green-900/30' : 'bg-slate-50 text-slate-400 dark:bg-slate-700'}">${active ? '<i class="fas fa-check"></i> ACTIVE' : 'INACTIVE'}</span>
+                </div>`;
+            });
+        } catch(e) { div.innerHTML = '<p class="text-center text-red-400 py-4">Error loading team data.</p>'; }
+    };
+
+    async function loadLiveTicker() {
+        const t = document.getElementById('payout-ticker');
+        try {
+            const snaps = await getDocs(query(collection(db, "withdrawal_requests"), limit(10)));
+            let text = '';
+            snaps.forEach(d => {
+                 const data = d.data();
+                 if(data.status === 'paid') {
+                     text += `<div class="ticker-item"><i class="fas fa-check-circle text-green-400 mr-1"></i> New Payout: <span>৳${data.amount}</span> to ${data.userName.split(' ')[0]} via ${data.method.toUpperCase()}</div>`;
+                 }
+            });
+            t.innerHTML = text || '<div class="ticker-item"><i class="fas fa-star text-yellow-400 mr-1"></i> Welcome to NS PRIME Ad Network! High CPM Guaranteed.</div>';
+        } catch(e) { t.innerHTML = '<div class="ticker-item">Welcome to NS PRIME Premium Ad Network.</div>'; }
+    }
+    
+    document.getElementById('advertiser-whatsapp-btn').onclick = () => {
+        const msg = encodeURIComponent("Hello NS PRIME, I want to advertise on your network.");
+        window.open(`https://wa.me/${adminConfig.adminWhatsapp}?text=${msg}`, '_blank');
+    };
+
+    const authModal = document.getElementById('auth-modal');
+    document.querySelectorAll('.nav-auth-btn').forEach(btn => btn.onclick = () => {
+        authModal.classList.remove('hidden'); authModal.classList.add('flex');
+        if(btn.dataset.auth === 'register') {
+            document.getElementById('login-box').classList.add('hidden'); document.getElementById('register-box').classList.remove('hidden');
+        } else {
+            document.getElementById('login-box').classList.remove('hidden'); document.getElementById('register-box').classList.add('hidden');
+        }
+    });
+    document.getElementById('close-auth').onclick = () => { authModal.classList.add('hidden'); authModal.classList.remove('flex'); };
+    document.getElementById('btn-show-reg').onclick = () => { document.getElementById('login-box').classList.add('hidden'); document.getElementById('register-box').classList.remove('hidden'); };
+    document.getElementById('btn-show-login').onclick = () => { document.getElementById('login-box').classList.remove('hidden'); document.getElementById('register-box').classList.add('hidden'); };
+
+    document.getElementById('form-register').onsubmit = async (e) => {
+        e.preventDefault();
+        showLoading(true);
+        try {
+            const cred = await createUserWithEmailAndPassword(auth, document.getElementById('reg-email').value, document.getElementById('reg-pass').value);
+            await updateProfile(cred.user, { displayName: document.getElementById('reg-name').value });
+            
+            let refUid = null;
+            const rCode = document.getElementById('reg-code').value;
+            if(rCode) {
+                const q = query(collection(db, "users"), where("referralCode", "==", rCode));
+                const s = await getDocs(q);
+                if(!s.empty) { refUid = s.docs[0].id; await updateDoc(doc(db, "users", refUid), { teamSize: increment(1) }); }
+            }
+
+            await setDoc(doc(db, "users", cred.user.uid), {
+                uid: cred.user.uid, email: document.getElementById('reg-email').value, name: document.getElementById('reg-name').value, 
+                phone: document.getElementById('reg-phone').value, joinedVia: rCode || "Direct", 
+                balance: 0, coins: 0, totalEarnings: 0, referralEarnings: 0, 
+                referralCode: "USR" + Math.floor(1000+Math.random()*9000),
+                teamSize: 0, joinDate: Timestamp.now(), lastActiveDate: new Date().toDateString(), 
+                todayEarning: 0, todayTaskCount: 0, rawTodayImpressions: 0
+            });
+            
+            notify('Registration Successful!'); authModal.classList.add('hidden');
+        } catch(e) { notify(e.message.replace('Firebase: ', ''), 'error'); showLoading(false); }
+    };
+
+    document.getElementById('form-login').onsubmit = async (e) => {
+        e.preventDefault(); showLoading(true);
+        try { await signInWithEmailAndPassword(auth, document.getElementById('login-email').value, document.getElementById('login-pass').value); notify('Login Successful!'); authModal.classList.add('hidden'); }
+        catch(e) { notify('Invalid Email or Password', 'error'); showLoading(false); }
+    };
+    
+    document.getElementById('logout-btn').onclick = () => {
+        Swal.fire({ title: 'Logout?', text: "Are you sure you want to sign out?", icon: 'warning', showCancelButton: true, confirmButtonColor: '#ef4444', cancelButtonColor: '#64748b', confirmButtonText: 'Yes, Logout' }).then((result) => {
+            if (result.isConfirmed) { showLoading(true); signOut(auth); }
+        });
+    };
 </script>
 </body>
 </html>
