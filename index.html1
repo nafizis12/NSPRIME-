@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#060B12">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>NS PRIME — Earn Money Online Bangladesh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --f:'Plus Jakarta Sans',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --nav-h:68px;--r:18px;--r2:12px;--r3:24px;
+  --tr:all .2s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"]{
+  --bg:#060B12;--bg2:#0B1220;--bg3:#101928;
+  --sf:rgba(11,18,32,.97);
+  --s2:rgba(255,255,255,.04);--s3:rgba(255,255,255,.07);
+  --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.13);
+  --tx:#EDF2F9;--tx2:#7E8FA8;--tx3:#4A5668;
+  --em:#00E5A0;--em2:#00FFA8;
+  --emb:rgba(0,229,160,.08);--embd:rgba(0,229,160,.2);
+  --gd:#F5C842;--gd2:#FFD966;
+  --gdb:rgba(245,200,66,.08);--gdbd:rgba(245,200,66,.2);
+  --rd:#FF4D6D;--bl:#4F8EF7;
+  --cn:#F59E0B;--cnb:rgba(245,158,11,.08);--cnbd:rgba(245,158,11,.2);
+  --sh:0 8px 32px rgba(0,0,0,.5);
+  --sh2:0 2px 8px rgba(0,0,0,.3);
+}
+[data-theme="light"]{
+  --bg:#F2F6FC;--bg2:#E8EFF8;--bg3:#FFF;
+  --sf:rgba(255,255,255,.98);
+  --s2:rgba(0,0,0,.04);--s3:rgba(0,0,0,.07);
+  --bd:rgba(0,0,0,.07);--bd2:rgba(0,0,0,.13);
+  --tx:#0E1928;--tx2:#4A5668;--tx3:#9AAABB;
+  --em:#00A870;--em2:#00C882;
+  --emb:rgba(0,168,112,.08);--embd:rgba(0,168,112,.22);
+  --gd:#D97706;--gd2:#F59E0B;
+  --gdb:rgba(217,119,6,.08);--gdbd:rgba(217,119,6,.2);
+  --rd:#E53E5A;--bl:#2563EB;
+  --cn:#D97706;--cnb:rgba(217,119,6,.08);--cnbd:rgba(217,119,6,.2);
+  --sh:0 4px 24px rgba(0,0,0,.08);
+  --sh2:0 2px 8px rgba(0,0,0,.06);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;height:100%}
+body{font-family:var(--f);background:var(--bg);color:var(--tx);overflow-x:hidden;overflow-y:auto;min-height:100%;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--em);border-radius:3px}
+
+.bg-mesh{position:fixed;inset:0;z-index:-3;overflow:hidden;pointer-events:none}
+[data-theme="light"] .bg-mesh{display:none}
+.mesh-orb{position:absolute;border-radius:50%;filter:blur(140px);animation:orbFloat linear infinite alternate}
+.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,80,40,.5),transparent 70%);top:-150px;left:-180px;animation-duration:42s}
+.o2{width:800px;height:800px;background:radial-gradient(circle,rgba(20,40,0,.4),transparent 70%);bottom:-300px;right:-250px;animation-duration:56s;animation-direction:alternate-reverse}
+.o3{width:400px;height:400px;background:radial-gradient(circle,rgba(79,142,247,.08),transparent 70%);top:40%;left:50%;transform:translate(-50%,-50%);animation-duration:30s}
+@keyframes orbFloat{0%{transform:translate(0,0)}100%{transform:translate(50px,40px)}}
+.bg-dots{position:fixed;inset:0;z-index:-2;pointer-events:none}
+[data-theme="dark"] .bg-dots{background-image:radial-gradient(rgba(0,229,160,.06) 1px,transparent 1px);background-size:32px 32px}
+[data-theme="light"] .bg-dots{background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1px);background-size:32px 32px}
+
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh)}
+.s2{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r2)}
+.s3{background:var(--s3);border:1px solid var(--bd2);border-radius:var(--r2)}
+.em-card{background:var(--emb);border:1px solid var(--embd);border-radius:var(--r)}
+.gold-card{background:var(--gdb);border:1px solid var(--gdbd);border-radius:var(--r)}
+.coin-card{background:var(--cnb);border:1px solid var(--cnbd);border-radius:var(--r)}
+.em-text{color:var(--em)}.gold-text{color:var(--gd)}.coin-text{color:var(--cn)}.mono{font-family:var(--fm)}
+
+.btn{font-family:var(--f);font-weight:700;border:none;cursor:pointer;transition:var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;white-space:nowrap;border-radius:var(--r2);position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .15s}
+.btn:active::after{background:rgba(255,255,255,.08)}
+.btn-em{background:linear-gradient(135deg,var(--em),#00C882);color:#001A0C;padding:14px 26px;font-size:.9rem;box-shadow:0 4px 20px rgba(0,229,160,.2)}
+.btn-em:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,229,160,.3)}
+.btn-gold{background:linear-gradient(135deg,var(--gd),#F59E0B);color:#1A0A00;padding:14px 26px;font-size:.9rem}
+.btn-gold:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,200,66,.25)}
+.btn-coin{background:linear-gradient(135deg,var(--cn),#E97B00);color:#1A0A00;padding:14px 26px;font-size:.9rem}
+.btn-ghost{background:var(--s2);border:1.5px solid var(--bd2);color:var(--tx);padding:13px 20px;font-size:.86rem}
+.btn-ghost:hover{border-color:var(--embd);color:var(--em)}
+.btn-sm{padding:9px 17px;font-size:.8rem;border-radius:10px}
+.btn-danger{background:rgba(255,77,109,.1);border:1.5px solid rgba(255,77,109,.25);color:var(--rd);padding:14px 26px;font-size:.9rem;margin-bottom:48px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+
+input,select,textarea{
+  font-family:var(--f);background:var(--s2)!important;color:var(--tx)!important;
+  border:1.5px solid var(--bd2)!important;border-radius:var(--r2)!important;
+  padding:13px 15px;width:100%;font-size:.9rem;outline:none;transition:border-color .2s;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--em)!important;box-shadow:0 0 0 3px rgba(0,229,160,.07)}
+::placeholder{color:var(--tx3)!important}select option{background:var(--bg2)}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;margin-bottom:7px;font-size:.78rem;color:var(--tx2);font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+
+#toast{position:fixed;bottom:calc(var(--nav-h)+18px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--bg3);border:1.5px solid var(--bd2);color:var(--tx);font-size:.84rem;font-weight:600;padding:12px 20px;border-radius:100px;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,1,.5,1);z-index:9999;max-width:calc(100vw - 32px);white-space:nowrap;display:flex;align-items:center;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.ok{border-color:var(--embd);color:var(--em)}
+#toast.err{border-color:rgba(255,77,109,.4);color:var(--rd)}
+#toast.info{border-color:rgba(79,142,247,.35);color:var(--bl)}
+
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:100px;font-size:.72rem;font-weight:800;letter-spacing:.01em}
+.badge-em{background:var(--emb);border:1px solid var(--embd);color:var(--em)}
+.badge-gold{background:var(--gdb);border:1px solid var(--gdbd);color:var(--gd)}
+.badge-coin{background:var(--cnb);border:1px solid var(--cnbd);color:var(--cn)}
+.badge-blue{background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.22);color:var(--bl)}
+.badge-red{background:rgba(255,77,109,.1);border:1px solid rgba(255,77,109,.25);color:var(--rd)}
+.live-dot{width:7px;height:7px;background:#FF4D6D;border-radius:50%;animation:livePulse 1.5s ease infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+.icon-btn{width:40px;height:40px;background:var(--s2);border:1.5px solid var(--bd2);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx2);font-size:.92rem;transition:var(--tr)}
+.icon-btn:hover{color:var(--em);border-color:var(--embd)}
+
+.app-hdr{position:sticky;top:0;z-index:100;background:var(--sf);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--bd);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.app-logo{font-size:1.2rem;font-weight:900;display:flex;align-items:center;gap:9px;letter-spacing:-.02em}
+.logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--em),var(--gd));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:900;color:#001A0C;flex-shrink:0}
+.hdr-right{display:flex;align-items:center;gap:9px}
+.hdr-info{text-align:right;line-height:1.3}
+.hdr-info .nm{font-weight:800;font-size:.86rem}
+.hdr-info .bal{font-size:.73rem;color:var(--tx2)}.hdr-info .bal strong{color:var(--em)}
+.notif-btn{position:relative}.notif-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;background:var(--rd);border-radius:50%;border:2px solid var(--bg2);display:none}
+
+.bot-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--sf);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-top:1px solid var(--bd);display:flex;justify-content:space-around;align-items:flex-end;padding:8px 2px;padding-bottom:max(8px,env(safe-area-inset-bottom));height:var(--nav-h)}
+.nav-i{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex:1;cursor:pointer;padding:5px 2px;border-radius:14px;color:var(--tx3);font-size:.55rem;font-weight:700;letter-spacing:.01em;transition:var(--tr);min-height:52px}
+.nav-i i{font-size:1.05rem;transition:all .2s}
+.nav-i.active{color:var(--em)}.nav-i.active i{transform:scale(1.15)}
+
+.ticker-wrap{background:rgba(0,0,0,.25);border-bottom:1px solid var(--bd);padding:8px 0;overflow:hidden;display:none}
+[data-theme="light"] .ticker-wrap{background:var(--s2)}
+.ticker-wrap.show{display:block}
+.ticker-inner{display:flex;gap:40px;animation:ticker 24s linear infinite;white-space:nowrap;padding:0 16px}
+.ticker-item{font-size:.76rem;color:var(--gd);font-weight:700;display:flex;align-items:center;gap:6px}
+.ticker-item i{font-size:.65rem}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.sec{display:none;padding:16px;padding-bottom:calc(var(--nav-h) + 120px);max-width:520px;margin:0 auto;animation:fadeUp .28s ease}
+.sec.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{font-size:1rem;font-weight:800;display:flex;align-items:center;gap:9px;margin-bottom:14px;letter-spacing:-.01em}
+.sec-title i{color:var(--em)}
+
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.stat-card{padding:18px 15px;border-radius:var(--r);position:relative;overflow:hidden;background:var(--s2);border:1px solid var(--bd)}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+.sc-em::before{background:linear-gradient(90deg,var(--em),var(--em2))}
+.sc-gold::before{background:linear-gradient(90deg,var(--gd),var(--gd2))}
+.sc-coin::before{background:linear-gradient(90deg,var(--cn),#F59E0B)}
+.sc-blue::before{background:linear-gradient(90deg,var(--bl),#76B2FF)}
+.stat-card .ico{font-size:1.3rem;margin-bottom:7px;display:block}
+.stat-card .val{font-size:1.5rem;font-weight:900;display:block;line-height:1.1;font-family:var(--fm)}
+.stat-card .lbl{font-size:.68rem;color:var(--tx2);margin-top:5px;display:block;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{font-size:.7rem;font-weight:800;color:var(--tx3);text-transform:uppercase;letter-spacing:.05em;padding:11px 13px;background:var(--s2);border-bottom:1px solid var(--bd)}
+.data-table td{font-size:.8rem;padding:11px 13px;border-bottom:1px solid var(--bd);vertical-align:middle}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:var(--s2)}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:700}
+.pill-paid,.pill-approved,.pill-completed{background:rgba(0,229,160,.1);color:var(--em);border:1px solid var(--embd)}
+.pill-pending{background:rgba(245,200,66,.1);color:var(--gd);border:1px solid var(--gdbd)}
+.pill-rejected,.pill-failed{background:rgba(255,77,109,.1);color:var(--rd);border:1px solid rgba(255,77,109,.25)}
+
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:800;display:none;align-items:flex-end;justify-content:center}
+.modal-bg.show{display:flex}
+.modal-sheet{background:var(--bg2);border:1.5px solid var(--bd2);border-radius:var(--r3) var(--r3) 0 0;width:100%;max-width:540px;max-height:92vh;overflow-y:auto;padding:20px 18px;animation:slideUp .38s cubic-bezier(.25,1,.5,1)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:40px;height:4px;background:var(--bd2);border-radius:2px;margin:0 auto 18px}
+
+.task-card{background:var(--s2);border:1.5px solid var(--bd);border-radius:var(--r);padding:15px;margin-bottom:10px;transition:var(--tr)}
+.task-card:hover{border-color:var(--bd2);transform:translateY(-1px);box-shadow:var(--sh2)}
+.task-top{display:flex;justify-content:space-between;align-items:flex-start;gap:11px;margin-bottom:11px}
+.task-info h4{font-weight:800;font-size:.92rem;margin-bottom:4px;line-height:1.3}
+.task-info p{font-size:.76rem;color:var(--tx2);line-height:1.55}
+.task-rew{font-family:var(--fm);font-size:.84rem;font-weight:700;white-space:nowrap;flex-shrink:0;background:var(--cnb);border:1.5px solid var(--cnbd);color:var(--cn);padding:5px 11px;border-radius:9px}
+.task-btn{font-weight:700;font-size:.82rem;padding:9px 18px;border:none;border-radius:9px;cursor:pointer;font-family:var(--f);transition:var(--tr)}
+.task-btn.go{background:linear-gradient(135deg,var(--em),#00C882);color:#001A0C}
+.task-btn.go:hover{transform:translateY(-1px)}
+
+.wallet-hero{border-radius:var(--r3);padding:26px 20px;text-align:center;margin-bottom:13px}
+.w-label{font-size:.75rem;color:var(--tx2);margin-bottom:7px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.w-amount{font-size:2.8rem;font-weight:900;letter-spacing:-.04em;line-height:1;font-family:var(--fm)}
+
+.vip-bronze{color:#CD7F32}.vip-silver{color:#A0AEC0}.vip-gold{color:var(--gd)}.vip-diamond{color:#76E4F7}
+.vip-bronze-bg{background:rgba(205,127,50,.1);border:1px solid rgba(205,127,50,.22)}
+.vip-silver-bg{background:rgba(160,174,192,.08);border:1px solid rgba(160,174,192,.2)}
+.vip-gold-bg{background:var(--gdb);border:1px solid var(--gdbd)}
+.vip-diamond-bg{background:rgba(118,228,247,.08);border:1px solid rgba(118,228,247,.2)}
+.level-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:100px;font-size:.78rem;font-weight:800}
+.xp-bar-wrap{background:var(--s3);border-radius:100px;height:8px;overflow:hidden;margin:8px 0}
+.xp-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--em),var(--gd));transition:width 1s cubic-bezier(.25,1,.5,1)}
+
+.streak-days{display:flex;gap:5px;justify-content:center;margin:11px 0;flex-wrap:wrap}
+.streak-day{width:34px;height:38px;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:.6rem;font-weight:700;border:1.5px solid var(--bd);color:var(--tx3)}
+.streak-day.done{background:linear-gradient(135deg,var(--gd),#F59E0B);color:#1A0F00;border-color:transparent;box-shadow:0 3px 10px rgba(245,200,66,.25)}
+.streak-day.today-d{border-color:var(--gd);color:var(--gd)}
+
+.refer-hero{background:linear-gradient(135deg,var(--gdb),rgba(240,140,0,.04));border:1.5px solid var(--gdbd);border-radius:var(--r3);padding:24px 20px;text-align:center;margin-bottom:12px}
+.ref-code{font-size:2.2rem;font-weight:900;letter-spacing:.12em;color:var(--gd);margin:9px 0;font-family:var(--fm)}
+
+.comm-btn{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--s2);border:1.5px solid var(--bd);border-radius:var(--r2);cursor:pointer;transition:var(--tr);text-decoration:none;color:var(--tx);margin-bottom:8px}
+.comm-btn:hover{border-color:var(--bd2);transform:translateX(3px)}
+
+.notif-panel{position:fixed;top:0;right:-100%;width:min(320px,100vw);height:100vh;background:var(--bg2);border-left:1.5px solid var(--bd);z-index:500;transition:right .32s cubic-bezier(.25,1,.5,1);overflow-y:auto;padding:18px 16px;padding-top:max(18px,env(safe-area-inset-top))}
+.notif-panel.open{right:0}
+.notif-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);z-index:499;display:none}
+.notif-overlay.show{display:block}
+.notif-item{padding:12px 14px;border-radius:var(--r2);margin-bottom:8px;background:var(--s2);border:1.5px solid var(--bd)}
+.notif-item.unread{border-color:var(--embd);background:var(--emb)}
+.n-title{font-weight:800;font-size:.84rem;margin-bottom:3px}.n-body{font-size:.77rem;color:var(--tx2);line-height:1.45}.n-time{font-size:.67rem;color:var(--tx3);margin-top:4px}
+
+.trust-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:700;display:none}
+.trust-bg.show{display:block}
+.trust-sheet{position:fixed;bottom:-100%;left:0;right:0;max-height:80vh;background:var(--bg2);border-radius:var(--r3) var(--r3) 0 0;border:1.5px solid var(--bd2);z-index:701;padding:20px;overflow-y:auto;transition:bottom .4s cubic-bezier(.25,1,.5,1)}
+.trust-sheet.open{bottom:0}
+.trust-handle{width:40px;height:4px;background:var(--bd2);border-radius:2px;margin:0 auto 16px}
+#trust-content h3{font-size:1.1rem;font-weight:900;margin-bottom:12px;color:var(--em)}
+#trust-content h4{font-size:.88rem;font-weight:800;margin-bottom:6px;margin-top:16px;color:var(--tx2)}
+#trust-content p{font-size:.82rem;color:var(--tx2);line-height:1.65;margin-bottom:8px}
+
+.logout-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:900;display:none;align-items:center;justify-content:center;padding:20px}
+.logout-modal-bg.show{display:flex}
+.logout-modal{background:var(--bg2);border:1.5px solid rgba(255,77,109,.25);border-radius:var(--r3);padding:28px 24px;max-width:340px;width:100%;text-align:center;animation:fadeUp .3s ease}
+.logout-modal-icon{font-size:3rem;margin-bottom:14px;display:block}
+.logout-modal h3{font-size:1.1rem;font-weight:900;margin-bottom:8px}
+.logout-modal p{font-size:.84rem;color:var(--tx2);margin-bottom:20px;line-height:1.6}
+.logout-modal-btns{display:flex;gap:10px}
+.logout-modal-btns button{flex:1;padding:13px;border-radius:12px;border:none;cursor:pointer;font-family:var(--f);font-size:.88rem;font-weight:800;transition:var(--tr)}
+.logout-cancel{background:var(--s2);border:1.5px solid var(--bd2)!important;color:var(--tx)}
+.logout-cancel:hover{border-color:var(--bd2);background:var(--s3)}
+.logout-confirm{background:linear-gradient(135deg,#FF4D6D,#E53E5A);color:white}
+.logout-confirm:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,77,109,.3)}
+
+#splash{position:fixed;inset:0;background:var(--bg);z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .6s}
+#splash.hide{opacity:0;pointer-events:none}
+.splash-logo{width:80px;height:80px;background:linear-gradient(135deg,var(--em),var(--gd));border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#001A0C;animation:splashPulse 1.4s ease infinite alternate;box-shadow:0 0 50px rgba(0,229,160,.3)}
+@keyframes splashPulse{0%{transform:scale(1)}100%{transform:scale(1.07)}}
+.splash-bar{width:160px;height:3px;background:var(--s3);border-radius:100px;overflow:hidden;margin-top:8px}
+.splash-fill{height:100%;background:linear-gradient(90deg,var(--em),var(--gd));animation:splashF 2s ease forwards}
+@keyframes splashF{0%{width:0}100%{width:100%}}
+
+#onboarding{position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(16px);z-index:9000;display:none;align-items:center;justify-content:center;padding:18px}
+#onboarding.show{display:flex}
+.ob-card{background:var(--bg2);border:1.5px solid var(--bd2);border-radius:var(--r3);padding:32px 24px;max-width:360px;width:100%;text-align:center}
+.ob-slide{display:none}.ob-slide.active{display:block}
+.ob-emoji{font-size:4rem;margin-bottom:16px;display:block;animation:obBounce .6s ease}
+@keyframes obBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.ob-title{font-size:1.35rem;font-weight:900;margin-bottom:10px;letter-spacing:-.02em}
+.ob-desc{font-size:.88rem;color:var(--tx2);line-height:1.65;margin-bottom:20px}
+.ob-dots{display:flex;gap:6px;justify-content:center;margin-bottom:20px}
+.ob-dot{width:8px;height:8px;border-radius:50%;background:var(--bd2);transition:all .3s}
+.ob-dot.active{background:var(--em);width:22px;border-radius:4px}
+
+#auth-screen{position:fixed;inset:0;background:rgba(6,11,18,.96);backdrop-filter:blur(24px);z-index:8000;display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
+#auth-screen.show{display:flex}
+.auth-box{background:var(--bg2);border:1.5px solid var(--bd2);border-radius:var(--r3);padding:28px 22px;max-width:380px;width:100%;animation:fadeUp .35s;position:relative}
+.auth-back{position:absolute;top:15px;left:15px;width:36px;height:36px;background:var(--s2);border:1.5px solid var(--bd);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx2)}
+
+#landing{min-height:100vh;display:flex;flex-direction:column}
+.land-hero{padding:60px 20px 36px;text-align:center;max-width:520px;margin:0 auto;width:100%}
+.land-badge{background:var(--emb);border:1.5px solid var(--embd);color:var(--em);border-radius:100px;padding:6px 16px;font-size:.76rem;font-weight:800;display:inline-flex;align-items:center;gap:6px;margin-bottom:20px}
+.land-h1{font-size:clamp(2.1rem,9vw,3rem);font-weight:900;line-height:1.06;margin-bottom:14px;letter-spacing:-.04em}
+.land-h1 .grad{background:linear-gradient(135deg,var(--em) 0%,var(--gd) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.land-sub{font-size:.94rem;color:var(--tx2);line-height:1.7;margin-bottom:28px;max-width:420px;margin-left:auto;margin-right:auto}
+.land-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+.land-stats{display:flex;background:var(--s2);border:1.5px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:36px}
+.ls-item{flex:1;padding:18px 8px;text-align:center;border-right:1px solid var(--bd)}
+.ls-item:last-child{border-right:none}
+.ls-val{font-size:1.3rem;font-weight:900;color:var(--em);font-family:var(--fm);display:block}
+.ls-lbl{font-size:.68rem;color:var(--tx2);display:block;margin-top:4px;font-weight:600}
+
+.land-feat{padding:0 20px 40px;max-width:520px;margin:0 auto;width:100%}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.feat-card{background:var(--s2);border:1.5px solid var(--bd);border-radius:var(--r);padding:20px 14px;text-align:center;transition:var(--tr)}
+.feat-card:hover{border-color:var(--embd);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,229,160,.08)}
+.feat-ico{font-size:2.2rem;margin-bottom:10px;display:block}
+.feat-name{font-size:.86rem;font-weight:800;margin-bottom:5px;letter-spacing:-.01em}
+.feat-desc{font-size:.72rem;color:var(--tx2);line-height:1.5}
+
+.trust-badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+.trust-badge{background:var(--s2);border:1.5px solid var(--bd);border-radius:100px;padding:6px 14px;font-size:.72rem;font-weight:700;color:var(--tx2);display:flex;align-items:center;gap:5px}
+
+.faq-item{background:var(--s2);border:1.5px solid var(--bd);border-radius:var(--r2);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:var(--bd2)}
+.faq-q{padding:14px 16px;font-size:.88rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.faq-q i{color:var(--tx2);transition:transform .3s;flex-shrink:0}
+.faq-a{padding:0 16px;font-size:.82rem;color:var(--tx2);line-height:1.65;max-height:0;overflow:hidden;transition:all .3s}
+.faq-item.open .faq-a{max-height:220px;padding:0 16px 14px}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-item.open{border-color:var(--embd)}
+
+.tab-row{display:flex;gap:6px;overflow-x:auto;margin-bottom:13px;padding-bottom:3px;scrollbar-width:none}
+.tab-row::-webkit-scrollbar{display:none}
+.tab-pill{background:var(--s2);border:1.5px solid var(--bd);border-radius:100px;padding:7px 15px;font-size:.76rem;font-weight:700;cursor:pointer;transition:var(--tr);white-space:nowrap;color:var(--tx2)}
+.tab-pill.active{background:var(--emb);border-color:var(--embd);color:var(--em)}
+
+.ann-card{background:linear-gradient(135deg,rgba(79,142,247,.07),rgba(167,139,250,.05));border:1.5px solid rgba(79,142,247,.2);border-radius:var(--r);padding:15px;margin-bottom:12px;display:none}
+.ann-card.show{display:block}
+.ann-item{padding:11px 0;border-bottom:1px solid var(--bd)}
+.ann-item:last-child{border-bottom:none}
+.ann-badge{font-size:.66rem;font-weight:800;background:rgba(79,142,247,.12);color:var(--bl);border:1px solid rgba(79,142,247,.22);border-radius:100px;padding:2px 9px;margin-right:6px}
+.admin-msg-card{background:rgba(79,142,247,.06);border:1.5px solid rgba(79,142,247,.18);border-radius:var(--r);padding:14px;margin-bottom:12px;display:none}
+.admin-msg-card.show{display:block}
+.motivation-card{background:linear-gradient(135deg,var(--emb),var(--gdb));border:1.5px solid var(--embd);border-radius:var(--r);padding:16px;margin-bottom:12px}
+
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ach-item{padding:13px 8px;text-align:center;border-radius:var(--r2);background:var(--s2);border:1.5px solid var(--bd);position:relative;transition:var(--tr)}
+.ach-item:not(.locked):hover{border-color:var(--embd);transform:translateY(-2px)}
+.ach-ico{font-size:1.5rem;display:block;margin-bottom:5px}
+.ach-name{font-size:.68rem;font-weight:700;color:var(--tx2);line-height:1.3}
+.ach-item.locked{opacity:.35}.ach-item.locked::after{content:"🔒";position:absolute;top:5px;right:5px;font-size:.58rem}
+
+.p-row{display:flex;justify-content:space-between;align-items:center;padding:13px 17px;border-bottom:1px solid var(--bd)}
+.p-row:last-child{border-bottom:none}
+.p-lbl{font-size:.83rem;color:var(--tx2)}
+.p-val{font-weight:700;font-size:.86rem;max-width:58%;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.profile-av{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--gd));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.6rem;color:#001A0C;margin:0 auto 12px;box-shadow:0 8px 24px rgba(0,229,160,.2)}
+
+.next-pay-card{background:rgba(79,142,247,.06);border:1.5px solid rgba(79,142,247,.18);border-radius:var(--r);padding:15px;margin-bottom:12px;display:none}
+.next-pay-card.show{display:block}
+
+.link-generated-box{display:none;animation:fadeUp .3s ease}
+.link-url-wrap{background:var(--s2);border:2px dashed var(--embd);border-radius:var(--r2);padding:12px 14px;margin-bottom:10px}
+.link-url-text{font-size:.72rem;color:var(--em);font-family:var(--fm);overflow-x:auto;white-space:nowrap;scrollbar-width:none;margin-bottom:9px}
+.link-url-text::-webkit-scrollbar{display:none}
+.social-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+.s-btn{border-radius:10px;padding:10px 6px;font-size:.73rem;font-weight:700;cursor:pointer;font-family:var(--f);border:1.5px solid;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:5px}
+.s-btn:hover{transform:translateY(-2px)}
+.s-wa{background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.25);color:#25D366}
+.s-fb{background:rgba(24,119,242,.1);border-color:rgba(24,119,242,.25);color:#1877F2}
+.s-tg{background:rgba(36,161,222,.1);border-color:rgba(36,161,222,.25);color:#24A1DE}
+
+.proof-box{border:2px dashed var(--bd2);border-radius:var(--r);padding:24px;text-align:center;cursor:pointer;transition:var(--tr);position:relative;overflow:hidden}
+.proof-box:hover,.proof-box.has-file{border-color:var(--em);background:var(--emb)}
+.proof-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+
+/* ===== NS PRIME BALANCE NOTIFICATION ===== */
+#ns-bal-notif{
+  position:fixed;top:80px;right:16px;z-index:99999;
+  background:rgba(10,16,28,0.96);
+  border:1.5px solid rgba(0,229,160,0.28);
+  border-radius:18px;padding:15px 16px;
+  max-width:290px;width:calc(100vw - 32px);
+  box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 1px rgba(0,229,160,.08);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  transform:translateX(calc(100% + 24px));opacity:0;
+  transition:transform 0.44s cubic-bezier(0.25,1,0.5,1),opacity 0.3s ease;
+  cursor:default;
+}
+#ns-bal-notif.ns-show{transform:translateX(0);opacity:1}
+#ns-bal-notif.ns-hide{transform:translateX(calc(100% + 24px));opacity:0}
+.ns-notif-row{display:flex;align-items:center;gap:11px}
+.ns-notif-ico{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#00E5A0,#00C882);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;box-shadow:0 4px 16px rgba(0,229,160,.4)}
+.ns-notif-body{flex:1;min-width:0}
+.ns-notif-label{font-size:.72rem;font-weight:800;color:#00E5A0;letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
+.ns-notif-amount{font-size:1.05rem;font-weight:900;color:#EDF2F9;font-family:'JetBrains Mono',monospace;letter-spacing:-.01em}
+.ns-notif-sub{font-size:.67rem;color:rgba(237,242,249,.5);margin-top:2px}
+.ns-notif-close{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(237,242,249,.5);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.68rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:inherit;transition:all .2s}
+.ns-notif-close:hover{background:rgba(255,255,255,.14);color:#EDF2F9}
+.ns-notif-bar{margin-top:11px;height:2px;border-radius:2px;background:rgba(255,255,255,.08)}
+.ns-notif-fill{height:100%;width:100%;background:linear-gradient(90deg,#00E5A0,#F5C842);border-radius:2px;transition:width 4s linear}
+/* ===== END NOTIFICATION CSS ===== */
+
+@keyframes spin{to{transform:rotate(360deg)}}.spin{animation:spin .8s linear infinite}
+hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-logo">N</div>
+  <div style="font-size:1.8rem;font-weight:900;letter-spacing:-.03em">NS PRIME</div>
+  <div style="font-size:.84rem;color:var(--tx2);font-weight:500">Earn Smart. Get Paid Daily.</div>
+  <div class="splash-bar"><div class="splash-fill"></div></div>
+</div>
+
+<!-- BG -->
+<div class="bg-mesh"><div class="mesh-orb o1"></div><div class="mesh-orb o2"></div><div class="mesh-orb o3"></div></div>
+<div class="bg-dots"></div>
+<div id="toast"></div>
+
+<!-- ===== BALANCE NOTIFICATION CARD ===== -->
+<div id="ns-bal-notif">
+  <div class="ns-notif-row">
+    <div class="ns-notif-ico">💰</div>
+    <div class="ns-notif-body">
+      <div class="ns-notif-label">Balance Added!</div>
+      <div class="ns-notif-amount" id="ns-notif-amt">+৳0.00</div>
+      <div class="ns-notif-sub">আপনার account এ যোগ হয়েছে ✓</div>
+    </div>
+    <button class="ns-notif-close" id="ns-notif-close-btn">✕</button>
+  </div>
+  <div class="ns-notif-bar">
+    <div class="ns-notif-fill" id="ns-notif-fill"></div>
+  </div>
+</div>
+<!-- ===== END NOTIFICATION CARD ===== -->
+
+<!-- TRUST SHEET -->
+<div class="trust-bg" id="trust-bg" onclick="closeTrust()"></div>
+<div class="trust-sheet" id="trust-sheet">
+  <div class="trust-handle"></div>
+  <div id="trust-content"></div>
+  <button class="btn btn-ghost" style="width:100%;margin-top:16px" onclick="closeTrust()">Close</button>
+</div>
+
+<!-- LOGOUT CONFIRM MODAL -->
+<div class="logout-modal-bg" id="logout-modal-bg">
+  <div class="logout-modal">
+    <span class="logout-modal-icon">👋</span>
+    <h3>Logout করবেন?</h3>
+    <p>আপনি কি সত্যিই NS PRIME থেকে logout করতে চান? আপনার সকল data সুরক্ষিত থাকবে।</p>
+    <div class="logout-modal-btns">
+      <button class="logout-cancel" onclick="closeLogoutModal()"><i class="fas fa-times"></i> Cancel</button>
+      <button class="logout-confirm" id="logout-confirm-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIF PANEL -->
+<div class="notif-overlay" id="notif-overlay" onclick="closeNotif()"></div>
+<div class="notif-panel" id="notif-panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <h3 style="font-weight:900;font-size:1.05rem">Notifications</h3>
+    <button class="btn btn-ghost btn-sm" onclick="closeNotif()"><i class="fas fa-times"></i></button>
+  </div>
+  <div id="notif-list"><p style="text-align:center;color:var(--tx3);padding:28px 0;font-size:.84rem">No notifications yet</p></div>
+</div>
+
+<!-- TASK MODAL -->
+<div class="modal-bg" id="task-modal-bg">
+  <div class="modal-sheet"><div class="modal-handle"></div><div id="task-modal-content"></div></div>
+</div>
+
+<!-- ONBOARDING -->
+<div id="onboarding">
+  <div class="ob-card">
+    <div id="ob1" class="ob-slide active"><span class="ob-emoji">🚀</span><h3 class="ob-title">Welcome to NS PRIME!</h3><p class="ob-desc">Bangladesh's most trusted earning platform. Share links, complete tasks & get paid via bKash every day.</p></div>
+    <div id="ob2" class="ob-slide"><span class="ob-emoji">🪙</span><h3 class="ob-title">Earn Coins from Tasks</h3><p class="ob-desc">Complete simple tasks to earn Coins. Convert your coins to ৳ anytime from your Wallet. 1000 Coins = ৳10!</p></div>
+    <div id="ob3" class="ob-slide"><span class="ob-emoji">🔗</span><h3 class="ob-title">Smart Link Generator</h3><p class="ob-desc">Generate unique monetized links & share on social media. Every valid click earns you money instantly!</p></div>
+    <div class="ob-dots"><div class="ob-dot active" id="od1"></div><div class="ob-dot" id="od2"></div><div class="ob-dot" id="od3"></div></div>
+    <button class="btn btn-em" id="ob-next-btn" style="width:100%;margin-bottom:10px">Next →</button>
+    <button class="btn btn-ghost btn-sm" id="ob-skip" style="width:100%">Skip Intro</button>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <div class="auth-back" onclick="closeAuth()"><i class="fas fa-arrow-left"></i></div>
+    <div style="text-align:center;margin-bottom:22px">
+      <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--em),var(--gd));border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#001A0C;margin:0 auto 10px">N</div>
+      <div style="font-size:1.2rem;font-weight:900;letter-spacing:-.02em">NS PRIME</div>
+      <div style="font-size:.76rem;color:var(--tx2);margin-top:3px">Bangladesh's #1 Earning Platform</div>
+    </div>
+    <div id="auth-login">
+      <h2 style="font-size:1.05rem;font-weight:800;margin-bottom:18px;text-align:center">Welcome Back 👋</h2>
+      <form id="login-form">
+        <div class="form-group"><label>Email</label><input type="email" id="li-email" placeholder="your@email.com" required></div>
+        <div class="form-group"><label>Password</label><input type="password" id="li-pass" placeholder="Your password" required></div>
+        <button type="submit" class="btn btn-em" id="li-btn" style="width:100%;margin-bottom:12px;padding:15px"><i class="fas fa-sign-in-alt"></i>Login to Account</button>
+      </form>
+      <p style="text-align:center;font-size:.82rem;color:var(--tx2)">No account? <span style="color:var(--em);cursor:pointer;font-weight:700" onclick="toggleAuth('register')">Register Free</span></p>
+    </div>
+    <div id="auth-reg" style="display:none">
+      <h2 style="font-size:1.05rem;font-weight:800;margin-bottom:18px;text-align:center">Create Free Account 🎉</h2>
+      <form id="reg-form">
+        <div class="form-group"><label>Full Name</label><input type="text" id="rg-name" placeholder="Your full name" required></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="rg-phone" placeholder="01XXXXXXXXX" required></div>
+        <div class="form-group"><label>Email</label><input type="email" id="rg-email" placeholder="your@email.com" required></div>
+        <div class="form-group"><label>Password</label><input type="password" id="rg-pass" placeholder="Min 6 characters" required></div>
+        <div class="form-group"><label>Referral Code (optional)</label><input type="text" id="rg-code" placeholder="Enter referral code" style="text-transform:uppercase"></div>
+        <button type="submit" class="btn btn-gold" id="rg-btn" style="width:100%;margin-bottom:12px;padding:15px"><i class="fas fa-rocket"></i>Create Free Account</button>
+      </form>
+      <p style="text-align:center;font-size:.82rem;color:var(--tx2)">Have account? <span style="color:var(--em);cursor:pointer;font-weight:700" onclick="toggleAuth('login')">Login</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- LANDING PAGE -->
+<div id="landing" style="display:none">
+  <div style="position:fixed;top:14px;right:14px;z-index:200"><div class="icon-btn" onclick="toggleTheme()"><i class="fas fa-circle-half-stroke"></i></div></div>
+  <div id="land-ticker" class="ticker-wrap">
+    <div class="ticker-inner" id="land-ticker-inner">
+      <div class="ticker-item"><i class="fas fa-bolt"></i>Welcome to NS PRIME — Bangladesh's #1 Earning Platform</div>
+      <div class="ticker-item"><i class="fas fa-check-circle"></i>Daily bKash Payments Guaranteed</div>
+      <div class="ticker-item"><i class="fas fa-users"></i>10,000+ Active Earners Trust Us</div>
+      <div class="ticker-item"><i class="fas fa-bolt"></i>Welcome to NS PRIME — Bangladesh's #1 Earning Platform</div>
+      <div class="ticker-item"><i class="fas fa-check-circle"></i>Daily bKash Payments Guaranteed</div>
+      <div class="ticker-item"><i class="fas fa-users"></i>10,000+ Active Earners Trust Us</div>
+    </div>
+  </div>
+
+  <div class="land-hero">
+    <div class="land-badge"><span class="live-dot"></span> #1 Earning Platform in Bangladesh</div>
+    <h1 class="land-h1">Earn Real Money<br><span class="grad">Every Single Day</span></h1>
+    <p class="land-sub">Share unique links, complete tasks to earn coins, refer friends — get paid directly to bKash. Zero investment. 100% Free. Trusted by 10,000+ earners.</p>
+    <div class="land-actions">
+      <button class="btn btn-em" onclick="showAuth('register')" style="padding:16px 34px;font-size:.96rem"><i class="fas fa-rocket"></i>Start Earning Free</button>
+      <button class="btn btn-ghost" onclick="showAuth('login')" style="padding:16px 24px"><i class="fas fa-sign-in-alt"></i>Login</button>
+    </div>
+    <div class="land-stats">
+      <div class="ls-item"><span class="ls-val" id="ls-users">10K+</span><span class="ls-lbl">Active Earners</span></div>
+      <div class="ls-item"><span class="ls-val" id="ls-paid">৳50L+</span><span class="ls-lbl">Total Paid Out</span></div>
+      <div class="ls-item"><span class="ls-val">4.9⭐</span><span class="ls-lbl">User Rating</span></div>
+    </div>
+  </div>
+
+  <div class="land-feat">
+    <div class="trust-badges">
+      <div class="trust-badge"><i class="fas fa-shield-halved" style="color:var(--em)"></i>SSL Secured</div>
+      <div class="trust-badge"><i class="fas fa-money-bill-wave" style="color:var(--gd)"></i>Verified Payments</div>
+      <div class="trust-badge"><i class="fas fa-users" style="color:var(--bl)"></i>10K+ Users</div>
+      <div class="trust-badge"><i class="fas fa-headset" style="color:var(--cn)"></i>24/7 Support</div>
+    </div>
+
+    <h2 style="font-size:1.15rem;font-weight:900;text-align:center;margin-bottom:16px;letter-spacing:-.02em">How You Earn</h2>
+    <div class="feat-grid">
+      <div class="feat-card"><span class="feat-ico">🔗</span><div class="feat-name">Smart Links</div><div class="feat-desc">Generate links & share. Every valid click earns money via CPM system</div></div>
+      <div class="feat-card"><span class="feat-ico">🪙</span><div class="feat-name">Tasks → Coins</div><div class="feat-desc">Complete tasks, collect coins, convert to ৳ anytime in Wallet</div></div>
+      <div class="feat-card"><span class="feat-ico">👥</span><div class="feat-name">Refer Friends</div><div class="feat-desc">Earn 10% commission on every referral's earnings — forever</div></div>
+      <div class="feat-card"><span class="feat-ico">👑</span><div class="feat-name">VIP Rewards</div><div class="feat-desc">Level up Bronze→Diamond and unlock exclusive earning perks</div></div>
+    </div>
+
+    <div style="background:var(--s2);border:1.5px solid var(--bd);border-radius:var(--r);padding:18px;margin-bottom:20px">
+      <div style="text-align:center;font-size:.78rem;font-weight:800;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:13px">Supported Payment Methods</div>
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+        <div style="background:linear-gradient(135deg,rgba(232,39,122,.12),rgba(194,24,91,.08));border:1.5px solid rgba(232,39,122,.2);border-radius:10px;padding:10px 16px;font-weight:800;font-size:.86rem;color:#E8277A">bKash</div>
+        <div style="background:rgba(245,200,66,.08);border:1.5px solid rgba(245,200,66,.2);border-radius:10px;padding:10px 16px;font-weight:800;font-size:.86rem;color:var(--gd)">Nagad</div>
+        <div style="background:rgba(79,142,247,.08);border:1.5px solid rgba(79,142,247,.2);border-radius:10px;padding:10px 16px;font-weight:800;font-size:.86rem;color:var(--bl)">Rocket</div>
+        <div style="background:var(--emb);border:1.5px solid var(--embd);border-radius:10px;padding:10px 16px;font-weight:800;font-size:.86rem;color:var(--em)">USDT</div>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How much can I earn daily? <i class="fas fa-chevron-down"></i></div><div class="faq-a">Earn ৳10 daily via bKash payout plus link click earnings, task coins, and referral commissions. No fixed cap — the more you share, the more you earn!</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do Smart Links work? <i class="fas fa-chevron-down"></i></div><div class="faq-a">Generate a unique monetized link, share it on Facebook, WhatsApp, or Telegram. Every valid click earns money automatically added to your balance!</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">When do I get paid? <i class="fas fa-chevron-down"></i></div><div class="faq-a">Daily ৳10 payout every 24 hours. Full balance withdrawals available on 6th & 20th of every month. Minimum withdrawal is ৳10.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is NS PRIME 100% free? <i class="fas fa-chevron-down"></i></div><div class="faq-a">Yes! Completely free to join and use. No investment, no hidden fees, no subscription. Sign up and start earning immediately.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is my money safe with NS PRIME? <i class="fas fa-chevron-down"></i></div><div class="faq-a">Your data and balance are secured by Firebase (Google), SSL encryption, and we have 10,000+ happy users who receive payments daily.</div></div>
+
+    <div style="text-align:center;margin-top:24px;padding-bottom:40px">
+      <button class="btn btn-em" onclick="showAuth('register')" style="padding:16px 42px;font-size:.96rem"><i class="fas fa-rocket"></i>Join Free & Start Earning Now</button>
+      <p style="font-size:.74rem;color:var(--tx3);margin-top:10px">✅ No investment required &nbsp;·&nbsp; ✅ Instant activation</p>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+  <div id="app-ticker" class="ticker-wrap">
+    <div class="ticker-inner" id="app-ticker-inner">
+      <div class="ticker-item"><i class="fas fa-bolt"></i>Complete tasks to earn coins!</div>
+      <div class="ticker-item"><i class="fas fa-users"></i>Refer friends for 10% commission forever!</div>
+      <div class="ticker-item"><i class="fas fa-coins"></i>Convert coins to ৳ in Wallet anytime</div>
+      <div class="ticker-item"><i class="fas fa-bolt"></i>Complete tasks to earn coins!</div>
+      <div class="ticker-item"><i class="fas fa-users"></i>Refer friends for 10% commission forever!</div>
+      <div class="ticker-item"><i class="fas fa-coins"></i>Convert coins to ৳ in Wallet anytime</div>
+    </div>
+  </div>
+
+  <header class="app-hdr">
+    <div class="app-logo">
+      <div class="logo-mark">N</div>
+      NS PRIME
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-info">
+        <div class="nm" id="hdr-name">User</div>
+        <div class="bal">Balance: <strong id="hdr-bal">৳0.00</strong></div>
+      </div>
+      <div class="icon-btn" onclick="toggleTheme()"><i class="fas fa-circle-half-stroke"></i></div>
+      <div class="icon-btn notif-btn" onclick="openNotif()"><i class="fas fa-bell"></i><span class="notif-dot" id="notif-dot"></span></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="sec-home" class="sec active">
+      <div class="admin-msg-card" id="admin-msg-card">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">
+          <span style="background:rgba(79,142,247,.12);border:1px solid rgba(79,142,247,.25);color:var(--bl);border-radius:6px;padding:2px 8px;font-size:.7rem;font-weight:800">Admin</span>
+          <span style="font-size:.7rem;color:var(--tx3);margin-left:auto" id="admin-msg-time"></span>
+        </div>
+        <div style="font-size:.86rem;color:var(--tx2);line-height:1.6" id="admin-msg-text"></div>
+      </div>
+
+      <div class="ann-card" id="ann-card">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+          <div style="width:34px;height:34px;background:linear-gradient(135deg,var(--bl),#A78BFA);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-bullhorn" style="color:white;font-size:.85rem"></i></div>
+          <div style="font-size:.98rem;font-weight:800">📢 Announcements</div>
+        </div>
+        <div id="ann-list"></div>
+      </div>
+
+      <!-- SMART LINK GENERATOR -->
+      <div class="card" style="padding:20px;margin-bottom:12px;border-color:var(--embd);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:var(--emb);border-radius:50%;pointer-events:none;opacity:.5"></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div style="width:44px;height:44px;background:var(--emb);border:1.5px solid var(--embd);border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <i class="fas fa-bolt" style="color:var(--em);font-size:1.15rem"></i>
+          </div>
+          <div>
+            <div style="font-size:1.05rem;font-weight:900;letter-spacing:-.02em">Smart Link Generator</div>
+            <div style="font-size:.72rem;color:var(--tx2);margin-top:2px">Select → Generate → Share → Earn ৳</div>
+          </div>
+          <div class="badge badge-em" style="margin-left:auto;flex-shrink:0"><span class="live-dot"></span> LIVE</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">
+          <div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:10px;text-align:center">
+            <div style="font-size:.6rem;color:var(--tx2);font-weight:700;text-transform:uppercase;margin-bottom:3px">Clicks</div>
+            <div style="font-size:1.3rem;font-weight:900;color:var(--bl);font-family:var(--fm)" id="d-valid-clicks">0</div>
+          </div>
+          <div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:10px;text-align:center">
+            <div style="font-size:.6rem;color:var(--tx2);font-weight:700;text-transform:uppercase;margin-bottom:3px">Today Earn</div>
+            <div style="font-size:1.1rem;font-weight:900;color:var(--em);font-family:var(--fm)" id="d-today-earn2">৳0.00</div>
+          </div>
+          <div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:10px;text-align:center">
+            <div style="font-size:.6rem;color:var(--tx2);font-weight:700;text-transform:uppercase;margin-bottom:3px">Coins</div>
+            <div style="font-size:1.3rem;font-weight:900;color:var(--cn);font-family:var(--fm)" id="d-coins-link">0</div>
+          </div>
+        </div>
+
+        <div style="font-size:.72rem;font-weight:800;color:var(--tx2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:7px">Traffic Category / Niche</div>
+        <div style="position:relative;margin-bottom:12px">
+          <select id="link-category-select">
+            <optgroup label="📣 Content & Community">
+              <option value="video">▶️ Video Content Campaign</option>
+              <option value="social">📱 Social Media Campaign</option>
+              <option value="community">👥 Community Invitation</option>
+              <option value="channel">📢 Channel Update</option>
+              <option value="gallery">🖼️ Creator Gallery</option>
+            </optgroup>
+            <optgroup label="🎮 Apps & Games">
+              <option value="app">📱 App Discovery</option>
+              <option value="game">🎮 Game Campaign</option>
+              <option value="survey">📝 Survey Campaign</option>
+              <option value="download">⬇️ Official Download</option>
+            </optgroup>
+            <optgroup label="🎁 Offers & Information">
+              <option value="offer">🎁 Verified Offer</option>
+              <option value="product">🛍️ Product Information</option>
+              <option value="education">📚 Education Update</option>
+              <option value="news">📰 News & Updates</option>
+            </optgroup>
+          </select>
+          <i class="fas fa-chevron-down" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--tx2);pointer-events:none;font-size:.82rem"></i>
+        </div>
+
+        <button id="generate-link-btn" class="btn btn-em" style="width:100%;padding:15px;font-size:.94rem;margin-bottom:12px"><i class="fas fa-bolt"></i>Generate Earning Link</button>
+
+        <div id="generated-link-box" class="link-generated-box">
+          <div style="font-size:.68rem;font-weight:800;color:var(--tx2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Your Unique Monetized Link</div>
+          <div class="link-url-wrap">
+            <div class="link-url-text" id="generated-link-text"></div>
+            <button id="copy-generated-link" style="background:linear-gradient(135deg,var(--em),#00C882);color:#001A0C;border:none;border-radius:9px;padding:10px 0;font-weight:800;font-size:.84rem;cursor:pointer;width:100%;font-family:var(--f);display:flex;align-items:center;justify-content:center;gap:7px"><i class="fas fa-copy"></i>Copy Full Link</button>
+          </div>
+          <div class="social-btns">
+            <button onclick="shareLink('whatsapp')" class="s-btn s-wa"><i class="fab fa-whatsapp"></i>WhatsApp</button>
+            <button onclick="shareLink('facebook')" class="s-btn s-fb"><i class="fab fa-facebook"></i>Facebook</button>
+            <button onclick="shareLink('telegram')" class="s-btn s-tg"><i class="fab fa-telegram"></i>Telegram</button>
+          </div>
+          <div style="background:rgba(245,200,66,.07);border:1.5px solid var(--gdbd);border-radius:11px;padding:10px 13px;display:flex;align-items:flex-start;gap:9px">
+            <i class="fas fa-triangle-exclamation" style="color:var(--gd);margin-top:1px;flex-shrink:0;font-size:.84rem"></i>
+            <span style="font-size:.73rem;color:var(--tx2);line-height:1.5"><strong style="color:var(--gd)">Rules:</strong> Share naturally. No VPN, Proxy, or Bots. Invalid traffic = account termination.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stat-grid">
+        <div class="stat-card sc-blue"><span class="ico">👁️</span><span class="val" id="d-today-impress" style="color:var(--bl)">0</span><span class="lbl">Today's Impressions</span></div>
+        <div class="stat-card sc-em"><span class="ico">⚡</span><span class="val" id="d-today-earn" style="color:var(--em)">৳0.00</span><span class="lbl">Today's Earning</span></div>
+        <div class="stat-card sc-coin"><span class="ico">🪙</span><span class="val" id="d-coins" style="color:var(--cn)">0</span><span class="lbl">Coin Balance</span></div>
+        <div class="stat-card sc-gold"><span class="ico">📈</span><span class="val" id="d-total" style="color:var(--gd)">৳0.00</span><span class="lbl">Total Earning</span></div>
+      </div>
+
+      <div class="motivation-card">
+        <div style="font-size:2rem;margin-bottom:8px" id="mot-emoji">🔥</div>
+        <div style="font-size:.92rem;font-weight:800;line-height:1.4;margin-bottom:5px" id="mot-msg">Start earning today!</div>
+        <div style="font-size:.77rem;color:var(--tx2)" id="mot-sub">Complete tasks and share links to grow your balance</div>
+      </div>
+
+      <!-- BALANCE CARD -->
+      <div class="card" style="padding:18px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="font-size:.77rem;color:var(--tx2);font-weight:700"><i class="fas fa-wallet" style="color:var(--em);margin-right:5px"></i>Current Balance</div>
+          <div style="display:flex;gap:1px;background:var(--s3);border:1.5px solid var(--bd2);border-radius:100px;padding:3px">
+            <button id="cur-bdt" style="background:var(--em);color:#001A0C;border:none;border-radius:100px;padding:5px 13px;font-size:.75rem;font-weight:800;cursor:pointer;font-family:var(--f);transition:all .2s" onclick="setCur('BDT')">৳ BDT</button>
+            <button id="cur-usdt" style="background:none;color:var(--tx2);border:none;border-radius:100px;padding:5px 13px;font-size:.75rem;font-weight:700;cursor:pointer;font-family:var(--f);transition:all .2s" onclick="setCur('USDT')">$ USD</button>
+          </div>
+        </div>
+        <div style="font-size:2.6rem;font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:4px;font-family:var(--fm);color:var(--em)" id="home-bal">৳0.00</div>
+        <div style="font-size:.74rem;color:var(--tx2)">Total Earned: <strong style="color:var(--tx);font-family:var(--fm)" id="home-total">৳0.00</strong></div>
+      </div>
+
+      <!-- VIP LEVEL -->
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="sec-title" style="margin-bottom:0"><i class="fas fa-crown"></i>VIP Level</div>
+          <div class="level-badge vip-bronze-bg vip-bronze" id="vip-badge">🥉 Bronze</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.76rem;color:var(--tx2);margin-bottom:5px"><span id="xp-label">৳0 earned</span><span id="xp-next">Next: Silver at ৳500</span></div>
+        <div class="xp-bar-wrap"><div class="xp-fill" id="xp-bar" style="width:0%"></div></div>
+        <p style="font-size:.73rem;color:var(--tx3);margin-top:6px;text-align:center" id="vip-perks">Bronze: All basic features available</p>
+      </div>
+
+      <!-- STREAK -->
+      <div class="gold-card" style="padding:16px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-weight:800;font-size:.92rem"><i class="fas fa-fire" style="color:var(--gd);margin-right:6px"></i>Daily Check-in</div>
+          <div class="badge badge-gold" id="streak-badge">Day 0</div>
+        </div>
+        <div class="streak-days" id="streak-days"></div>
+        <div style="display:flex;justify-content:center;align-items:center;gap:7px;margin:8px 0 7px;font-size:.75rem;color:var(--tx2)">
+          <span class="badge badge-coin" id="streak-next-coin">Next: 🪙10 coins</span>
+        </div>
+        <button class="btn btn-gold btn-sm" id="checkin-btn" style="width:100%"><i class="fas fa-calendar-check"></i>Check In Today</button>
+      </div>
+    </section>
+
+    <!-- TASKS -->
+    <section id="sec-tasks" class="sec">
+      <div class="stat-grid">
+        <div class="stat-card sc-coin"><span class="ico">🪙</span><span class="val" id="t-coins" style="color:var(--cn)">0</span><span class="lbl">Coin Balance</span></div>
+        <div class="stat-card sc-em"><span class="ico">✅</span><span class="val" id="t-done" style="color:var(--em)">0</span><span class="lbl">Completed</span></div>
+      </div>
+      <div class="coin-card" style="padding:16px;margin-bottom:13px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:.75rem;color:var(--tx2);margin-bottom:4px;font-weight:700">🪙 Your Coin Balance</div>
+          <div style="font-size:2rem;font-weight:900;color:var(--cn);font-family:var(--fm)" id="t-coins-big">0</div>
+          <div style="font-size:.72rem;color:var(--tx2);margin-top:3px">1000 coins = ৳10</div>
+        </div>
+        <button class="btn btn-coin btn-sm" onclick="navigate('wallet')"><i class="fas fa-exchange-alt"></i>Convert to ৳</button>
+      </div>
+      <div class="tab-row" id="task-tabs">
+        <div class="tab-pill active" data-filter="all">All Tasks</div>
+        <div class="tab-pill" data-filter="video">📹 Video</div>
+        <div class="tab-pill" data-filter="click">🖱️ Click</div>
+        <div class="tab-pill" data-filter="social">📱 Social</div>
+        <div class="tab-pill" data-filter="survey">📝 Survey</div>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div class="sec-title"><i class="fas fa-list-check"></i>Available Tasks</div>
+        <div id="tasks-list">
+          <div style="text-align:center;padding:24px;color:var(--tx3)"><i class="fas fa-spinner spin" style="font-size:1.4rem;margin-bottom:10px;display:block;color:var(--em)"></i><p style="font-size:.84rem">Loading tasks...</p></div>
+        </div>
+      </div>
+      <div class="card" style="padding:17px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sec-title" style="margin-bottom:0"><i class="fas fa-history"></i>Task History</div>
+          <button onclick="loadTaskHistory()" class="btn btn-ghost btn-sm"><i class="fas fa-sync" style="font-size:.72rem"></i></button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table" style="min-width:400px">
+            <thead><tr><th>Date</th><th>Task</th><th>Reward</th><th style="text-align:right">Status</th></tr></thead>
+            <tbody id="task-history-list"><tr><td colspan="4" style="text-align:center;padding:18px;color:var(--tx3)">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- WALLET -->
+    <section id="sec-wallet" class="sec">
+      <div style="background:rgba(245,200,66,.06);border:1.5px solid var(--gdbd);border-radius:var(--r);padding:15px;margin-bottom:13px">
+        <div style="font-weight:800;font-size:.88rem;margin-bottom:9px;color:var(--gd)"><i class="fas fa-scroll" style="margin-right:6px"></i>Withdrawal Rules</div>
+        <ul style="font-size:.8rem;color:var(--tx2);line-height:2;padding-left:15px">
+          <li>Daily withdraw: exactly <strong style="color:var(--tx)">৳10 once every 24 hours</strong></li>
+          <li>Full balance withdrawal on <strong style="color:var(--tx)">6th & 20th</strong> of every month</li>
+          <li>Minimum withdrawal: <strong style="color:var(--tx)">৳10</strong></li>
+          <li>Save your bKash number in Settings first</li>
+        </ul>
+      </div>
+      <div class="em-card wallet-hero">
+        <div style="display:flex;justify-content:center;margin-bottom:13px">
+          <div style="display:flex;gap:1px;background:var(--s3);border:1.5px solid var(--bd2);border-radius:100px;padding:3px">
+            <button id="cur-bdt2" style="background:var(--em);color:#001A0C;border:none;border-radius:100px;padding:6px 15px;font-size:.76rem;font-weight:800;cursor:pointer;font-family:var(--f)" onclick="setCur('BDT')">৳ BDT</button>
+            <button id="cur-usdt2" style="background:none;color:var(--tx2);border:none;border-radius:100px;padding:6px 15px;font-size:.76rem;font-weight:700;cursor:pointer;font-family:var(--f)" onclick="setCur('USDT')">$ USD</button>
+          </div>
+        </div>
+        <p class="w-label">Available Balance</p>
+        <p class="w-amount em-text" id="w-bal">৳0.00</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:13px">
+        <div class="s2" style="padding:14px;text-align:center;border-radius:var(--r)"><span style="font-weight:900;font-size:1.1rem;display:block;color:var(--gd);font-family:var(--fm)" id="w-pend">৳0.00</span><span style="font-size:.7rem;color:var(--tx2);margin-top:4px;display:block;font-weight:700">Pending</span></div>
+        <div class="s2" style="padding:14px;text-align:center;border-radius:var(--r)"><span style="font-weight:900;font-size:1.1rem;display:block;color:var(--em);font-family:var(--fm)" id="w-drawn">৳0.00</span><span style="font-size:.7rem;color:var(--tx2);margin-top:4px;display:block;font-weight:700">Withdrawn</span></div>
+      </div>
+      <div class="coin-card" style="padding:20px;margin-bottom:13px">
+        <div class="sec-title" style="margin-bottom:14px"><i class="fas fa-coins" style="color:var(--cn)"></i>Coin → ৳ Converter</div>
+        <div style="text-align:center;margin-bottom:15px">
+          <div style="font-size:.75rem;color:var(--tx2);margin-bottom:5px;font-weight:700">Your Coin Balance</div>
+          <div style="font-size:3rem;font-weight:900;font-family:var(--fm);color:var(--cn);line-height:1" id="w-coins">0</div>
+          <div style="font-size:.73rem;color:var(--tx2);margin-top:5px">1000 coins = ৳10 &nbsp;·&nbsp; Min 100 coins to convert</div>
+        </div>
+        <div class="form-group"><label>Coins to Convert</label><input type="number" id="coin-convert-amount" placeholder="e.g. 1000" min="100" step="100"></div>
+        <div style="background:var(--s2);border:1.5px solid var(--bd);border-radius:10px;padding:11px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:.82rem;color:var(--tx2)">You'll receive:</span>
+          <span style="font-weight:900;color:var(--em);font-family:var(--fm);font-size:1.1rem" id="coin-convert-preview">৳0.00</span>
+        </div>
+        <button class="btn btn-coin" id="coin-convert-btn" style="width:100%"><i class="fas fa-exchange-alt"></i>Convert Coins to ৳</button>
+      </div>
+      <div class="next-pay-card" id="next-pay">
+        <div style="font-weight:800;margin-bottom:10px;font-size:.88rem;display:flex;align-items:center;gap:7px"><i class="fas fa-calendar-check" style="color:var(--bl)"></i>Next Payment</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center">
+          <div><p style="font-size:.7rem;color:var(--tx2);margin-bottom:3px">Date</p><p id="np-date" style="font-weight:800;color:var(--bl);font-family:var(--fm)">—</p></div>
+          <div><p style="font-size:.7rem;color:var(--tx2);margin-bottom:3px">Amount</p><p id="np-amt" style="font-weight:800;color:var(--em);font-family:var(--fm)">৳0.00</p></div>
+        </div>
+      </div>
+      <div class="em-card" style="padding:20px;margin-bottom:13px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px">
+          <div>
+            <p style="font-size:.95rem;font-weight:900;color:var(--em)">⚡ Daily ৳10 Payout</p>
+            <p style="font-size:.77rem;color:var(--tx2);margin-top:4px">Once every 24 hours — direct to bKash</p>
+          </div>
+          <div class="badge badge-em">Once/24h</div>
+        </div>
+        <button class="btn btn-em" id="daily-wd-btn" style="width:100%;padding:14px">⚡ Request ৳10 Now</button>
+        <div id="daily-countdown" style="display:none;align-items:center;gap:8px;font-size:.82rem;color:var(--tx2);margin-top:10px;justify-content:center">
+          <i class="fas fa-clock" style="color:var(--rd)"></i>
+          <span>Next payout in:</span>
+          <span style="font-weight:900;color:var(--rd);font-family:var(--fm);font-size:1rem" id="daily-timer">24:00:00</span>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(232,39,122,.07),rgba(194,24,91,.04));border:1.5px solid rgba(232,39,122,.18);border-radius:var(--r);padding:18px;margin-bottom:13px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:13px">
+          <div style="width:36px;height:36px;background:linear-gradient(135deg,#E8277A,#C2185B);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:white;font-size:.78rem;flex-shrink:0">bK</div>
+          <div><div style="font-weight:900;font-size:.95rem">bKash Withdrawal</div><div style="font-size:.72rem;color:var(--tx2);margin-top:1px">Min ৳10 · Full balance on 6th &amp; 20th</div></div>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+          <div style="display:flex;align-items:center">
+            <span style="background:var(--s3);border:1.5px solid var(--bd2);border-right:none;border-radius:var(--r2) 0 0 var(--r2);padding:13px 12px;color:var(--tx2);font-weight:800;font-size:.9rem">৳</span>
+            <input type="number" id="bk-amt" placeholder="10" min="10" style="border-radius:0 var(--r2) var(--r2) 0!important">
+          </div>
+        </div>
+        <div class="form-group"><label>bKash/Nagad Number</label><input type="tel" id="bk-account" placeholder="01XXXXXXXXX"></div>
+        <button id="bk-wd-btn" style="width:100%;background:linear-gradient(135deg,#E8277A,#C2185B);color:white;padding:14px;font-size:.9rem;font-family:var(--f);font-weight:800;border:none;border-radius:var(--r2);cursor:pointer;letter-spacing:-.01em">Request Withdrawal</button>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:13px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sec-title" style="margin-bottom:0"><i class="fas fa-history"></i>Withdrawal History</div>
+          <button onclick="loadWdHistory()" class="btn btn-ghost btn-sm"><i class="fas fa-sync" style="font-size:.72rem"></i></button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table" style="min-width:400px">
+            <thead><tr><th>Date</th><th>Method</th><th>Account</th><th>Amount</th><th style="text-align:right">Status</th></tr></thead>
+            <tbody id="wd-hist"><tr><td colspan="5" style="text-align:center;padding:18px;color:var(--tx3)">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card" style="padding:17px">
+        <div class="sec-title"><i class="fas fa-sim-card"></i>Save bKash Number</div>
+        <div class="form-group"><label>Your bKash Number</label><input type="tel" id="bk-num" placeholder="017XXXXXXXX"></div>
+        <button class="btn btn-em btn-sm" id="save-bk" style="width:100%"><i class="fas fa-save"></i>Save Number</button>
+      </div>
+    </section>
+
+    <!-- REFER -->
+    <section id="sec-refer" class="sec">
+      <div class="refer-hero">
+        <p style="font-size:.76rem;color:var(--tx2);margin-bottom:4px;font-weight:700">Your Referral Code</p>
+        <div class="ref-code" id="ref-code">LOADING</div>
+        <div style="font-size:.76rem;color:var(--tx2);margin-bottom:12px">Share this code and earn 10% of every referral's earnings forever!</div>
+        <div style="display:flex;gap:8px;justify-content:center">
+          <button class="btn btn-gold btn-sm" id="copy-ref-btn"><i class="fas fa-copy"></i>Copy Code</button>
+          <button class="btn btn-ghost btn-sm" id="share-ref-btn"><i class="fas fa-share-alt"></i>Share</button>
+        </div>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div class="sec-title" style="margin-bottom:12px"><i class="fas fa-percent" style="color:var(--gd)"></i>Commission System</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px">
+          <div style="text-align:center;flex:1"><span style="font-size:1.4rem;display:block;margin-bottom:3px">👤</span><span style="font-size:.7rem;color:var(--tx2)">You Refer</span></div>
+          <span style="color:var(--gd);font-size:1.2rem">→</span>
+          <div style="text-align:center;flex:1"><span style="font-size:1.4rem;display:block;margin-bottom:3px">💼</span><span style="font-size:.7rem;color:var(--tx2)">Friend Earns</span></div>
+          <span style="color:var(--gd);font-size:1.2rem">→</span>
+          <div style="text-align:center;flex:1"><span style="font-size:1.4rem;display:block;margin-bottom:3px">💰</span><span style="font-size:.7rem;color:var(--tx2)">You Get 10%</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--gdb);border:1.5px solid var(--gdbd);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:.72rem;color:var(--tx2);margin-bottom:4px;font-weight:700">Commission Rate</div><div style="font-size:2.2rem;font-weight:900;color:var(--gd);font-family:var(--fm)">10%</div></div>
+          <div style="background:var(--emb);border:1.5px solid var(--embd);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:.72rem;color:var(--tx2);margin-bottom:4px;font-weight:700">Total Earned</div><div style="font-size:1.5rem;font-weight:900;color:var(--em);font-family:var(--fm)" id="r-commission">৳0.00</div></div>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card sc-gold"><span class="ico">👥</span><span class="val gold-text mono" id="r-team">0</span><span class="lbl">Total Team</span></div>
+        <div class="stat-card sc-em"><span class="ico">⚡</span><span class="val em-text mono" id="r-active">0</span><span class="lbl">Active Members</span></div>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sec-title" style="margin-bottom:0"><i class="fas fa-users" style="color:var(--em)"></i>My Team</div>
+          <span class="badge badge-em" id="ref-count-badge">0 members</span>
+        </div>
+        <div id="my-ref-list"><p style="text-align:center;color:var(--tx3);padding:13px 0;font-size:.82rem">Loading...</p></div>
+      </div>
+      <div class="card" style="padding:17px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sec-title" style="margin-bottom:0"><i class="fas fa-trophy" style="color:var(--gd)"></i>Top Earners</div>
+          <span class="badge badge-gold">Weekly</span>
+        </div>
+        <div id="lb-list"><p style="text-align:center;color:var(--tx3);padding:13px 0;font-size:.82rem">Loading...</p></div>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section id="sec-support" class="sec">
+      <div class="s2" style="padding:14px 16px;border-radius:var(--r2);margin-bottom:14px;display:flex;gap:10px;align-items:flex-start">
+        <i class="fas fa-clock" style="color:var(--gd);margin-top:2px;flex-shrink:0"></i>
+        <span style="font-size:.82rem;color:var(--tx2);line-height:1.55">Response time: <strong style="color:var(--tx)">24-48 hours</strong>. For urgent issues use Live Chat below.</span>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div class="sec-title"><i class="fas fa-comments"></i>Live Chat Support</div>
+        <div id="chat-messages" style="display:flex;flex-direction:column;gap:9px;max-height:320px;overflow-y:auto;padding:4px 0;margin-bottom:12px">
+          <div style="max-width:84%;padding:10px 14px;border-radius:14px;border-bottom-left-radius:4px;font-size:.84rem;line-height:1.55;background:var(--s3);border:1.5px solid var(--bd2);align-self:flex-start"><div>Hello! Welcome to NS PRIME Support. How can I help you today? 😊</div><div style="font-size:.64rem;color:var(--tx3);margin-top:3px">Support Team</div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="chat-input" placeholder="Type your message..." maxlength="300" style="flex:1;border-radius:100px!important;padding:11px 15px">
+          <button id="chat-send-btn" style="width:42px;height:42px;background:linear-gradient(135deg,var(--em),#00C882);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#001A0C;font-size:.9rem;flex-shrink:0"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div class="sec-title"><i class="fas fa-headset"></i>Support Ticket</div>
+        <form id="ticket-form">
+          <div class="form-group"><label>Subject</label><select id="tk-sub"><option>Payment Issue</option><option>Task Problem</option><option>Referral Issue</option><option>Coin Issue</option><option>Account Problem</option><option>Other</option></select></div>
+          <div class="form-group"><label>Details</label><textarea id="tk-msg" style="height:100px;resize:none" placeholder="Describe your issue in detail..."></textarea></div>
+          <button type="submit" class="btn btn-em" style="width:100%"><i class="fas fa-paper-plane"></i>Send Ticket</button>
+        </form>
+      </div>
+      <div class="card" style="padding:17px">
+        <div class="sec-title"><i class="fas fa-list"></i>Ticket History</div>
+        <div id="tk-hist"><p style="text-align:center;color:var(--tx3);padding:13px 0;font-size:.82rem">Loading...</p></div>
+      </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="sec-profile" class="sec">
+      <div class="card" style="padding:20px;margin-bottom:12px;text-align:center">
+        <div class="profile-av" id="pf-avatar">U</div>
+        <div style="font-size:1.1rem;font-weight:900;letter-spacing:-.02em" id="pf-name">User</div>
+        <div style="margin-top:8px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <div class="level-badge vip-bronze-bg vip-bronze" id="pf-level-badge">🥉 Bronze</div>
+          <div class="badge badge-em" id="pf-join-badge">Member</div>
+        </div>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div class="sec-title"><i class="fas fa-medal" style="color:var(--gd)"></i>Achievement Badges</div>
+        <div class="ach-grid" id="ach-grid"></div>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div class="sec-title"><i class="fas fa-users"></i>Join Community</div>
+        <a href="#" class="comm-btn" id="tg-link">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(36,161,222,.12);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0"><i class="fab fa-telegram" style="color:#24A1DE"></i></div>
+          <div><div style="font-weight:800;font-size:.88rem">Telegram Group</div><div style="font-size:.72rem;color:var(--tx2)">Latest updates & announcements</div></div>
+          <i class="fas fa-chevron-right" style="margin-left:auto;color:var(--tx3);font-size:.74rem"></i>
+        </a>
+        <a href="#" class="comm-btn" id="wa-link">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(37,211,102,.12);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0"><i class="fab fa-whatsapp" style="color:#25D366"></i></div>
+          <div><div style="font-weight:800;font-size:.88rem">WhatsApp Group</div><div style="font-size:.72rem;color:var(--tx2)">Community support & tips</div></div>
+          <i class="fas fa-chevron-right" style="margin-left:auto;color:var(--tx3);font-size:.74rem"></i>
+        </a>
+      </div>
+      <div class="card" style="margin-bottom:12px;overflow:hidden">
+        <div style="padding:16px 17px 5px"><div class="sec-title" style="margin-bottom:4px"><i class="fas fa-user"></i>Profile Details</div></div>
+        <div class="p-row"><span class="p-lbl">Name</span><strong class="p-val" id="p-name">—</strong></div>
+        <div class="p-row"><span class="p-lbl">Phone</span><strong class="p-val" id="p-phone">—</strong></div>
+        <div class="p-row"><span class="p-lbl">Email</span><strong class="p-val" id="p-email">—</strong></div>
+        <div class="p-row"><span class="p-lbl">Joined</span><strong class="p-val" id="p-joined">—</strong></div>
+        <div class="p-row"><span class="p-lbl">Referral Code</span><strong class="p-val mono" id="p-refcode" style="color:var(--gd)">—</strong></div>
+        <div class="p-row"><span class="p-lbl">Saved Wallet</span><strong class="p-val" id="p-wallet">—</strong></div>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div class="sec-title"><i class="fas fa-sliders"></i>Settings</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span style="font-size:.9rem;font-weight:700">Currency</span>
+          <div style="display:flex;gap:1px;background:var(--s3);border:1.5px solid var(--bd2);border-radius:100px;padding:3px">
+            <button id="cur-bdt3" style="background:var(--em);color:#001A0C;border:none;border-radius:100px;padding:6px 14px;font-size:.76rem;font-weight:800;cursor:pointer;font-family:var(--f)" onclick="setCur('BDT')">৳ BDT</button>
+            <button id="cur-usdt3" style="background:none;color:var(--tx2);border:none;border-radius:100px;padding:6px 14px;font-size:.76rem;font-weight:700;cursor:pointer;font-family:var(--f)" onclick="setCur('USDT')">$ USD</button>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span style="font-size:.9rem;font-weight:700">Theme</span>
+          <button class="btn btn-ghost btn-sm" onclick="toggleTheme()"><i class="fas fa-circle-half-stroke"></i> Toggle</button>
+        </div>
+        <div class="form-group"><label>Update Wallet Number</label><input type="tel" id="bk-num2" placeholder="01XXXXXXXXX"></div>
+        <button class="btn btn-em btn-sm" id="save-bk2" style="width:100%"><i class="fas fa-save"></i>Save Wallet Number</button>
+      </div>
+      <div class="card" style="padding:17px;margin-bottom:12px">
+        <div class="sec-title"><i class="fas fa-scale-balanced"></i>Legal</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="btn btn-ghost" onclick="openTrust('privacy')" style="justify-content:flex-start;gap:10px"><i class="fas fa-shield-halved" style="color:var(--em)"></i>Privacy Policy</button>
+          <button class="btn btn-ghost" onclick="openTrust('terms')" style="justify-content:flex-start;gap:10px"><i class="fas fa-file-contract" style="color:var(--gd)"></i>Terms of Service</button>
+          <button class="btn btn-ghost" onclick="openTrust('about')" style="justify-content:flex-start;gap:10px"><i class="fas fa-circle-info" style="color:var(--bl)"></i>About NS PRIME</button>
+        </div>
+      </div>
+      <button class="btn btn-danger" id="logout-btn" style="width:100%;padding:15px;font-size:.95rem;margin-bottom:60px">
+        <i class="fas fa-sign-out-alt"></i> Logout from NS PRIME
+      </button>
+    </section>
+  </main>
+
+  <nav class="bot-nav">
+    <div class="nav-i active" data-sec="home"><i class="fas fa-home"></i><span>Home</span></div>
+    <div class="nav-i" data-sec="tasks"><i class="fas fa-list-check"></i><span>Tasks</span></div>
+    <div class="nav-i" data-sec="wallet"><i class="fas fa-wallet"></i><span>Wallet</span></div>
+    <div class="nav-i" data-sec="refer"><i class="fas fa-user-friends"></i><span>Refer</span></div>
+    <div class="nav-i" data-sec="support"><i class="fas fa-headset"></i><span>Support</span></div>
+    <div class="nav-i" data-sec="profile"><i class="fas fa-user-circle"></i><span>Profile</span></div>
+  </nav>
+</div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile,signOut}from"https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+import{getFirestore,doc,getDoc,setDoc,updateDoc,onSnapshot,collection,addDoc,query,where,getDocs,increment,limit,Timestamp,writeBatch}from"https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import{getFunctions,httpsCallable}from"https://www.gstatic.com/firebasejs/9.22.1/firebase-functions.js";
+
+const FC={apiKey:"AIzaSyCU2RfLeclEyyxzEActtl5ks1P_NPvATOE",authDomain:"ns-prime-d7ca5.firebaseapp.com",projectId:"ns-prime-d7ca5",storageBucket:"ns-prime-d7ca5.firebasestorage.app",messagingSenderId:"172231719671",appId:"1:172231719671:web:3dafc0ace7b44fbe0071f2"};
+const app=initializeApp(FC),auth=getAuth(app),db=getFirestore(app);
+// All balance-changing operations are handled by Cloud Functions.  This is
+// essential: browser code must never be trusted to credit money or commission.
+const functions=getFunctions(app,"asia-south1");
+const call=fn=>httpsCallable(functions,fn);
+
+let CU=null,UD={},UL=null,CC="BDT";
+let adminConfig={coinRate:100,telegramLink:"#",whatsappLink:"#",adminWhatsapp:"8801905028230",noticeText:""};
+const RATE=118;
+// Deploy this file at the same URL that is used in the generated smart links.
+// Smart links open the dedicated, category-aware campaign landing page.
+const LANDING_BASE=new URL("campaign.html",window.location.href).href;
+const bdDateKey=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Dhaka",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+const $=id=>document.getElementById(id);
+window.$=$;
+
+const fmt=v=>{
+  const n=+v||0;
+  if(CC==="USDT") return "$"+(n/RATE).toFixed(2);
+  return "৳"+n.toFixed(2);
+};
+
+function toast(msg,type="ok"){
+  const t=$("toast");t.textContent="";
+  const i=document.createElement("i");
+  i.className=`fas fa-${type==="ok"?"check-circle":type==="err"?"exclamation-circle":"info-circle"}`;
+  t.appendChild(i);t.appendChild(document.createTextNode(" "+msg));
+  t.className="show "+type;clearTimeout(t._t);t._t=setTimeout(()=>t.className="",3400);
+}
+window.toast=toast;
+
+window.toggleTheme=function(){
+  const n=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",n);localStorage.setItem("nsp-theme",n);
+};
+const sT=localStorage.getItem("nsp-theme");if(sT)document.documentElement.setAttribute("data-theme",sT);
+
+// ============================================
+// NS PRIME — ATM TING NOTIFICATION SYSTEM
+// ============================================
+
+// Dollar/ATM Single Ting Sound
+function playTing(){
+  try{
+    const c=new(window.AudioContext||window.webkitAudioContext)();
+    function note(freq,startT,dur,vol,decay){
+      const o=c.createOscillator(),g=c.createGain(),comp=c.createDynamicsCompressor();
+      o.type='sine';
+      o.frequency.setValueAtTime(freq,startT);
+      o.frequency.exponentialRampToValueAtTime(freq*decay,startT+dur);
+      g.gain.setValueAtTime(0,startT);
+      g.gain.linearRampToValueAtTime(vol,startT+0.005);
+      g.gain.exponentialRampToValueAtTime(0.0001,startT+dur);
+      o.connect(g);g.connect(comp);comp.connect(c.destination);
+      o.start(startT);o.stop(startT+dur+0.05);
+    }
+    const n=c.currentTime;
+    note(2637,n,0.9,0.35,0.97);
+    note(5274,n,0.5,0.08,0.96);
+    note(1319,n,0.4,0.06,0.98);
+  }catch(e){console.warn('Ting:',e);}
+}
+
+// Show the notification card
+let _notifTimer=null;
+function showBalanceNotif(amount){
+  const el=$("ns-bal-notif");
+  const amtEl=$("ns-notif-amt");
+  const fill=$("ns-notif-fill");
+  if(!el)return;
+
+  // Update amount
+  if(amtEl)amtEl.textContent="+৳"+amount.toFixed(2);
+
+  // Clear any existing timer
+  if(_notifTimer)clearTimeout(_notifTimer);
+
+  // Reset progress bar
+  if(fill){fill.style.transition='none';fill.style.width='100%';}
+
+  // Show
+  el.classList.remove('ns-hide');
+  el.classList.add('ns-show');
+
+  // Start progress bar after a tiny delay
+  setTimeout(()=>{
+    if(fill){fill.style.transition='width 4s linear';fill.style.width='0%';}
+  },80);
+
+  // Vibrate on mobile
+  if(navigator.vibrate)navigator.vibrate([70,35,70]);
+
+  // Browser push notification
+  if(Notification.permission==='granted'){
+    try{
+      new Notification('💰 NS PRIME — Balance Added!',{
+        body:'+৳'+amount.toFixed(2)+' আপনার account এ যোগ হয়েছে!',
+        tag:'ns-balance',
+        silent:true
+      });
+    }catch(e){}
+  }
+
+  // Auto dismiss after 4.3s
+  _notifTimer=setTimeout(()=>{
+    el.classList.remove('ns-show');
+    el.classList.add('ns-hide');
+  },4300);
+}
+
+// Close button
+document.getElementById('ns-notif-close-btn').addEventListener('click',()=>{
+  if(_notifTimer)clearTimeout(_notifTimer);
+  const el=$("ns-bal-notif");
+  el.classList.remove('ns-show');
+  el.classList.add('ns-hide');
+});
+
+// Request browser notification permission
+async function requestPushPermission(){
+  if('Notification' in window&&Notification.permission==='default'){
+    await Notification.requestPermission();
+  }
+}
+
+// Balance monitor — triggers on ANY increase ≥ ৳0.01
+let _prevBal=null;
+function checkBalanceChange(newBal){
+  if(_prevBal!==null&&newBal>_prevBal+0.005){
+    playTing();
+    showBalanceNotif(newBal-_prevBal);
+  }
+  _prevBal=newBal;
+}
+
+// ============================================
+// END NOTIFICATION SYSTEM
+// ============================================
+
+function getVIP(e){
+  if(e>=5000)return{name:"Diamond",icon:"💎",cls:"vip-diamond",bgcls:"vip-diamond-bg"};
+  if(e>=2000)return{name:"Gold",icon:"🥇",cls:"vip-gold",bgcls:"vip-gold-bg",next:"Diamond",nxt:5000};
+  if(e>=500)return{name:"Silver",icon:"🥈",cls:"vip-silver",bgcls:"vip-silver-bg",next:"Gold",nxt:2000};
+  return{name:"Bronze",icon:"🥉",cls:"vip-bronze",bgcls:"vip-bronze-bg",next:"Silver",nxt:500};
+}
+
+setTimeout(()=>{$("splash").classList.add("hide");setTimeout(()=>$("splash").style.display="none",600);},2200);
+
+onAuthStateChanged(auth,user=>{
+  if(user){CU=user;const isNew=(Date.now()-new Date(user.metadata.creationTime).getTime())<15000;startListen(user.uid,isNew);showApp();}
+  else{if(UL)UL();CU=null;UD={};showLanding();}
+});
+
+function startListen(uid,isNew){
+  if(UL)UL();
+  requestPushPermission();
+  let _new=isNew;
+  UL=onSnapshot(doc(db,"users",uid),async snap=>{
+    if(snap.exists()){
+      UD=snap.data();
+      CC=UD.preferredCurrency||"BDT";
+
+      // ✅ BALANCE CHANGE CHECK — fires ting + notification
+      checkBalanceChange(UD.balance||0);
+
+      if(UD.lastActiveDate!==bdDateKey()){
+        try{
+          await call("resetDailyCounters")({});
+          UD.todayEarning=0;UD.rawTodayImpressions=0;
+        }catch(e){console.warn("Daily reset:",e);}
+      }
+      renderUI();
+      if(_new&&!UD._onboarded){showOnboarding();_new=false;}
+    } else if(!_new){toast("Account not found","err");signOut(auth);}
+  });
+
+  onSnapshot(doc(db,"settings","config"),snap=>{
+    if(snap.exists()){
+      adminConfig={...adminConfig,...snap.data()};
+      if(adminConfig.telegramLink)$("tg-link").href=adminConfig.telegramLink;
+      if(adminConfig.whatsappLink)$("wa-link").href=adminConfig.whatsappLink;
+      if(adminConfig.tickerText){
+        const txt=adminConfig.tickerText;
+        const items=Array(4).fill(`<div class="ticker-item"><i class="fas fa-bolt"></i>${txt}</div>`).join("");
+        ["land-ticker-inner","app-ticker-inner"].forEach(id=>{const el=$(id);if(el)el.innerHTML=items;});
+        $("land-ticker").classList.add("show");$("app-ticker").classList.add("show");
+      }
+      const noticeDiv=$("admin-msg-card");
+      if(adminConfig.noticeText&&adminConfig.noticeText.trim()){
+        $("admin-msg-text").textContent=adminConfig.noticeText;
+        if(adminConfig.noticeTimestamp?.toDate)$("admin-msg-time").textContent=adminConfig.noticeTimestamp.toDate().toLocaleDateString("en-BD");
+        noticeDiv.classList.add("show");
+      } else {noticeDiv.classList.remove("show");}
+      if(adminConfig.nextPaymentDate&&adminConfig.nextPaymentAmount){
+        $("np-date").textContent=adminConfig.nextPaymentDate;
+        $("np-amt").textContent=fmt(adminConfig.nextPaymentAmount);
+        $("next-pay").classList.add("show");
+      }
+    }
+  },()=>{});
+
+  try{
+    const nq=query(collection(db,"notifications"),where("userId","==",uid),limit(20));
+    onSnapshot(nq,snap=>{
+      const items=[];snap.forEach(d=>{try{items.push({id:d.id,...d.data()});}catch{}});
+      items.sort((a,b)=>(b.createdAt?.toDate?.()?.getTime()||0)-(a.createdAt?.toDate?.()?.getTime()||0));
+      renderNotifications(items);
+    },e=>console.warn("Notif:",e.code));
+  }catch(e){console.warn(e);}
+
+  try{
+    const cq=query(collection(db,"supportChats"),where("userId","==",uid),limit(50));
+    onSnapshot(cq,snap=>renderChat(snap),e=>console.warn("Chat:",e.code));
+  }catch(e){console.warn(e);}
+
+  loadAnnouncements();
+}
+
+function loadAnnouncements(){
+  try{
+    onSnapshot(query(collection(db,"announcements"),limit(5)),snap=>{
+      if(snap.empty){$("ann-card").classList.remove("show");return;}
+      const items=[];snap.forEach(d=>{try{items.push({id:d.id,...d.data()});}catch{}});
+      items.sort((a,b)=>(b.createdAt?.toDate?.()?.getTime()||0)-(a.createdAt?.toDate?.()?.getTime()||0));
+      const el=$("ann-list");if(!el)return;
+      el.innerHTML=items.map(a=>`<div class="ann-item"><span class="ann-badge">📢 Notice</span><strong style="font-size:.86rem">${a.title||""}</strong><p style="font-size:.79rem;color:var(--tx2);margin-top:5px;line-height:1.55">${a.body||a.message||""}</p><div style="font-size:.67rem;color:var(--tx3);margin-top:4px">${a.createdAt?.toDate?a.createdAt.toDate().toLocaleDateString("en-BD"):""}</div></div>`).join("");
+      $("ann-card").classList.add("show");
+    },e=>{$("ann-card").classList.remove("show");console.warn("Ann:",e.code);});
+  }catch(e){console.warn(e);}
+}
+
+const MOTIV=[
+  {e:"🔥",m:"Don't stop — your ৳1,000 milestone is closer!",s:"Complete 3 tasks today"},
+  {e:"💪",m:"Earners who log in daily earn 3x more!",s:"Check in daily for streak bonuses"},
+  {e:"🚀",m:"Refer ONE friend today — earn 10% forever!",s:"Share your referral code now"},
+  {e:"🪙",m:"Convert your coins to ৳ in Wallet!",s:"1000 Coins = ৳10 — cash out anytime"},
+  {e:"🔗",m:"Generate & share links for max earnings!",s:"More links = more clicks = more ৳"},
+];
+function updateMotivation(tot,coins){
+  const h=new Date().getHours();let pick;
+  if(coins>1000)pick={e:"🪙",m:"You have "+coins+" coins! Convert them now.",s:"Go to Wallet → Convert Coins to ৳"};
+  else if(h<12)pick={e:"☀️",m:"Good morning! Push higher today!",s:"Morning is best time to share links"};
+  else pick=MOTIV[Math.floor(Date.now()/86400000)%MOTIV.length];
+  $("mot-emoji").textContent=pick.e;$("mot-msg").textContent=pick.m;$("mot-sub").textContent=pick.s;
+}
+
+function getStreakCoins(s){return Math.min((s||1)*10,200);}
+function renderStreak(streak,last){
+  const today=bdDateKey();const chk=last===today;
+  const wrap=$("streak-days");if(!wrap)return;wrap.innerHTML="";
+  const cur=(streak||0)%7;
+  for(let i=0;i<7;i++){
+    const div=document.createElement("div");div.className="streak-day";
+    if(chk?i<=cur:i<cur)div.classList.add("done");else if(!chk&&i===cur)div.classList.add("today-d");
+    div.innerHTML=`<span style="font-size:.58rem">D${i+1}</span><span style="font-size:.62rem;color:${(chk?i<=cur:i<cur)?"inherit":"var(--cn)"};font-family:var(--fm)">${(chk?i<=cur:i<cur)?"✅":"🪙"+(i+1)*10}</span>`;
+    wrap.appendChild(div);
+  }
+  $("streak-badge").textContent="Day "+(streak||0);
+  const nc=$("streak-next-coin");if(nc)nc.textContent="Next: 🪙"+getStreakCoins((streak||0)+1)+" coins";
+  const btn=$("checkin-btn");if(!btn)return;
+  if(chk){btn.disabled=true;btn.textContent="✅ Checked In — +🪙"+getStreakCoins(streak||1)+" coins!";}
+  else{btn.disabled=false;btn.innerHTML=`<i class="fas fa-calendar-check"></i> Check In — Earn 🪙${getStreakCoins((streak||0)+1)} Coins`;}
+}
+
+$("checkin-btn").addEventListener("click",async()=>{
+  if(!CU)return;
+  const today=bdDateKey();
+  if(UD.lastCheckin===today){toast("Already checked in today!","info");return;}
+  try{
+    const r=await call("dailyCheckin")({});
+    toast("Day "+r.data.streak+" streak! +🪙"+r.data.coins+" coins! 🔥","ok");
+  }catch(e){toast("Error: "+e.message,"err");}
+});
+
+async function addNotif(uid,title,body){
+  try{await addDoc(collection(db,"notifications"),{userId:uid,title,body,read:false,createdAt:Timestamp.now()});}
+  catch(e){console.warn("addNotif:",e.code);}
+}
+
+function updateCurrencyButtons(){
+  const isBDT=(CC==="BDT");
+  const em="linear-gradient(135deg,var(--em),#00C882)";
+  const smBtnStyle=(active)=>active
+    ?`background:${em};color:#001A0C;border:none;border-radius:100px;padding:6px 15px;font-size:.76rem;font-weight:800;cursor:pointer;font-family:var(--f)`
+    :`background:none;color:var(--tx2);border:none;border-radius:100px;padding:6px 15px;font-size:.76rem;font-weight:700;cursor:pointer;font-family:var(--f)`;
+  ["cur-bdt","cur-bdt2","cur-bdt3"].forEach(id=>{const e=$(id);if(e)e.style.cssText=smBtnStyle(isBDT);});
+  ["cur-usdt","cur-usdt2","cur-usdt3"].forEach(id=>{const e=$(id);if(e)e.style.cssText=smBtnStyle(!isBDT);});
+}
+
+function renderUI(){
+  const d=(k,def)=>UD[k]??def;
+  const bal=d("balance",0),tot=d("totalEarnings",0),coins=d("coins",0);
+  const todayImpress=d("rawTodayImpressions",0);
+  const todayEarn=d("todayEarning",0);
+  const s=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+
+  s("hdr-name",d("name","User").split(" ")[0]);
+  s("hdr-bal",fmt(bal));s("home-bal",fmt(bal));s("home-total",fmt(tot));
+  s("d-valid-clicks",todayImpress);
+  s("d-today-earn",fmt(todayEarn));
+  s("d-today-earn2",fmt(todayEarn));
+  s("d-today-impress",todayImpress);
+  s("d-coins",coins);s("d-total",fmt(tot));
+  s("d-coins-link",coins);
+  s("t-coins",coins);s("t-coins-big",coins);
+  s("w-bal",fmt(bal));s("w-pend",fmt(d("withdrawBalance",0)));s("w-drawn",fmt(d("totalWithdrawn",0)));
+  s("w-coins",coins);
+  s("r-team",d("teamSize",0));s("r-active",d("activeTeam",0));s("r-commission",fmt(d("referralEarnings",0)));
+  s("ref-code",d("referralCode","NOTSET"));
+
+  updateCurrencyButtons();
+
+  const nm=d("name","User");
+  s("p-name",nm);s("p-phone",d("phone","—"));s("p-email",d("email","—"));
+  s("p-refcode",d("referralCode","—"));s("p-wallet",d("savedWallet","—"));
+  s("pf-name",nm);
+  const pav=$("pf-avatar");if(pav)pav.textContent=nm.charAt(0).toUpperCase();
+
+  const jd=d("joinDate",null);
+  if(jd?.toDate){s("p-joined",jd.toDate().toLocaleDateString("en-BD"));const mo=Math.floor((Date.now()-jd.toDate().getTime())/2592e6);s("pf-join-badge",mo<1?"New Member":mo+"mo Member");}
+
+  const bkEl=$("bk-num");if(bkEl&&!bkEl._edited)bkEl.value=d("savedWallet","");
+  const bkEl2=$("bk-num2");if(bkEl2&&!bkEl2._edited)bkEl2.value=d("savedWallet","");
+
+  const vip=getVIP(tot);
+  [$("vip-badge"),$("pf-level-badge")].forEach(el=>{if(el){el.textContent=vip.icon+" "+vip.name;el.className="level-badge "+vip.bgcls+" "+vip.cls;}});
+  const xp=vip.name==="Bronze"?tot/500*100:vip.name==="Silver"?(tot-500)/1500*100:vip.name==="Gold"?(tot-2000)/3000*100:100;
+  const xb=$("xp-bar");if(xb)xb.style.width=Math.min(xp,100)+"%";
+  s("xp-label","৳"+tot.toFixed(0)+" earned");
+  s("xp-next",vip.name==="Diamond"?"Max Level ✨":"Next: "+vip.next+" at ৳"+vip.nxt);
+  const VP={Bronze:"Bronze: All basic features available",Silver:"Silver: Priority support + bonus perks",Gold:"Gold: Weekly contest + bonuses",Diamond:"Diamond: Exclusive rewards + VIP support"};
+  s("vip-perks",VP[vip.name]);
+
+  const lWD=d("lastWithdrawTime",null);
+  const dwB=$("daily-wd-btn"),cd=$("daily-countdown");
+  if(dwB&&cd){
+    if(lWD?.toDate){
+      const diff=864e5-(Date.now()-lWD.toDate().getTime());
+      if(diff>900000){dwB.disabled=true;dwB.textContent="⏳ Come back later";cd.style.display="flex";startDailyCountdown(diff);}
+      else{dwB.disabled=false;dwB.innerHTML="⚡ Request ৳10 Now";cd.style.display="none";}
+    } else {dwB.disabled=false;dwB.innerHTML="⚡ Request ৳10 Now";cd.style.display="none";}
+  }
+
+  renderStreak(d("streakCount",0),d("lastCheckin",""));
+  updateMotivation(tot,coins);
+  renderAchievements(d("tasksDone",0),tot,d("teamSize",0),coins);
+  restoreGeneratedLink();
+}
+
+function renderAchievements(tasks,earn,team,coins){
+  const g=$("ach-grid");if(!g)return;
+  const achs=[{ico:"🌟",name:"First Task",u:tasks>=1},{ico:"🪙",name:"1000 Coins",u:coins>=1000},{ico:"👥",name:"First Refer",u:team>=1},{ico:"💰",name:"৳500 Earner",u:earn>=500},{ico:"👑",name:"Silver Level",u:earn>=500},{ico:"🏆",name:"Top 10",u:false}];
+  g.innerHTML=achs.map(a=>`<div class="ach-item${a.u?"":" locked"}"><span class="ach-ico">${a.ico}</span><div class="ach-name">${a.name}</div></div>`).join("");
+}
+
+function renderNotifications(items){
+  let unread=0;const list=$("notif-list");if(!list)return;
+  if(!items||items.length===0){list.innerHTML=`<p style="text-align:center;color:var(--tx3);padding:28px 0;font-size:.84rem">No notifications yet</p>`;return;}
+  list.innerHTML="";
+  items.forEach(n=>{
+    try{if(!n.read)unread++;
+    const div=document.createElement("div");div.className="notif-item"+(n.read?"":" unread");
+    div.innerHTML=`<div class="n-title">${n.title||"Notification"}</div><div class="n-body">${n.body||""}</div><div class="n-time">${n.createdAt?.toDate?n.createdAt.toDate().toLocaleString("en-BD"):""}</div>`;
+    list.appendChild(div);}catch{}
+  });
+  const dot=$("notif-dot");if(dot)dot.style.display=unread>0?"block":"none";
+}
+
+function renderChat(snap){
+  const wrap=$("chat-messages");if(!wrap)return;
+  const msgs=[];
+  if(snap&&!snap.empty){snap.forEach(d=>{try{msgs.push(d.data());}catch{}});msgs.sort((a,b)=>(a.createdAt?.toDate?.()||new Date(0))-(b.createdAt?.toDate?.()||new Date(0)));}
+  wrap.innerHTML=`<div style="max-width:84%;padding:10px 14px;border-radius:14px;border-bottom-left-radius:4px;font-size:.84rem;line-height:1.55;background:var(--s3);border:1.5px solid var(--bd2);align-self:flex-start"><div>Hello! Welcome to NS PRIME Support. How can I help you today? 😊</div><div style="font-size:.64rem;color:var(--tx3);margin-top:3px">Support Team</div></div>`;
+  msgs.forEach(m=>{
+    try{
+      const isAdmin=m.sender==="admin";
+      const div=document.createElement("div");
+      div.style.cssText=`max-width:84%;padding:10px 14px;border-radius:14px;font-size:.84rem;line-height:1.55;align-self:${isAdmin?"flex-start":"flex-end"};background:${isAdmin?"var(--s3)":"var(--emb)"};border:1.5px solid ${isAdmin?"var(--bd2)":"var(--embd)"};border-bottom-${isAdmin?"left":"right"}-radius:4px`;
+      const t=m.createdAt?.toDate?m.createdAt.toDate().toLocaleTimeString("en",{hour:"2-digit",minute:"2-digit"}):"";
+      div.innerHTML=`<div>${m.message||""}</div><div style="font-size:.64rem;color:var(--tx3);margin-top:3px">${isAdmin?"Admin · ":""}${t}</div>`;
+      wrap.appendChild(div);
+    }catch{}
+  });
+  wrap.scrollTop=wrap.scrollHeight;
+}
+
+const chatSendBtn=$("chat-send-btn"),chatInput=$("chat-input");
+async function sendChat(){
+  const msg=chatInput.value.trim();if(!msg){toast("Type a message first","info");return;}
+  if(!CU){toast("Not logged in","err");return;}
+  chatSendBtn.disabled=true;
+  try{await addDoc(collection(db,"supportChats"),{userId:CU.uid,userName:UD.name||"User",message:msg,sender:"user",read:false,createdAt:Timestamp.now()});chatInput.value="";}
+  catch(e){toast("Failed to send: "+e.message,"err");}
+  finally{chatSendBtn.disabled=false;}
+}
+chatSendBtn.addEventListener("click",sendChat);
+chatInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}});
+
+$("coin-convert-amount").addEventListener("input",function(){
+  const v=parseInt(this.value)||0;const rate=adminConfig.coinRate||100;
+  const p=$("coin-convert-preview");if(p)p.textContent=v>0?"৳"+(v/rate).toFixed(2):"৳0.00";
+});
+$("coin-convert-btn").addEventListener("click",async()=>{
+  if(!CU){toast("Not logged in","err");return;}
+  const amount=parseInt($("coin-convert-amount").value)||0;
+  const rate=adminConfig.coinRate||100;
+  if(amount<100){toast("Minimum 100 coins to convert","err");return;}
+  if(amount>(UD.coins||0)){toast("Insufficient coins! You have "+(UD.coins||0)+" coins.","err");return;}
+  const btn=$("coin-convert-btn");btn.disabled=true;btn.innerHTML=`<i class="fas fa-spinner spin"></i> Converting...`;
+  try{
+    const r=await call("convertCoins")({amount});
+    $("coin-convert-amount").value="";const p=$("coin-convert-preview");if(p)p.textContent="৳0.00";
+    toast("✅ "+amount+" coins → ৳"+r.data.taka.toFixed(2)+" added!","ok");
+  }catch(e){toast("Conversion failed: "+e.message,"err");}
+  finally{btn.disabled=false;btn.innerHTML=`<i class="fas fa-exchange-alt"></i>Convert Coins to ৳`;}
+});
+
+let _cdI=null;
+function startDailyCountdown(ms){
+  if(_cdI)clearInterval(_cdI);const el=$("daily-timer");
+  function tick(){if(ms<=0){clearInterval(_cdI);$("daily-wd-btn").disabled=false;$("daily-wd-btn").innerHTML="⚡ Request ৳10 Now";$("daily-countdown").style.display="none";return;}ms-=1000;const h=Math.floor(ms/36e5),m=Math.floor(ms%36e5/6e4),s=Math.floor(ms%6e4/1e3);if(el)el.textContent=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");}
+  tick();_cdI=setInterval(tick,1000);
+}
+
+async function initUser(user,name,phone,email,code){
+  // The server validates the code, creates a collision-free referral code and
+  // increments the referrer's team in one transaction.
+  const result=await call("completeRegistration")({name,phone,email,referralCode:code||""});
+  if(result.data?.invalidReferral) toast("Account created, but the referral code was invalid.","info");
+}
+
+let currentFilter="all";let taskCache={};
+function loadTasks(){
+  const el=$("tasks-list");if(!el)return;
+  el.innerHTML=`<div style="text-align:center;padding:24px;color:var(--tx3)"><i class="fas fa-spinner spin" style="font-size:1.4rem;margin-bottom:10px;display:block;color:var(--em)"></i><p style="font-size:.84rem">Loading tasks...</p></div>`;
+  onSnapshot(query(collection(db,"tasks"),limit(50)),snap=>{
+    if(snap.empty){el.innerHTML=`<div style="text-align:center;padding:28px;color:var(--tx3)"><p style="font-size:.84rem">No tasks available right now. Check back later!</p></div>`;return;}
+    const tasks=[];taskCache={};
+    snap.forEach(d=>{
+      try{
+        const t={id:d.id,...d.data()};
+        if(t.active===true||t.active==="true"||t.active===undefined){tasks.push(t);taskCache[d.id]=t;}
+      }catch{}
+    });
+    tasks.sort((a,b)=>(b.createdAt?.toDate?.()?.getTime()||0)-(a.createdAt?.toDate?.()?.getTime()||0));
+    el.innerHTML="";let shown=0;
+    tasks.forEach(t=>{
+      const cat=(t.category||"general").toLowerCase();
+      if(currentFilter!=="all"&&cat!==currentFilter)return;
+      shown++;
+      const coinR=parseInt(t.reward)||10;
+      el.innerHTML+=`<div class="task-card">
+        <div class="task-top">
+          <div class="task-info">
+            <h4>${t.title}</h4>
+            <p>${(t.description||"Complete this task and earn your reward.").substring(0,110)}...</p>
+            <div style="display:flex;gap:5px;align-items:center;margin-top:6px;flex-wrap:wrap">
+              <span style="font-size:.72rem;color:var(--tx2)"><i class="fas fa-tag" style="margin-right:3px;color:var(--em)"></i>${t.category||"General"}</span>
+              ${t.timeLimit?`<span style="font-size:.72rem;color:var(--gd)"><i class="fas fa-clock" style="margin-right:2px"></i>${t.timeLimit} min</span>`:""}
+            </div>
+          </div>
+          <span class="task-rew">🪙 +${coinR}</span>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:10px">
+          <button class="task-btn go" onclick="openTaskModal('${t.id}')"><i class="fas fa-eye"></i> View & Do Task</button>
+        </div>
+      </div>`;
+    });
+    if(shown===0)el.innerHTML=`<div style="text-align:center;padding:22px;color:var(--tx3)"><p style="font-size:.84rem">No tasks in this category yet.</p></div>`;
+  },e=>el.innerHTML=`<div style="text-align:center;padding:22px;color:var(--tx3)"><p style="font-size:.84rem">Could not load (${e.code})</p></div>`);
+  loadTaskHistory();
+}
+
+window.openTaskModal=function(taskId){
+  const t=taskCache[taskId];if(!t)return;
+  $("task-modal-content").innerHTML=`
+    <div style="display:flex;align-items:center;gap:13px;margin-bottom:18px">
+      <div style="width:48px;height:48px;background:var(--cnb);border:1.5px solid var(--cnbd);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">🪙</div>
+      <div><h3 style="font-weight:900;font-size:1.05rem;margin-bottom:5px">${t.title}</h3><span class="badge badge-coin">+${t.reward||10} Coins</span></div>
+    </div>
+    <div class="s2" style="padding:15px;margin-bottom:14px;border-radius:var(--r)">
+      <div style="font-size:.76rem;font-weight:800;color:var(--tx2);margin-bottom:8px;text-transform:uppercase"><i class="fas fa-list-check" style="color:var(--em);margin-right:5px"></i>Task Instructions</div>
+      <p style="font-size:.87rem;line-height:1.7;white-space:pre-line">${t.description||"Complete this task as instructed."}</p>
+    </div>
+    ${t.link?`<a href="${t.link}" target="_blank" class="btn btn-em" style="width:100%;margin-bottom:14px;padding:15px;font-size:.92rem"><i class="fas fa-external-link-alt"></i>CLICK HERE TO DO TASK</a>`:""}
+    <hr>
+    <div style="font-size:.76rem;font-weight:800;color:var(--tx2);margin-bottom:10px;text-transform:uppercase"><i class="fas fa-upload" style="color:var(--gd);margin-right:5px"></i>Submit Proof</div>
+    <div class="form-group"><label>Text Proof (Required)</label><textarea id="task-text-proof" style="height:95px;resize:none" placeholder="Type username, email, or exact text as requested..."></textarea></div>
+    <div class="form-group"><label>Screenshot Link (Optional)</label><input type="url" id="task-img-proof" placeholder="Paste ImgBB or image link here..."></div>
+    <button class="btn btn-gold" id="submit-task-btn" style="width:100%;padding:15px;font-size:.92rem" onclick="submitTask('${taskId}',${t.reward||10})"><i class="fas fa-paper-plane"></i>Submit Proof for Review</button>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:10px" onclick="closeTaskModal()">Cancel</button>
+  `;
+  $("task-modal-bg").classList.add("show");
+};
+
+window.submitTask=async function(taskId,coinR){
+  if(!CU)return;
+  const btn=$("submit-task-btn");
+  const textProof=$("task-text-proof")?.value.trim()||"";
+  if(!textProof){toast("Text proof is required","err");return;}
+  btn.disabled=true;btn.innerHTML=`<i class="fas fa-spinner spin"></i> Submitting...`;
+  try{
+    await addDoc(collection(db,"task_submissions"),{
+      userId:CU.uid,userName:UD.name||"User",
+      taskId,taskTitle:taskCache[taskId]?.title||"Task",
+      reward:coinR,textProof,
+      imageProof:$("task-img-proof")?.value||"",
+      status:"pending",timestamp:Timestamp.now()
+    });
+    await addNotif(CU.uid,"📋 Task Submitted!","Your task proof is under review. You'll be notified when approved.");
+    toast("✅ Task submitted! Admin will review soon.","ok");
+    closeTaskModal();loadTaskHistory();
+  }catch(e){toast("Submit failed: "+e.message,"err");btn.disabled=false;btn.innerHTML=`<i class="fas fa-paper-plane"></i>Submit Proof for Review`;}
+};
+window.closeTaskModal=function(){$("task-modal-bg").classList.remove("show");};
+$("task-modal-bg").addEventListener("click",e=>{if(e.target===$("task-modal-bg"))closeTaskModal();});
+
+window.loadTaskHistory=async function(){
+  const tbody=$("task-history-list");if(!tbody||!CU)return;
+  tbody.innerHTML=`<tr><td colspan="4" style="text-align:center;padding:18px;color:var(--tx3)"><i class="fas fa-spinner spin"></i></td></tr>`;
+  try{
+    const snap=await getDocs(query(collection(db,"task_submissions"),where("userId","==",CU.uid),limit(20)));
+    if(snap.empty){tbody.innerHTML=`<tr><td colspan="4" style="text-align:center;padding:18px;color:var(--tx3);font-size:.82rem">No tasks submitted yet</td></tr>`;return;}
+    const items=[];snap.forEach(d=>{try{items.push(d.data());}catch{}});
+    items.sort((a,b)=>(b.timestamp?.toDate?.()?.getTime()||0)-(a.timestamp?.toDate?.()?.getTime()||0));
+    tbody.innerHTML=items.map(t=>{
+      const st=t.status||"pending";
+      const stLabel=st==="approved"?"✅ Approved":st==="pending"?"⏳ Pending":"❌ Rejected";
+      return `<tr>
+        <td style="font-size:.73rem;color:var(--tx2)">${t.timestamp?.toDate?t.timestamp.toDate().toLocaleDateString("en-BD"):"-"}</td>
+        <td style="font-weight:700;font-size:.8rem;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.taskTitle||"Task"}</td>
+        <td style="font-weight:800;color:var(--cn)">🪙 +${t.reward||0}</td>
+        <td style="text-align:right"><span class="pill pill-${st}">${stLabel}</span></td>
+      </tr>`;
+    }).join("");
+  }catch(e){tbody.innerHTML=`<tr><td colspan="4" style="text-align:center;padding:18px;color:var(--tx3);font-size:.82rem">Could not load</td></tr>`;}
+};
+
+document.querySelectorAll("#task-tabs .tab-pill").forEach(p=>p.addEventListener("click",()=>{
+  document.querySelectorAll("#task-tabs .tab-pill").forEach(t=>t.classList.remove("active"));
+  p.classList.add("active");currentFilter=p.dataset.filter;loadTasks();
+}));
+
+$("daily-wd-btn").addEventListener("click",async()=>{
+  const btn=$("daily-wd-btn");
+  if(!UD.savedWallet){toast("Please save your bKash number first!","err");navigate("wallet");return;}
+  if((UD.balance||0)<10){toast("Insufficient balance (need ৳10)","err");return;}
+  if(UD.lastWithdrawTime?.toDate){
+    const diff=(Date.now()-UD.lastWithdrawTime.toDate().getTime())/36e5;
+    if(diff<23.5){const rem=Math.ceil(24-diff);toast(`Please wait ${rem} more hours`,"err");return;}
+  }
+  btn.disabled=true;btn.innerHTML=`<i class="fas fa-spinner spin"></i> Processing...`;
+  try{
+    await call("requestWithdrawal")({amount:10,accountNumber:UD.savedWallet});
+    toast("৳10 request sent! ✅","ok");
+  }catch(e){btn.disabled=false;btn.innerHTML="⚡ Request ৳10 Now";toast("Error: "+e.message,"err");}
+});
+
+$("bk-wd-btn").addEventListener("click",async()=>{
+  const amt=parseFloat($("bk-amt").value);
+  const acc=$("bk-account").value.trim();
+  if(!acc&&!UD.savedWallet){toast("Enter your bKash number","err");return;}
+  if(isNaN(amt)||amt<10){toast("Minimum withdrawal is ৳10","err");return;}
+  if((UD.balance||0)<amt){toast("Insufficient balance!","err");return;}
+  const todayDate=new Date().getDate();
+  const isPaymentDay=(todayDate===6||todayDate===20);
+  if(!isPaymentDay&&amt>10){toast("Full balance withdrawal only on 6th & 20th. Daily limit is ৳10.","err");return;}
+  if(UD.lastWithdrawTime?.toDate){
+    const diff=(Date.now()-UD.lastWithdrawTime.toDate().getTime())/36e5;
+    if(diff<23.5){const rem=Math.ceil(24-diff);toast(`Please wait ${rem} more hours`,"err");return;}
+  }
+  $("bk-wd-btn").disabled=true;$("bk-wd-btn").innerHTML=`<i class="fas fa-spinner spin"></i> Processing...`;
+  try{
+    await call("requestWithdrawal")({amount:amt,accountNumber:acc||UD.savedWallet});
+    $("bk-amt").value="";toast("৳"+amt+" request sent! ✅","ok");
+  }catch(e){toast("Error: "+e.message,"err");}
+  finally{$("bk-wd-btn").disabled=false;$("bk-wd-btn").textContent="Request Withdrawal";}
+});
+
+window.loadWdHistory=async function(){
+  const tbody=$("wd-hist");if(!tbody||!CU)return;
+  tbody.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:18px;color:var(--tx3)"><i class="fas fa-spinner spin"></i></td></tr>`;
+  try{
+    const snap=await getDocs(query(collection(db,"withdrawal_requests"),where("userId","==",CU.uid),limit(15)));
+    if(snap.empty){tbody.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:18px;color:var(--tx3);font-size:.82rem">No withdrawal records yet</td></tr>`;return;}
+    const items=[];snap.forEach(d=>{try{items.push(d.data());}catch{}});
+    items.sort((a,b)=>(b.timestamp?.toDate?.()?.getTime()||0)-(a.timestamp?.toDate?.()?.getTime()||0));
+    tbody.innerHTML=items.map(t=>{
+      const st=t.status||"pending";
+      const stLabel=st==="paid"||st==="approved"||st==="completed"?"✅ Paid":st==="pending"?"⏳ Pending":"❌ Rejected";
+      const stCls=st==="paid"||st==="approved"||st==="completed"?"pill-paid":st==="pending"?"pill-pending":"pill-rejected";
+      return `<tr>
+        <td style="font-size:.73rem;color:var(--tx2)">${t.timestamp?.toDate?t.timestamp.toDate().toLocaleDateString("en-BD"):"-"}</td>
+        <td style="font-size:.8rem;font-weight:700;text-transform:uppercase">${t.method||"bKash"}</td>
+        <td style="font-size:.73rem;color:var(--tx2);font-family:var(--fm)">${t.accountNumber||"-"}</td>
+        <td style="font-weight:800;color:var(--em);font-family:var(--fm)">৳${parseFloat(t.amount||0).toFixed(2)}</td>
+        <td style="text-align:right"><span class="pill ${stCls}">${stLabel}</span></td>
+      </tr>`;
+    }).join("");
+  }catch(e){tbody.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:13px;color:var(--tx3);font-size:.82rem">Could not load</td></tr>`;}
+};
+
+function loadTicketHistory(){
+  const el=$("tk-hist");if(!el||!CU)return;
+  getDocs(query(collection(db,"supportTickets"),where("userId","==",CU.uid),limit(10))).then(snap=>{
+    if(snap.empty){el.innerHTML=`<p style="text-align:center;color:var(--tx3);padding:11px 0;font-size:.82rem">No tickets yet</p>`;return;}
+    const items=[];snap.forEach(d=>{try{items.push(d.data());}catch{}});
+    items.sort((a,b)=>(b.createdAt?.toDate?.()?.getTime()||0)-(a.createdAt?.toDate?.()?.getTime()||0));
+    el.innerHTML=`<div style="overflow-x:auto"><table class="data-table" style="min-width:300px"><thead><tr><th>Date</th><th>Subject</th><th style="text-align:right">Status</th></tr></thead><tbody>${items.map(t=>`<tr><td style="font-size:.73rem;color:var(--tx2)">${t.createdAt?.toDate?t.createdAt.toDate().toLocaleDateString("en-BD"):"-"}</td><td style="font-size:.8rem;font-weight:700">${t.subject||"Ticket"}</td><td style="text-align:right"><span class="pill ${t.status==="open"?"pill-pending":"pill-paid"}">${t.status==="open"?"🔵 Open":"✅ Resolved"}</span></td></tr>`).join("")}</tbody></table></div>`;
+  }).catch(()=>{el.innerHTML=`<p style="text-align:center;color:var(--tx3);padding:11px;font-size:.82rem">Could not load</p>`;});
+}
+
+async function loadMyReferrals(){
+  const el=$("my-ref-list");const badge=$("ref-count-badge");if(!el||!CU)return;
+  el.innerHTML=`<p style="text-align:center;color:var(--tx3);padding:11px;font-size:.82rem"><i class="fas fa-spinner spin"></i> Loading...</p>`;
+  try{
+    const myCode=UD.referralCode||"";if(!myCode){el.innerHTML=`<p style="text-align:center;color:var(--tx3);padding:11px;font-size:.82rem">Referral code not set.</p>`;return;}
+    const result=await call("getMyReferrals")({});
+    const docs=Array.isArray(result.data?.users)?result.data.users:[];
+    if(badge)badge.textContent=docs.length+" members";
+    if(docs.length===0){el.innerHTML=`<div style="text-align:center;padding:22px"><p style="font-size:.84rem;color:var(--tx2)">No referrals yet. Share your code!</p></div>`;return;}
+    docs.sort((a,b)=>(b.totalEarnings||0)-(a.totalEarnings||0));
+    el.innerHTML=docs.map(u=>{
+      const earn=u.totalEarnings||0;const isActive=earn>10;const vip=getVIP(earn);const comm=(earn*0.1).toFixed(2);const init=(u.name||"?").charAt(0).toUpperCase();
+      return `<div style="display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--bd)"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,${isActive?"var(--em),var(--gd)":"var(--s3),var(--bd2)"});display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.88rem;color:${isActive?"#001A0C":"var(--tx3)"};flex-shrink:0">${init}</div><div style="flex:1;min-width:0"><div style="font-weight:800;font-size:.86rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${u.name||"Anonymous"}</div><div style="font-size:.72rem;color:var(--tx2);margin-top:2px">${vip.icon} ${vip.name} · ৳${earn.toFixed(0)}</div></div><div style="text-align:right;flex-shrink:0"><div style="font-size:.84rem;font-weight:900;color:var(--gd);font-family:var(--fm)">+৳${comm}</div><div style="font-size:.66rem;margin-top:2px">${isActive?`<span style="color:var(--em);font-weight:800">✅ Active</span>`:`<span style="color:var(--tx3)">⏳ Inactive</span>`}</div></div></div>`;
+    }).join("");
+  }catch(e){el.innerHTML=`<p style="text-align:center;color:var(--tx3);padding:11px;font-size:.82rem">Could not load referrals</p>`;}
+}
+
+async function loadLeaderboard(){
+  const el=$("lb-list");if(!el)return;
+  try{
+    const snap=await getDocs(query(collection(db,"publicProfiles"),limit(50)));
+    const users=[];snap.forEach(d=>{try{users.push(d.data());}catch{}});
+    users.sort((a,b)=>(b.totalEarnings||0)-(a.totalEarnings||0));
+    const top=users.slice(0,15);
+    if(top.length===0){el.innerHTML=`<p style="text-align:center;color:var(--tx3);padding:13px 0;font-size:.82rem">No data yet</p>`;return;}
+    el.innerHTML=top.map((ud,i)=>{const vip=getVIP(ud.totalEarnings||0),init=(ud.name||"?").charAt(0).toUpperCase();return `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd)"><span style="font-size:${i<3?".9rem":".8rem"};font-weight:900;width:24px;text-align:center;font-family:var(--fm);color:${i===0?"var(--gd)":i===1?"#A0AEC0":i===2?"#CD7F32":"var(--tx3)"}">${i===0?"🥇":i===1?"🥈":i===2?"🥉":i+1}</span><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--gd));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.8rem;color:#001A0C;flex-shrink:0">${init}</div><div style="flex:1;min-width:0"><div style="font-weight:800;font-size:.84rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${ud.name||"Anonymous"}</div><div style="font-size:.7rem;color:var(--tx2)">${vip.icon} ${vip.name}</div></div><span style="font-weight:900;font-size:.86rem;color:var(--em);font-family:var(--fm)">${fmt(ud.totalEarnings||0)}</span></div>`;}).join("");
+  }catch(e){el.innerHTML=`<p style="text-align:center;color:var(--tx3);padding:13px;font-size:.82rem">Could not load</p>`;}
+}
+
+async function loadLandingStats(){
+  try{const snap=await getDocs(collection(db,"users"));const uel=$("ls-users"),pel=$("ls-paid");if(uel)uel.textContent=Math.max(snap.size,10000).toLocaleString()+"+";let paid=0;snap.forEach(d=>paid+=d.data().totalWithdrawn||0);if(pel)pel.textContent="৳"+Math.max(Math.round(paid/1000),500)+"K+";}catch{}
+}
+
+window.navigate=function(sec){
+  document.querySelectorAll(".sec").forEach(s=>s.classList.remove("active"));
+  document.querySelectorAll(".nav-i").forEach(n=>n.classList.remove("active"));
+  $("sec-"+sec)?.classList.add("active");
+  document.querySelector(`.nav-i[data-sec="${sec}"]`)?.classList.add("active");
+  window.scrollTo(0,0);
+  if(sec==="tasks")loadTasks();
+  else if(sec==="wallet"){loadWdHistory();loadTaskHistory();}
+  else if(sec==="support")loadTicketHistory();
+  else if(sec==="refer"){loadLeaderboard();loadMyReferrals();}
+};
+document.querySelectorAll(".nav-i").forEach(n=>n.addEventListener("click",()=>navigate(n.dataset.sec)));
+
+$("login-form").addEventListener("submit",async e=>{
+  e.preventDefault();const btn=$("li-btn");btn.disabled=true;btn.innerHTML=`<i class="fas fa-spinner spin"></i>`;
+  try{await signInWithEmailAndPassword(auth,$("li-email").value,$("li-pass").value);}
+  catch(err){const m=err.code==="auth/wrong-password"||err.code==="auth/invalid-credential"?"Wrong email or password":"Login failed";toast(m,"err");}
+  finally{btn.disabled=false;btn.innerHTML=`<i class="fas fa-sign-in-alt"></i>Login to Account`;}
+});
+$("reg-form").addEventListener("submit",async e=>{
+  e.preventDefault();const btn=$("rg-btn");btn.disabled=true;btn.innerHTML=`<i class="fas fa-spinner spin"></i>`;
+  const name=$("rg-name").value.trim(),phone=$("rg-phone").value.trim(),email=$("rg-email").value.trim(),pass=$("rg-pass").value,code=$("rg-code").value.trim().toUpperCase();
+  if(pass.length<6){toast("Password min 6 characters","err");btn.disabled=false;btn.innerHTML=`<i class="fas fa-rocket"></i>Create Free Account`;return;}
+  try{const cred=await createUserWithEmailAndPassword(auth,email,pass);await updateProfile(cred.user,{displayName:name});await initUser(cred.user,name,phone,email,code);}
+  catch(err){toast(err.code==="auth/email-already-in-use"?"Email already in use!":"Registration failed: "+err.message,"err");}
+  finally{btn.disabled=false;btn.innerHTML=`<i class="fas fa-rocket"></i>Create Free Account`;}
+});
+$("ticket-form").addEventListener("submit",async e=>{
+  e.preventDefault();if(!CU){toast("Not logged in","err");return;}
+  if(!$("tk-msg").value.trim()){toast("Please describe your issue","err");return;}
+  try{await addDoc(collection(db,"supportTickets"),{userId:CU.uid,userName:UD.name||"User",subject:$("tk-sub").value,message:$("tk-msg").value,status:"open",createdAt:Timestamp.now()});toast("Ticket sent! ✅","ok");e.target.reset();}
+  catch(e){toast("Error sending ticket","err");}
+});
+
+async function saveWallet(num){
+  if(!CU){toast("Not logged in","err");return;}
+  if(!/^01[3-9]\d{8}$/.test(num)){toast("Enter a valid BD number (01XXXXXXXXX)","err");return;}
+  try{await updateDoc(doc(db,"users",CU.uid),{savedWallet:num});toast("bKash number saved ✅","ok");}
+  catch(e){toast("Error saving","err");}
+}
+$("save-bk").addEventListener("click",()=>saveWallet($("bk-num").value.trim()));
+$("save-bk2").addEventListener("click",()=>saveWallet($("bk-num2").value.trim()));
+$("bk-num").addEventListener("focus",()=>$("bk-num")._edited=true);
+$("bk-num2").addEventListener("focus",()=>$("bk-num2")._edited=true);
+
+window.cpLink=function(text,msg){
+  if(!text){toast("Nothing to copy","info");return;}
+  const _c=()=>{try{const ta=document.createElement("textarea");ta.value=text;ta.style.cssText="position:fixed;opacity:0;top:0;left:0";document.body.appendChild(ta);ta.focus();ta.select();document.execCommand("copy");document.body.removeChild(ta);toast(msg||"Copied!","ok");}catch{toast("Copy failed","err");}};
+  if(navigator.clipboard?.writeText){navigator.clipboard.writeText(text).then(()=>toast(msg||"Copied!","ok")).catch(_c);}else{_c();}
+};
+$("copy-ref-btn").addEventListener("click",()=>cpLink($("ref-code").textContent,"Referral code copied! 📋"));
+$("share-ref-btn")?.addEventListener("click",()=>{
+  const code=$("ref-code").textContent;const msg=`Join NS PRIME and earn money daily via bKash! Use my referral code: ${code}\nJoin: https://nsprime.com/?ref=${code}`;
+  if(navigator.share){navigator.share({title:"Join NS PRIME",text:msg});}else cpLink(msg,"Share message copied!");
+});
+
+window.setCur=async function(c){
+  CC=c;
+  if(CU)try{await updateDoc(doc(db,"users",CU.uid),{preferredCurrency:c});}catch{}
+  renderUI();
+};
+
+window.openLogoutModal=function(){$("logout-modal-bg").classList.add("show");};
+window.closeLogoutModal=function(){$("logout-modal-bg").classList.remove("show");};
+
+$("logout-btn").addEventListener("click",openLogoutModal);
+$("logout-confirm-btn").addEventListener("click",async()=>{
+  $("logout-confirm-btn").disabled=true;
+  $("logout-confirm-btn").innerHTML=`<i class="fas fa-spinner spin"></i> Logging out...`;
+  try{
+    await signOut(auth);
+    closeLogoutModal();
+    toast("Logged out successfully","ok");
+  }catch(e){
+    toast("Logout failed: "+e.message,"err");
+    $("logout-confirm-btn").disabled=false;
+    $("logout-confirm-btn").innerHTML=`<i class="fas fa-sign-out-alt"></i> Logout`;
+  }
+});
+$("logout-modal-bg").addEventListener("click",e=>{if(e.target===$("logout-modal-bg"))closeLogoutModal();});
+
+function showLanding(){$("landing").style.display="flex";$("auth-screen").classList.remove("show");$("app").style.display="none";loadLandingStats();}
+function showApp(){$("landing").style.display="none";$("auth-screen").classList.remove("show");$("app").style.display="block";$("app-ticker").classList.add("show");}
+window.showAuth=function(type){$("landing").style.display="none";$("app").style.display="none";$("auth-screen").classList.add("show");toggleAuth(type);};
+window.closeAuth=function(){showLanding();};
+window.toggleAuth=function(t){$("auth-login").style.display=t==="login"?"block":"none";$("auth-reg").style.display=t==="register"?"block":"none";};
+
+window.openNotif=function(){
+  $("notif-panel").classList.add("open");$("notif-overlay").classList.add("show");
+  if(CU){getDocs(query(collection(db,"notifications"),where("userId","==",CU.uid),where("read","==",false))).then(s=>{s.forEach(d=>updateDoc(doc(db,"notifications",d.id),{read:true}).catch(()=>{}));$("notif-dot").style.display="none";}).catch(()=>{});}
+};
+window.closeNotif=function(){$("notif-panel").classList.remove("open");$("notif-overlay").classList.remove("show");};
+
+const TRUST={
+  privacy:`<h3>Privacy Policy</h3><p><strong>Last Updated:</strong> March 2025</p><h4>Data We Collect</h4><p>We collect your name, phone, email and payment details to provide our services.</p><h4>How We Use It</h4><p>Your data is never sold. All data secured via Firebase encryption.</p><h4>Contact</h4><p>privacy@nsprime.com</p>`,
+  terms:`<h3>Terms of Service</h3><p><strong>Last Updated:</strong> March 2025</p><h4>Acceptable Use</h4><p>Do not commit fraud, use bots, or engage in illegal activity.</p><h4>Coin Policy</h4><p>1000 coins = ৳10. Coins cannot be transferred between accounts.</p><h4>Payment Terms</h4><p>Daily ৳10 payout, full balance on 6th & 20th each month.</p>`,
+  about:`<h3>About NS PRIME</h3><p>Bangladesh's #1 online earning platform. Earn from home via links, tasks, and referrals.</p><h4>Why NS PRIME?</h4><p>✅ Direct bKash payments<br>✅ Coin-based task rewards<br>✅ Smart Link Generator<br>✅ VIP Level System<br>✅ 10% referral commissions<br>✅ 24/7 support</p><h4>Contact</h4><p>support@nsprime.com</p>`
+};
+window.openTrust=function(type){$("trust-content").innerHTML=TRUST[type]||"";$("trust-bg").classList.add("show");$("trust-sheet").classList.add("open");};
+window.closeTrust=function(){$("trust-bg").classList.remove("show");$("trust-sheet").classList.remove("open");};
+
+let obStep=1;
+$("ob-next-btn").addEventListener("click",()=>{
+  if(obStep>=3){closeOb();return;}
+  document.querySelectorAll(".ob-slide").forEach(s=>s.classList.remove("active"));document.querySelectorAll(".ob-dot").forEach(d=>d.classList.remove("active"));
+  obStep++;$("ob"+obStep).classList.add("active");$("od"+obStep).classList.add("active");
+  if(obStep===3)$("ob-next-btn").textContent="Let's Start! 🚀";
+});
+$("ob-skip").addEventListener("click",closeOb);
+async function closeOb(){$("onboarding").classList.remove("show");if(CU)try{await updateDoc(doc(db,"users",CU.uid),{_onboarded:true});}catch{}}
+function showOnboarding(){$("onboarding").classList.add("show");}
+
+let _lastLink="";
+function buildSmartLink(cat,uid){return `${LANDING_BASE}?sl=${encodeURIComponent(uid)}&cat=${encodeURIComponent(cat)}`;}
+function showGenLink(link,cat){
+  _lastLink=link;
+  const box=$("generated-link-box"),txt=$("generated-link-text");
+  if(!box||!txt)return;
+  txt.textContent=link;txt.scrollLeft=0;box.style.display="block";
+  const sel=$("link-category-select");if(sel&&cat)try{sel.value=cat;}catch{}
+}
+
+$("generate-link-btn").addEventListener("click",async()=>{
+  if(!CU){toast("Please login first","err");return;}
+  const cat=$("link-category-select")?.value||"video";
+  const uid=CU.uid;if(!uid)return;
+  const link=buildSmartLink(cat,uid);showGenLink(link,cat);
+  try{
+    await call("saveGeneratedLink")({category:cat,link});
+    toast("Link generated! 🔗 Copy and share now","ok");
+  }catch(e){toast("Could not save the link. Please try again.","err");}
+});
+
+$("copy-generated-link").addEventListener("click",()=>{
+  const link=_lastLink||$("generated-link-text")?.textContent||"";
+  if(!link.startsWith("http")){toast("Generate a link first","info");return;}
+  cpLink(link,"✅ Full link copied! Share it now");
+});
+
+window.shareLink=function(platform){
+  if(!_lastLink){toast("Generate a link first","info");return;}
+  const enc=encodeURIComponent(_lastLink);const txt=encodeURIComponent("Click to claim your reward! 👆");
+  const urls={whatsapp:"https://wa.me/?text="+txt+"%20"+enc,facebook:"https://www.facebook.com/sharer/sharer.php?u="+enc,telegram:"https://t.me/share/url?url="+enc+"&text="+txt};
+  if(urls[platform])window.open(urls[platform],"_blank");
+};
+
+// Smart-link landing flow. `sl` is deliberately separate from `ref`: a smart
+// link credits its owner for a valid visit, while `ref` remains a registration
+// referral code.  The callable function enforces the anti-fraud rules.
+async function recordIncomingSmartLink(){
+  const params=new URLSearchParams(window.location.search);
+  const ownerId=params.get("sl");
+  if(!ownerId)return;
+  const category=params.get("cat")||"general";
+  let visitorKey=localStorage.getItem("nsp-visitor-id");
+  if(!visitorKey){visitorKey=crypto.randomUUID?crypto.randomUUID():"v-"+Date.now()+"-"+Math.random().toString(36).slice(2);localStorage.setItem("nsp-visitor-id",visitorKey);}
+  try{
+    const r=await call("recordSmartLinkVisit")({ownerId,category,visitorKey});
+    if(r.data?.credited)toast("Thanks for visiting! Your reward was recorded.","ok");
+  }catch(e){console.warn("Smart-link tracking:",e.code||e.message);}
+}
+
+function restoreGeneratedLink(){
+  const l=UD.lastGeneratedLink||"";const c=UD.lastGeneratedCat||"";
+  if(l&&l.startsWith("http"))showGenLink(l,c);
+}
+
+window.toggleFaq=function(el){el.classList.toggle("open");};
+loadLandingStats();
+$("land-ticker").classList.add("show");
+recordIncomingSmartLink();
+const urlRef=new URLSearchParams(window.location.search).get("ref");
+if(urlRef){const rc=$("rg-code");if(rc)rc.value=urlRef;}
+</script>
+</body>
+</html>
