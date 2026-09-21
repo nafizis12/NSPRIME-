@@ -970,6 +970,23 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
       </div>
     </section>
 
+    <!-- REELS TASKS -->
+    <section id="sec-reels-tasks" class="sec">
+      <div class="app-page-title">
+        <div><h1>Reels Tasks</h1><p>Admin-posted Reels campaigns: read the brief, create your video, publish it and submit the link. Admins verify views and approve coins.</p></div>
+        <span class="page-status" style="background:rgba(245,166,35,.12);color:var(--gd);border-color:var(--gdbd);">Manual view verification</span>
+      </div>
+      <div class="gold-card" style="padding:16px;margin-bottom:13px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#ffd86a,#f5a623);display:flex;align-items:center;justify-content:center;color:#171006;font-size:1.1rem;box-shadow:0 8px 25px rgba(245,166,35,.2)"><i class="fas fa-film"></i></div>
+          <div><b style="font-size:.92rem">How Reels Tasks Work</b><div style="font-size:.72rem;color:var(--tx2);margin-top:3px">Read the admin instructions → make your own video → publish it → submit the public video link → admin updates verified views → target completion → admin approves coins.</div></div>
+        </div>
+      </div>
+      <div id="reels-task-list" style="display:flex;flex-direction:column;gap:12px">
+        <div class="card" style="padding:24px;text-align:center;color:var(--tx3)"><i class="fas fa-spinner spin" style="font-size:1.4rem;margin-bottom:10px;display:block;color:var(--gd)"></i>Loading Reels tasks...</div>
+      </div>
+    </section>
+
     <!-- WALLET -->
     <section id="sec-wallet" class="sec">
       <div class="app-page-title"><div><h1>Wallet centre</h1><p>Balance, conversions and withdrawal requests in one place.</p></div><span class="page-status">Secure wallet</span></div>
@@ -1278,6 +1295,7 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
   <nav class="bot-nav">
     <div class="nav-i active" data-sec="home"><i class="fas fa-home"></i><span>Home</span></div>
     <div class="nav-i" data-sec="tasks"><i class="fas fa-list-check"></i><span>Tasks</span></div>
+      <div class="nav-i" data-sec="reels-tasks"><i class="fas fa-clapperboard"></i><span>Reels</span></div>
     <div class="nav-i" data-sec="wallet"><i class="fas fa-wallet"></i><span>Wallet</span></div>
     <div class="nav-i" data-sec="refer"><i class="fas fa-user-friends"></i><span>Refer</span></div>
     <div class="nav-i" data-sec="affiliate"><i class="fas fa-gem"></i><span>Affiliate</span></div>
@@ -2002,6 +2020,81 @@ window.claimGrandPrize=async function(){
 };
 $("affiliate-lead-modal")?.addEventListener("click",e=>{if(e.target.id==="affiliate-lead-modal")closeAffiliateModal();});
 
+
+let reelsTaskCache={};
+let reelsSubmissionCache={};
+let reelsTasksUnsub=null;
+let reelsSubUnsub=null;
+
+function renderReelsTasks(tasks, submissions){
+  const el=$("reels-task-list"); if(!el)return;
+  reelsTaskCache={}; tasks.forEach(t=>reelsTaskCache[t.id]=t);
+  reelsSubmissionCache={}; submissions.forEach(x=>reelsSubmissionCache[x.taskId]=x);
+  if(!tasks.length){el.innerHTML='<div class="card" style="padding:28px;text-align:center;color:var(--tx3)"><i class="fas fa-film" style="font-size:1.8rem;color:var(--gd);margin-bottom:9px;display:block"></i>No Reels tasks are available right now.</div>';return;}
+  el.innerHTML=tasks.map(t=>{
+    const sub=reelsSubmissionCache[t.id];
+    const target=Math.max(1,Number(t.targetViews||t.target||0));
+    const views=Math.max(0,Number(sub?.verifiedViews||0));
+    const pct=Math.min(100,Math.round((views/target)*100));
+    const reached=views>=target;
+    const paid=sub?.coinApproved===true || sub?.status==='approved';
+    const status=paid?'Reward Paid':reached?'Target Reached — Waiting for Approval':sub?'Submitted — Views Being Checked':'Not Submitted';
+    const statusColor=paid?'var(--gr)':reached?'var(--gd)':sub?'var(--bl)':'var(--tx2)';
+    return `<div class="card" style="padding:16px;border:1px solid ${reached?'var(--gdbd)':'var(--bo)'};background:linear-gradient(145deg,rgba(245,166,35,.045),rgba(255,255,255,.015))">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div style="flex:1"><div style="font-size:.98rem;font-weight:900">${escapeHtml(t.title||'Reels Promotion')}</div><div style="font-size:.68rem;color:var(--tx3);margin-top:3px">Reward: 🪙 ${Number(t.rewardCoins||t.reward||0).toLocaleString()} coins · Target: ${target.toLocaleString()} views</div></div>
+        <span class="badge" style="color:${statusColor};border-color:${statusColor}44;background:${statusColor}12">${status}</span>
+      </div>
+      <div style="margin-top:12px;padding:12px;border-radius:12px;background:rgba(0,0,0,.14);border:1px solid var(--bo)">
+        <div style="font-size:.7rem;font-weight:800;color:var(--tx2);margin-bottom:7px"><i class="fas fa-list-check" style="color:var(--gd);margin-right:5px"></i>What you need to do</div>
+        <div style="font-size:.78rem;line-height:1.7;white-space:pre-line;color:var(--tx)">${escapeHtml(t.instructions||t.description||'Follow the admin instructions and publish your Reel.')}</div>
+        ${t.postLink?`<a href="${escapeHtml(t.postLink)}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="margin-top:10px;width:100%"><i class="fas fa-link"></i> Open Campaign / Reference Link</a>`:''}
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:end;margin-top:13px"><div><span style="font-size:1.45rem;font-weight:900;font-family:var(--fm)">${views.toLocaleString()}</span><span style="font-size:.68rem;color:var(--tx2)"> verified views</span></div><div style="text-align:right"><div style="font-size:.65rem;color:var(--tx2)">Target</div><b style="font-family:var(--fm);color:var(--gd)">${target.toLocaleString()}</b></div></div>
+      <div class="reels-progress" style="margin-top:7px"><div class="reels-fill" style="width:${pct}%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:.66rem;color:var(--tx2);margin-top:4px"><span>${pct}% complete</span><span>${Math.max(0,target-views).toLocaleString()} views remaining</span></div>
+      ${sub?.videoLink?`<a href="${escapeHtml(sub.videoLink)}" target="_blank" rel="noopener" style="display:block;margin-top:10px;font-size:.7rem;color:var(--em);word-break:break-all"><i class="fas fa-video"></i> Your submitted video: ${escapeHtml(sub.videoLink)}</a>`:''}
+      ${!sub?`<button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="openReelsSubmit('${t.id}')"><i class="fas fa-paper-plane"></i> Submit My Reel Link</button>`:paid?`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.18);color:var(--gr);font-size:.75rem;font-weight:800">✓ ${Number(t.rewardCoins||t.reward||0).toLocaleString()} coins approved</div>`:reached?`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(245,166,35,.08);border:1px solid var(--gdbd);color:var(--gd);font-size:.75rem;font-weight:800">Target reached. Admin will approve the reward after checking the views.</div>`:`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.15);color:var(--bl);font-size:.7rem">Keep promoting your submitted Reel. Admin will update verified views here.</div>`}
+    </div>`;
+  }).join('');
+}
+
+window.loadReelsTasks=function(){
+  if(!CU)return;
+  const el=$("reels-task-list"); if(el)el.innerHTML='<div class="card" style="padding:24px;text-align:center;color:var(--tx3)"><i class="fas fa-spinner spin" style="font-size:1.4rem;margin-bottom:10px;display:block;color:var(--gd)"></i>Loading Reels tasks...</div>';
+  try{ if(reelsTasksUnsub)reelsTasksUnsub(); if(reelsSubUnsub)reelsSubUnsub(); }catch{}
+  const tq=query(collection(db,"reels_tasks"),where("active","==",true),limit(50));
+  const sq=query(collection(db,"reels_task_submissions"),where("userId","==",CU.uid),limit(100));
+  let tasks=[],subs=[];
+  const redraw=()=>{tasks.sort((a,b)=>(b.createdAt?.toDate?.()?.getTime()||0)-(a.createdAt?.toDate?.()?.getTime()||0));subs.sort((a,b)=>(b.createdAt?.toDate?.()?.getTime()||0)-(a.createdAt?.toDate?.()?.getTime()||0));renderReelsTasks(tasks,subs);};
+  reelsTasksUnsub=onSnapshot(tq,s=>{tasks=s.docs.map(d=>({id:d.id,...d.data()}));redraw();},e=>{if(el)el.innerHTML='<div class="card" style="padding:24px;text-align:center;color:var(--re)">Could not load Reels tasks: '+escapeHtml(e.code||'permission-denied')+'</div>';});
+  reelsSubUnsub=onSnapshot(sq,s=>{subs=s.docs.map(d=>({id:d.id,...d.data()}));redraw();},e=>console.warn("Reels submissions:",e.code));
+};
+
+window.openReelsSubmit=function(taskId){
+  const t=reelsTaskCache[taskId];if(!t)return;
+  const old=$("reels-submit-modal"); if(old)old.remove();
+  const bg=document.createElement('div');bg.id='reels-submit-modal';bg.className='modal-bg show';
+  bg.innerHTML=`<div class="modal-sheet"><div class="modal-handle"></div><div style="padding:18px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div><h3 style="font-size:1rem;font-weight:900">Submit Reel</h3><p style="font-size:.7rem;color:var(--tx2);margin-top:3px">${escapeHtml(t.title||'Reels Promotion')}</p></div><button class="btn btn-ghost btn-sm" onclick="document.getElementById('reels-submit-modal')?.remove()">×</button></div><div class="form-group"><label>Your public Reel / video link</label><input id="reels-video-link" type="url" placeholder="https://facebook.com/... or https://instagram.com/... or https://youtube.com/..." style="width:100%"></div><div class="form-group"><label>Short note (optional)</label><textarea id="reels-submit-note" style="height:80px;resize:none" placeholder="Anything the admin should know about your video..."></textarea></div><button id="reels-submit-save" class="btn btn-gold" style="width:100%;padding:14px" onclick="submitReelsTask('${taskId}')"><i class="fas fa-paper-plane"></i> Submit for View Tracking</button></div></div>`;
+  document.body.appendChild(bg);
+};
+
+window.submitReelsTask=async function(taskId){
+  if(!CU)return;
+  const t=reelsTaskCache[taskId];if(!t)return;
+  const link=$("reels-video-link")?.value.trim()||"";const note=$("reels-submit-note")?.value.trim()||"";
+  if(!/^https?:\/\/\S+/i.test(link)){toast("Please enter a valid public video link","err");return;}
+  const btn=$("reels-submit-save");if(btn){btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner spin"></i> Submitting...';}
+  try{
+    const existing=await getDocs(query(collection(db,"reels_task_submissions"),where("userId","==",CU.uid),where("taskId","==",taskId),limit(10)));
+    const active=existing.docs.find(d=>{const x=d.data();return x.status!=="rejected"&&x.coinApproved!==true;});
+    if(active){toast("You already submitted this Reels task. Keep promoting the same video until the target is reached.","warning");return;}
+    await addDoc(collection(db,"reels_task_submissions"),{userId:CU.uid,userName:UD.name||"User",taskId,taskTitle:t.title||"Reels Promotion",videoLink:link,note,verifiedViews:0,targetViews:Number(t.targetViews||t.target||0),rewardCoins:Number(t.rewardCoins||t.reward||0),status:"pending",coinApproved:false,createdAt:Timestamp.now(),updatedAt:Timestamp.now()});
+    await addNotif(CU.uid,"🎬 Reels Task Submitted!","Your video link was submitted. Admin will manually update verified views and approve the coins after the target is reached.");
+    document.getElementById('reels-submit-modal')?.remove();toast("Reel submitted successfully!","ok");
+  }catch(e){toast("Submit failed: "+e.message,"err");if(btn){btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit for View Tracking';}}
+};
+
 let currentFilter="all";let taskCache={};
 function loadTasks(){
   const el=$("tasks-list");if(!el)return;
@@ -2233,7 +2326,7 @@ window.navigate=function(sec){
   else if(sec==="wallet"){loadWdHistory();loadTaskHistory();}
   else if(sec==="support")loadTicketHistory();
   else if(sec==="refer"){loadLeaderboard();loadMyReferrals();}
-  else if(sec==="affiliate"){renderAffiliateUI();loadAffiliateCourses();}
+  else if(sec==="affiliate"){renderAffiliateUI();loadAffiliateCourses();}else if(sec==="reels-tasks"){loadReelsTasks();}
 };
 document.querySelectorAll(".nav-i").forEach(n=>n.addEventListener("click",()=>navigate(n.dataset.sec)));
 
