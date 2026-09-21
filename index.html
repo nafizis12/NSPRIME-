@@ -747,6 +747,13 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
     <!-- HOME -->
     <section id="sec-home" class="sec active">
       <div class="app-page-title"><div><h1>Good to see you 👋</h1><p>Your earning command centre for today.</p></div><span class="page-status">Account active</span></div>
+      <div class="card" id="home-mission-widget" style="padding:15px;margin-bottom:13px;border:1px solid var(--gdbd);background:linear-gradient(135deg,var(--gdb),transparent)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div class="sec-title" style="margin:0"><i class="fas fa-bullseye"></i>Today's Missions</div><button class="btn btn-gold btn-sm" onclick="document.querySelector('[data-sec=missions]').click()">View all</button></div>
+        <div id="home-daily-missions" style="display:grid;gap:7px"></div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:7px;font-weight:900;color:var(--gd)">🏆 Weekly Challenge</div>
+        <div id="home-weekly-mission" style="margin-top:7px"></div>
+      </div>
+
       <div class="admin-msg-card" id="admin-msg-card">
         <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">
           <span style="background:rgba(79,142,247,.12);border:1px solid rgba(79,142,247,.25);color:var(--bl);border-radius:6px;padding:2px 8px;font-size:.7rem;font-weight:800">Admin</span>
@@ -906,6 +913,23 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
           <span class="badge badge-coin" id="streak-next-coin">Next: 🪙10 coins</span>
         </div>
         <button class="btn btn-gold btn-sm" id="checkin-btn" style="width:100%"><i class="fas fa-calendar-check"></i>Check In Today</button>
+      </div>
+    </section>
+
+    <!-- DAILY MISSIONS / WEEKLY CHALLENGE -->
+    <section id="sec-missions" class="sec">
+      <div class="app-page-title"><div><h1>Mission Center</h1><p>Complete today's missions and the weekly challenge.</p></div><span class="page-status">Earn coins</span></div>
+      <div class="stat-grid">
+        <div class="stat-card sc-em"><span class="ico">🎯</span><span class="val" id="mission-daily-count">0</span><span class="lbl">Today's Daily Missions</span></div>
+        <div class="stat-card sc-coin"><span class="ico">🏆</span><span class="val" id="mission-weekly-count">0</span><span class="lbl">Weekly Challenge</span></div>
+      </div>
+      <div class="card" style="padding:16px;margin-bottom:13px;border-top:2px solid var(--em)">
+        <div class="sec-title"><i class="fas fa-bullseye"></i>Today's Daily Missions</div>
+        <div id="daily-missions-list" style="display:grid;gap:10px"><div style="color:var(--tx2);padding:12px;text-align:center">Loading missions...</div></div>
+      </div>
+      <div class="card" style="padding:16px;margin-bottom:13px;border-top:2px solid var(--gd)">
+        <div class="sec-title"><i class="fas fa-trophy"></i>🏆 Weekly Challenge</div>
+        <div id="weekly-challenges-list" style="display:grid;gap:10px"><div style="color:var(--tx2);padding:12px;text-align:center">Loading challenge...</div></div>
       </div>
     </section>
 
@@ -1094,6 +1118,22 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
     <!-- REFER -->
     <section id="sec-refer" class="sec">
       <div class="app-page-title"><div><h1>Grow your community</h1><p>Share your code and follow referral progress clearly.</p></div><span class="page-status">10% commission</span></div>
+      <div class="card" style="padding:15px;margin-bottom:12px;border:1px solid var(--gdbd);background:linear-gradient(135deg,var(--gdb),transparent)">
+        <div style="font-weight:900;font-size:.95rem;margin-bottom:10px">🔗 Your two referral codes</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="padding:12px;border-radius:12px;background:var(--s2);border:1px solid var(--bd)">
+            <div style="font-size:.68rem;color:var(--tx2);font-weight:800;text-transform:uppercase">Affiliate Code</div>
+            <div id="affiliate-ref-code" style="font-family:var(--fm);font-weight:900;color:var(--gd);margin:5px 0">—</div>
+            <button class="btn btn-gold btn-sm" onclick="copyTextById('affiliate-ref-code')">Copy</button>
+          </div>
+          <div style="padding:12px;border-radius:12px;background:var(--s2);border:1px solid var(--bd)">
+            <div style="font-size:.68rem;color:var(--tx2);font-weight:800;text-transform:uppercase">Customer ৳500 Discount Code</div>
+            <div id="customer-ref-code" style="font-family:var(--fm);font-weight:900;color:var(--em);margin:5px 0">—</div>
+            <button class="btn btn-em btn-sm" onclick="copyTextById('customer-ref-code')">Copy</button>
+          </div>
+        </div>
+        <div style="font-size:.72rem;color:var(--tx2);margin-top:10px">A customer can provide the customer discount code to request a ৳500 discount. Admin verifies it before approval.</div>
+      </div>
       <div class="refer-hero">
         <p style="font-size:.76rem;color:var(--tx2);margin-bottom:4px;font-weight:700">Your Referral Code</p>
         <div class="ref-code" id="ref-code">LOADING</div>
@@ -1102,6 +1142,17 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
           <button class="btn btn-gold btn-sm" id="copy-ref-btn"><i class="fas fa-copy"></i>Copy Code</button>
           <button class="btn btn-ghost btn-sm" id="share-ref-btn"><i class="fas fa-share-alt"></i>Share</button>
         </div>
+      </div>
+      <div class="card" style="padding:16px;margin-bottom:12px;border-top:2px solid var(--gd)">
+        <div class="sec-title"><i class="fas fa-ticket"></i>Customer ৳500 Discount Verification</div>
+        <p style="font-size:.73rem;color:var(--tx2);margin-bottom:10px">Enter a customer's details and their customer referral code. Admin will verify and approve the discount.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+          <input class="inp" id="cust-ref-name" placeholder="Customer name">
+          <input class="inp" id="cust-ref-phone" placeholder="Customer phone">
+        </div>
+        <input class="inp" id="cust-ref-code" placeholder="Customer referral code" style="margin-top:9px">
+        <button class="btn btn-gold" style="width:100%;margin-top:9px" onclick="submitCustomerDiscountRequest()"><i class="fas fa-paper-plane"></i> Submit for Admin Check</button>
+        <div id="cust-ref-status" style="font-size:.72rem;color:var(--tx2);margin-top:8px"></div>
       </div>
       <div class="card" style="padding:17px;margin-bottom:12px">
         <div class="sec-title" style="margin-bottom:12px"><i class="fas fa-percent" style="color:var(--gd)"></i>Commission System</div>
@@ -1295,6 +1346,7 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
   <nav class="bot-nav">
     <div class="nav-i active" data-sec="home"><i class="fas fa-home"></i><span>Home</span></div>
     <div class="nav-i" data-sec="tasks"><i class="fas fa-list-check"></i><span>Tasks</span></div>
+    <div class="nav-i" data-sec="missions"><i class="fas fa-bullseye"></i><span>Mission</span></div>
       <div class="nav-i" data-sec="reels-tasks"><i class="fas fa-clapperboard"></i><span>Reels</span></div>
     <div class="nav-i" data-sec="wallet"><i class="fas fa-wallet"></i><span>Wallet</span></div>
     <div class="nav-i" data-sec="refer"><i class="fas fa-user-friends"></i><span>Refer</span></div>
@@ -1358,6 +1410,43 @@ async function trackSmartLinkVisit(){
 trackSmartLinkVisit();
 
 let CU=null,UD={},UL=null,CC="BDT";
+// Cross-module referral code helper: the main app module owns CU/db,
+// so this must live in the same module as the auth snapshot callback.
+async function ensureDualReferralCodes(){
+  if(!CU?.uid)return {};
+  try{
+    const ref=doc(db,"users",CU.uid);
+    const snap=await getDoc(ref);
+    if(!snap.exists())return {};
+    const d=snap.data()||{},patch={};
+    const makeCode=(prefix)=>prefix+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
+
+    // Keep the legacy referralCode field synchronized with the new affiliate code.
+    const affiliateCode=d.affiliateCode||d.referralCode||makeCode("AFF");
+    const customerReferralCode=d.customerReferralCode||makeCode("REF");
+
+    if(d.affiliateCode!==affiliateCode)patch.affiliateCode=affiliateCode;
+    if(d.customerReferralCode!==customerReferralCode)patch.customerReferralCode=customerReferralCode;
+    if(d.referralCode!==affiliateCode)patch.referralCode=affiliateCode;
+
+    if(Object.keys(patch).length){
+      await updateDoc(ref,patch);
+      Object.assign(UD,patch);
+      logUserActivity("referral_codes","Referral codes generated",
+        `Affiliate: ${affiliateCode} · Customer discount: ${customerReferralCode}`);
+    }
+
+    // Prevent the UI from briefly showing NOTSET/— while the snapshot catches up.
+    UD.affiliateCode=UD.affiliateCode||affiliateCode;
+    UD.customerReferralCode=UD.customerReferralCode||customerReferralCode;
+    UD.referralCode=UD.referralCode||affiliateCode;
+    return {affiliateCode,customerReferralCode,referralCode:affiliateCode};
+  }catch(e){
+    console.warn("dual referral codes",e);
+    return {};
+  }
+}
+
 let adminConfig={coinRate:100,telegramLink:"#",whatsappLink:"#",adminWhatsapp:"8801905028230",noticeText:"",cpmRate:0,reelsReward:100};
 let affiliateConfig={target:10,commission:500,prizeTitle:"Cox's Bazar Tour / iPhone",prizeDescription:"Grand Prize for 10 verified sales",enabled:true,telegramUrl:"#",trainingTitle:"Affiliate Sales Training",trainingDescription:"Learn how to find genuine buyers, present the course clearly, follow up and submit a verified lead.",trainingSteps:["Choose a course and learn its core benefits","Find relevant buyers through your own audience","Explain price, value and delivery clearly","Follow up professionally and avoid spam","Submit the buyer lead for admin verification"]};
 let affiliateCourseCache={},selectedAffiliateCourse=null,affiliateUnsubs=[],postEarningsUnsub=null,affiliateCoursesLoaded=false;
@@ -1381,6 +1470,29 @@ function toast(msg,type="ok"){
   t.className="show "+type;clearTimeout(t._t);t._t=setTimeout(()=>t.className="",3400);
 }
 window.toast=toast;
+
+/* =========================================================
+   USER ACTIVITY AUDIT TRAIL
+   ========================================================= */
+async function logUserActivity(type,title,detail="",meta={}){
+  if(!CU?.uid)return;
+  try{
+    await addDoc(collection(db,"user_activity"),{
+      userId:CU.uid,
+      userName:UD.name||CU.displayName||"User",
+      userEmail:UD.email||CU.email||"",
+      type:String(type||"general").slice(0,40),
+      title:String(title||"Activity").slice(0,160),
+      detail:String(detail||"").slice(0,500),
+      meta:meta&&typeof meta==="object"?meta:{},
+      reviewed:false,
+      timestamp:Timestamp.now()
+    });
+  }catch(e){
+    console.warn("User activity log:",e?.code||e?.message||e);
+  }
+}
+window.logUserActivity=logUserActivity;
 
 window.toggleTheme=function(){
   const n=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
@@ -1525,7 +1637,8 @@ function startListen(uid,isNew){
           UD.todayEarning=0;UD.rawTodayImpressions=0;
         }catch(e){console.warn("Daily reset:",e);}
       }
-      renderUI();
+      ensureDualReferralCodes().then(()=>renderUI()).catch(()=>renderUI());
+      setTimeout(()=>{try{window.loadMissionCenter?.()}catch(e){console.warn("Mission center init:",e)}},300);
       if(_new&&!UD._onboarded){showOnboarding();_new=false;}
     } else if(!_new){toast("Account profile is missing. Please contact support.","err");}
   },e=>{console.warn("User profile listener:",e?.code||e);toast("Account data permission is blocked. Please contact support.","err");});
@@ -1683,7 +1796,8 @@ function renderUI(){
 
   const nm=d("name","User");
   s("p-name",nm);s("p-phone",d("phone","—"));s("p-email",d("email","—"));
-  s("p-refcode",d("referralCode","—"));s("p-wallet",d("savedWallet","—"));
+  s("p-refcode",d("referralCode","—"));
+   const ar=$("affiliate-ref-code"),cr=$("customer-ref-code");if(ar)ar.textContent=d("affiliateCode","—");if(cr)cr.textContent=d("customerReferralCode","—");s("p-wallet",d("savedWallet","—"));
   s("pf-name",nm);
   const pav=$("pf-avatar");if(pav)pav.textContent=nm.charAt(0).toUpperCase();
 
@@ -2001,6 +2115,9 @@ window.submitAffiliateLead=async function(){
       coursePrice:Number(selectedAffiliateCourse.price||0),commission:Number(selectedAffiliateCourse.commission??500),
       buyerName:name,buyerPhone:phone,status:"pending",createdAt:Timestamp.now()
     });
+    await logUserActivity("affiliate_lead","Affiliate sale lead submitted",
+      `Buyer: ${name} · Course: ${selectedAffiliateCourse.title||selectedAffiliateCourse.name||"IT Course"}`,
+      {courseId:selectedAffiliateCourse.id||"",buyerPhone:phone});
     await addNotif(CU.uid,"📚 Affiliate Sale Submitted!","Buyer lead submitted for "+(selectedAffiliateCourse.title||"course")+" and is awaiting verification.");
     closeAffiliateModal();toast("Sale lead submitted for verification! ✅","ok");
   }catch(e){toast("Could not submit lead: "+e.message,"err");}
@@ -2037,12 +2154,15 @@ function renderReelsTasks(tasks, submissions){
     const views=Math.max(0,Number(sub?.verifiedViews||0));
     const pct=Math.min(100,Math.round((views/target)*100));
     const reached=views>=target;
+    const maxP=Math.max(0,Number(t.maxParticipants||0));
+    const usedP=Math.max(0,Number(t.participantCount||0));
+    const full=maxP>0&&usedP>=maxP&&!sub;
     const paid=sub?.coinApproved===true || sub?.status==='approved';
     const status=paid?'Reward Paid':reached?'Target Reached — Waiting for Approval':sub?'Submitted — Views Being Checked':'Not Submitted';
     const statusColor=paid?'var(--gr)':reached?'var(--gd)':sub?'var(--bl)':'var(--tx2)';
     return `<div class="card" style="padding:16px;border:1px solid ${reached?'var(--gdbd)':'var(--bo)'};background:linear-gradient(145deg,rgba(245,166,35,.045),rgba(255,255,255,.015))">
       <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
-        <div style="flex:1"><div style="font-size:.98rem;font-weight:900">${escapeHtml(t.title||'Reels Promotion')}</div><div style="font-size:.68rem;color:var(--tx3);margin-top:3px">Reward: 🪙 ${Number(t.rewardCoins||t.reward||0).toLocaleString()} coins · Target: ${target.toLocaleString()} views</div></div>
+        <div style="flex:1"><div style="font-size:.98rem;font-weight:900">${escapeHtml(t.title||'Reels Promotion')}</div><div style="font-size:.68rem;color:var(--tx3);margin-top:3px">Reward: 🪙 ${Number(t.rewardCoins||t.reward||0).toLocaleString()} coins · Target: ${target.toLocaleString()} views · 👥 ${maxP?`${usedP}/${maxP}`:'Unlimited'}</div></div>
         <span class="badge" style="color:${statusColor};border-color:${statusColor}44;background:${statusColor}12">${status}</span>
       </div>
       <div style="margin-top:12px;padding:12px;border-radius:12px;background:rgba(0,0,0,.14);border:1px solid var(--bo)">
@@ -2054,7 +2174,7 @@ function renderReelsTasks(tasks, submissions){
       <div class="reels-progress" style="margin-top:7px"><div class="reels-fill" style="width:${pct}%"></div></div>
       <div style="display:flex;justify-content:space-between;font-size:.66rem;color:var(--tx2);margin-top:4px"><span>${pct}% complete</span><span>${Math.max(0,target-views).toLocaleString()} views remaining</span></div>
       ${sub?.videoLink?`<a href="${escapeHtml(sub.videoLink)}" target="_blank" rel="noopener" style="display:block;margin-top:10px;font-size:.7rem;color:var(--em);word-break:break-all"><i class="fas fa-video"></i> Your submitted video: ${escapeHtml(sub.videoLink)}</a>`:''}
-      ${!sub?`<button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="openReelsSubmit('${t.id}')"><i class="fas fa-paper-plane"></i> Submit My Reel Link</button>`:paid?`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.18);color:var(--gr);font-size:.75rem;font-weight:800">✓ ${Number(t.rewardCoins||t.reward||0).toLocaleString()} coins approved</div>`:reached?`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(245,166,35,.08);border:1px solid var(--gdbd);color:var(--gd);font-size:.75rem;font-weight:800">Target reached. Admin will approve the reward after checking the views.</div>`:`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.15);color:var(--bl);font-size:.7rem">Keep promoting your submitted Reel. Admin will update verified views here.</div>`}
+      ${!sub&&!full?`<button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="openReelsSubmit('${t.id}')"><i class="fas fa-paper-plane"></i> Submit My Reel Link</button>`:!sub&&full?`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:var(--re);font-size:.75rem;font-weight:800">Participant limit reached — this task is closed.</div>`:paid?`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.18);color:var(--gr);font-size:.75rem;font-weight:800">✓ ${Number(t.rewardCoins||t.reward||0).toLocaleString()} coins approved</div>`:reached?`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(245,166,35,.08);border:1px solid var(--gdbd);color:var(--gd);font-size:.75rem;font-weight:800">Target reached. Admin will approve the reward after checking the views.</div>`:`<div style="margin-top:11px;text-align:center;padding:9px;border-radius:9px;background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.15);color:var(--bl);font-size:.7rem">Keep promoting your submitted Reel. Admin will update verified views here.</div>`}
     </div>`;
   }).join('');
 }
@@ -2089,7 +2209,23 @@ window.submitReelsTask=async function(taskId){
     const existing=await getDocs(query(collection(db,"reels_task_submissions"),where("userId","==",CU.uid),where("taskId","==",taskId),limit(10)));
     const active=existing.docs.find(d=>{const x=d.data();return x.status!=="rejected"&&x.coinApproved!==true;});
     if(active){toast("You already submitted this Reels task. Keep promoting the same video until the target is reached.","warning");return;}
-    await addDoc(collection(db,"reels_task_submissions"),{userId:CU.uid,userName:UD.name||"User",taskId,taskTitle:t.title||"Reels Promotion",videoLink:link,note,verifiedViews:0,targetViews:Number(t.targetViews||t.target||0),rewardCoins:Number(t.rewardCoins||t.reward||0),status:"pending",coinApproved:false,createdAt:Timestamp.now(),updatedAt:Timestamp.now()});
+    const taskRef=doc(db,"reels_tasks",taskId);
+    await runTransaction(db,async tx=>{
+      const taskSnap=await tx.get(taskRef);
+      if(!taskSnap.exists())throw new Error("Reels task is no longer available.");
+      const live=taskSnap.data();
+      if(live.active===false)throw new Error("This Reels task is closed.");
+      const maxP=Math.max(0,Number(live.maxParticipants||0));
+      const usedP=Math.max(0,Number(live.participantCount||0));
+      if(maxP>0&&usedP>=maxP)throw new Error("This Reels task has reached its participant limit.");
+      const submissionRef=doc(collection(db,"reels_task_submissions"));
+      tx.set(submissionRef,{userId:CU.uid,userName:UD.name||"User",taskId,taskTitle:live.title||"Reels Promotion",videoLink:link,note,verifiedViews:0,targetViews:Number(live.targetViews||live.target||0),rewardCoins:Number(live.rewardCoins||live.reward||0),status:"pending",coinApproved:false,createdAt:Timestamp.now(),updatedAt:Timestamp.now()});
+      const next=usedP+1;
+      tx.update(taskRef,{participantCount:next,active:maxP>0&&next>=maxP?false:true,autoClosedByLimit:maxP>0&&next>=maxP,updatedAt:Timestamp.now()});
+    });
+    await logUserActivity("reels_submission","Reels task submitted",
+      `Task: ${t.title||"Reels Promotion"} · Video link submitted for manual view tracking`,
+      {taskId,videoLink:link});
     await addNotif(CU.uid,"🎬 Reels Task Submitted!","Your video link was submitted. Admin will manually update verified views and approve the coins after the target is reached.");
     document.getElementById('reels-submit-modal')?.remove();toast("Reel submitted successfully!","ok");
   }catch(e){toast("Submit failed: "+e.message,"err");if(btn){btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit for View Tracking';}}
@@ -2115,7 +2251,10 @@ function loadTasks(){
       if(currentFilter!=="all"&&cat!==currentFilter)return;
       shown++;
       const coinR=parseInt(t.reward)||10;
-      el.innerHTML+=`<div class="task-card">
+      const maxP=Math.max(0,Number(t.maxParticipants||0));
+      const usedP=Math.max(0,Number(t.participantCount||0));
+      const full=maxP>0&&usedP>=maxP;
+      el.innerHTML+=`<div class="task-card" style="${full?'opacity:.72':''}">
         <div class="task-top">
           <div class="task-info">
             <h4>${t.title}</h4>
@@ -2123,12 +2262,13 @@ function loadTasks(){
             <div style="display:flex;gap:5px;align-items:center;margin-top:6px;flex-wrap:wrap">
               <span style="font-size:.72rem;color:var(--tx2)"><i class="fas fa-tag" style="margin-right:3px;color:var(--em)"></i>${t.category||"General"}</span>
               ${t.timeLimit?`<span style="font-size:.72rem;color:var(--gd)"><i class="fas fa-clock" style="margin-right:2px"></i>${t.timeLimit} min</span>`:""}
+              <span style="font-size:.72rem;color:${full?'var(--re)':'var(--gr)'}"><i class="fas fa-users" style="margin-right:3px"></i>${maxP?`${usedP}/${maxP} spots`:'Unlimited spots'}</span>
             </div>
           </div>
           <span class="task-rew">🪙 +${coinR}</span>
         </div>
         <div style="display:flex;justify-content:flex-end;margin-top:10px">
-          <button class="task-btn go" onclick="openTaskModal('${t.id}')"><i class="fas fa-eye"></i> View & Do Task</button>
+          ${full?`<button class="task-btn" disabled style="opacity:.55;cursor:not-allowed"><i class="fas fa-lock"></i> LIMIT REACHED</button>`:`<button class="task-btn go" onclick="openTaskModal('${t.id}')"><i class="fas fa-eye"></i> View & Do Task</button>`}
         </div>
       </div>`;
     });
@@ -2166,13 +2306,21 @@ window.submitTask=async function(taskId,coinR){
   if(!textProof){toast("Text proof is required","err");return;}
   btn.disabled=true;btn.innerHTML=`<i class="fas fa-spinner spin"></i> Submitting...`;
   try{
-    await addDoc(collection(db,"task_submissions"),{
-      userId:CU.uid,userName:UD.name||"User",
-      taskId,taskTitle:taskCache[taskId]?.title||"Task",
-      reward:coinR,textProof,
-      imageProof:$("task-img-proof")?.value||"",
-      status:"pending",timestamp:Timestamp.now()
+    const taskRef=doc(db,"tasks",taskId);
+    await runTransaction(db,async tx=>{
+      const taskSnap=await tx.get(taskRef);
+      if(!taskSnap.exists())throw new Error("Task is no longer available.");
+      const live=taskSnap.data();
+      if(live.active===false)throw new Error("This task is currently closed.");
+      const maxP=Math.max(0,Number(live.maxParticipants||0));
+      const usedP=Math.max(0,Number(live.participantCount||0));
+      if(maxP>0&&usedP>=maxP)throw new Error("This task has reached its participant limit.");
+      const submissionRef=doc(collection(db,"task_submissions"));
+      tx.set(submissionRef,{userId:CU.uid,userName:UD.name||"User",taskId,taskTitle:live.title||"Task",reward:Number(live.reward||coinR||0),textProof,imageProof:$("task-img-proof")?.value||"",status:"pending",timestamp:Timestamp.now()});
+      const next=usedP+1;
+      tx.update(taskRef,{participantCount:next,active:maxP>0&&next>=maxP?false:true,autoClosedByLimit:maxP>0&&next>=maxP,updatedAt:Timestamp.now()});
     });
+    await logUserActivity("task_submission","Task proof submitted","A normal task proof was submitted for admin review.",{taskId});
     await addNotif(CU.uid,"📋 Task Submitted!","Your task proof is under review. You'll be notified when approved.");
     toast("✅ Task submitted! Admin will review soon.","ok");
     closeTaskModal();loadTaskHistory();
@@ -2221,6 +2369,7 @@ $("daily-wd-btn").addEventListener("click",async()=>{
     batch.set(doc(collection(db,"withdrawal_requests")),{userId:CU.uid,userName:UD.name,amount:10,method:"bkash",accountNumber:UD.savedWallet,status:"pending",timestamp:Timestamp.now()});
     batch.update(doc(db,"users",CU.uid),{balance:increment(-10),withdrawBalance:increment(10),lastWithdrawTime:Timestamp.now()});
     await batch.commit();
+    await logUserActivity("withdrawal_request","Withdrawal requested","Daily ৳10 withdrawal request submitted.",{amount:10,method:"bkash"});
     await addNotif(CU.uid,"💸 Payout Requested","৳10 withdrawal request submitted!");
     toast("৳10 request sent! ✅","ok");
   }catch(e){btn.disabled=false;btn.innerHTML="⚡ Request ৳10 Now";toast("Error: "+e.message,"err");}
@@ -2245,6 +2394,7 @@ $("bk-wd-btn").addEventListener("click",async()=>{
     batch.set(doc(collection(db,"withdrawal_requests")),{userId:CU.uid,userName:UD.name,amount:amt,method:"bkash",accountNumber:acc||UD.savedWallet,status:"pending",timestamp:Timestamp.now()});
     batch.update(doc(db,"users",CU.uid),{balance:increment(-amt),withdrawBalance:increment(amt),lastWithdrawTime:Timestamp.now()});
     await batch.commit();
+    await logUserActivity("withdrawal_request","Withdrawal requested",`৳${amt} bKash withdrawal request submitted.`,{amount:amt,method:"bkash"});
     $("bk-amt").value="";toast("৳"+amt+" request sent! ✅","ok");
   }catch(e){toast("Error: "+e.message,"err");}
   finally{$("bk-wd-btn").disabled=false;$("bk-wd-btn").textContent="Request Withdrawal";}
@@ -2502,6 +2652,108 @@ G("nsp-admin-fab").onclick=()=>G("nsp-admin-panel").classList.add("open");G("nsp
 G("nsp-admin-form").onsubmit=async e=>{e.preventDefault();if(!isAdmin())return;const f=new FormData(e.target),k=f.get("kind"),id=f.get("id"),v={kind:k,title:f.get("title").trim(),description:f.get("description").trim(),metric:f.get("metric"),target:+f.get("target"),reward:+f.get("reward"),active:true,updatedAt:serverTimestamp()};try{if(id)await updateDoc(doc(gdb,"gamification_"+k,id),v);else await addDoc(collection(gdb,"gamification_"+k),{...v,createdAt:serverTimestamp()});e.target.reset();say("Campaign saved ✅")}catch(e){say(e.message,"err")}};G("nsp-save-rules").onclick=async()=>{try{await setDoc(doc(gdb,"gamification_settings","main"),{maxMembers:+G("nsp-max-members").value||5,weekTarget:+G("nsp-week-target").value||100},{merge:true});say("Squad rules saved ✅")}catch(e){say(e.message,"err")}};
 const activity=["Someone completed a Daily Mission","A member unlocked a Referral Quest","New Squad earned weekly XP","A payout request is being reviewed"];setInterval(()=>{const el=G("nsp-activity");if(!el)return;el.querySelector("span").textContent=activity[Math.floor(Math.random()*activity.length)];el.classList.add("show");setTimeout(()=>el.classList.remove("show"),4300)},11000);
 onAuthStateChanged(gAuth,u=>{gu=u;if(u){attach()}else{gUnsubs.forEach(x=>x());gUnsubs=[];document.body.classList.remove("nsp-admin")}});
+
+// =========================================================
+// MISSION CENTER + DUAL REFERRAL CODES + CUSTOMER DISCOUNT
+// =========================================================
+let missionUnsubs=[];
+let dailyMissionData=[], weeklyChallengeData=[];
+function genCode(prefix){return prefix+'-'+Math.random().toString(36).slice(2,8).toUpperCase();}
+async function ensureDualReferralCodesAddon(){
+  if(!gu||!gu.uid)return;
+  try{
+    const ref=doc(gdb,'users',gu.uid), snap=await getDoc(ref);
+    if(!snap.exists())return;
+    const d=snap.data(), patch={};
+    if(!d.affiliateCode)patch.affiliateCode=genCode('AFF');
+    if(!d.customerReferralCode)patch.customerReferralCode=genCode('REF');
+    if(Object.keys(patch).length)await updateDoc(ref,patch);
+  }catch(e){console.warn('dual referral codes addon',e);}
+}
+window.ensureDualReferralCodesAddon=ensureDualReferralCodesAddon;
+function copyTextById(id){const el=$(id);if(!el)return;navigator.clipboard?.writeText(el.textContent.trim()).then(()=>toast('Copied','ok')).catch(()=>toast('Copy failed','err'));}
+function renderMissionCard(m,c){
+  const status=c?.status||'available', pct=Math.min(100,Math.max(0,Number(c?.progress||0)/Math.max(1,Number(m.target||1))*100));
+  const maxP=Math.max(0,Number(m.maxParticipants||0)), usedP=Math.max(0,Number(m.participantCount||0)), full=maxP>0&&usedP>=maxP;
+  let action='';
+  if(status==='approved')action='<span class="tag tag-ok">✓ Approved</span>';
+  else if(status==='pending')action='<span class="tag tag-warn">Pending review</span>';
+  else if(full)action='<span class="tag tag-warn">LIMIT REACHED</span>';
+  else if(status==='rejected')action='<button class="btn btn-ghost btn-sm" onclick="submitMissionCompletion(\''+m.id+'\')">Resubmit</button>';
+  else action='<button class="btn btn-em btn-sm" onclick="submitMissionCompletion(\''+m.id+'\')">Mark Complete</button>';
+  return `<div class="card" style="padding:13px;background:var(--s2);border:1px solid var(--bd)"><div style="display:flex;justify-content:space-between;gap:10px"><div><div style="font-weight:900">${esc(m.title||'Mission')}</div><div style="font-size:.73rem;color:var(--tx2);margin-top:4px">${esc(m.description||'Complete this mission as instructed.')}</div></div><div style="font-weight:900;color:var(--gd);white-space:nowrap">+${Number(m.rewardCoins||0)} 🪙</div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-size:.7rem;color:var(--tx2)">${Number(m.target||1)} ${esc(m.unit||'completion')}</span>${action}</div></div>`;
+}
+async function loadMissionCenter(){
+  missionUnsubs.forEach(x=>{try{x()}catch{}});missionUnsubs=[];
+  if(!gu?.uid)return;
+  const render=async(type,snap)=>{
+    const arr=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.active!==false);
+    const ids=arr.map(x=>x.id); const comps={};
+    if(ids.length){const qs=await Promise.all(ids.map(id=>getDoc(doc(gdb,'mission_completions',gu.uid+'_'+id))));qs.forEach((s,i)=>{if(s.exists())comps[ids[i]]=s.data();});}
+    if(type==='daily'){dailyMissionData=arr;const el=$('daily-missions-list');if(el)el.innerHTML=arr.length?arr.map(m=>renderMissionCard(m,comps[m.id])).join(''):'<div style="padding:14px;text-align:center;color:var(--tx2)">No daily missions available.</div>';if($('mission-daily-count'))$('mission-daily-count').textContent=arr.length;;const hd=$('home-daily-missions');if(hd)hd.innerHTML=arr.slice(0,2).map(m=>renderMissionCard(m,comps[m.id])).join('')||'<span style="font-size:.73rem;color:var(--tx2)">No daily missions available.</span>';}
+    else {weeklyChallengeData=arr;const el=$('weekly-challenges-list');if(el)el.innerHTML=arr.length?arr.map(m=>renderMissionCard(m,comps[m.id])).join(''):'<div style="padding:14px;text-align:center;color:var(--tx2)">No weekly challenge available.</div>';if($('mission-weekly-count'))$('mission-weekly-count').textContent=arr.length;;const hw=$('home-weekly-mission');if(hw)hw.innerHTML=arr[0]?renderMissionCard(arr[0],comps[arr[0].id]):'<span style="font-size:.73rem;color:var(--tx2)">No weekly challenge available.</span>';}
+  };
+  missionUnsubs.push(onSnapshot(query(collection(gdb,'daily_missions'),limit(20)),s=>render('daily',s),e=>console.warn('daily missions',e)));
+  missionUnsubs.push(onSnapshot(query(collection(gdb,'weekly_challenges'),limit(10)),s=>render('weekly',s),e=>console.warn('weekly challenge',e)));
+}
+window.loadMissionCenter=loadMissionCenter;
+window.submitMissionCompletion=async function(id){
+  if(!gu?.uid)return toast('Please login first','err');
+  try{
+    const daily=dailyMissionData.find(x=>x.id===id), weekly=weeklyChallengeData.find(x=>x.id===id), m=daily||weekly;
+    if(!m)return toast('Mission not found','err');
+    const ref=doc(gdb,'mission_completions',gu.uid+'_'+id);
+    const missionRef=doc(gdb,daily?'daily_missions':'weekly_challenges',id);
+    await runTransaction(gdb,async tx=>{
+      // Both reads are inside the transaction: duplicate clicks/tabs cannot consume two slots.
+      const existingSnap=await tx.get(ref);
+      const ms=await tx.get(missionRef);
+      if(existingSnap.exists()){
+        const st=existingSnap.data().status;
+        if(st==='approved')throw new Error('ALREADY_APPROVED');
+        if(st==='pending')throw new Error('ALREADY_SUBMITTED');
+      }
+      if(!ms.exists())throw new Error('MISSION_NOT_FOUND');
+      const live=ms.data();
+      if(live.active===false)throw new Error('MISSION_CLOSED');
+      const maxP=Math.max(0,Number(live.maxParticipants||0));
+      const usedP=Math.max(0,Number(live.participantCount||0));
+      if(maxP>0&&usedP>=maxP)throw new Error('MISSION_LIMIT');
+      const next=usedP+1;
+      tx.set(ref,{userId:gu.uid,userName:gud.name||gu.displayName||'User',missionId:id,missionType:daily?'daily':'weekly',missionTitle:live.title||m.title||'',rewardCoins:Number(live.rewardCoins||m.rewardCoins||0),status:'pending',progress:Number(live.target||m.target||1),submittedAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
+      tx.update(missionRef,{participantCount:next,active:maxP>0&&next>=maxP?false:true,autoClosedByLimit:maxP>0&&next>=maxP,updatedAt:serverTimestamp()});
+    });
+    await logUserActivity("mission_submission","Mission submitted",
+      `Mission: ${m.title||"Mission"} · Submitted for admin review`,
+      {missionId:id,missionType:daily?"daily":"weekly"});
+    toast('Submitted for admin review','ok');
+    loadMissionCenter();
+  }catch(e){
+    console.error(e);
+    if(e?.message==='ALREADY_APPROVED') return toast('Already approved','ok');
+    if(e?.message==='ALREADY_SUBMITTED') return toast('Already submitted. Waiting for admin review.','warning');
+    if(e?.message==='MISSION_CLOSED') return toast('This mission is currently closed.','warning');
+    if(e?.message==='MISSION_LIMIT') return toast('This mission has reached its participant limit.','warning');
+    toast('Mission submission failed: '+(e?.message||'Unknown error'),'err');
+  }
+};
+window.submitCustomerDiscountRequest=async function(){
+  if(!gu?.uid)return toast('Please login first','err');
+  const name=$('cust-ref-name')?.value.trim(),phone=$('cust-ref-phone')?.value.trim(),code=$('cust-ref-code')?.value.trim().toUpperCase();
+  if(!name||!phone||!code)return toast('Enter customer name, phone and code','err');
+  try{
+    const rs=await getDocs(query(collection(gdb,'users'),where('customerReferralCode','==',code),limit(1)));
+    if(rs.empty)return toast('Referral code not found','err');
+    const owner=rs.docs[0];
+    await addDoc(collection(gdb,'customer_referrals'),{customerName:name,customerPhone:phone,code,referrerUid:owner.id,referrerName:owner.data().name||'User',submittedBy:gu.uid,discountAmount:500,status:'pending',createdAt:serverTimestamp()});
+    await logUserActivity("discount_request","Customer ৳500 discount request",
+      `Customer: ${name} · Referral code: ${code}`,
+      {referrerUid:owner.id,discountAmount:500});
+    $('cust-ref-status').textContent='Submitted. Admin will verify the code and approve ৳500 discount.';
+    $('cust-ref-name').value='';$('cust-ref-phone').value='';$('cust-ref-code').value='';toast('Discount request submitted','ok');
+  }catch(e){console.error(e);toast('Could not submit discount request','err');}
+};
+
 </script>
 </body>
 </html>
