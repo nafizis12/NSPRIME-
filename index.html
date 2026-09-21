@@ -442,6 +442,42 @@ input:focus,select:focus,textarea:focus{border-color:var(--em)!important;box-sha
 
 @keyframes spin{to{transform:rotate(360deg)}}.spin{animation:spin .8s linear infinite}
 hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
+
+/* ===== NS PRIME AFFILIATE HUB + ADVANCED REELS ANALYTICS ===== */
+.affiliate-hero{position:relative;overflow:hidden;padding:20px;margin-bottom:13px;border-radius:var(--r3);border:1px solid var(--gdbd);background:radial-gradient(circle at 90% 0,rgba(245,200,66,.24),transparent 45%),linear-gradient(135deg,var(--gdb),rgba(245,200,66,.025)),var(--sf);box-shadow:0 18px 45px rgba(245,200,66,.08)}
+.affiliate-hero:before{content:'✦';position:absolute;right:18px;top:4px;font-size:5rem;color:rgba(245,200,66,.08);animation:affiliateFloat 4s ease-in-out infinite}
+@keyframes affiliateFloat{50%{transform:translateY(8px) rotate(8deg)}}
+.affiliate-kicker{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gd);font-weight:900}
+.affiliate-title{font-size:1.45rem;font-weight:900;letter-spacing:-.045em;margin:5px 0}
+.affiliate-sub{font-size:.76rem;color:var(--tx2);line-height:1.55;max-width:390px}
+.milestone-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:17px 0 12px}
+.milestone-box{aspect-ratio:1/1;min-width:0;border-radius:13px;border:1.5px dashed var(--bd2);background:rgba(255,255,255,.025);display:flex;align-items:center;justify-content:center;position:relative;transition:all .45s cubic-bezier(.25,1,.5,1);color:var(--tx3);font-size:.75rem}
+.milestone-box:before{content:attr(data-num);font-family:var(--fm);font-size:.68rem}
+.milestone-box.filled{border-style:solid;border-color:transparent;background:linear-gradient(145deg,#fff2a6,var(--gd),#d98c00);color:#261400;box-shadow:0 7px 22px rgba(245,200,66,.25);transform:translateY(-2px) scale(1.02);animation:milestonePop .45s ease}
+.milestone-box.filled:before{content:'✓';font-size:1.15rem;font-weight:900}
+@keyframes milestonePop{0%{transform:scale(.7);opacity:.3}70%{transform:scale(1.08)}100%{transform:scale(1.02);opacity:1}}
+.grand-prize{display:none;margin-top:12px;padding:15px;border-radius:15px;text-align:center;background:linear-gradient(135deg,rgba(255,228,138,.18),rgba(245,158,11,.09));border:1px solid var(--gdbd);animation:grandGlow 1.8s ease-in-out infinite alternate}
+.grand-prize.show{display:block}
+@keyframes grandGlow{from{box-shadow:0 0 0 rgba(245,200,66,0)}to{box-shadow:0 0 28px rgba(245,200,66,.16)}}
+.course-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.course-card{padding:15px;border-radius:var(--r);background:linear-gradient(145deg,var(--s2),rgba(245,200,66,.035));border:1px solid var(--bd);transition:var(--tr);position:relative;overflow:hidden}.course-card .course-media{height:128px;margin:-15px -15px 12px;overflow:hidden;background:linear-gradient(135deg,var(--gdb),rgba(245,200,66,.04));position:relative}.course-card .course-media img{width:100%;height:100%;object-fit:cover;display:block}.course-card .course-media:after{content:'NS PRIME AFFILIATE';position:absolute;left:9px;bottom:8px;padding:4px 7px;border-radius:999px;background:rgba(0,0,0,.62);backdrop-filter:blur(8px);color:#ffe9a8;font-size:.52rem;font-weight:900;letter-spacing:.12em}.affiliate-training{position:relative;overflow:hidden;padding:17px;border-radius:18px;border:1px solid rgba(245,200,66,.28);background:radial-gradient(circle at 100% 0,rgba(245,200,66,.18),transparent 42%),linear-gradient(135deg,rgba(245,200,66,.09),rgba(255,255,255,.02)),var(--s2);box-shadow:0 18px 45px rgba(245,200,66,.07)}.affiliate-training:before{content:'✦';position:absolute;right:18px;top:2px;font-size:4.2rem;color:rgba(245,200,66,.08);animation:affiliateFloat 5s ease-in-out infinite}.training-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;align-items:stretch}.training-step{display:flex;gap:10px;padding:10px;border:1px solid var(--bd);border-radius:12px;background:rgba(255,255,255,.02)}.training-step b{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--gdb);color:var(--gd);font-size:.68rem;flex-shrink:0}.telegram-training{display:flex;align-items:center;gap:12px;padding:13px;border-radius:14px;background:linear-gradient(135deg,rgba(36,161,222,.15),rgba(36,161,222,.04));border:1px solid rgba(36,161,222,.25);text-decoration:none;color:inherit;transition:var(--tr)}.telegram-training:hover{transform:translateY(-2px);border-color:rgba(36,161,222,.5);box-shadow:0 12px 30px rgba(36,161,222,.1)}.telegram-training .tg-icon{width:46px;height:46px;border-radius:14px;background:rgba(36,161,222,.16);display:grid;place-items:center;font-size:1.35rem;color:#24A1DE}.training-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);color:var(--gd);font-size:.58rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}@media(max-width:620px){.training-grid{grid-template-columns:1fr}.course-card .course-media{height:112px}}
+.course-card:before{content:'';position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,var(--gd),transparent)}
+.course-card:hover{transform:translateY(-3px);border-color:var(--gdbd);box-shadow:0 14px 30px rgba(245,200,66,.08)}
+.course-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--gdb);color:var(--gd);margin-bottom:10px}
+.course-title{font-size:.84rem;font-weight:900;line-height:1.35;min-height:36px}
+.course-price{font-family:var(--fm);font-weight:900;font-size:.92rem;color:var(--tx);margin:8px 0}
+.course-card .btn{width:100%;padding:10px 8px;font-size:.72rem}
+.affiliate-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:13px}
+.affiliate-stat{padding:13px 9px;text-align:center;background:var(--s2);border:1px solid var(--bd);border-radius:13px}
+.affiliate-stat b{display:block;font-family:var(--fm);font-size:1.05rem;color:var(--gd)}
+.affiliate-stat span{display:block;font-size:.62rem;color:var(--tx2);font-weight:700;margin-top:4px}
+.reels-progress{height:13px;background:var(--s3);border-radius:100px;overflow:hidden;border:1px solid var(--bd);margin:11px 0 7px}
+.reels-fill{height:100%;width:0;border-radius:100px;background:linear-gradient(90deg,var(--em),var(--gd),#fff0a3);transition:width 1s cubic-bezier(.25,1,.5,1);box-shadow:0 0 15px rgba(245,200,66,.2)}
+.reels-complete{display:none}.reels-complete.show{display:inline-flex}
+.post-earn-row{padding:13px 0;border-bottom:1px solid var(--bd);display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.post-earn-row:last-child{border-bottom:none}
+.post-earn-title{font-size:.8rem;font-weight:800}.post-earn-meta{font-size:.68rem;color:var(--tx2);margin-top:3px}.post-earn-value{text-align:right;font-family:var(--fm);font-weight:900;color:var(--em);font-size:.82rem}
+@media(max-width:390px){.course-grid{grid-template-columns:1fr}.milestone-grid{gap:6px}.milestone-box{border-radius:10px}.affiliate-title{font-size:1.3rem}}
 </style>
 </head>
 <body>
@@ -510,6 +546,23 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
 <!-- TASK MODAL -->
 <div class="modal-bg" id="task-modal-bg">
   <div class="modal-sheet"><div class="modal-handle"></div><div id="task-modal-content"></div></div>
+</div>
+
+
+<!-- AFFILIATE LEAD MODAL -->
+<div class="modal-bg" id="affiliate-lead-modal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px">
+      <div style="width:44px;height:44px;border-radius:13px;background:var(--gdb);display:grid;place-items:center;color:var(--gd);font-size:1.1rem"><i class="fas fa-user-plus"></i></div>
+      <div><h3 style="font-weight:900;font-size:1.05rem">Submit Sale Lead</h3><p style="font-size:.72rem;color:var(--tx2)">Buyer details are sent for verification.</p></div>
+    </div>
+    <div class="form-group"><label>Buyer Name</label><input id="affiliate-buyer-name" type="text" maxlength="100" placeholder="Enter buyer's full name"></div>
+    <div class="form-group"><label>Phone Number</label><input id="affiliate-buyer-phone" type="tel" maxlength="20" placeholder="01XXXXXXXXX"></div>
+    <div id="affiliate-selected-course" class="s2" style="padding:11px 13px;margin-bottom:13px;font-size:.76rem;color:var(--tx2)">Course: —</div>
+    <button class="btn btn-gold" id="affiliate-submit-btn" style="width:100%;padding:15px" onclick="submitAffiliateLead()"><i class="fas fa-paper-plane"></i> Submit Sale</button>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:9px" onclick="closeAffiliateModal()">Cancel</button>
+  </div>
 </div>
 
 <!-- ONBOARDING -->
@@ -795,6 +848,15 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
         </div>
       </div>
 
+      <!-- AFFILIATE SPOTLIGHT -->
+      <div class="affiliate-training" style="margin-bottom:13px;cursor:pointer" onclick="navigate('affiliate')">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:48px;height:48px;border-radius:15px;background:linear-gradient(145deg,#fff0a3,var(--gd),#d98c00);display:grid;place-items:center;color:#2b1a00;box-shadow:0 8px 24px rgba(245,200,66,.22)"><i class="fas fa-gem" style="font-size:1.15rem"></i></div>
+          <div style="flex:1;min-width:0"><span class="training-badge">Premium Affiliate Opportunity</span><div style="font-size:1rem;font-weight:900;margin-top:6px">Turn your audience into verified course sales.</div><div style="font-size:.7rem;color:var(--tx2);margin-top:3px">৳500 commission examples • milestone rewards • guided training</div></div>
+          <i class="fas fa-arrow-right" style="color:var(--gd)"></i>
+        </div>
+      </div>
+
       <!-- STAT CARDS -->
       <div class="stat-grid dash-stat-grid">
         <div class="stat-card sc-blue"><span class="ico">👁️</span><span class="val" id="d-today-impress" style="color:var(--bl)">0</span><span class="lbl">Today's Impressions</span></div>
@@ -862,6 +924,25 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
         </div>
         <button class="btn btn-coin btn-sm" onclick="navigate('wallet')"><i class="fas fa-exchange-alt"></i>Convert to ৳</button>
       </div>
+
+      <div class="gold-card" style="padding:17px;margin-bottom:13px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div>
+            <div style="font-size:.92rem;font-weight:900"><i class="fas fa-film" style="color:var(--gd);margin-right:6px"></i>Reels Promotion Task</div>
+            <div style="font-size:.73rem;color:var(--tx2);line-height:1.5;margin-top:4px">Progress is calculated only against the current admin-set target.</div>
+          </div>
+          <span class="badge badge-gold" id="reels-status-badge">In Progress</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:end;margin-top:13px">
+          <div><span style="font-size:1.35rem;font-weight:900;font-family:var(--fm)" id="reels-current">0</span><span style="font-size:.7rem;color:var(--tx2)"> views</span></div>
+          <div style="text-align:right"><span style="font-size:.7rem;color:var(--tx2)">Admin target</span><div style="font-weight:900;font-family:var(--fm);color:var(--gd)" id="reels-target">0</div></div>
+        </div>
+        <div class="reels-progress"><div class="reels-fill" id="reels-progress-fill"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <span style="font-size:.68rem;color:var(--tx2)" id="reels-percent">0%</span>
+          <span class="badge badge-em reels-complete" id="reels-complete-badge">✓ Target Completed</span>
+        </div>
+      </div>
       <div class="tab-row" id="task-tabs">
         <div class="tab-pill active" data-filter="all">All Tasks</div>
         <div class="tab-pill" data-filter="video">📹 Video</div>
@@ -914,6 +995,15 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
       <div class="wallet-summary-grid">
         <div class="s2" style="padding:14px;text-align:center;border-radius:var(--r)"><span style="font-weight:900;font-size:1.1rem;display:block;color:var(--gd);font-family:var(--fm)" id="w-pend">৳0.00</span><span style="font-size:.7rem;color:var(--tx2);margin-top:4px;display:block;font-weight:700">Pending</span></div>
         <div class="s2" style="padding:14px;text-align:center;border-radius:var(--r)"><span style="font-weight:900;font-size:1.1rem;display:block;color:var(--em);font-family:var(--fm)" id="w-drawn">৳0.00</span><span style="font-size:.7rem;color:var(--tx2);margin-top:4px;display:block;font-weight:700">Withdrawn</span></div>
+      </div>
+
+      <div class="card" style="padding:17px;margin-bottom:13px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px">
+          <div class="sec-title" style="margin-bottom:0"><i class="fas fa-chart-line"></i>Post-wise Earnings</div>
+          <span class="badge badge-em">CPM <span id="wallet-cpm-rate">—</span></span>
+        </div>
+        <p style="font-size:.7rem;color:var(--tx2);line-height:1.5;margin-bottom:8px">Revenue = (CPM ÷ 1000) × Views</p>
+        <div id="post-earnings-list"><p style="text-align:center;color:var(--tx3);padding:14px;font-size:.78rem">No post analytics yet.</p></div>
       </div>
       <div class="coin-card" style="padding:20px;margin-bottom:13px">
         <div class="sec-title" style="margin-bottom:14px"><i class="fas fa-coins" style="color:var(--cn)"></i>Coin → ৳ Converter</div>
@@ -1030,6 +1120,63 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
       </div>
     </section>
 
+
+    <!-- AFFILIATE HUB -->
+    <section id="sec-affiliate" class="sec">
+      <div class="app-page-title"><div><h1>Affiliate Marketing Hub</h1><p>Turn verified course sales into commissions and milestone rewards.</p></div><span class="page-status">Affiliate live</span></div>
+
+      <div class="affiliate-hero">
+        <div class="affiliate-kicker">🏆 Mega Milestone Challenge</div>
+        <div class="affiliate-title" id="affiliate-challenge-title">10 verified sales. One grand prize.</div>
+        <div class="affiliate-sub" id="affiliate-challenge-sub">Every verified sale unlocks one golden milestone. Reach all 10 to unlock the grand-prize claim.</div>
+        <div class="milestone-grid" id="affiliate-milestones"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <span class="badge badge-gold" id="affiliate-sale-count">0 / 10 verified sales</span>
+          <span style="font-size:.68rem;color:var(--tx2)" id="affiliate-next-text">Keep sharing 🚀</span>
+        </div>
+        <div class="grand-prize" id="affiliate-grand-prize">
+          <div style="font-size:1.45rem;margin-bottom:4px">🎁</div>
+          <div style="font-weight:900;font-size:.96rem">Grand Prize Unlocked!</div>
+          <div style="font-size:.72rem;color:var(--tx2);margin:4px 0 11px" id="affiliate-prize-title">Cox's Bazar Tour or iPhone</div>
+          <button class="btn btn-gold" id="affiliate-claim-btn" onclick="claimGrandPrize()" style="width:100%"><i class="fas fa-crown"></i> Claim Grand Prize</button>
+        </div>
+      </div>
+
+      <div class="affiliate-stats">
+        <div class="affiliate-stat"><b id="affiliate-sales-stat">0</b><span>Verified Sales</span></div>
+        <div class="affiliate-stat"><b id="affiliate-commission-stat">৳0</b><span>Commission</span></div>
+        <div class="affiliate-stat"><b id="affiliate-pending-stat">0</b><span>Pending Leads</span></div>
+      </div>
+
+      <div class="card" style="padding:17px;margin-bottom:13px">
+        <div class="sec-title"><i class="fas fa-graduation-cap" style="color:var(--gd)"></i>IT Course Marketplace</div>
+        <p style="font-size:.75rem;color:var(--tx2);line-height:1.55;margin:-5px 0 13px">Submit a genuine buyer lead. Your commission is credited after the sale is verified by the admin.</p>
+        <div class="course-grid" id="affiliate-course-list">
+          <div style="grid-column:1/-1;text-align:center;padding:22px;color:var(--tx3)"><i class="fas fa-spinner spin" style="color:var(--gd)"></i><div style="font-size:.78rem;margin-top:7px">Loading courses...</div></div>
+        </div>
+      </div>
+
+      <div class="affiliate-training" style="margin-bottom:13px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px">
+          <div><span class="training-badge"><i class="fas fa-graduation-cap"></i> Affiliate Training</span><h3 id="affiliate-training-title" style="font-size:1rem;font-weight:900;margin-top:7px">Affiliate Sales Training</h3><p id="affiliate-training-desc" style="font-size:.73rem;color:var(--tx2);line-height:1.55;margin-top:4px">Learn how to find genuine buyers, present the course clearly, follow up and submit a verified lead.</p></div>
+        </div>
+        <div class="training-grid">
+          <div id="affiliate-training-steps" style="display:flex;flex-direction:column;gap:7px"></div>
+          <a class="telegram-training" id="affiliate-training-telegram" href="#" target="_blank" rel="noopener">
+            <div class="tg-icon"><i class="fab fa-telegram-plane"></i></div><div style="flex:1"><div style="font-size:.86rem;font-weight:900">Join Affiliate Training</div><div style="font-size:.68rem;color:var(--tx2);margin-top:3px">Telegram group • Sales training • Updates</div></div><i class="fas fa-arrow-up-right-from-square" style="color:#24A1DE;font-size:.75rem"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="card" style="padding:17px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px">
+          <div class="sec-title" style="margin-bottom:0"><i class="fas fa-clock-rotate-left" style="color:var(--gd)"></i>My Affiliate Leads</div>
+          <span class="badge badge-gold" id="affiliate-lead-badge">0 leads</span>
+        </div>
+        <div id="affiliate-lead-list"><p style="text-align:center;color:var(--tx3);padding:14px;font-size:.78rem">Loading...</p></div>
+      </div>
+    </section>
+
     <!-- SUPPORT -->
     <section id="sec-support" class="sec">
       <div class="app-page-title"><div><h1>Help & support</h1><p>Message the team or create a ticket for account help.</p></div><span class="page-status">Support online</span></div>
@@ -1133,6 +1280,7 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
     <div class="nav-i" data-sec="tasks"><i class="fas fa-list-check"></i><span>Tasks</span></div>
     <div class="nav-i" data-sec="wallet"><i class="fas fa-wallet"></i><span>Wallet</span></div>
     <div class="nav-i" data-sec="refer"><i class="fas fa-user-friends"></i><span>Refer</span></div>
+    <div class="nav-i" data-sec="affiliate"><i class="fas fa-gem"></i><span>Affiliate</span></div>
     <div class="nav-i" data-sec="support"><i class="fas fa-headset"></i><span>Support</span></div>
     <div class="nav-i" data-sec="profile"><i class="fas fa-user-circle"></i><span>Profile</span></div>
   </nav>
@@ -1141,13 +1289,61 @@ hr{border:none;border-top:1px solid var(--bd);margin:16px 0}
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile,signOut}from"https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-import{getFirestore,doc,getDoc,setDoc,updateDoc,onSnapshot,collection,addDoc,query,where,getDocs,increment,limit,Timestamp,writeBatch}from"https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import{getFirestore,doc,getDoc,setDoc,updateDoc,onSnapshot,collection,addDoc,query,where,getDocs,increment,limit,Timestamp,writeBatch,runTransaction}from"https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 const FC={apiKey:"AIzaSyCU2RfLeclEyyxzEActtl5ks1P_NPvATOE",authDomain:"ns-prime-d7ca5.firebaseapp.com",projectId:"ns-prime-d7ca5",storageBucket:"ns-prime-d7ca5.firebasestorage.app",messagingSenderId:"172231719671",appId:"1:172231719671:web:3dafc0ace7b44fbe0071f2"};
 const app=initializeApp(FC),auth=getAuth(app),db=getFirestore(app);
 
+
+// =========================================================
+// SMART LINK CLICK TRACKING
+// Public landing visits are logged without exposing user balances.
+// One click is recorded per browser tab/session for a given ref+type.
+// =========================================================
+function nspVisitorId(){
+  try{
+    let id=localStorage.getItem('nsp_visitor_id');
+    if(!id){id='v_'+crypto.randomUUID();localStorage.setItem('nsp_visitor_id',id);}
+    return id;
+  }catch{return 'v_'+Math.random().toString(36).slice(2)+Date.now();}
+}
+async function trackSmartLinkVisit(){
+  try{
+    const qs=new URLSearchParams(location.search);
+    const ref=(qs.get('ref')||'').trim();
+    const type=(qs.get('type')||'general').trim().slice(0,60);
+    if(!ref)return;
+    if(!/^[A-Za-z0-9_-]{10,128}$/.test(ref))return;
+    const key='nsp_click_'+ref+'_'+type;
+    if(sessionStorage.getItem(key))return;
+    sessionStorage.setItem(key,'1');
+    const visitorId=nspVisitorId();
+    const source=document.referrer||'direct';
+    const utmSource=qs.get('utm_source')||'';
+    const utmMedium=qs.get('utm_medium')||'';
+    const utmCampaign=qs.get('utm_campaign')||'';
+    await addDoc(collection(db,'smart_link_clicks'),{
+      userId:ref,
+      category:type,
+      type,
+      visitorId,
+      source:source.slice(0,300),
+      utmSource:utmSource.slice(0,100),
+      utmMedium:utmMedium.slice(0,100),
+      utmCampaign:utmCampaign.slice(0,100),
+      path:location.pathname,
+      valid:true,
+      timestamp:Timestamp.now()
+    });
+  }catch(e){console.warn('Smart link tracking:',e?.code||e?.message||e);}
+}
+trackSmartLinkVisit();
+
 let CU=null,UD={},UL=null,CC="BDT";
-let adminConfig={coinRate:100,telegramLink:"#",whatsappLink:"#",adminWhatsapp:"8801905028230",noticeText:""};
+let adminConfig={coinRate:100,telegramLink:"#",whatsappLink:"#",adminWhatsapp:"8801905028230",noticeText:"",cpmRate:0,reelsReward:100};
+let affiliateConfig={target:10,commission:500,prizeTitle:"Cox's Bazar Tour / iPhone",prizeDescription:"Grand Prize for 10 verified sales",enabled:true,telegramUrl:"#",trainingTitle:"Affiliate Sales Training",trainingDescription:"Learn how to find genuine buyers, present the course clearly, follow up and submit a verified lead.",trainingSteps:["Choose a course and learn its core benefits","Find relevant buyers through your own audience","Explain price, value and delivery clearly","Follow up professionally and avoid spam","Submit the buyer lead for admin verification"]};
+let affiliateCourseCache={},selectedAffiliateCourse=null,affiliateUnsubs=[],postEarningsUnsub=null,affiliateCoursesLoaded=false;
+const VERIFIED_AFFILIATE_STATUSES=["verified","approved","completed","paid","sale_verified"];
 const RATE=118;
 const LANDING_BASE="https://landing-omega-red.vercel.app/index.html";
 const $=id=>document.getElementById(id);
@@ -1292,6 +1488,9 @@ onAuthStateChanged(auth,user=>{
 
 function startListen(uid,isNew){
   if(UL)UL();
+  affiliateUnsubs.forEach(u=>{try{u();}catch{}});
+  affiliateUnsubs=[];
+  if(postEarningsUnsub){try{postEarningsUnsub();}catch{} postEarningsUnsub=null;}
   requestPushPermission();
   let _new=isNew;
   UL=onSnapshot(doc(db,"users",uid),async snap=>{
@@ -1310,8 +1509,8 @@ function startListen(uid,isNew){
       }
       renderUI();
       if(_new&&!UD._onboarded){showOnboarding();_new=false;}
-    } else if(!_new){toast("Account not found","err");signOut(auth);}
-  });
+    } else if(!_new){toast("Account profile is missing. Please contact support.","err");}
+  },e=>{console.warn("User profile listener:",e?.code||e);toast("Account data permission is blocked. Please contact support.","err");});
 
   onSnapshot(doc(db,"settings","config"),snap=>{
     if(snap.exists()){
@@ -1338,6 +1537,14 @@ function startListen(uid,isNew){
     }
   },()=>{});
 
+  onSnapshot(doc(db,"settings","affiliate"),snap=>{
+    if(snap.exists()){
+      affiliateConfig={...affiliateConfig,...snap.data()};
+      renderAffiliateUI(window._affiliateLeads||[]);
+      renderAffiliateTraining();
+    }
+  },()=>{});
+
   try{
     const nq=query(collection(db,"notifications"),where("userId","==",uid),limit(20));
     onSnapshot(nq,snap=>{
@@ -1353,6 +1560,8 @@ function startListen(uid,isNew){
   }catch(e){console.warn(e);}
 
   loadAnnouncements();
+  startAffiliateListeners(uid);
+  startPostEarningsListener(uid);
 }
 
 function loadAnnouncements(){
@@ -1428,6 +1637,9 @@ function updateCurrencyButtons(){
   ["cur-usdt","cur-usdt2","cur-usdt3"].forEach(id=>{const e=$(id);if(e)e.style.cssText=smBtnStyle(!isBDT);});
 }
 
+window.renderReelsProgress=renderReelsProgress;
+window.renderAffiliateUI=renderAffiliateUI;
+window.loadAffiliateCourses=loadAffiliateCourses;
 function renderUI(){
   const d=(k,def)=>UD[k]??def;
   const bal=d("balance",0),tot=d("totalEarnings",0),coins=d("coins",0);
@@ -1485,6 +1697,8 @@ function renderUI(){
   renderStreak(d("streakCount",0),d("lastCheckin",""));
   updateMotivation(tot,coins);
   renderAchievements(d("tasksDone",0),tot,d("teamSize",0),coins);
+  renderReelsProgress();
+  renderPostEarnings();
   restoreGeneratedLink();
 }
 
@@ -1589,6 +1803,204 @@ async function initUser(user,name,phone,email,code){
   }
   await batch.commit();
 }
+
+
+function renderReelsProgress(){
+  const current=Math.max(0,Number(UD.reels_current||0)),target=Math.max(0,Number(UD.reels_target||0));
+  const pct=target>0?Math.min(100,(current/target)*100):0;
+  const f=$("reels-progress-fill");if(f)f.style.width=pct+"%";
+  const c=$("reels-current"),t=$("reels-target"),p=$("reels-percent"),b=$("reels-status-badge"),done=$("reels-complete-badge");
+  if(c)c.textContent=current.toLocaleString();
+  if(t)t.textContent=target.toLocaleString();
+  if(p)p.textContent=Math.round(pct)+"%";
+  const completed=target>0&&current>=target;
+  if(b){b.textContent=completed?"✓ Completed":"In Progress";b.className="badge "+(completed?"badge-em":"badge-gold");}
+  if(done)done.classList.toggle("show",completed);
+  if(completed&&!UD.reelsRewardClaimed)creditReelsRewardOnce();
+}
+async function creditReelsRewardOnce(){
+  if(!CU||UD.reelsRewardClaimed||Number(UD.reels_target||0)<=0||Number(UD.reels_current||0)<Number(UD.reels_target||0))return;
+  const reward=Number(UD.reels_reward??UD.reelsReward??adminConfig.reelsReward??0);
+  if(reward<=0)return;
+  try{
+    await runTransaction(db,async tx=>{
+      const ref=doc(db,"users",CU.uid),snap=await tx.get(ref);
+      const d=snap.data()||{};
+      if(d.reelsRewardClaimed===true)return;
+      const current=Number(d.reels_current||0),target=Number(d.reels_target||0);
+      if(target<=0||current<target)return;
+      tx.update(ref,{reelsRewardClaimed:true,balance:increment(reward),totalEarnings:increment(reward),todayEarning:increment(reward),todayEarningDate:new Date().toISOString().slice(0,10)});
+    });
+    await addNotif(CU.uid,"🎬 Reels Target Completed!","Your admin-set reels target was completed. Reward: ৳"+reward.toFixed(2));
+    toast("🎉 Reels target completed! ৳"+reward.toFixed(2)+" credited.","ok");
+  }catch(e){console.warn("Reels reward:",e);}
+}
+
+function startPostEarningsListener(uid){
+  const list=$("post-earnings-list");if(!list)return;
+  const render=items=>{
+    const cpmDefault=Number(adminConfig.cpmRate||UD.cpmRate||0);
+    const rows=items.map((p,i)=>{
+      const views=Math.max(0,Number(p.views??p.viewCount??0));
+      const cpm=Number(p.cpm??p.cpmRate??cpmDefault);
+      const rev=(cpm/1000)*views;
+      return {p,i,views,cpm,rev};
+    });
+    renderPostEarnings(rows);
+  };
+  // Support a dedicated post_earnings collection while retaining compatibility with
+  // user.posts / user.postEarnings fields.
+  try{
+    postEarningsUnsub=onSnapshot(query(collection(db,"post_earnings"),where("userId","==",uid),limit(100)),snap=>{
+      const items=[];snap.forEach(d=>items.push({id:d.id,...d.data()}));
+      if(items.length)render(items);else renderPostEarnings();
+    },()=>renderPostEarnings());
+  }catch(e){renderPostEarnings();}
+}
+let postEarningsCache=[];
+function renderPostEarnings(rows){
+  const el=$("post-earnings-list"),cpmEl=$("wallet-cpm-rate");if(!el)return;
+  const embedded=Array.isArray(UD.posts)?UD.posts:(Array.isArray(UD.postEarnings)?UD.postEarnings:[]);
+  if(rows&&rows.length)postEarningsCache=rows;
+  else if(embedded.length)postEarningsCache=embedded.map((p,i)=>{const views=Number(p.views??p.viewCount??0),cpm=Number(p.cpm??p.cpmRate??adminConfig.cpmRate??UD.cpmRate??0);return {p,i,views,cpm,rev:(cpm/1000)*views};});
+  if(!postEarningsCache.length){el.innerHTML='<p style="text-align:center;color:var(--tx3);padding:14px;font-size:.78rem">No post analytics yet.</p>';if(cpmEl)cpmEl.textContent=Number(adminConfig.cpmRate||UD.cpmRate||0).toFixed(2);return;}
+  const avgCpm=postEarningsCache[0]?.cpm??Number(adminConfig.cpmRate||UD.cpmRate||0);
+  if(cpmEl)cpmEl.textContent="৳"+Number(avgCpm||0).toFixed(2);
+  el.innerHTML=postEarningsCache.map((r,i)=>{
+    const p=r.p||{},title=p.title||p.postTitle||("Post #"+(i+1));
+    return `<div class="post-earn-row"><div><div class="post-earn-title">${escapeHtml(title)}</div><div class="post-earn-meta">👁 ${Number(r.views||0).toLocaleString()} views · CPM ৳${Number(r.cpm||0).toFixed(2)}</div></div><div class="post-earn-value">৳${Number(r.rev||0).toFixed(2)}</div></div>`;
+  }).join("");
+}
+function renderPostEarningsFromUser(){
+  renderPostEarnings();
+}
+function escapeHtml(v){
+  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+
+function renderAffiliateTraining(){
+  const c=affiliateConfig||{};
+  const title=$("affiliate-training-title");if(title)title.textContent=c.trainingTitle||"Affiliate Sales Training";
+  const desc=$("affiliate-training-desc");if(desc)desc.textContent=c.trainingDescription||"Learn how to find genuine buyers, present the course clearly, follow up and submit a verified lead.";
+  const tg=$("affiliate-training-telegram");if(tg)tg.href=c.telegramUrl&&c.telegramUrl!=="#"?c.telegramUrl:"#";
+  const steps=Array.isArray(c.trainingSteps)&&c.trainingSteps.length?c.trainingSteps:["Choose a course and learn its core benefits","Find relevant buyers through your own audience","Explain price, value and delivery clearly","Follow up professionally and avoid spam","Submit the buyer lead for admin verification"];
+  const el=$("affiliate-training-steps");if(el)el.innerHTML=steps.slice(0,8).map((x,i)=>`<div class="training-step"><b>${String(i+1).padStart(2,"0")}</b><div><div style="font-size:.73rem;font-weight:800">${escapeHtml(x)}</div><div style="font-size:.61rem;color:var(--tx3);margin-top:2px">Practical guidance</div></div></div>`).join("");
+}
+window.renderAffiliateTraining=renderAffiliateTraining;
+function startAffiliateListeners(uid){
+  const leadQuery=query(collection(db,"affiliate_leads"),where("userId","==",uid),limit(100));
+  const unsub=onSnapshot(leadQuery,snap=>{
+    const leads=[];snap.forEach(d=>leads.push({id:d.id,...d.data()}));
+    leads.sort((a,b)=>(b.createdAt?.toDate?.()?.getTime()||0)-(a.createdAt?.toDate?.()?.getTime()||0));
+    window._affiliateLeads=leads;
+    renderAffiliateUI(leads);
+  },e=>{console.warn("Affiliate leads:",e.code);renderAffiliateUI([]);});
+  affiliateUnsubs.push(unsub);
+}
+function renderAffiliateUI(leads=window._affiliateLeads||[]){
+  renderAffiliateTraining();
+  const leadVerified=leads.filter(x=>VERIFIED_AFFILIATE_STATUSES.includes(String(x.status||"pending").toLowerCase())).length;
+  const verified=Math.max(leadVerified,Number(UD.affiliateVerifiedSales||0));
+  const pending=leads.filter(x=>!VERIFIED_AFFILIATE_STATUSES.includes(String(x.status||"pending").toLowerCase())&&String(x.status||"pending").toLowerCase()==="pending").length;
+  const leadCommission=leads.filter(x=>VERIFIED_AFFILIATE_STATUSES.includes(String(x.status||"pending").toLowerCase())).reduce((a,x)=>a+Number(x.commission??x.commissionAmount??500),0);
+  const commission=Math.max(leadCommission,Number(UD.affiliateEarnings||0));
+  const target=Math.max(1,Number(UD.affiliateMilestoneTarget||affiliateConfig.target||10));
+  const count=Math.min(target,verified);
+  const grid=$("affiliate-milestones");
+  if(grid)grid.innerHTML=Array.from({length:target},(_,i)=>`<div class="milestone-box${i<count?" filled":""}" data-num="${i+1}" title="${i<count?"Verified sale":"Awaiting verified sale"}"></div>`).join("");
+  const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+  set("affiliate-sale-count",verified+" / "+target+" verified sales");
+  set("affiliate-sales-stat",verified);
+  set("affiliate-commission-stat","৳"+commission.toFixed(0));
+  set("affiliate-pending-stat",pending);
+  set("affiliate-lead-badge",leads.length+" leads");
+  set("affiliate-next-text",verified>=target?"All milestones unlocked!":"Next milestone: sale "+Math.min(verified+1,target));
+  const gp=$("affiliate-grand-prize");if(gp)gp.classList.toggle("show",affiliateConfig.enabled!==false&&(verified>=target||UD.affiliatePrizeEligible===true));
+  const prizeTitle=$("affiliate-prize-title");if(prizeTitle)prizeTitle.textContent=affiliateConfig.prizeTitle||"Grand Prize";
+  const ct=$("affiliate-challenge-title");if(ct)ct.textContent=target+" verified sales. One grand prize.";
+  const cs=$("affiliate-challenge-sub");if(cs)cs.textContent="Every verified sale unlocks one golden milestone. Reach all "+target+" to unlock the grand-prize claim.";
+  const list=$("affiliate-lead-list");
+  if(list){
+    if(!leads.length){list.innerHTML='<p style="text-align:center;color:var(--tx3);padding:14px;font-size:.78rem">No affiliate leads yet.</p>';}
+    else list.innerHTML=leads.slice(0,12).map(x=>{
+      const st=String(x.status||"pending").toLowerCase();
+      const cls=VERIFIED_AFFILIATE_STATUSES.includes(st)?"pill-approved":st==="rejected"?"pill-rejected":"pill-pending";
+      return `<div style="display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--bd)"><div><div style="font-size:.8rem;font-weight:800">${escapeHtml(x.courseTitle||"IT Course")}</div><div style="font-size:.68rem;color:var(--tx2);margin-top:3px">${escapeHtml(x.buyerName||"Buyer")} · ${escapeHtml(x.buyerPhone||"")}</div></div><span class="pill ${cls}">${st}</span></div>`;
+    }).join("");
+  }
+}
+function loadAffiliateCourses(){
+  const el=$("affiliate-course-list");if(!el)return;
+  if(affiliateCoursesLoaded)return;
+  affiliateCoursesLoaded=true;
+  try{
+    const q=query(collection(db,"affiliate_courses"),limit(30));
+    const unsub=onSnapshot(q,snap=>{
+      const courses=[];snap.forEach(d=>{const c={id:d.id,...d.data()};if(c.active!==false)courses.push(c);});
+      affiliateCourseCache={};
+      courses.forEach(c=>affiliateCourseCache[c.id]=c);
+      if(courses.length){renderAffiliateCourses(courses);return;}
+      const fallbackCourses=[
+        {id:"web-development",title:"Full Stack Web Development",price:4999,commission:500,icon:"💻"},
+        {id:"graphic-design",title:"Graphic Design Masterclass",price:3499,commission:500,icon:"🎨"},
+        {id:"digital-marketing",title:"Digital Marketing & SEO",price:3999,commission:500,icon:"📈"},
+        {id:"video-editing",title:"Professional Video Editing",price:2999,commission:500,icon:"🎬"}
+      ];
+      fallbackCourses.forEach(c=>affiliateCourseCache[c.id]=c);
+      renderAffiliateCourses(fallbackCourses);
+    },e=>{console.warn("Affiliate courses:",e.code);renderAffiliateCourses([
+      {id:"web-development",title:"Full Stack Web Development",price:4999,commission:500,icon:"💻"},
+      {id:"graphic-design",title:"Graphic Design Masterclass",price:3499,commission:500,icon:"🎨"},
+      {id:"digital-marketing",title:"Digital Marketing & SEO",price:3999,commission:500,icon:"📈"},
+      {id:"video-editing",title:"Professional Video Editing",price:2999,commission:500,icon:"🎬"}
+    ]);});
+    affiliateUnsubs.push(unsub);
+  }catch(e){console.warn(e);}
+}
+function renderAffiliateCourses(courses){
+  const el=$("affiliate-course-list");if(!el)return;
+  el.innerHTML=courses.map(c=>`<div class="course-card"><div class="course-media">${c.imageUrl?`<img src="${escapeHtml(c.imageUrl)}" alt="${escapeHtml(c.title||c.name||"IT Course")}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\"height:100%;display:grid;place-items:center;font-size:2.4rem\">🎓</div>';">`:`<div style="height:100%;display:grid;place-items:center;font-size:2.4rem">${c.icon||"🎓"}</div>`}</div><div class="course-title">${escapeHtml(c.title||c.name||"IT Course")}</div><div class="course-price">৳${Number(c.price||0).toLocaleString()}</div><div class="badge badge-gold" style="margin-bottom:10px">৳${Number(c.commission??500).toFixed(0)} Commission</div><button class="btn btn-gold btn-sm" onclick="openAffiliateLeadModal('${String(c.id).replace(/'/g,"\\'")}')"><i class="fas fa-paper-plane"></i> Submit Sale</button></div>`).join("");
+}
+window.openAffiliateLeadModal=function(courseId){
+  selectedAffiliateCourse=affiliateCourseCache[courseId]||{id:courseId,title:"IT Course",price:0,commission:500};
+  const title=selectedAffiliateCourse.title||selectedAffiliateCourse.name||"IT Course";
+  const el=$("affiliate-selected-course");if(el)el.textContent="Course: "+title;
+  $("affiliate-buyer-name").value="";$("affiliate-buyer-phone").value="";
+  $("affiliate-lead-modal").classList.add("show");
+};
+window.closeAffiliateModal=function(){$("affiliate-lead-modal")?.classList.remove("show");};
+window.submitAffiliateLead=async function(){
+  if(!CU){toast("Please login first","err");return;}
+  const name=$("affiliate-buyer-name")?.value.trim()||"",phone=$("affiliate-buyer-phone")?.value.trim()||"";
+  if(name.length<2){toast("Enter the buyer's name","err");return;}
+  if(!/^[0-9+()\\-\\s]{7,20}$/.test(phone)){toast("Enter a valid phone number","err");return;}
+  if(!selectedAffiliateCourse){toast("Select a course first","err");return;}
+  const btn=$("affiliate-submit-btn");btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner spin"></i> Saving...';
+  try{
+    await addDoc(collection(db,"affiliate_leads"),{
+      userId:CU.uid,userName:UD.name||"User",
+      courseId:selectedAffiliateCourse.id||"",courseTitle:selectedAffiliateCourse.title||selectedAffiliateCourse.name||"IT Course",
+      coursePrice:Number(selectedAffiliateCourse.price||0),commission:Number(selectedAffiliateCourse.commission??500),
+      buyerName:name,buyerPhone:phone,status:"pending",createdAt:Timestamp.now()
+    });
+    await addNotif(CU.uid,"📚 Affiliate Sale Submitted!","Buyer lead submitted for "+(selectedAffiliateCourse.title||"course")+" and is awaiting verification.");
+    closeAffiliateModal();toast("Sale lead submitted for verification! ✅","ok");
+  }catch(e){toast("Could not submit lead: "+e.message,"err");}
+  finally{btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Sale';}
+};
+window.claimGrandPrize=async function(){
+  if(!CU)return;
+  const leads=window._affiliateLeads||[],verified=leads.filter(x=>VERIFIED_AFFILIATE_STATUSES.includes(String(x.status||"").toLowerCase())).length;
+  const target=Math.max(1,Number(affiliateConfig.target||10));
+  if(verified<target){toast("Complete "+target+" verified sales first","info");return;}
+  const btn=$("affiliate-claim-btn");if(btn)btn.disabled=true;
+  try{
+    await addDoc(collection(db,"affiliate_prize_claims"),{userId:CU.uid,userName:UD.name||"User",verifiedSales:verified,prizeStatus:"pending",createdAt:Timestamp.now()});
+    toast("Grand prize claim submitted for verification! 🏆","ok");
+    await addNotif(CU.uid,"🏆 Grand Prize Claim Submitted!","Your 10-sale milestone claim is now under admin verification.");
+  }catch(e){toast("Claim failed: "+e.message,"err");if(btn)btn.disabled=false;}
+};
+$("affiliate-lead-modal")?.addEventListener("click",e=>{if(e.target.id==="affiliate-lead-modal")closeAffiliateModal();});
 
 let currentFilter="all";let taskCache={};
 function loadTasks(){
@@ -1821,6 +2233,7 @@ window.navigate=function(sec){
   else if(sec==="wallet"){loadWdHistory();loadTaskHistory();}
   else if(sec==="support")loadTicketHistory();
   else if(sec==="refer"){loadLeaderboard();loadMyReferrals();}
+  else if(sec==="affiliate"){renderAffiliateUI();loadAffiliateCourses();}
 };
 document.querySelectorAll(".nav-i").forEach(n=>n.addEventListener("click",()=>navigate(n.dataset.sec)));
 
